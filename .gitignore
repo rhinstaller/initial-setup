@@ -1,0 +1,6 @@
+.ropeproject
+*.pyc
+*.pyo
+~.~
+.#*
+
