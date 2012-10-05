@@ -25,10 +25,12 @@ rungui:
 	ANACONDA_WIDGETS_OVERRIDES=${ANACONDA_PATH}/widgets/python \
 	ANACONDA_WIDGETS_DATA=${ANACONDA_PATH}/widgets/data \
 	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
-	PYTHONPATH=.:${ANACONDA_PATH}:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/ \
+	PYTHONPATH=.:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/:${ANACONDA_PATH} \
 	LD_LIBRARY_PATH=${ANACONDA_PATH}/widgets/src/.libs \
 	UIPATH=${ANACONDA_PATH}/pyanaconda/ui/gui/ \
 	GI_TYPELIB_PATH=${ANACONDA_PATH}/widgets/src/ \
+	GLADE_CATALOG_SEARCH_PATH=${ANACONDA_PATH}/widgets/glade \
+	GLADE_MODULE_SEARCH_PATH=${ANACONDA_PATH}/widgets/src/.libs \
 	python -m gui
 
 runtui:
