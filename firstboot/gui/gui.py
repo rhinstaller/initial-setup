@@ -1,4 +1,4 @@
-from pyanaconda.ui.gui import GUIObject, GraphicalUserInterface
+from pyanaconda.ui.gui import QuitDialog, GUIObject, GraphicalUserInterface
 #from .product import productName, productVersion
 from .hubs import FirstbootHub
 from pyanaconda.ui.gui.spokes import StandaloneSpoke
@@ -10,16 +10,20 @@ productName = "Fedora"
 productVersion = "rawhide"
 isFinal = False
 
+class FirstbootQuitDialog(QuitDialog):
+    MESSAGE = "Are you sure you want to quit the configuration process?\nYou might end up with unusable system if you do."
+
 class FirstbootGraphicalUserInterface(GraphicalUserInterface):
-    """This is the standard GTK+ interface we try to steer everything to using.
-       It is suitable for use both directly and via VNC.
+    """This is the main Gtk based firstboot interface. It inherits from
+       anaconda to make the look & feel as similar as possible.
     """
 
     TITLE = "%(productName)s %(productVersion)s SETUP"
     
     def __init__(self, storage, payload, instclass):
         GraphicalUserInterface.__init__(self, storage, payload, instclass,
-                                        productName, productVersion, isFinal)
+                                        productName, productVersion, isFinal,
+                                        quitDialog = FirstbootQuitDialog)
     
     def _list_hubs(self):
         return [FirstbootHub]
