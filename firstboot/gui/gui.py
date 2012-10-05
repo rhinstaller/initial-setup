@@ -6,10 +6,21 @@ import pyanaconda.ui.gui.spokes
 from pyanaconda.ui.common import collect, FirstbootSpokeMixIn
 import os.path
 
+productName = "Fedora"
+productVersion = "rawhide"
+isFinal = False
+
 class FirstbootGraphicalUserInterface(GraphicalUserInterface):
     """This is the standard GTK+ interface we try to steer everything to using.
        It is suitable for use both directly and via VNC.
     """
+
+    TITLE = "%(productName)s %(productVersion)s SETUP"
+    
+    def __init__(self, storage, payload, instclass):
+        GraphicalUserInterface.__init__(self, storage, payload, instclass,
+                                        productName, productVersion, isFinal)
+    
     def _list_hubs(self):
         return [FirstbootHub]
 

@@ -27,7 +27,7 @@ rungui:
 	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
 	PYTHONPATH=.:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/:${ANACONDA_PATH} \
 	LD_LIBRARY_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	UIPATH=${ANACONDA_PATH}/pyanaconda/ui/gui/ \
+	UIPATH=gui/:${ANACONDA_PATH}/pyanaconda/ui/gui/ \
 	GI_TYPELIB_PATH=${ANACONDA_PATH}/widgets/src/ \
 	GLADE_CATALOG_SEARCH_PATH=${ANACONDA_PATH}/widgets/glade \
 	GLADE_MODULE_SEARCH_PATH=${ANACONDA_PATH}/widgets/src/.libs \
@@ -59,7 +59,7 @@ runpy:
 	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
 	PYTHONPATH=.:${ANACONDA_PATH}:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/ \
 	LD_LIBRARY_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	UIPATH=${ANACONDA_PATH}/pyanaconda/ui/gui/ \
+	UIPATH=gui/:${ANACONDA_PATH}/pyanaconda/ui/gui/ \
 	GI_TYPELIB_PATH=${ANACONDA_PATH}/widgets/src/ \
 	GLADE_CATALOG_SEARCH_PATH=${ANACONDA_PATH}/widgets/glade \
 	GLADE_MODULE_SEARCH_PATH=${ANACONDA_PATH}/widgets/src/.libs \

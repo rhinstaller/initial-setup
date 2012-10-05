@@ -23,7 +23,8 @@ def collect_spokes(mask_paths):
 
 
 class FirstbootHub(SummaryHub):
-
+    uiFile = "hubs/firstboot.glade"
+    
     def _collectCategoriesAndSpokes(self):
         """collects categories and spokes to be displayed on this Hub
 
