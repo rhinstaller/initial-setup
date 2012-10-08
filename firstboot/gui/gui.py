@@ -28,17 +28,10 @@ class FirstbootGraphicalUserInterface(GraphicalUserInterface):
     def _list_hubs(self):
         return [FirstbootHub]
 
-    @property
-    def basemask(self):
-        return "firstboot.gui"
+    basemask = "firstboot.gui"
+    basepath = os.path.dirname(__file__)
+    paths = GraphicalUserInterface.paths + {
+        "spokes": [(basemask + ".spokes.%s", os.path.join(basepath, "spokes"))],
+        "categories": [(basemask + ".categories.%s", os.path.join(basepath, "categories"))],
+        }
 
-    @property
-    def paths(self):
-        firstboot_path = os.path.join(os.path.dirname(__file__), "spokes")
-
-        _anaconda_paths = GraphicalUserInterface.paths.fget(self)
-        _anaconda_paths["spokes"].append((self.basemask + ".spokes.%s",
-                                          os.path.join(self.basepath, "spokes")))
-        _anaconda_paths["categories"].append((self.basemask + ".categories.%s",
-                                          os.path.join(self.basepath, "categories")))
-        return _anaconda_paths
