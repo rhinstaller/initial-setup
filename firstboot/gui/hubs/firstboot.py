@@ -16,9 +16,8 @@ def collect_spokes(mask_paths):
     spokes = []
     for mask, path in mask_paths:
         spokes.extend(collect(mask, path,
-                              lambda obj: hasattr(obj, "category")
-                                          and obj.category != None))
-        
+                              lambda obj: hasattr(obj, "firstboot")))
+
     return spokes
 
 
@@ -40,7 +39,8 @@ class FirstbootHub(SummaryHub):
                         if hasattr(spoke, "firstboot") and spoke.firstboot()]
 
         for spoke in spokes:
-            ret[spoke.category] = spoke
+            ret.setdefault(spoke.category, [])
+            ret[spoke.category].append(spoke)
 
         return ret
 
