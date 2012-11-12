@@ -18,6 +18,7 @@ def collect_spokes(mask_paths):
         spokes.extend(collect(mask, path,
                               lambda obj: hasattr(obj, "firstboot")))
 
+    print spokes
     return spokes
 
 
