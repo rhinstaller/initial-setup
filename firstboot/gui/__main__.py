@@ -1,40 +1,10 @@
 import os
+from pyanaconda.addons import collect_addon_paths
 
 addon_paths = ["addons"]
 
-def collect_plugins(addon_paths, ui = "gui"):
-    # collect all applicable addon paths from
-    # for p in addon_paths: <p>/<plugin id>/ks/*.(py|so)
-    # and register them under <plugin id> name
 
-    module_paths = {
-        "spokes": [],
-        "ks": [],
-        "categories": []
-        }
-    
-    for path in addon_paths:
-        try:
-            files = os.listdir(path)
-        except OSError:
-            files = []
-                
-        for addon_id in files:
-            addon_ks_path = os.path.join(path, addon_id, "ks")
-            if os.path.isdir(addon_ks_path):
-                module_paths["ks"].append(("anaconda.addon.%s.ks.%%s" % addon_id, addon_ks_path))
-
-            addon_spoke_path = os.path.join(path, addon_id, ui, "spokes")
-            if os.path.isdir(addon_spoke_path):
-                module_paths["spokes"].append(("anaconda.addon.%s.spokes.%%s" % addon_id, addon_spoke_path))
-
-            addon_category_path = os.path.join(path, addon_id, ui, "categories")
-            if os.path.isdir(addon_spoke_path):
-                module_paths["categories"].append(("anaconda.addon.%s.categories.%%s" % addon_id, addon_category_path))
-
-    return module_paths
-
-addon_module_paths = collect_plugins(addon_paths)
+addon_module_paths = collect_addon_paths(addon_paths)
 print addon_module_paths
 
 # Too bad anaconda does not have modularized logging
