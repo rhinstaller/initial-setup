@@ -1,0 +1,17 @@
+[Unit]
+Description=firstboot configuration program (graphical mode)
+After=livesys.service plymouth-quit.service
+Before=display-manager.service getty@tty1.service
+Conflicts=plymouth-quit.service
+
+[Service]
+Type=oneshot
+ExecStartPre=-/bin/plymouth quit
+ExecStart=/usr/sbin/firstboot
+ExecStartPost=/bin/systemctl disable firstboot-graphical.service
+TimeoutSec=0
+RemainAfterExit=yes
+SysVStartPriority=99
+
+[Install]
+WantedBy=graphical.target
