@@ -23,8 +23,10 @@ def collect_spokes(mask_paths):
     return spokes
 
 
-class FirstbootHub(SummaryHub):
-    uiFile = "hubs/firstboot.glade"
+class InitalSetupMainHub(Hub):
+    uiFile = "inital_setup.glade"
+    builderObjects = ["summaryWindow"]
+    mainWidgetName = "summaryWindow"
     
     def _collectCategoriesAndSpokes(self):
         """collects categories and spokes to be displayed on this Hub
@@ -46,3 +48,10 @@ class FirstbootHub(SummaryHub):
 
         return ret
 
+    @property
+    def continueButton(self):
+        return self.builder.get_object("continueButton")
+
+    @property
+    def quitButton(self):
+        return self.builder.get_object("quitButton")

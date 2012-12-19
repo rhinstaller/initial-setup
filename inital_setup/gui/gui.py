@@ -1,32 +1,41 @@
 from pyanaconda.ui.gui import QuitDialog, GUIObject, GraphicalUserInterface
 #from .product import productName, productVersion
-from .hubs import FirstbootHub
+from .hubs import InitalSetupMainHub
 from pyanaconda.ui.gui.spokes import StandaloneSpoke
 import pyanaconda.ui.gui.spokes
 from pyanaconda.ui.common import collect, FirstbootSpokeMixIn
-import os.path
+import os
+from gi.repository import Gdk
+import logging
+from di import inject, usesclassinject
 
-productName = "Fedora"
-productVersion = "rawhide"
-isFinal = False
+# localization
+_ = lambda t: t
+N_ = lambda t: t
 
-class FirstbootQuitDialog(QuitDialog):
-    MESSAGE = "Are you sure you want to quit the configuration process?\nYou might end up with unusable system if you do."
+productTitle = lambda: "Inital Setup of Fedora"
+isFinal = lambda: False
 
-class FirstbootGraphicalUserInterface(GraphicalUserInterface):
+class InitalSetupQuitDialog(QuitDialog):
+    MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
+                 "You might end up with unusable system if you do.")
+
+@inject(Gdk, productTitle = productTitle, isFinal = isFinal)
+class InitalSetupGraphicalUserInterface(GraphicalUserInterface):
     """This is the main Gtk based firstboot interface. It inherits from
        anaconda to make the look & feel as similar as possible.
     """
 
-    TITLE = "%(productName)s %(productVersion)s SETUP"
+    screenshots_directory = "/tmp/inital-setup-screenshots"
     
+    @usesclassinject
     def __init__(self, storage, payload, instclass):
         GraphicalUserInterface.__init__(self, storage, payload, instclass,
-                                        productName, productVersion, isFinal,
-                                        quitDialog = FirstbootQuitDialog)
-    
+                                        productTitle, isFinal,
+                                        quitDialog = InitalSetupQuitDialog)
+        
     def _list_hubs(self):
-        return [FirstbootHub]
+        return [InitalSetupMainHub]
 
     basemask = "firstboot.gui"
     basepath = os.path.dirname(__file__)

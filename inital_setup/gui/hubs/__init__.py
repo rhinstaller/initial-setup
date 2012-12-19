@@ -1,1 +1,1 @@
-from firstboot import FirstbootHub
+from inital_setup import InitalSetupMainHub
