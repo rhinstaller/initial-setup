@@ -9,7 +9,7 @@
     <property name="mnemonics_visible">False</property>
     <property name="focus_visible">False</property>
     <property name="distribution">DISTRIBUTION SETUP</property>
-    <property name="window_name">FIRSTBOOT</property>
+    <property name="window_name">INITAL SETUP</property>
     <child internal-child="main_box">
       <object class="GtkBox" id="AnacondaHubWindow-main_box1">
         <property name="can_focus">False</property>

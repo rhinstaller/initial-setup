@@ -1,13 +1,13 @@
 # firstboot.sh
 
-FIRSTBOOT_EXEC=/usr/sbin/firstboot
-FIRSTBOOT_CONF=/etc/sysconfig/firstboot
+IS_EXEC=/usr/sbin/inital-setup
+IS_CONF=/etc/sysconfig/inital-setup
 
 # source the config file
-[ -f $FIRSTBOOT_CONF ] && . $FIRSTBOOT_CONF
+[ -f $IS_CONF ] && . $IS_CONF
 
 # check if we should run firstboot
-if [ -f $FIRSTBOOT_EXEC ] && [ "${RUN_FIRSTBOOT,,}" = "yes" ]; then
+if [ -f $IS_EXEC ] && [ "${RUN_INITAL_SETUP,,}" = "yes" ]; then
     # check if we're not on 3270 terminal and root
     if [ $(/sbin/consoletype) = "pty" ] && [ $EUID -eq 0 ]; then
         args=""
@@ -16,6 +16,6 @@ if [ -f $FIRSTBOOT_EXEC ] && [ "${RUN_FIRSTBOOT,,}" = "yes" ]; then
         fi
 
         . /etc/sysconfig/i18n
-        $FIRSTBOOT_EXEC $args
+        $IS_EXEC $args
     fi
 fi
