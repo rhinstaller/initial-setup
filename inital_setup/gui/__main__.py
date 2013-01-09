@@ -6,6 +6,11 @@ import gi.overrides
 for p in os.environ.get("ANACONDA_WIDGETS_OVERRIDES", "").split(":"):
     gi.overrides.__path__.insert(0, p)
 
+# set the root path to / so the imported spokes
+# know where to apply their changes
+from pyanaconda.constants import ROOT_PATH
+ROOT_PATH= "/"
+
 from pyanaconda.addons import collect_addon_paths
 
 addon_paths = ["/usr/share/inital-setup/modules", "/usr/share/anaconda/addons"]
