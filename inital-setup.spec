@@ -25,7 +25,7 @@ BuildRequires: pygobject3
 BuildRequires: python-babel
 Requires: gtk3
 Requires: python
-Requires: anaconda
+Requires: anaconda >= 19.0
 Requires(post): systemd-units systemd-sysv chkconfig
 Requires(preun): systemd-units
 Requires(postun): systemd-units
