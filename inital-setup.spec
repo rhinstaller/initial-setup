@@ -1,10 +1,11 @@
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
+%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Summary: Initial system configuration utility
 Name: inital-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
 Version: 0.1
 Release: 1%{?dist}
+BuildArch: noarch
 # This is a Red Hat maintained package which is specific to
 # our distribution.  Thus the source is only available from
 # within this srpm.
@@ -14,9 +15,16 @@ License: GPLv2+
 Group: System Environment/Base
 ExclusiveOS: Linux
 BuildRequires: gettext
-BuildRequires: python-devel, python-setuptools-devel
+BuildRequires: python2-devel, python-setuptools-devel
 BuildRequires: systemd-units
-Requires: gtk3, python, python-gi
+BuildRequires: gtk3-devel
+BuildRequires: gtk-doc
+BuildRequires: gobject-introspection-devel
+BuildRequires: glade-devel
+BuildRequires: pygobject3
+BuildRequires: python-babel
+Requires: gtk3
+Requires: python
 Requires: anaconda
 Requires(post): systemd-units systemd-sysv chkconfig
 Requires(preun): systemd-units
@@ -24,10 +32,10 @@ Requires(postun): systemd-units
 Requires: firstboot(windowmanager)
 Requires: libreport-python
 
-%define debug_package %{nil}
+%global debug_package %{nil}
 
 %description
-The firstboot utility runs after installation.  It guides the user through
+The inital-setup utility runs after installation.  It guides the user through
 a series of steps that allows for easier configuration of the machine.
 
 %prep
@@ -38,8 +46,11 @@ rm -rf *.egg-info
 
 %build
 %{__python} setup.py build
+%{__python} setup.py compile_catalog -D %{name} -d locale
 
 %install
+rm -rf ${buildroot}
+
 %{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
 rm -rf ${buildroot}%{python_sitelib}/setuptools/tests
 %find_lang %{name}
@@ -68,16 +79,13 @@ fi
 %defattr(-,root,root,-)
 %dir %{_datadir}/inital-setup/
 %dir %{_datadir}/inital-setup/modules/
-%dir %{_datadir}/inital-setup/themes/
-%dir %{_datadir}/inital-setup/themes/default
 %{python_sitelib}/*
-%{_sbindir}/inital-setup
-%{_datadir}/inital-setup/modules/create_user.py*
-%{_datadir}/inital-setup/modules/date.py*
-%{_datadir}/inital-setup/modules/eula.py*
-%{_datadir}/inital-setup/modules/welcome.py*
-%{_datadir}/inital-setup/themes/default/*
+%{_bindir}/inital-setup
+%{_datadir}/inital-setup/modules/*
+
 /lib/systemd/system/inital-setup-graphical.service
+/lib/systemd/system/inital-setup-text.service
+
 %ifarch s390 s390x
 %dir %{_sysconfdir}/profile.d
 %{_sysconfdir}/profile.d/inital-setup.sh
@@ -86,5 +94,5 @@ fi
 
 
 %changelog
-* Tue Nov 06 2012 Martin Sivak <msivak@redhat.com> 19.0-1
+* Tue Nov 06 2012 Martin Sivak <msivak@redhat.com> 0.1-1
 - Inital release

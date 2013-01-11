@@ -1,0 +1,6 @@
+include COPYING
+recursive-include systemd *
+recursive-include scripts *
+recursive-include locale *.po *.pot
+recursive-include modules *.py *.glade *.txt
+recursive-exclude modules *.pyc *.pyo

@@ -36,10 +36,11 @@ class InitalSetupMainHub(Hub):
         """
 
         ret = {}
-        
+
         # Collect all the categories this hub displays, then collect all the
         # spokes belonging to all those categories.
-        spokes = [spoke for spoke in collect_spokes(self.paths["spokes"]) \
+        candidate_spokes = collect_spokes(self.paths["spokes"])
+        spokes = [spoke for spoke in candidate_spokes \
                         if spoke.should_run("firstboot", self.data)]
 
         for spoke in spokes:

@@ -9,7 +9,7 @@ for p in os.environ.get("ANACONDA_WIDGETS_OVERRIDES", "").split(":"):
 # set the root path to / so the imported spokes
 # know where to apply their changes
 from pyanaconda.constants import ROOT_PATH
-ROOT_PATH= "/"
+ROOT_PATH = "/"
 
 from pyanaconda.addons import collect_addon_paths
 
@@ -36,3 +36,6 @@ g.setup(data)
 
 # Start the application
 g.run()
+
+# Print the kickstart file
+print data
