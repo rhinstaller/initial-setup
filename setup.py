@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Setup file for Python DI
+# Setup file for inital-setup
 #
 # Copyright (C) 2012  Red Hat, Inc.
 #
@@ -64,8 +64,10 @@ setup(
     long_description=read('README'),
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Intended Audience :: Developers",
-        "Topic :: Software Development :: Testing",
+        "Environment :: X11 Applications :: GTK",
+        "Environment :: Console",
+        "Intended Audience :: System Administrators",
+        "Topic :: System :: Systems Administration",
         "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
     ],
     cmdclass = {'compile_catalog': babel.compile_catalog,

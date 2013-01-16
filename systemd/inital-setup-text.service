@@ -1,6 +1,7 @@
 [Unit]
 Description=Inital Setup configuration program (text mode)
 After=livesys.service plymouth-quit.service
+After=systemd-vconsole-setup.service
 Before=display-manager.service getty@tty1.service
 Conflicts=plymouth-quit.service
 
@@ -14,4 +15,4 @@ RemainAfterExit=yes
 SysVStartPriority=99
 
 [Install]
-WantedBy=graphical.target #TODO
+WantedBy=multi-user.target

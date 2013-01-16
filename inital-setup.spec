@@ -1,21 +1,25 @@
-%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
-
 Summary: Initial system configuration utility
 Name: inital-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
 Version: 0.1
 Release: 1%{?dist}
 BuildArch: noarch
+
 # This is a Red Hat maintained package which is specific to
-# our distribution.  Thus the source is only available from
-# within this srpm.
+# our distribution.
+#
+# The source is thus available only from within this SRPM
+# or via direct git checkout:
+# git clone http://
 Source0: %{name}-%{version}.tar.gz
 
 License: GPLv2+
 Group: System Environment/Base
 ExclusiveOS: Linux
 BuildRequires: gettext
-BuildRequires: python2-devel, python-setuptools-devel
+BuildRequires: python2-devel
+BuildRequires: python-setuptools
+BuildRequires: python-nose
 BuildRequires: systemd-units
 BuildRequires: gtk3-devel
 BuildRequires: gtk-doc
@@ -25,7 +29,7 @@ BuildRequires: pygobject3
 BuildRequires: python-babel
 Requires: gtk3
 Requires: python
-Requires: anaconda >= 19.0
+Requires: anaconda >= 18.40
 Requires(post): systemd-units systemd-sysv chkconfig
 Requires(preun): systemd-units
 Requires(postun): systemd-units
@@ -48,11 +52,13 @@ rm -rf *.egg-info
 %{__python} setup.py build
 %{__python} setup.py compile_catalog -D %{name} -d locale
 
+%check
+%{__python} setup.py nosetests
+
 %install
 rm -rf ${buildroot}
 
 %{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
-rm -rf ${buildroot}%{python_sitelib}/setuptools/tests
 %find_lang %{name}
 
 %post
@@ -62,6 +68,8 @@ if [ $1 -ne 2 -a ! -f /etc/sysconfig/inital-setup ]; then
     echo "RUN_INITAL_SETUP=YES" > /etc/sysconfig/inital-setup
   else
     %systemd_post inital-setup-graphical.service
+    %systemd_post inital-setup-text.service
+    %systemd_post inital-setup-xserver.service
   fi
 fi
 
@@ -71,9 +79,13 @@ if [ $1 = 0 ]; then
   rm -rf /usr/share/inital-setup/modules/*.pyc
 fi
 %systemd_preun inital-setup-graphical.service
+%systemd_preun inital-setup-text.service
+%systemd_preun inital-setup-xserver.service
 
 %postun
 %systemd_postun_with_restart inital-setup-graphical.service
+%systemd_postun_with_restart inital-setup-text.service
+%systemd_postun_with_restart inital-setup-xserver.service
 
 %files -f %{name}.lang
 %defattr(-,root,root,-)
@@ -85,6 +97,7 @@ fi
 
 /lib/systemd/system/inital-setup-graphical.service
 /lib/systemd/system/inital-setup-text.service
+/lib/systemd/system/inital-setup-xserver.service
 
 %ifarch s390 s390x
 %dir %{_sysconfdir}/profile.d

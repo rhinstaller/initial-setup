@@ -1,13 +1,14 @@
 [Unit]
-Description=Inital Setup configuration program (graphical mode)
+Description=Inital Setup configuration program
 After=livesys.service plymouth-quit.service
 Before=display-manager.service getty@tty1.service
-Conflicts=plymouth-quit.service
+Conflicts=plymouth-quit.service inital-setup-text.service
+PartOf=inital-setup-xserver.service
 
 [Service]
 Type=oneshot
 ExecStartPre=-/bin/plymouth quit
-ExecStart=/usr/sbin/inital-setup
+ExecStart=/usr/sbin/inital-setup --display=:9
 ExecStartPost=/bin/systemctl disable inital-setup-graphical.service
 TimeoutSec=0
 RemainAfterExit=yes
