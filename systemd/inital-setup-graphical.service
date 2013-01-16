@@ -8,7 +8,7 @@ PartOf=inital-setup-xserver.service
 [Service]
 Type=oneshot
 ExecStartPre=-/bin/plymouth quit
-ExecStart=/usr/sbin/inital-setup --display=:9
+ExecStart=DISPLAY=:9 /usr/sbin/inital-setup
 ExecStartPost=/bin/systemctl disable inital-setup-graphical.service
 TimeoutSec=0
 RemainAfterExit=yes
