@@ -1,8 +1,8 @@
 [main]
 host = https://www.transifex.net
 
-[inital-setup.master]
-file_filter = locale/<lang>/LC_MESSAGES/inital-setup.po
-source_file = locale/inital-setup.pot
+[initial-setup.master]
+file_filter = locale/<lang>/LC_MESSAGES/initial-setup.po
+source_file = locale/initial-setup.pot
 source_lang = en
 type = PO

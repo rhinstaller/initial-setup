@@ -8,8 +8,8 @@ Conflicts=plymouth-quit.service
 [Service]
 Type=oneshot
 ExecStartPre=-/bin/plymouth quit
-ExecStart=/usr/sbin/inital-setup
-ExecStartPost=/bin/systemctl disable inital-setup-text.service
+ExecStart=/usr/sbin/initial-setup
+ExecStartPost=/bin/systemctl disable initial-setup-text.service
 TimeoutSec=0
 RemainAfterExit=yes
 SysVStartPriority=99

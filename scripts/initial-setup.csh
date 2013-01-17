@@ -1,7 +1,7 @@
-# inital-setup.csh
+# initial-setup.csh
 
-set IS_EXEC = /usr/sbin/inital-setup
-set IS_CONF = /etc/sysconfig/inital-setup
+set IS_EXEC = /usr/sbin/initial-setup
+set IS_CONF = /etc/sysconfig/initial-setup
 
 # check if we should run firstboot
 grep -i "RUN_INITAL_SETUP=NO" $IS_CONF >/dev/null

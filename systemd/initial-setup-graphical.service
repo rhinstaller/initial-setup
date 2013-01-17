@@ -2,14 +2,14 @@
 Description=Inital Setup configuration program
 After=livesys.service plymouth-quit.service
 Before=display-manager.service getty@tty1.service
-Conflicts=plymouth-quit.service inital-setup-text.service
-PartOf=inital-setup-xserver.service
+Conflicts=plymouth-quit.service initial-setup-text.service
+PartOf=initial-setup-xserver.service
 
 [Service]
 Type=oneshot
 ExecStartPre=-/bin/plymouth quit
-ExecStart=DISPLAY=:9 /usr/sbin/inital-setup
-ExecStartPost=/bin/systemctl disable inital-setup-graphical.service
+ExecStart=DISPLAY=:9 /usr/sbin/initial-setup
+ExecStartPost=/bin/systemctl disable initial-setup-graphical.service
 TimeoutSec=0
 RemainAfterExit=yes
 SysVStartPriority=99

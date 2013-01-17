@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# Setup file for inital-setup
+# Setup file for initial-setup
 #
 # Copyright (C) 2012  Red Hat, Inc.
 #
@@ -34,33 +34,33 @@ def read(fname):
 
 
 data_files = [('/lib/systemd/system', glob('systemd/*.service')),
-              ('/usr/share/inital-setup/modules', glob('modules/*'))]
+              ('/usr/share/initial-setup/modules', glob('modules/*'))]
 
 # add localization files
 data_files += [('/usr/share/locale/%s/LC_MESSAGES' % dirname,
-                ['locale/%s/LC_MESSAGES/inital-setup.mo' % dirname])
+                ['locale/%s/LC_MESSAGES/initial-setup.mo' % dirname])
                 for dirname in os.listdir("locale")
                 if not dirname.endswith(".pot")]
 
 # add the firstboot start script for s390 architectures
 if os.uname()[4].startswith('s390'):
-    data_files.append(('/etc/profile.d', ['scripts/inital-setup.sh']))
-    data_files.append(('/etc/profile.d', ['scripts/inital-setup.csh']))
+    data_files.append(('/etc/profile.d', ['scripts/initial-setup.sh']))
+    data_files.append(('/etc/profile.d', ['scripts/initial-setup.csh']))
 
 setup(
-    name = "inital-setup",
+    name = "initial-setup",
     version = "0.1",
     author = "Martin Sivak",
     author_email = "msivak@redhat.com",
     description='Post-installation configuration utility',
     url='http://fedoraproject.org/wiki/FirstBoot',
     license = "GPLv2+",
-    keywords = "firstboot inital setup",
+    keywords = "firstboot initial setup",
     packages = find_packages(),
-    scripts = ["inital-setup"],
+    scripts = ["initial-setup"],
     data_files = data_files,
     setup_requires= ['nose>=1.0'],
-    test_suite = "inital_setup",
+    test_suite = "initial_setup",
     long_description=read('README'),
     classifiers=[
         "Development Status :: 3 - Alpha",

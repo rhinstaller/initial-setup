@@ -24,7 +24,7 @@ def collect_spokes(mask_paths):
 
 
 class InitalSetupMainHub(Hub):
-    uiFile = "inital_setup.glade"
+    uiFile = "initial_setup.glade"
     builderObjects = ["summaryWindow"]
     mainWidgetName = "summaryWindow"
     

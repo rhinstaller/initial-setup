@@ -1,13 +1,13 @@
-# Translations template for inital-setup.
+# Translations template for initial-setup.
 # Copyright (C) 2013 ORGANIZATION
-# This file is distributed under the same license as the inital-setup
+# This file is distributed under the same license as the initial-setup
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: inital-setup 0.1\n"
+"Project-Id-Version: initial-setup 0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-01-11 15:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: inital_setup/gui/gui.py:20
+#: initial_setup/gui/gui.py:20
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with unusable system if you do."

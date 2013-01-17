@@ -26,7 +26,7 @@ class InitalSetupGraphicalUserInterface(GraphicalUserInterface):
        anaconda to make the look & feel as similar as possible.
     """
 
-    screenshots_directory = "/tmp/inital-setup-screenshots"
+    screenshots_directory = "/tmp/initial-setup-screenshots"
     
     @usesclassinject
     def __init__(self, storage, payload, instclass):

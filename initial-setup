@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ "x$DISPLAY" != "x" ]; then
+    python -m initial_setup.gui
+else
+    python -m initial_setup.tui
+fi
+

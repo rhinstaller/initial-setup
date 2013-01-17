@@ -1,7 +1,7 @@
 # firstboot.sh
 
-IS_EXEC=/usr/sbin/inital-setup
-IS_CONF=/etc/sysconfig/inital-setup
+IS_EXEC=/usr/sbin/initial-setup
+IS_CONF=/etc/sysconfig/initial-setup
 
 # source the config file
 [ -f $IS_CONF ] && . $IS_CONF
