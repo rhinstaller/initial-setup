@@ -57,6 +57,9 @@ setup(
     license = "GPLv2+",
     keywords = "firstboot initial setup",
     packages = find_packages(),
+    package_data = {
+        "": ["*.glade"]
+    },
     scripts = ["initial-setup"],
     data_files = data_files,
     setup_requires= ['nose>=1.0'],
