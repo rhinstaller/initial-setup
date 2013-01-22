@@ -33,7 +33,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
-data_files = [('/lib/systemd/system', glob('systemd/*.service')),
+data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
               ('/usr/share/initial-setup/modules', glob('modules/*'))]
 
 # add localization files

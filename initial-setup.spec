@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
 Version: 0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 BuildArch: noarch
 
 # This is a Red Hat maintained package which is specific to
@@ -10,12 +10,11 @@ BuildArch: noarch
 #
 # The source is thus available only from within this SRPM
 # or via direct git checkout:
-# git clone http://
+# git clone git://fedorapeople.org/home/fedora/msivak/public_git/firstboot2.git
 Source0: %{name}-%{version}.tar.gz
 
 License: GPLv2+
 Group: System Environment/Base
-ExclusiveOS: Linux
 BuildRequires: gettext
 BuildRequires: python2-devel
 BuildRequires: python-setuptools
@@ -27,6 +26,7 @@ BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
 BuildRequires: python-babel
+BuildRequires: anaconda >= 18.40
 Requires: gtk3
 Requires: python
 Requires: anaconda >= 18.40
@@ -52,8 +52,9 @@ rm -rf *.egg-info
 %{__python} setup.py build
 %{__python} setup.py compile_catalog -D %{name} -d locale
 
-%check
-%{__python} setup.py nosetests
+# Check is disabled until Gtk bug rhbz#902401 is resolved
+#%check
+#%{__python} setup.py nosetests
 
 %install
 rm -rf ${buildroot}
@@ -65,7 +66,7 @@ rm -rf ${buildroot}
 if [ $1 -ne 2 -a ! -f /etc/sysconfig/initial-setup ]; then
   platform="$(arch)"
   if [ "$platform" = "s390" -o "$platform" = "s390x" ]; then
-    echo "RUN_INITAL_SETUP=YES" > /etc/sysconfig/initial-setup
+    echo "RUN_INITIAL_SETUP=YES" > /etc/sysconfig/initial-setup
   else
     %systemd_post initial-setup-graphical.service
     %systemd_post initial-setup-text.service
@@ -74,10 +75,6 @@ if [ $1 -ne 2 -a ! -f /etc/sysconfig/initial-setup ]; then
 fi
 
 %preun
-if [ $1 = 0 ]; then
-  rm -rf /usr/share/initial-setup/*.pyc
-  rm -rf /usr/share/initial-setup/modules/*.pyc
-fi
 %systemd_preun initial-setup-graphical.service
 %systemd_preun initial-setup-text.service
 %systemd_preun initial-setup-xserver.service
@@ -88,16 +85,15 @@ fi
 %systemd_postun_with_restart initial-setup-xserver.service
 
 %files -f %{name}.lang
-%defattr(-,root,root,-)
 %dir %{_datadir}/initial-setup/
 %dir %{_datadir}/initial-setup/modules/
 %{python_sitelib}/*
 %{_bindir}/initial-setup
 %{_datadir}/initial-setup/modules/*
 
-/lib/systemd/system/initial-setup-graphical.service
-/lib/systemd/system/initial-setup-text.service
-/lib/systemd/system/initial-setup-xserver.service
+%{_unitdir}/initial-setup-graphical.service
+%{_unitdir}/initial-setup-text.service
+%{_unitdir}/initial-setup-xserver.service
 
 %ifarch s390 s390x
 %dir %{_sysconfdir}/profile.d
@@ -107,5 +103,8 @@ fi
 
 
 %changelog
+* Tue Jan 22 2013 Martin Sivak <msivak@redhat.com> 0.1-2
+- Updates for package review
+
 * Tue Nov 06 2012 Martin Sivak <msivak@redhat.com> 0.1-1
-- Inital release
+- Initial release
