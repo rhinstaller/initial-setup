@@ -13,7 +13,7 @@ from di import inject, usesclassinject
 _ = lambda t: t
 N_ = lambda t: t
 
-productTitle = lambda: "Inital Setup of Fedora"
+productTitle = lambda: "Initial Setup of Fedora"
 isFinal = lambda: False
 
 class InitalSetupQuitDialog(QuitDialog):
