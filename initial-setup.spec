@@ -1,8 +1,8 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.1
-Release: 2%{?dist}
+Version: 0.2
+Release: 1%{?dist}
 BuildArch: noarch
 
 # This is a Red Hat maintained package which is specific to
@@ -30,13 +30,11 @@ BuildRequires: anaconda >= 18.40
 Requires: gtk3
 Requires: python
 Requires: anaconda >= 18.40
-Requires(post): systemd-units systemd-sysv chkconfig
+Requires(post): systemd-units
 Requires(preun): systemd-units
 Requires(postun): systemd-units
 Requires: firstboot(windowmanager)
 Requires: libreport-python
-
-%global debug_package %{nil}
 
 %description
 The initial-setup utility runs after installation.  It guides the user through
@@ -57,8 +55,6 @@ rm -rf *.egg-info
 #%{__python} setup.py nosetests
 
 %install
-rm -rf ${buildroot}
-
 %{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
 %find_lang %{name}
 
@@ -85,10 +81,12 @@ fi
 %systemd_postun_with_restart initial-setup-xserver.service
 
 %files -f %{name}.lang
+%doc COPYING README
 %dir %{_datadir}/initial-setup/
 %dir %{_datadir}/initial-setup/modules/
 %{python_sitelib}/*
 %{_bindir}/initial-setup
+%{_bindir}/firstboot-windowmanager
 %{_datadir}/initial-setup/modules/*
 
 %{_unitdir}/initial-setup-graphical.service
@@ -96,13 +94,19 @@ fi
 %{_unitdir}/initial-setup-xserver.service
 
 %ifarch s390 s390x
-%dir %{_sysconfdir}/profile.d
 %{_sysconfdir}/profile.d/initial-setup.sh
 %{_sysconfdir}/profile.d/initial-setup.csh
 %endif
 
 
 %changelog
+* Tue Feb 13 2013 Martin Sivak <msivak@redhat.com> 0.2-1
+- Updates for package review
+- Firstboot-windowmanager script
+
+* Tue Feb 13 2013 Martin Sivak <msivak@redhat.com> 0.1-3
+- Updates for package review
+
 * Tue Jan 22 2013 Martin Sivak <msivak@redhat.com> 0.1-2
 - Updates for package review
 

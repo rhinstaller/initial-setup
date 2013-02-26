@@ -1,0 +1,8 @@
+#!/bin/sh
+WMS="metacity"
+for WM in $WMS; do
+    FILE=$(which $WM)
+    if [ -x "$FILE" ]; then
+        exec "$FILE" "$@"
+    fi
+done

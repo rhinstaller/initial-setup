@@ -49,7 +49,7 @@ if os.uname()[4].startswith('s390'):
 
 setup(
     name = "initial-setup",
-    version = "0.1",
+    version = "0.2",
     author = "Martin Sivak",
     author_email = "msivak@redhat.com",
     description='Post-installation configuration utility',
@@ -60,7 +60,7 @@ setup(
     package_data = {
         "": ["*.glade"]
     },
-    scripts = ["initial-setup"],
+    scripts = ["initial-setup", "firstboot-windowmanager"],
     data_files = data_files,
     setup_requires= ['nose>=1.0'],
     test_suite = "initial_setup",

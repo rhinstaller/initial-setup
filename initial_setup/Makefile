@@ -17,7 +17,7 @@
 #
 # Author: Martin Sivak <msivak@redhat.com>
 
-ANACONDA_PATH=${HOME}/Work/anaconda/firstboot
+ANACONDA_PATH=${HOME}/Work/anaconda/master
 
 # GUI TESTING
 rungui:
