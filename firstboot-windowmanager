@@ -1,8 +1,16 @@
 #!/bin/sh
-WMS="metacity"
-for WM in $WMS; do
-    FILE=$(which $WM)
-    if [ -x "$FILE" ]; then
+
+# This is the list of supported window manager binaries
+WMS=("metacity" "kwin" "xfwm4" "openbox" "marco")
+
+for WM in ${WMS[@]}; do
+    FILE=$(which $WM 2>/dev/null)
+    FOUND=$?
+
+    if [ $FOUND -eq 0 -a -x "$FILE" ]; then
         exec "$FILE" "$@"
     fi
 done
+
+# No known window manager found
+exit 1
