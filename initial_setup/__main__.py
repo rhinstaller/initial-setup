@@ -1,7 +1,7 @@
 #!/bin/python
 import os
 
-if "DISPLAY" in os.environ:
+if "DISPLAY" in os.environ and os.environ["DISPLAY"]:
     mode="gui"
 else:
     mode="tui"
@@ -55,7 +55,7 @@ else:
     tui.InitialSetupTextUserInterface.update_paths(addon_module_paths)
 
     # Initialize the UI
-    ui = gui.InitialSetupTextUserInterface(None, None, None)
+    ui = tui.InitialSetupTextUserInterface(None, None, None)
 
 # Pass the data object to user inteface
 ui.setup(data)
