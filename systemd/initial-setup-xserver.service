@@ -1,5 +1,5 @@
 [Unit]
-Description=Initial Setup configuration program (text mode)
+Description=Initial Setup Xserver service
 After=livesys.service plymouth-quit.service
 After=systemd-vconsole-setup.service
 Before=display-manager.service getty@tty1.service
@@ -8,11 +8,10 @@ Conflicts=plymouth-quit.service
 [Service]
 Type=oneshot
 ExecStartPre=-/bin/plymouth quit
-ExecStart=/usr/sbin/initial-setup
-ExecStartPost=/bin/systemctl disable initial-setup-text.service
+ExecStart=xinit /bin/firstboot-windowmanager -- Xorg :9 -ac -nolisten tcp vt1
+ExecStartPost=
 TimeoutSec=0
 RemainAfterExit=yes
 SysVStartPriority=99
 
 [Install]
-WantedBy=multi-user.target

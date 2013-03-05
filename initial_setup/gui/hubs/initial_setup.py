@@ -3,6 +3,8 @@ from pyanaconda.ui.gui.spokes import Spoke
 from pyanaconda.ui.common import collect
 import os
 
+__all__ = ["InitialSetupMainHub"]
+
 def collect_spokes(mask_paths):
     """Return a list of all spoke subclasses that should appear for a given
        category. Look for them in files imported as module_path % basename(f)
@@ -23,7 +25,7 @@ def collect_spokes(mask_paths):
     return spokes
 
 
-class InitalSetupMainHub(Hub):
+class InitialSetupMainHub(Hub):
     uiFile = "initial_setup.glade"
     builderObjects = ["summaryWindow"]
     mainWidgetName = "summaryWindow"

@@ -17,7 +17,7 @@
 #
 # Author: Martin Sivak <msivak@redhat.com>
 
-ANACONDA_PATH=${HOME}/Work/anaconda/master
+ANACONDA_PATH=${HOME}/Work/anaconda/msivak
 
 # GUI TESTING
 rungui:
@@ -31,13 +31,13 @@ rungui:
 	GI_TYPELIB_PATH=${ANACONDA_PATH}/widgets/src/ \
 	GLADE_CATALOG_SEARCH_PATH=${ANACONDA_PATH}/widgets/glade \
 	GLADE_MODULE_SEARCH_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	python -m gui
+	./initial-setup
 
 runtui:
 	ANACONDA_DATA=${ANACONDA_PATH}/data \
 	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
 	PYTHONPATH=.:${ANACONDA_PATH}:${ANACONDA_PATH}/pyanaconda/isys/.libs \
-	python -m tui
+	DISPLAY= ./initial-setup
 
 runglade:
 	ANACONDA_DATA=${ANACONDA_PATH}/data \

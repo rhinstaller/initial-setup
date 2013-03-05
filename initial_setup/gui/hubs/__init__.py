@@ -1,1 +1,1 @@
-from initial_setup import InitalSetupMainHub
+from .initial_setup import InitialSetupMainHub

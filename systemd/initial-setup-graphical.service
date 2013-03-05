@@ -1,5 +1,5 @@
 [Unit]
-Description=Inital Setup configuration program
+Description=Initial Setup configuration program
 After=livesys.service plymouth-quit.service
 Before=display-manager.service getty@tty1.service
 Conflicts=plymouth-quit.service initial-setup-text.service

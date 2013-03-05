@@ -1,6 +1,6 @@
 from pyanaconda.ui.gui import QuitDialog, GUIObject, GraphicalUserInterface
 #from .product import productName, productVersion
-from .hubs import InitalSetupMainHub
+from .hubs import InitialSetupMainHub
 from pyanaconda.ui.gui.spokes import StandaloneSpoke
 import pyanaconda.ui.gui.spokes
 from pyanaconda.ui.common import collect, FirstbootSpokeMixIn
@@ -16,12 +16,12 @@ N_ = lambda t: t
 productTitle = lambda: "Initial Setup of Fedora"
 isFinal = lambda: False
 
-class InitalSetupQuitDialog(QuitDialog):
+class InitialSetupQuitDialog(QuitDialog):
     MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
                  "You might end up with unusable system if you do.")
 
 @inject(Gdk, productTitle = productTitle, isFinal = isFinal)
-class InitalSetupGraphicalUserInterface(GraphicalUserInterface):
+class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     """This is the main Gtk based firstboot interface. It inherits from
        anaconda to make the look & feel as similar as possible.
     """
@@ -32,10 +32,10 @@ class InitalSetupGraphicalUserInterface(GraphicalUserInterface):
     def __init__(self, storage, payload, instclass):
         GraphicalUserInterface.__init__(self, storage, payload, instclass,
                                         productTitle, isFinal,
-                                        quitDialog = InitalSetupQuitDialog)
+                                        quitDialog = InitialSetupQuitDialog)
         
     def _list_hubs(self):
-        return [InitalSetupMainHub]
+        return [InitialSetupMainHub]
 
     basemask = "firstboot.gui"
     basepath = os.path.dirname(__file__)
