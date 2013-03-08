@@ -4,15 +4,19 @@ After=livesys.service plymouth-quit.service
 After=systemd-vconsole-setup.service
 Before=display-manager.service getty@tty1.service
 Conflicts=plymouth-quit.service
+Conflicts=initial-setup-graphical.service
+After=initial-setup-graphical.service
 
 [Service]
 Type=oneshot
-ExecStartPre=-/bin/plymouth quit
-ExecStart=/usr/sbin/initial-setup
-ExecStartPost=/bin/systemctl disable initial-setup-text.service
+ExecStartPre=
+ExecStart=/bin/initial-setup
+ExecStartPost=/bin/systemctl disable initial-setup-text.service initial-setup-graphical.service
 TimeoutSec=0
 RemainAfterExit=yes
 SysVStartPriority=99
+StandardInput=tty
+StandardOutput=tty
 
 [Install]
 WantedBy=multi-user.target

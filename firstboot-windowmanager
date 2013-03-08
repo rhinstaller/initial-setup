@@ -3,12 +3,29 @@
 # This is the list of supported window manager binaries
 WMS=("metacity" "kwin" "xfwm4" "openbox" "marco")
 
+# Get the application binary to start and remove it from
+# the argument list
+BINARY=$1
+shift
+
 for WM in ${WMS[@]}; do
     FILE=$(which $WM 2>/dev/null)
     FOUND=$?
 
     if [ $FOUND -eq 0 -a -x "$FILE" ]; then
-        exec "$FILE" "$@"
+        # start window manager
+        "$FILE" "$@" &
+        pid=$!
+
+        # start the application
+        $BINARY
+        res=$?
+
+        # stop window manager
+        kill $pid
+
+        # return result
+        exit $res
     fi
 done
 

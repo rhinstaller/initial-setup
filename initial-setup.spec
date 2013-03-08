@@ -66,19 +66,16 @@ if [ $1 -ne 2 -a ! -f /etc/sysconfig/initial-setup ]; then
   else
     %systemd_post initial-setup-graphical.service
     %systemd_post initial-setup-text.service
-    %systemd_post initial-setup-xserver.service
   fi
 fi
 
 %preun
 %systemd_preun initial-setup-graphical.service
 %systemd_preun initial-setup-text.service
-%systemd_preun initial-setup-xserver.service
 
 %postun
 %systemd_postun_with_restart initial-setup-graphical.service
 %systemd_postun_with_restart initial-setup-text.service
-%systemd_postun_with_restart initial-setup-xserver.service
 
 %files -f %{name}.lang
 %doc COPYING README
@@ -91,7 +88,6 @@ fi
 
 %{_unitdir}/initial-setup-graphical.service
 %{_unitdir}/initial-setup-text.service
-%{_unitdir}/initial-setup-xserver.service
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
