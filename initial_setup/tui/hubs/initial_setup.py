@@ -30,7 +30,7 @@ def collect_spokes(mask_paths):
 
 
 class InitialSetupMainHub(TUIHub):
-    categories = ["password"]
+    categories = ["password", "localization"]
     title = _("Initial setup of Fedora")
     
     def _collectCategoriesAndSpokes(self):
