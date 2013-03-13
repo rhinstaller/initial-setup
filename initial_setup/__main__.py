@@ -1,6 +1,7 @@
 #!/bin/python
 import os
 import sys
+from pyanaconda.users import Users
 
 if "DISPLAY" in os.environ and os.environ["DISPLAY"]:
     mode="gui"
@@ -70,4 +71,10 @@ if ret == False:
     sys.exit(0)
 
 # Print the kickstart file
-print data
+# print data
+
+u = Users()
+data.group.execute(None, data, None, u)
+data.user.execute(None, data, None, u)
+data.rootpw.execute(None, data, None, u)
+data.addons.execute(None, data, None, u)
