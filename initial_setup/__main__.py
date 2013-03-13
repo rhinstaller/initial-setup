@@ -29,16 +29,28 @@ addon_module_paths = collect_addon_paths(addon_paths)
 from pyanaconda import anaconda_log
 anaconda_log.init()
 
-# Prepare new data object
 from pyanaconda import kickstart
-data = kickstart.AnacondaKSHandler(addon_module_paths["ks"])
 
-# Replace storage commands by Dummy objects
-# TODO
+# Construct a commandMap with the supported Anaconda's commands only
+kickstart_commands = ["user",
+                      "group",
+                      "keyboard",
+                      "lang",
+                      "rootpw",
+                      "timezone",
+                      "logging",
+                      "selinux",
+                      "firewall",
+                      ]
 
+commandMap = dict((k, kickstart.commandMap[k]) for k in kickstart_commands)
+
+# Prepare new data object
+data = kickstart.AnacondaKSHandler(addon_module_paths["ks"], commandUpdates=commandMap)
+    
 # Read the installed kickstart
 parser = kickstart.AnacondaKSParser(data)
-parser.readKickstart("anaconda-ks.cfg")
+parser.readKickstart("/root/anaconda-ks.cfg")
 
 if mode == "gui":
     # Import IS gui specifics
@@ -73,8 +85,17 @@ if ret == False:
 # Print the kickstart file
 # print data
 
+data.keyboard.execute(None, data, None)
+data.lang.execute(None, data, None)
+
+# data.selinux.execute(None, data, None)
+# data.firewall.execute(None, data, None)
+# data.timezone.execute(None, data, None)
+
 u = Users()
 data.group.execute(None, data, None, u)
 data.user.execute(None, data, None, u)
 data.rootpw.execute(None, data, None, u)
+
+# Configure all addons
 data.addons.execute(None, data, None, u)
