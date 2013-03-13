@@ -1,5 +1,6 @@
 #!/bin/python
 import os
+import sys
 
 if "DISPLAY" in os.environ and os.environ["DISPLAY"]:
     mode="gui"
@@ -61,7 +62,12 @@ else:
 ui.setup(data)
 
 # Start the application
-ui.run()
+ret = ui.run()
+
+# TUI returns False if the app was ended prematurely
+# all other cases return True or None
+if ret == False:
+    sys.exit(0)
 
 # Print the kickstart file
 print data
