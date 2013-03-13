@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.2
+Version: 0.3
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -26,15 +26,16 @@ BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
 BuildRequires: python-babel
-BuildRequires: anaconda >= 18.40
+BuildRequires: anaconda >= 19.11
 Requires: gtk3
 Requires: python
-Requires: anaconda >= 18.40
+Requires: anaconda >= 19.11
 Requires(post): systemd-units
 Requires(preun): systemd-units
 Requires(postun): systemd-units
 Requires: firstboot(windowmanager)
 Requires: libreport-python
+Conflicts: firstboot < 19.2
 
 %description
 The initial-setup utility runs after installation.  It guides the user through
@@ -96,6 +97,13 @@ fi
 
 
 %changelog
+* Wed Mar 13 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3-1
+- Use updated Anaconda API
+- Fix systemd units
+- Add localization spokes to TUI
+- Write changes to disk
+- Conflict with old firstboot
+
 * Tue Feb 13 2013 Martin Sivak <msivak@redhat.com> 0.2-1
 - Updates for package review
 - Firstboot-windowmanager script
