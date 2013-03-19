@@ -23,6 +23,8 @@ class InitialSetupTextUserInterface(TextUserInterface):
     """This is the main text based firstboot interface. It inherits from
        anaconda to make the look & feel as similar as possible.
     """
+
+    ENVIRONMENT = "firstboot"
     
     @usesclassinject
     def __init__(self, storage, payload, instclass):
