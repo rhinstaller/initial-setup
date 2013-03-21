@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3
+Version: 0.3.1
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -26,10 +26,10 @@ BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
 BuildRequires: python-babel
-BuildRequires: anaconda >= 19.11
+BuildRequires: anaconda >= 19.13
 Requires: gtk3
 Requires: python
-Requires: anaconda >= 19.11
+Requires: anaconda >= 19.13
 Requires(post): systemd-units
 Requires(preun): systemd-units
 Requires(postun): systemd-units
@@ -97,6 +97,10 @@ fi
 
 
 %changelog
+* Thu Mar 21 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.1-1
+- Use updated Anaconda API
+- Request firstboot environment spokes
+
 * Wed Mar 13 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3-1
 - Use updated Anaconda API
 - Fix systemd units
