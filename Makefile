@@ -18,6 +18,7 @@
 # Author: Martin Sivak <msivak@redhat.com>
 
 ANACONDA_PATH=${HOME}/Work/anaconda/msivak
+PYKICKSTART_PATH=${HOME}/Work/pykickstart/master
 
 # GUI TESTING
 rungui:
@@ -25,7 +26,7 @@ rungui:
 	ANACONDA_WIDGETS_OVERRIDES=${ANACONDA_PATH}/widgets/python \
 	ANACONDA_WIDGETS_DATA=${ANACONDA_PATH}/widgets/data \
 	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
-	PYTHONPATH=.:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/:${ANACONDA_PATH} \
+	PYTHONPATH=.:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/:${ANACONDA_PATH}:${PYKICKSTART_PATH} \
 	LD_LIBRARY_PATH=${ANACONDA_PATH}/widgets/src/.libs \
 	UIPATH=gui/:${ANACONDA_PATH}/pyanaconda/ui/gui/ \
 	GI_TYPELIB_PATH=${ANACONDA_PATH}/widgets/src/ \
@@ -36,7 +37,7 @@ rungui:
 runtui:
 	ANACONDA_DATA=${ANACONDA_PATH}/data \
 	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
-	PYTHONPATH=.:${ANACONDA_PATH}:${ANACONDA_PATH}/pyanaconda/isys/.libs \
+	PYTHONPATH=.:${ANACONDA_PATH}:${ANACONDA_PATH}/pyanaconda/isys/.libs:${PYKICKSTART_PATH}  \
 	DISPLAY= ./initial-setup
 
 runglade:
