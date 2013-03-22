@@ -29,6 +29,12 @@ addon_module_paths = collect_addon_paths(addon_paths)
 from pyanaconda import anaconda_log
 anaconda_log.init()
 
+
+# init threading before Gtk can do anything and before we start using threads
+# initThreading initializes the threadMgr instance, import it afterwards
+from pyanaconda.threads import initThreading
+initThreading()
+
 from pyanaconda import kickstart
 
 # Construct a commandMap with the supported Anaconda's commands only
