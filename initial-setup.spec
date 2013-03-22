@@ -100,6 +100,7 @@ fi
 * Thu Mar 21 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.1-1
 - Use updated Anaconda API
 - Request firstboot environment spokes
+- Initialize anaconda threading properly
 
 * Wed Mar 13 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3-1
 - Use updated Anaconda API
