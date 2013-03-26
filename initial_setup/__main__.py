@@ -17,8 +17,11 @@ if mode == "gui":
 
 # set the root path to / so the imported spokes
 # know where to apply their changes
-from pyanaconda.constants import ROOT_PATH
-ROOT_PATH = "/"
+from pyanaconda import constants
+
+# this has to stay in the form constants.ROOT_PATH so it modifies
+# the scalar in anaconda, not the local copy here
+constants.ROOT_PATH = "/"
 
 from pyanaconda.addons import collect_addon_paths
 
