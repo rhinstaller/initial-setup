@@ -1,16 +1,17 @@
 [Unit]
 Description=Initial Setup configuration program (text mode)
-After=livesys.service plymouth-quit.service
+After=livesys.service plymouth-quit-wait.service
 After=systemd-vconsole-setup.service
 Before=display-manager.service getty@tty1.service
-Conflicts=plymouth-quit.service
+Conflicts=plymouth-quit-wait.service
 Conflicts=initial-setup-graphical.service
 After=initial-setup-graphical.service
 
 [Service]
 Type=oneshot
-ExecStartPre=
+ExecStartPre=/bin/kill -55 1
 ExecStart=/bin/initial-setup
+ExecStartPost=/bin/kill -54 1
 ExecStartPost=/bin/systemctl disable initial-setup-text.service initial-setup-graphical.service
 TimeoutSec=0
 RemainAfterExit=yes

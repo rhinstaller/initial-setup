@@ -1,12 +1,12 @@
 [Unit]
 Description=Initial Setup configuration program
-After=livesys.service plymouth-quit.service
+After=livesys.service plymouth-quit-wait.service
 Before=display-manager.service getty@tty1.service
-Conflicts=plymouth-quit.service initial-setup-text.service
+Conflicts=plymouth-quit-wait.service initial-setup-text.service
 
 [Service]
 Type=oneshot
-ExecStartPre=-/bin/plymouth quit
+ExecStartPre=
 ExecStart=/bin/xinit /bin/firstboot-windowmanager /bin/initial-setup -- /bin/Xorg :9 -ac -nolisten tcp
 ExecStartPost=/bin/systemctl disable initial-setup-graphical.service initial-setup-text.service
 TimeoutSec=0
