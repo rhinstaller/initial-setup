@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
 Version: 0.3.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 BuildArch: noarch
 
 # This is a Red Hat maintained package which is specific to
@@ -27,6 +27,7 @@ BuildRequires: glade-devel
 BuildRequires: pygobject3
 BuildRequires: python-babel
 BuildRequires: anaconda >= 19.13
+BuildRequires: python-di
 Requires: gtk3
 Requires: python
 Requires: anaconda >= 19.13
@@ -35,6 +36,7 @@ Requires(preun): systemd-units
 Requires(postun): systemd-units
 Requires: firstboot(windowmanager)
 Requires: libreport-python
+Requires: python-di
 Conflicts: firstboot < 19.2
 
 %description
@@ -97,6 +99,9 @@ fi
 
 
 %changelog
+* Tue Mar 26 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.1-2
+- Require python-di package
+
 * Thu Mar 21 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.1-1
 - Use updated Anaconda API
 - Request firstboot environment spokes
