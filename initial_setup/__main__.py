@@ -91,20 +91,33 @@ ret = ui.run()
 if ret == False:
     sys.exit(0)
 
-# Print the kickstart file
-# print data
+# Do not execute sections that were part of the original
+# anaconda kickstart file (== have .seen flag set)
 
-data.keyboard.execute(None, data, None)
-data.lang.execute(None, data, None)
+sections = [data.keyboard, data.lang]
 
-# data.selinux.execute(None, data, None)
-# data.firewall.execute(None, data, None)
-# data.timezone.execute(None, data, None)
+# data.selinux
+# data.firewall
+# data.timezone
 
+for section in sections:
+    if section.seen:
+        continue
+    section.execute(None, data, None)
+
+# Prepare the user database tools
 u = Users()
-data.group.execute(None, data, None, u)
-data.user.execute(None, data, None, u)
-data.rootpw.execute(None, data, None, u)
+
+sections = [data.group, data.user, data.rootpw]
+for section in sections:
+    if section.seen:
+        continue
+    section.execute(None, data, None, u)
 
 # Configure all addons
 data.addons.execute(None, data, None, u)
+
+# Print the kickstart data to file
+with open("/root/initial-setup-ks.cfg", "w") as f:
+    f.write(str(data))
+
