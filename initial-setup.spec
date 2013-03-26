@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.2
+Version: 0.3.3
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -99,6 +99,9 @@ fi
 
 
 %changelog
+* Tue Mar 26 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.3-1
+- Systemd unit files improved
+
 * Tue Mar 26 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.2-1
 - Modify the ROOT_PATH properly
 - Do not execute old ksdata (from anaconda's ks file)
