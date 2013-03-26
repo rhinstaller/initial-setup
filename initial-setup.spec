@@ -1,8 +1,8 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.1
-Release: 2%{?dist}
+Version: 0.3.2
+Release: 1%{?dist}
 BuildArch: noarch
 
 # This is a Red Hat maintained package which is specific to
@@ -99,6 +99,11 @@ fi
 
 
 %changelog
+* Tue Mar 26 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.2-1
+- Modify the ROOT_PATH properly
+- Do not execute old ksdata (from anaconda's ks file)
+- Save the resulting configuration to /root/initial-setup-ks.cfg
+
 * Tue Mar 26 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.1-2
 - Require python-di package
 
