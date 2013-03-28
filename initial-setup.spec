@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.3
+Version: 0.3.4
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -99,6 +99,10 @@ fi
 
 
 %changelog
+* Thu Mar 28 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.4-1
+- Search for proper UI variant of addons
+- Add addon directories to sys.path
+
 * Tue Mar 26 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.3-1
 - Systemd unit files improved
 
