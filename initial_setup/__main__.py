@@ -26,7 +26,11 @@ constants.ROOT_PATH = "/"
 from pyanaconda.addons import collect_addon_paths
 
 addon_paths = ["/usr/share/initial-setup/modules", "/usr/share/anaconda/addons"]
-addon_module_paths = collect_addon_paths(addon_paths)
+
+# append ADDON_PATHS dirs at the end
+sys.path.extend(addon_paths)
+
+addon_module_paths = collect_addon_paths(addon_paths, mode)
 
 # Too bad anaconda does not have modularized logging
 from pyanaconda import anaconda_log
