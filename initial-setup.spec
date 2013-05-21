@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
 Version: 0.3.4
-Release: 1%{?dist}
+Release: 3%{?dist}
 BuildArch: noarch
 
 # This is a Red Hat maintained package which is specific to
@@ -31,9 +31,9 @@ BuildRequires: python-di
 Requires: gtk3
 Requires: python
 Requires: anaconda >= 19.13
-Requires(post): systemd-units
-Requires(preun): systemd-units
-Requires(postun): systemd-units
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
 Requires: firstboot(windowmanager)
 Requires: libreport-python
 Requires: python-di
@@ -53,9 +53,8 @@ rm -rf *.egg-info
 %{__python} setup.py build
 %{__python} setup.py compile_catalog -D %{name} -d locale
 
-# Check is disabled until Gtk bug rhbz#902401 is resolved
-#%check
-#%{__python} setup.py nosetests
+%check
+%{__python} setup.py nosetests
 
 %install
 %{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
@@ -99,6 +98,12 @@ fi
 
 
 %changelog
+* Mon Apr 8 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.4-3
+- Rebuild with fixed spec that partly reverts the previous change
+
+* Fri Apr 5 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.4-2
+- Rebuild with fixed spec that enables services after installation
+
 * Thu Mar 28 2013 Martin Sivak <msivak@euryale.brq.redhat.com> - 0.3.4-1
 - Search for proper UI variant of addons
 - Add addon directories to sys.path
