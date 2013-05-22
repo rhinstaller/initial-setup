@@ -10,7 +10,7 @@ BuildArch: noarch
 #
 # The source is thus available only from within this SRPM
 # or via direct git checkout:
-# git clone git://fedorapeople.org/home/fedora/msivak/public_git/firstboot2.git
+# git clone git://git.fedorahosted.org/initial-setup.git
 Source0: %{name}-%{version}.tar.gz
 
 License: GPLv2+
