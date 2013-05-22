@@ -6,6 +6,7 @@ Before=display-manager.service getty@tty1.service
 Conflicts=plymouth-quit-wait.service
 Conflicts=initial-setup-graphical.service
 After=initial-setup-graphical.service
+ConditionKernelCommandLine=!rd.live.image
 
 [Service]
 Type=oneshot

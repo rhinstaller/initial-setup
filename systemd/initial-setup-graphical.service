@@ -3,6 +3,7 @@ Description=Initial Setup configuration program
 After=livesys.service plymouth-quit-wait.service
 Before=display-manager.service getty@tty1.service
 Conflicts=plymouth-quit-wait.service initial-setup-text.service
+ConditionKernelCommandLine=!rd.live.image
 
 [Service]
 Type=oneshot
