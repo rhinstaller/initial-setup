@@ -1,6 +1,7 @@
 #!/bin/python
 import os
 import sys
+import pykickstart
 from pyanaconda.users import Users
 
 if "DISPLAY" in os.environ and os.environ["DISPLAY"]:
@@ -61,9 +62,12 @@ commandMap = dict((k, kickstart.commandMap[k]) for k in kickstart_commands)
 # Prepare new data object
 data = kickstart.AnacondaKSHandler(addon_module_paths["ks"], commandUpdates=commandMap)
     
-# Read the installed kickstart
-parser = kickstart.AnacondaKSParser(data)
-parser.readKickstart("/root/anaconda-ks.cfg")
+try:
+    # Read the installed kickstart
+    parser = kickstart.AnacondaKSParser(data)
+    parser.readKickstart("/root/anaconda-ks.cfg")
+except pykickstart.errors.KickstartError as kserr:
+    sys.exit(1)
 
 if mode == "gui":
     # Import IS gui specifics
