@@ -1,8 +1,8 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.4
-Release: 3%{?dist}
+Version: 0.3.5
+Release: 1%{?dist}
 BuildArch: noarch
 
 # This is a Red Hat maintained package which is specific to
@@ -98,6 +98,11 @@ fi
 
 
 %changelog
+* Mon May 22 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.5-1
+- Reference the new repository in the .spec file (vpodzime)
+- Prevent systemd services from running on live images (#962196) (awilliam)
+- Don't traceback if the expected kickstart file doesn't exist (#950796) (vpodzime)
+
 * Mon Apr 8 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.4-3
 - Rebuild with fixed spec that partly reverts the previous change
 
