@@ -13,7 +13,6 @@ Type=oneshot
 ExecStartPre=/bin/kill -55 1
 ExecStart=/bin/initial-setup
 ExecStartPost=/bin/kill -54 1
-ExecStartPost=/bin/systemctl disable initial-setup-text.service initial-setup-graphical.service
 TimeoutSec=0
 RemainAfterExit=yes
 SysVStartPriority=99
