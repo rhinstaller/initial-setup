@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.5
+Version: 0.3.6
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -98,6 +98,10 @@ fi
 
 
 %changelog
+* Tue Jun 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.6-1
+- Make serial-getty wait for us as well (#970719) (vpodzime)
+- Disable the service only on successful exit (#967617) (vpodzime)
+
 * Mon May 22 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.5-1
 - Reference the new repository in the .spec file (vpodzime)
 - Prevent systemd services from running on live images (#962196) (awilliam)
