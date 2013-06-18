@@ -2,7 +2,7 @@
 Description=Initial Setup configuration program (text mode)
 After=livesys.service plymouth-quit-wait.service
 After=systemd-vconsole-setup.service
-Before=display-manager.service getty@tty1.service
+Before=display-manager.service getty@tty1.service serial-getty@ttyS0.service
 Conflicts=plymouth-quit-wait.service
 Conflicts=initial-setup-graphical.service
 After=initial-setup-graphical.service
