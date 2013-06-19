@@ -43,6 +43,10 @@ anaconda_log.init()
 from pyanaconda.threads import initThreading
 initThreading()
 
+# initialize network logging (needed by the Network spoke that may be shown)
+from pyanaconda.network import setup_ifcfg_log
+setup_ifcfg_log()
+
 from pyanaconda import kickstart
 
 # Construct a commandMap with the supported Anaconda's commands only
@@ -61,7 +65,7 @@ commandMap = dict((k, kickstart.commandMap[k]) for k in kickstart_commands)
 
 # Prepare new data object
 data = kickstart.AnacondaKSHandler(addon_module_paths["ks"], commandUpdates=commandMap)
-    
+
 try:
     # Read the installed kickstart
     parser = kickstart.AnacondaKSParser(data)
