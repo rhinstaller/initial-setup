@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.6
+Version: 0.3.7
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -98,6 +98,10 @@ fi
 
 
 %changelog
+* Tue Aug 27 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.7-1
+- Prevent getty on various services killing us (#979174) (vpodzime)
+- Initialize network logging for the network spoke (vpodzime)
+
 * Tue Jun 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.6-1
 - Make serial-getty wait for us as well (#970719) (vpodzime)
 - Disable the service only on successful exit (#967617) (vpodzime)
