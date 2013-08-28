@@ -1,6 +1,7 @@
 from pyanaconda.ui.tui.hubs import TUIHub
 from pyanaconda.ui.tui.spokes import TUISpoke
 from pyanaconda.ui.common import collect
+from initial_setup import product
 import os
 
 __all__ = ["InitialSetupMainHub"]
@@ -31,8 +32,13 @@ def collect_spokes(mask_paths):
 
 class InitialSetupMainHub(TUIHub):
     categories = ["password", "localization"]
-    title = _("Initial setup of Fedora")
-    
+
+    prod_title = product.product_title()
+    if prod_title:
+        title = _("Initial setup of %(product)s") % {"product": prod_title}
+    else:
+        title = _("Initial setup")
+
     def _collectCategoriesAndSpokes(self):
         """collects categories and spokes to be displayed on this Hub
 

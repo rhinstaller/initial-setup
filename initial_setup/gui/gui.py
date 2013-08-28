@@ -1,5 +1,5 @@
 from pyanaconda.ui.gui import QuitDialog, GUIObject, GraphicalUserInterface
-#from .product import productName, productVersion
+from initial_setup.product import product_title, is_final
 from .hubs import InitialSetupMainHub
 from pyanaconda.ui.gui.spokes import StandaloneSpoke
 import pyanaconda.ui.gui.spokes
@@ -13,27 +13,24 @@ from di import inject, usesclassinject
 _ = lambda t: t
 N_ = lambda t: t
 
-productTitle = lambda: "Initial Setup of Fedora"
-isFinal = lambda: False
-
 class InitialSetupQuitDialog(QuitDialog):
     MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
                  "You might end up with unusable system if you do.")
 
-@inject(Gdk, productTitle = productTitle, isFinal = isFinal)
+@inject(Gdk, product_title = product_title, is_final = is_final)
 class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     """This is the main Gtk based firstboot interface. It inherits from
        anaconda to make the look & feel as similar as possible.
     """
 
     screenshots_directory = "/tmp/initial-setup-screenshots"
-    
+
     @usesclassinject
     def __init__(self, storage, payload, instclass):
         GraphicalUserInterface.__init__(self, storage, payload, instclass,
-                                        productTitle, isFinal,
+                                        product_title, is_final,
                                         quitDialog = InitialSetupQuitDialog)
-        
+
     def _list_hubs(self):
         return [InitialSetupMainHub]
 

@@ -29,7 +29,7 @@ class InitialSetupMainHub(Hub):
     uiFile = "initial_setup.glade"
     builderObjects = ["summaryWindow"]
     mainWidgetName = "summaryWindow"
-    
+
     def _collectCategoriesAndSpokes(self):
         """collects categories and spokes to be displayed on this Hub
 
