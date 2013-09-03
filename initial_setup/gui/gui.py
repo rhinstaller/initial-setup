@@ -35,7 +35,7 @@ class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     def _list_hubs(self):
         return [InitialSetupMainHub]
 
-    basemask = "firstboot.gui"
+    basemask = "initial_setup.gui"
     basepath = os.path.dirname(__file__)
     paths = GraphicalUserInterface.paths + {
         "spokes": [(basemask + ".spokes.%s", os.path.join(basepath, "spokes"))],
