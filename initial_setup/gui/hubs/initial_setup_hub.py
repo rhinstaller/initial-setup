@@ -1,3 +1,4 @@
+from pyanaconda.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.ui.gui.hubs import Hub
 from pyanaconda.ui.gui.spokes import Spoke
 from pyanaconda.ui.common import collect
@@ -29,6 +30,10 @@ class InitialSetupMainHub(Hub):
     builderObjects = ["summaryWindow"]
     mainWidgetName = "summaryWindow"
 
+    def __init__(self, *args):
+        Hub.__init__(self, *args)
+        self._environs = [FIRSTBOOT_ENVIRON]
+
     def _collectCategoriesAndSpokes(self):
         """collects categories and spokes to be displayed on this Hub
 
@@ -42,7 +47,7 @@ class InitialSetupMainHub(Hub):
         # spokes belonging to all those categories.
         candidate_spokes = collect_spokes(self.paths["spokes"])
         spokes = [spoke for spoke in candidate_spokes \
-                        if spoke.should_run("firstboot", self.data)]
+                        if spoke.should_run(FIRSTBOOT_ENVIRON, self.data)]
 
         for spoke in spokes:
             ret.setdefault(spoke.category, [])
