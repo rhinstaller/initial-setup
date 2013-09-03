@@ -51,6 +51,7 @@ from pyanaconda import kickstart
 
 # Construct a commandMap with the supported Anaconda's commands only
 kickstart_commands = ["user",
+                      "eula",
                       "group",
                       "keyboard",
                       "lang",

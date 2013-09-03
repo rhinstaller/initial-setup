@@ -2,7 +2,9 @@ from pyanaconda.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.ui.gui.hubs import Hub
 from pyanaconda.ui.gui.spokes import Spoke
 from pyanaconda.ui.common import collect
+from initial_setup import product
 import os
+import sys
 
 __all__ = ["InitialSetupMainHub"]
 
@@ -62,3 +64,23 @@ class InitialSetupMainHub(Hub):
     @property
     def quitButton(self):
         return self.builder.get_object("quitButton")
+
+    def register_event_cb(self, event, cb):
+        if event == "continue" and self.continueButton:
+            self.continueButton.connect("clicked", lambda *args: cb())
+        elif event == "quit" and self.quitButton:
+            self.quitButton.connect("clicked", lambda *args: self._on_quit_clicked(cb))
+
+    def _on_quit_clicked(self, cb):
+        try:
+            cb()
+        except SystemExit:
+            # user wants to exit, check if EULA is available and accepted and do
+            # proper action
+            license_file = product.get_license_file_name()
+            if not license_file or self.data.eula.agreed:
+                # agreed, just exit
+                sys.exit(0)
+            else:
+                # not agreed, reboot the system and leave Initial Setup enabled
+                os.system("reboot")
