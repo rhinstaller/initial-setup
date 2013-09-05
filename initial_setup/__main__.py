@@ -106,11 +106,10 @@ if ret == False:
 # Do not execute sections that were part of the original
 # anaconda kickstart file (== have .seen flag set)
 
-sections = [data.keyboard, data.lang]
+sections = [data.keyboard, data.lang, data.timezone]
 
 # data.selinux
 # data.firewall
-# data.timezone
 
 for section in sections:
     if section.seen:
