@@ -20,7 +20,9 @@ def product_title():
                 if key == "PRETTY_NAME":
                     return value.strip('"')
     except IOError:
-        return ""
+        pass
+
+    return ""
 
 def is_final():
     """

@@ -21,7 +21,6 @@ def collect_spokes(mask_paths):
         spokes.extend(collect(mask, path,
                               lambda obj: issubclass(obj, Spoke) and obj.should_run("firstboot", None)))
 
-    print spokes
     return spokes
 
 
