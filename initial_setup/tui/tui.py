@@ -6,11 +6,12 @@ import pyanaconda.ui.tui.spokes
 from pyanaconda.ui.common import collect, FirstbootSpokeMixIn
 import os
 import logging
+import gettext
 from di import inject, usesclassinject
 
 # localization
-_ = lambda t: t
-N_ = lambda t: t
+_ = lambda x: gettext.ldgettext("initial-setup", x)
+N_ = lambda x: x
 
 QUIT_MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
                   "You might end up with unusable system if you do.")

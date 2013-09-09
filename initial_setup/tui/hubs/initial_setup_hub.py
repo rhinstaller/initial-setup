@@ -3,12 +3,13 @@ from pyanaconda.ui.tui.spokes import TUISpoke
 from pyanaconda.ui.common import collect
 from initial_setup import product
 import os
+import gettext
 
 __all__ = ["InitialSetupMainHub"]
 
 # localization
-_ = lambda t: t
-N_ = lambda t: t
+_ = lambda x: gettext.ldgettext("initial-setup", x)
+N_ = lambda x: x
 
 def collect_spokes(mask_paths):
     """Return a list of all spoke subclasses that should appear for a given
