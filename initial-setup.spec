@@ -25,7 +25,6 @@ BuildRequires: gtk-doc
 BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
-BuildRequires: python-babel
 BuildRequires: anaconda >= 19.13
 BuildRequires: python-di
 Requires: gtk3
@@ -51,13 +50,14 @@ rm -rf *.egg-info
 
 %build
 %{__python} setup.py build
-%{__python} setup.py compile_catalog -D %{name} -d locale
+make po-files
 
 %check
 %{__python} setup.py nosetests
 
 %install
 %{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
+make install-po-files
 %find_lang %{name}
 
 %post

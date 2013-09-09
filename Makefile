@@ -1,6 +1,6 @@
-# Makefile.am for anaconda
+# Taken from the anaconda sources
 #
-# Copyright (C) 2009  Red Hat, Inc.
+# Copyright (C) 2009-2013  Red Hat, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
@@ -19,6 +19,13 @@
 
 ANACONDA_PATH=${HOME}/Work/anaconda/msivak
 PYKICKSTART_PATH=${HOME}/Work/pykickstart/master
+
+default: all
+
+all: po-files
+
+po-files:
+	$(MAKE) -C po
 
 # GUI TESTING
 rungui:
@@ -65,3 +72,12 @@ runpy:
 	GLADE_CATALOG_SEARCH_PATH=${ANACONDA_PATH}/widgets/glade \
 	GLADE_MODULE_SEARCH_PATH=${ANACONDA_PATH}/widgets/src/.libs \
 	ipython
+
+potfile:
+	$(MAKE) -C po potfile
+
+po-pull:
+	tx pull -a --disable-overwrite
+
+install-po-files:
+	$(MAKE) -C po install
