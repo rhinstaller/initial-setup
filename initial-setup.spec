@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.7
+Version: 0.3.8
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -98,6 +98,14 @@ fi
 
 
 %changelog
+* Tue Sep 10 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.8-1
+- Read /etc/os-release to get product title (#1000426) (vpodzime)
+- Don't let product_title() return None (vpodzime)
+- Apply the timezone and NTP configuration (#985566) (hdegoede)
+- Make handling translations easier (vpodzime)
+- Make translations work (vpodzime)
+- Sync changelog with downstream (vpodzime)
+
 * Tue Aug 27 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.7-1
 - Prevent getty on various services killing us (#979174) (vpodzime)
 - Initialize network logging for the network spoke (vpodzime)
