@@ -102,6 +102,12 @@ fi
 - Prevent getty on various services killing us (#979174) (vpodzime)
 - Initialize network logging for the network spoke (vpodzime)
 
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.6-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+* Tue Jun 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.6-2
+- Rebuild with dependencies available.
+
 * Tue Jun 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.6-1
 - Make serial-getty wait for us as well (#970719) (vpodzime)
 - Disable the service only on successful exit (#967617) (vpodzime)
