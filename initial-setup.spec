@@ -25,7 +25,7 @@ BuildRequires: gtk-doc
 BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
-BuildRequires: anaconda >= 19.13
+BuildRequires: anaconda >= 19.31.19
 BuildRequires: python-di
 Requires: gtk3
 Requires: python
