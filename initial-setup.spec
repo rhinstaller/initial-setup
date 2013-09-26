@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.8
+Version: 0.3.9
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -25,11 +25,11 @@ BuildRequires: gtk-doc
 BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
-BuildRequires: anaconda >= 19.13
+BuildRequires: anaconda >= 20.11
 BuildRequires: python-di
 Requires: gtk3
 Requires: python
-Requires: anaconda >= 19.13
+Requires: anaconda >= 20.11
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
@@ -98,6 +98,11 @@ fi
 
 
 %changelog
+* Thu Sep 26 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9-1
+- Yet another serial console in ARMs (#1007163) (vpodzime)
+- Fix the base mask of initial_setup gui submodules (vpodzime)
+- Specify and use environment of the main hub (vpodzime)
+
 * Tue Sep 10 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.8-1
 - Read /etc/os-release to get product title (#1000426) (vpodzime)
 - Don't let product_title() return None (vpodzime)
