@@ -29,7 +29,7 @@ BuildRequires: anaconda >= 19.31.19
 BuildRequires: python-di
 Requires: gtk3
 Requires: python
-Requires: anaconda >= 19.13
+Requires: anaconda >= 19.31.19
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
