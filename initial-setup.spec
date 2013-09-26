@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.8
+Version: 0.3.9.1
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -98,6 +98,13 @@ fi
 
 
 %changelog
+* Thu Sep 26 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.1-1
+- Yet another serial console in ARMs (#1007163) (vpodzime)
+- Fix the base mask of initial_setup gui submodules (vpodzime)
+- Specify and use environment of the main hub (vpodzime)
+- EULA agreement spoke (#1000409) (vpodzime)
+- Require new version of anaconda with eula command support (vpodzime)
+
 * Tue Sep 10 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.8-1
 - Read /etc/os-release to get product title (#1000426) (vpodzime)
 - Don't let product_title() return None (vpodzime)

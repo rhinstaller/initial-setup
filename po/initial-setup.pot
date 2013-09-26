@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-09 12:57+0200\n"
+"POT-Creation-Date: 2013-09-26 11:21-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,55 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../initial_setup/tui/tui.py:15 ../initial_setup/gui/gui.py:17
+#: ../initial_setup/tui/tui.py:16 ../initial_setup/gui/gui.py:18
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with unusable system if you do."
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:37
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:38
 #, python-format
 msgid "Initial setup of %(product)s"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:39
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:40
 msgid "Initial setup"
+msgstr ""
+
+#: ../initial_setup/gui/spokes/eula.py:26
+msgid "_LICENSE INFORMATION"
+msgstr ""
+
+#: ../initial_setup/gui/spokes/eula.py:42
+msgid "No license found. Please report this at http://bugzilla.redhat.com"
+msgstr ""
+
+#: ../initial_setup/gui/spokes/eula.py:64
+msgid "No license found"
+msgstr ""
+
+#: ../initial_setup/gui/spokes/eula.py:66
+msgid "License agreed"
+msgstr ""
+
+#: ../initial_setup/gui/spokes/eula.py:66
+msgid "License not agreed"
+msgstr ""
+
+#: tmp/eula.glade.h:1
+msgid "The license will go here"
+msgstr ""
+
+#: tmp/eula.glade.h:2
+msgid "LICENSE INFORMATION"
+msgstr ""
+
+#: tmp/eula.glade.h:3
+msgid "License Agreement:"
+msgstr ""
+
+#: tmp/eula.glade.h:4
+msgid "I _accept the license agreement."
 msgstr ""
 
 #: tmp/initial_setup.glade.h:1
