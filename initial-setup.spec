@@ -99,11 +99,15 @@ fi
 
 %changelog
 * Thu Sep 26 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.1-1
-- Yet another serial console in ARMs (#1007163) (vpodzime)
+- Yet another serial console in ARMs (vpodzime)
+  Related: rhbz#1000409
 - Fix the base mask of initial_setup gui submodules (vpodzime)
+  Related: rhbz#1000409
 - Specify and use environment of the main hub (vpodzime)
+  Related: rhbz#1000409
 - EULA agreement spoke (#1000409) (vpodzime)
 - Require new version of anaconda with eula command support (vpodzime)
+  Related: rhbz#1000409
 
 * Tue Sep 10 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.8-1
 - Read /etc/os-release to get product title (#1000426) (vpodzime)
