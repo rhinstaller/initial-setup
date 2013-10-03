@@ -69,20 +69,27 @@
                     <property name="vexpand">True</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkTextView" id="eulaView">
+                      <object class="GtkScrolledWindow" id="eulaScrolledWindow">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="margin_bottom">18</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="vscroll_policy">natural</property>
-                        <property name="pixels_above_lines">12</property>
-                        <property name="editable">False</property>
-                        <property name="wrap_mode">word</property>
-                        <property name="left_margin">12</property>
-                        <property name="right_margin">12</property>
-                        <property name="cursor_visible">False</property>
-                        <property name="buffer">eulaBuffer</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <object class="GtkTextView" id="eulaView">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="margin_bottom">18</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="vscroll_policy">natural</property>
+                            <property name="pixels_above_lines">12</property>
+                            <property name="editable">False</property>
+                            <property name="wrap_mode">word</property>
+                            <property name="left_margin">12</property>
+                            <property name="right_margin">12</property>
+                            <property name="cursor_visible">False</property>
+                            <property name="buffer">eulaBuffer</property>
+                          </object>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
