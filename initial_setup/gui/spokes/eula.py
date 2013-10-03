@@ -35,7 +35,6 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
         self._agree_label = self._agree_check_button.get_child()
         self._agree_text = self._agree_label.get_text()
 
-        itr = self._eula_buffer.get_iter_at_offset(0)
         license_file = get_license_file_name()
         if not license_file:
             self._have_eula = False
@@ -43,6 +42,8 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
                                          "at http://bugzilla.redhat.com"))
             return
 
+        self._eula_buffer.set_text("")
+        itr = self._eula_buffer.get_iter_at_offset(0)
         with open(license_file, "r") as fobj:
             for line in fobj:
                 self._eula_buffer.insert(itr, line)

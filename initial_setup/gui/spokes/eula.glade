@@ -3,7 +3,7 @@
   <!-- interface-requires gtk+ 3.6 -->
   <!-- interface-requires AnacondaWidgets 1.0 -->
   <object class="GtkTextBuffer" id="eulaBuffer">
-    <property name="text" translatable="yes">The license will go here</property>
+    <property name="text">The license will go here</property>
   </object>
   <object class="AnacondaSpokeWindow" id="eulaWindow">
     <property name="startup_id">filler</property>
