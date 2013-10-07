@@ -10,7 +10,7 @@ _ = lambda x: gettext.ldgettext("initial-setup", x)
 N_ = lambda x: x
 
 class InitialSetupMainHub(TUIHub):
-    categories = ["password", "localization"]
+    categories = ["password", "localization", "system"]
 
     prod_title = product.product_title()
     if prod_title:
