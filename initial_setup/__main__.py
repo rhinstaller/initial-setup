@@ -102,7 +102,11 @@ ret = ui.run()
 # TUI returns False if the app was ended prematurely
 # all other cases return True or None
 if ret == False:
-    sys.exit(0)
+    if data.eula.agreed:
+        sys.exit(0)
+    else:
+        # EULA not agreed, reboot the system and leave Initial Setup enabled
+        os.system("reboot")
 
 # Do not execute sections that were part of the original
 # anaconda kickstart file (== have .seen flag set)
