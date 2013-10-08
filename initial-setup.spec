@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.1
+Version: 0.3.9.2
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -98,6 +98,11 @@ fi
 
 
 %changelog
+* Tue Oct 08 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.2-1
+- Put license view into a scrolled window (#1015005) (vpodzime)
+- Clear the default text before inserting the EULA (dshea)
+  Related: rhbz#1015005
+
 * Thu Sep 26 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.1-1
 - Yet another serial console in ARMs (vpodzime)
   Related: rhbz#1000409

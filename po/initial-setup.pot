@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 11:21-0400\n"
+"POT-Creation-Date: 2013-10-08 15:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,35 +36,31 @@ msgstr ""
 msgid "_LICENSE INFORMATION"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:42
+#: ../initial_setup/gui/spokes/eula.py:41
 msgid "No license found. Please report this at http://bugzilla.redhat.com"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:64
+#: ../initial_setup/gui/spokes/eula.py:65
 msgid "No license found"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:66
+#: ../initial_setup/gui/spokes/eula.py:67
 msgid "License agreed"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:66
+#: ../initial_setup/gui/spokes/eula.py:67
 msgid "License not agreed"
 msgstr ""
 
 #: tmp/eula.glade.h:1
-msgid "The license will go here"
-msgstr ""
-
-#: tmp/eula.glade.h:2
 msgid "LICENSE INFORMATION"
 msgstr ""
 
-#: tmp/eula.glade.h:3
+#: tmp/eula.glade.h:2
 msgid "License Agreement:"
 msgstr ""
 
-#: tmp/eula.glade.h:4
+#: tmp/eula.glade.h:3
 msgid "I _accept the license agreement."
 msgstr ""
 
