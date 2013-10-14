@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-08 15:58+0200\n"
+"POT-Creation-Date: 2013-10-10 13:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,33 +23,51 @@ msgid ""
 "You might end up with unusable system if you do."
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:38
+#: ../initial_setup/tui/spokes/eula.py:19
+msgid "License information"
+msgstr ""
+
+#. make the options aligned to the same column (the checkbox has the
+#. '[ ]' prepended)
+#: ../initial_setup/tui/spokes/eula.py:38
+msgid "Read the License Agreement"
+msgstr ""
+
+#: ../initial_setup/tui/spokes/eula.py:39
+msgid "I accept the license agreement."
+msgstr ""
+
+#: ../initial_setup/tui/spokes/eula.py:42
+#: ../initial_setup/gui/spokes/eula.py:41
+msgid "No license found. Please report this at http://bugzilla.redhat.com"
+msgstr ""
+
+#: ../initial_setup/tui/spokes/eula.py:58
+#: ../initial_setup/gui/spokes/eula.py:65
+msgid "No license found"
+msgstr ""
+
+#: ../initial_setup/tui/spokes/eula.py:60
+#: ../initial_setup/gui/spokes/eula.py:67
+msgid "License agreed"
+msgstr ""
+
+#: ../initial_setup/tui/spokes/eula.py:60
+#: ../initial_setup/gui/spokes/eula.py:67
+msgid "License not agreed"
+msgstr ""
+
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:17
 #, python-format
 msgid "Initial setup of %(product)s"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:40
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:19
 msgid "Initial setup"
 msgstr ""
 
 #: ../initial_setup/gui/spokes/eula.py:26
 msgid "_LICENSE INFORMATION"
-msgstr ""
-
-#: ../initial_setup/gui/spokes/eula.py:41
-msgid "No license found. Please report this at http://bugzilla.redhat.com"
-msgstr ""
-
-#: ../initial_setup/gui/spokes/eula.py:65
-msgid "No license found"
-msgstr ""
-
-#: ../initial_setup/gui/spokes/eula.py:67
-msgid "License agreed"
-msgstr ""
-
-#: ../initial_setup/gui/spokes/eula.py:67
-msgid "License not agreed"
 msgstr ""
 
 #: tmp/eula.glade.h:1

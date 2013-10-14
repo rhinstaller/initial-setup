@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.2
+Version: 0.3.9.3
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -12,6 +12,8 @@ BuildArch: noarch
 # or via direct git checkout:
 # git clone git://git.fedorahosted.org/initial-setup.git
 Source0: %{name}-%{version}.tar.gz
+
+%define anacondaver 19.31.27
 
 License: GPLv2+
 Group: System Environment/Base
@@ -25,11 +27,11 @@ BuildRequires: gtk-doc
 BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
-BuildRequires: anaconda >= 19.31.19
+BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: python-di
 Requires: gtk3
 Requires: python
-Requires: anaconda >= 19.31.19
+Requires: anaconda >= %{anacondaver}
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
@@ -98,6 +100,14 @@ fi
 
 
 %changelog
+* Mon Oct 14 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.3-1
+- Fix how spokes are collected for the I-S main hub
+  Related: rhbz#1000409
+- Add TUI Eula spoke
+  Related: rhbz#1000409
+- Reboot the system if EULA is not agreed
+  Related: rhbz#1000409
+
 * Tue Oct 08 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.2-1
 - Put license view into a scrolled window (#1015005) (vpodzime)
 - Clear the default text before inserting the EULA (dshea)
