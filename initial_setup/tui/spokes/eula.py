@@ -1,6 +1,7 @@
 """EULA TUI spoke for the Initial Setup"""
 
 import gettext
+import codecs
 
 from pyanaconda.ui.tui.spokes import NormalTUISpoke
 from pyanaconda.ui.tui.simpleline.widgets import TextWidget, CheckboxWidget
@@ -100,8 +101,10 @@ class LicenseScreen(UIScreen):
         # read the license file and make it one long string so that it can be
         # processed by the TextWidget to fit in the screen in a best possible
         # way
-        with open(self._license_file, "r") as fobj:
-            buf = u"".join(fobj.xreadlines())
+        buf = u""
+        with codecs.open(self._license_file, "r", "utf-8", "ignore") as fobj:
+            for line in fobj:
+                buf += line
 
         self._window += [TextWidget(buf), ""]
 
