@@ -16,7 +16,8 @@ N_ = lambda x: x
 
 class InitialSetupQuitDialog(QuitDialog):
     MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
-                 "You might end up with unusable system if you do.")
+                 "You might end up with an unusable system if you do. Unless the "
+                 "License agreement is accepted, the system will be rebooted.")
 
 @inject(Gdk, product_title = product_title, is_final = is_final)
 class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
