@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-10 13:46+0200\n"
+"POT-Creation-Date: 2013-11-01 17:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,39 +20,40 @@ msgstr ""
 #: ../initial_setup/tui/tui.py:16 ../initial_setup/gui/gui.py:18
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
-"You might end up with unusable system if you do."
+"You might end up with an unusable system if you do. Unless the License "
+"agreement is accepted, the system will be rebooted."
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:19
+#: ../initial_setup/tui/spokes/eula.py:20
 msgid "License information"
 msgstr ""
 
 #. make the options aligned to the same column (the checkbox has the
 #. '[ ]' prepended)
-#: ../initial_setup/tui/spokes/eula.py:38
+#: ../initial_setup/tui/spokes/eula.py:39
 msgid "Read the License Agreement"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:39
+#: ../initial_setup/tui/spokes/eula.py:40
 msgid "I accept the license agreement."
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:42
+#: ../initial_setup/tui/spokes/eula.py:43
 #: ../initial_setup/gui/spokes/eula.py:41
 msgid "No license found. Please report this at http://bugzilla.redhat.com"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:58
+#: ../initial_setup/tui/spokes/eula.py:59
 #: ../initial_setup/gui/spokes/eula.py:65
 msgid "No license found"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:60
+#: ../initial_setup/tui/spokes/eula.py:61
 #: ../initial_setup/gui/spokes/eula.py:67
 msgid "License agreed"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:60
+#: ../initial_setup/tui/spokes/eula.py:61
 #: ../initial_setup/gui/spokes/eula.py:67
 msgid "License not agreed"
 msgstr ""

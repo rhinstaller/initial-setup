@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.3
+Version: 0.3.9.4
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -100,6 +100,10 @@ fi
 
 
 %changelog
+* Fri Nov 01 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.4-1
+- Read licence files as utf-8 encoded (#1023052) (vpodzime)
+- Inform user that the system may be rebooted (#1022040) (vpodzime)
+
 * Mon Oct 14 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.3-1
 - Fix how spokes are collected for the I-S main hub
   Related: rhbz#1000409
