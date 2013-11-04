@@ -22,7 +22,7 @@ for WM in ${WMS[@]}; do
         res=$?
 
         # stop window manager
-        kill $pid
+        ps -p $pid >/dev/null && kill $pid
 
         # return result
         exit $res
