@@ -36,6 +36,7 @@ Requires(postun): systemd
 Requires: firstboot(windowmanager)
 Requires: libreport-python
 Requires: python-di
+Requires: util-linux
 Conflicts: firstboot < 19.2
 
 %description

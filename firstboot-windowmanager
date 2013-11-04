@@ -14,10 +14,12 @@ for WM in ${WMS[@]}; do
 
     if [ $FOUND -eq 0 -a -x "$FILE" ]; then
         # start window manager
+        echo "Running $FOUND window manager ($FILE)" | logger
         "$FILE" "$@" &
         pid=$!
 
         # start the application
+        echo "Running $BINARY" | logger
         $BINARY
         res=$?
 
@@ -30,4 +32,5 @@ for WM in ${WMS[@]}; do
 done
 
 # No known window manager found
+echo "No supported window manager found!" | logger
 exit 1
