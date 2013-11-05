@@ -6,3 +6,4 @@ if python -m initial_setup; then
     /bin/systemctl disable initial-setup-graphical.service initial-setup-text.service &>/dev/null
 else
     echo "initial_setup failed, keeping enabled" | logger
+fi
