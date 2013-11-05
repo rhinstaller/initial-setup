@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9
+Version: 0.3.10
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -99,6 +99,10 @@ fi
 
 
 %changelog
+* Tue Nov 05 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.10-1
+- Do not try to kill unexisting process (vpodzime)
+- Add some logging to our shell scripts (vpodzime)
+
 * Thu Sep 26 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9-1
 - Yet another serial console in ARMs (#1007163) (vpodzime)
 - Fix the base mask of initial_setup gui submodules (vpodzime)
