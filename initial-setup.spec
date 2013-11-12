@@ -13,6 +13,8 @@ BuildArch: noarch
 # git clone git://git.fedorahosted.org/initial-setup.git
 Source0: %{name}-%{version}.tar.gz
 
+%define anacondaver 21.7
+
 License: GPLv2+
 Group: System Environment/Base
 BuildRequires: gettext
@@ -25,11 +27,11 @@ BuildRequires: gtk-doc
 BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
-BuildRequires: anaconda >= 20.11
+BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: python-di
 Requires: gtk3
 Requires: python
-Requires: anaconda >= 20.11
+Requires: anaconda >= %{anacondaver}
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd

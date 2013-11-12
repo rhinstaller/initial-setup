@@ -55,6 +55,15 @@ class InitialSetupMainHub(Hub):
 
         return ret
 
+    def _createBox(self):
+        Hub._createBox(self)
+
+        # override spokes' distribution strings set by the pyanaconda module
+        for spoke in self._spokes.itervalues():
+            spoke.window.set_property("distribution",
+                                      product.product_title().upper())
+
+
     @property
     def continueButton(self):
         return self.builder.get_object("continueButton")
