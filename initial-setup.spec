@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.4
+Version: 0.3.9.5
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -100,6 +100,9 @@ fi
 
 
 %changelog
+* Mon Nov 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.5-1
+- Override distribution text in spokes (#1028370) (vpodzime)
+
 * Fri Nov 01 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.4-1
 - Read licence files as utf-8 encoded (#1023052) (vpodzime)
 - Inform user that the system may be rebooted (#1022040) (vpodzime)
