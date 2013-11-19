@@ -84,12 +84,9 @@ fi
 
 %files -f %{name}.lang
 %doc COPYING README
-%dir %{_datadir}/initial-setup/
-%dir %{_datadir}/initial-setup/modules/
 %{python_sitelib}/*
 %{_bindir}/initial-setup
 %{_bindir}/firstboot-windowmanager
-%{_datadir}/initial-setup/modules/*
 
 %{_unitdir}/initial-setup-graphical.service
 %{_unitdir}/initial-setup-text.service

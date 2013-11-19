@@ -32,8 +32,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
-data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
-              ('/usr/share/initial-setup/modules', glob('modules/*'))]
+data_files = [('/usr/lib/systemd/system', glob('systemd/*.service'))]
 
 # add the firstboot start script for s390 architectures
 if os.uname()[4].startswith('s390'):
