@@ -29,9 +29,9 @@ BuildRequires: glade-devel
 BuildRequires: pygobject3
 BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: python-di
-Requires: gtk3
+
 Requires: python
-Requires: anaconda >= %{anacondaver}
+Requires: anaconda-tui >= %{anacondaver}
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
@@ -43,6 +43,15 @@ Conflicts: firstboot < 19.2
 %description
 The initial-setup utility runs after installation.  It guides the user through
 a series of steps that allows for easier configuration of the machine.
+
+%package gui
+Summary: Graphical user interface for the initial-setup utility
+Requires: gtk3
+Requires: anaconda-gui >= %{anacondaver}
+
+%description gui
+The initial-setup-gui package contains a graphical user interface for the
+initial-setup utility.
 
 %prep
 %setup -q
@@ -83,20 +92,20 @@ fi
 
 %files -f %{name}.lang
 %doc COPYING README
-%dir %{_datadir}/initial-setup/
-%dir %{_datadir}/initial-setup/modules/
-%{python_sitelib}/*
+%{python_sitelib}/initial_setup*
+%exclude %{python_sitelib}/initial_setup/gui
 %{_bindir}/initial-setup
 %{_bindir}/firstboot-windowmanager
-%{_datadir}/initial-setup/modules/*
-
-%{_unitdir}/initial-setup-graphical.service
 %{_unitdir}/initial-setup-text.service
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
 %{_sysconfdir}/profile.d/initial-setup.csh
 %endif
+
+%files gui
+%{python_sitelib}/initial_setup/gui/*
+%{_unitdir}/initial-setup-graphical.service
 
 
 %changelog

@@ -78,8 +78,14 @@ except pykickstart.errors.KickstartError as kserr:
     sys.exit(1)
 
 if mode == "gui":
-    # Import IS gui specifics
-    import gui
+    try:
+        # Try to import IS gui specifics
+        import gui
+    except ImportError:
+        mode = "tui"
+
+if mode == "gui":
+    # gui already imported (see above)
 
     # Add addons to search paths
     gui.InitialSetupGraphicalUserInterface.update_paths(addon_module_paths)
