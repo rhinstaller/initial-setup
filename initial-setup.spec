@@ -29,9 +29,9 @@ BuildRequires: glade-devel
 BuildRequires: pygobject3
 BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: python-di
-Requires: gtk3
+
 Requires: python
-Requires: anaconda >= %{anacondaver}
+Requires: anaconda-tui >= %{anacondaver}
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
@@ -44,6 +44,15 @@ Conflicts: firstboot < 19.2
 %description
 The initial-setup utility runs after installation.  It guides the user through
 a series of steps that allows for easier configuration of the machine.
+
+%package gui
+Summary: Graphical user interface for the initial-setup utility
+Requires: gtk3
+Requires: anaconda-gui >= %{anacondaver}
+
+%description gui
+The initial-setup-gui package contains a graphical user interface for the
+initial-setup utility.
 
 %prep
 %setup -q
@@ -84,11 +93,10 @@ fi
 
 %files -f %{name}.lang
 %doc COPYING README
-%{python_sitelib}/*
+%{python_sitelib}/initial_setup*
+%exclude %{python_sitelib}/initial_setup/gui
 %{_bindir}/initial-setup
 %{_bindir}/firstboot-windowmanager
-
-%{_unitdir}/initial-setup-graphical.service
 %{_unitdir}/initial-setup-text.service
 
 %ifarch s390 s390x
@@ -96,6 +104,25 @@ fi
 %{_sysconfdir}/profile.d/initial-setup.csh
 %endif
 
+%files gui
+%{python_sitelib}/initial_setup/gui/*
+%{_unitdir}/initial-setup-graphical.service
+
+%post gui
+if [ $1 -ne 2 -a ! -f /etc/sysconfig/initial-setup ]; then
+  platform="$(arch)"
+  if [ "$platform" = "s390" -o "$platform" = "s390x" ]; then
+    echo "RUN_INITIAL_SETUP=YES" > /etc/sysconfig/initial-setup
+  else
+    %systemd_post initial-setup-graphical.service
+  fi
+fi
+
+%preun gui
+%systemd_preun initial-setup-graphical.service
+
+%postun gui
+%systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
 * Tue Nov 05 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.10-1
