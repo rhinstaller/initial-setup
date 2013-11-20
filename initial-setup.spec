@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.10
+Version: 0.3.11
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -125,6 +125,13 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Wed Nov 20 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.11-1
+- Fix how spokes are collected for the I-S main hub (vpodzime)
+- Override distribution text in spokes (#1028370) (vpodzime)
+- Get rid of the useless modules directory (vpodzime)
+- Split GUI code into a separate package (#999464) (vpodzime)
+- Fallback to text UI if GUI is not available (vpodzime)
+
 * Tue Nov 05 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.10-1
 - Do not try to kill unexisting process (vpodzime)
 - Add some logging to our shell scripts (vpodzime)

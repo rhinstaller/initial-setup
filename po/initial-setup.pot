@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-05 10:55+0100\n"
+"POT-Creation-Date: 2013-11-20 14:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,12 +23,12 @@ msgid ""
 "You might end up with unusable system if you do."
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:38
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:17
 #, python-format
 msgid "Initial setup of %(product)s"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:40
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:19
 msgid "Initial setup"
 msgstr ""
 
