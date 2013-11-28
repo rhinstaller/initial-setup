@@ -31,7 +31,7 @@ def collect_spokes(mask_paths):
 
 
 class InitialSetupMainHub(TUIHub):
-    categories = ["password", "localization"]
+    categories = ["user", "localization"]
 
     prod_title = product.product_title()
     if prod_title:
