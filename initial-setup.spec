@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.10
+Version: 0.3.10.1
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -99,6 +99,9 @@ fi
 
 
 %changelog
+* Thu Nov 28 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.10.1-1
+- Adapt to changes in anaconda tui spoke categories (#1035462) (vpodzime)
+
 * Tue Nov 05 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.10-1
 - Do not try to kill unexisting process (vpodzime)
 - Add some logging to our shell scripts (vpodzime)
