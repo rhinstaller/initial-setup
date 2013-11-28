@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.11
+Version: 0.3.12
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -125,6 +125,10 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Thu Nov 28 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.12-1
+- Adapt to changes in anaconda tui spoke categories (#1035462) (vpodzime)
+- Ignore the SIGINT (#1035590) (vpodzime)
+
 * Wed Nov 20 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.11-1
 - Fix how spokes are collected for the I-S main hub (vpodzime)
 - Override distribution text in spokes (#1028370) (vpodzime)
