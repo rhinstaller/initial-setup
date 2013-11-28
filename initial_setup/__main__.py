@@ -1,8 +1,11 @@
 #!/bin/python
 import os
 import sys
+import signal
 import pykickstart
 from pyanaconda.users import Users
+
+signal.signal(signal.SIGINT, signal.SIG_IGN)
 
 if "DISPLAY" in os.environ and os.environ["DISPLAY"]:
     mode="gui"
