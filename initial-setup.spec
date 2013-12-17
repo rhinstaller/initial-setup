@@ -167,7 +167,7 @@ fi
 - Make serial-getty wait for us as well (#970719) (vpodzime)
 - Disable the service only on successful exit (#967617) (vpodzime)
 
-* Mon May 22 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.5-1
+* Wed May 22 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.5-1
 - Reference the new repository in the .spec file (vpodzime)
 - Prevent systemd services from running on live images (#962196) (awilliam)
 - Don't traceback if the expected kickstart file doesn't exist (#950796) (vpodzime)
@@ -205,11 +205,11 @@ fi
 - Write changes to disk
 - Conflict with old firstboot
 
-* Tue Feb 13 2013 Martin Sivak <msivak@redhat.com> 0.2-1
+* Wed Feb 13 2013 Martin Sivak <msivak@redhat.com> 0.2-1
 - Updates for package review
 - Firstboot-windowmanager script
 
-* Tue Feb 13 2013 Martin Sivak <msivak@redhat.com> 0.1-3
+* Wed Feb 13 2013 Martin Sivak <msivak@redhat.com> 0.1-3
 - Updates for package review
 
 * Tue Jan 22 2013 Martin Sivak <msivak@redhat.com> 0.1-2
