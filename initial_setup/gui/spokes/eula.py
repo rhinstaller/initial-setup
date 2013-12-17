@@ -64,7 +64,7 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
         if not self._have_eula:
             return _("No license found")
 
-        return _("License agreed") if self.data.eula.agreed else _("License not agreed")
+        return _("License accepted") if self.data.eula.agreed else _("License not accepted")
 
     def on_check_button_toggled(self, checkbutton, *args):
         if self._agree_check_button.get_active():

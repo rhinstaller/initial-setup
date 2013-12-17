@@ -58,7 +58,7 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalTUISpoke):
         if not self._have_eula:
             return _("No license found")
 
-        return _("License agreed") if self.data.eula.agreed else _("License not agreed")
+        return _("License accepted") if self.data.eula.agreed else _("License not accepted")
 
     def apply(self):
         # nothing needed here, the agreed field is changed in the input method
