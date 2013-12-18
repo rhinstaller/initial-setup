@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.5
+Version: 0.3.9.6
 Release: 1%{?dist}
 BuildArch: noarch
 
@@ -100,6 +100,16 @@ fi
 
 
 %changelog
+* Wed Dec 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.6-1
+- Ignore .po and generated files in po/ (dshea)
+  Related: rhbz#1040240
+- Mark title strings in the initial-setup hub as translatable (dshea)
+  Resolves: rhbz#1040240
+- Reword the EULA spokes' status messages (vpodzime)
+  Resolves: rhbz#1039672
+- Cancel formatting of EULA when putting it into the text buffer (vpodzime)
+  Resolves: rhbz#1039675
+
 * Mon Nov 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.5-1
 - Override distribution text in spokes (#1028370) (vpodzime)
 
