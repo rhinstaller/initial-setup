@@ -6,7 +6,7 @@ import os
 import glob
 
 RELEASE_STRING_FILE = "/etc/os-release"
-LICENSE_FILE_GLOB = "/usr/share/doc/redhat-release*/EULA*"
+LICENSE_FILE_GLOB = "/usr/share/redhat-release*/EULA*"
 
 def product_title():
     """
