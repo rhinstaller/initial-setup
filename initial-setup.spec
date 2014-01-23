@@ -111,11 +111,18 @@ fi
   Resolves: rhbz#1039675
 
 * Mon Nov 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.5-1
-- Override distribution text in spokes (#1028370) (vpodzime)
+- Override distribution text in spokes (vpodzime)
+  Resolves: rhbz#1028370
+
+* Fri Nov 08 2013 David Cantrell <dcantrell@redhat.com> - 0.3.9.4-2
+- EULA is now in /usr/share/redhat-release/EULA
+  Resolves: rhbz#1028365
 
 * Fri Nov 01 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.4-1
-- Read licence files as utf-8 encoded (#1023052) (vpodzime)
-- Inform user that the system may be rebooted (#1022040) (vpodzime)
+- Read licence files as utf-8 encoded (vpodzime)
+  Resolves: rhbz#1023052
+- Inform user that the system may be rebooted (vpodzime)
+  Resolves: rhbz#1022040
 
 * Mon Oct 14 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.3-1
 - Fix how spokes are collected for the I-S main hub
@@ -141,20 +148,20 @@ fi
 - Require new version of anaconda with eula command support (vpodzime)
   Related: rhbz#1000409
 
-* Tue Sep 10 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.8-1
+* Wed Sep 11 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.8-1
 - Read /etc/os-release to get product title (#1000426) (vpodzime)
 - Don't let product_title() return None (vpodzime)
 - Apply the timezone and NTP configuration (#985566) (hdegoede)
 - Make handling translations easier (vpodzime)
 - Make translations work (vpodzime)
-- Sync changelog with downstream (vpodzime)
-
-* Tue Aug 27 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.7-1
 - Prevent getty on various services killing us (#979174) (vpodzime)
 - Initialize network logging for the network spoke (vpodzime)
 
-* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.3.6-3
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+* Mon Aug 12 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.6-4
+- Require a new version of the anaconda with fixed dependencies.
+
+* Fri Jul 26 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.6-3
+- Rebuild with dependencies available in RHEL tree.
 
 * Tue Jun 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.6-2
 - Rebuild with dependencies available.
