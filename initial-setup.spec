@@ -1,8 +1,8 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.7
-Release: 2%{?dist}
+Version: 0.3.9.8
+Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -99,6 +99,10 @@ fi
 
 
 %changelog
+* Fri Jan 25 2014 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.8-1
+- Ignore the SIGINT
+  Resolves: rhbz#1035590
+
 * Fri Jan 24 2014 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.7-2
 - Make initial-setup an arch specific package
   Resolves: rhbz#1057590
