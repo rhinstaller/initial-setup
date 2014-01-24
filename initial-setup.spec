@@ -2,8 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
 Version: 0.3.9.7
-Release: 1%{?dist}
-BuildArch: noarch
+Release: 2%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -100,9 +99,16 @@ fi
 
 
 %changelog
+* Fri Jan 24 2014 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.7-2
+- Make initial-setup an arch specific package
+  Resolves: rhbz#1057590
+
 * Thu Jan 23 2014 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.7-1
 - Include new translations
   Resolves: rhbz#1030361
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.3.9.6-2
+- Mass rebuild 2013-12-27
 
 * Wed Dec 18 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.6-1
 - Ignore .po and generated files in po/ (dshea)
