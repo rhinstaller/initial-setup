@@ -12,6 +12,7 @@ Release: 1%{?dist}
 # git clone git://git.fedorahosted.org/initial-setup.git
 Source0: %{name}-%{version}.tar.gz
 
+%define debug_package %{nil}
 %define anacondaver 21.7
 
 License: GPLv2+
