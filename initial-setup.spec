@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.12
+Version: 0.3.13
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -124,6 +124,9 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Wed Feb 05 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.13-1
+- Make Initial Setup an arch specific package (#1057590) (vpodzime)
+
 * Thu Nov 28 2013 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.12-1
 - Adapt to changes in anaconda tui spoke categories (#1035462) (vpodzime)
 - Ignore the SIGINT (#1035590) (vpodzime)
