@@ -3,7 +3,6 @@ Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
 Version: 0.3.12
 Release: 1%{?dist}
-BuildArch: noarch
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
