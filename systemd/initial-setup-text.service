@@ -12,6 +12,7 @@ ConditionKernelCommandLine=!rd.live.image
 
 [Service]
 Type=oneshot
+ExecStartPre=-/bin/plymouth quit
 ExecStartPre=/bin/kill -55 1
 ExecStart=/bin/initial-setup
 ExecStartPost=/bin/kill -54 1

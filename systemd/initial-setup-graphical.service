@@ -7,7 +7,7 @@ ConditionKernelCommandLine=!rd.live.image
 
 [Service]
 Type=oneshot
-ExecStartPre=
+ExecStartPre=-/bin/plymouth quit
 ExecStart=/bin/xinit /bin/firstboot-windowmanager /bin/initial-setup -- /bin/Xorg :9 -ac -nolisten tcp
 TimeoutSec=0
 RemainAfterExit=no
