@@ -104,9 +104,11 @@ fi
 - Rebuild with new translations
   Resolves: rhbz#1040240
 
-* Mon Feb 24 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.9-1
-- Rebuild with new translations
-  Resolves: rhbz#1040240
+* Tue Feb 11 2014 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.9-1
+- Try to quit plymouth before running our X server instance
+  Resolves: rhbz#1058329
+- Get rid of the empty debuginfo package
+  Related: rhbz#1057590
 
 * Fri Jan 25 2014 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.9.8-1
 - Ignore the SIGINT
