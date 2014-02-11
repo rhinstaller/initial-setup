@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-28 11:12+0100\n"
+"POT-Creation-Date: 2014-02-11 16:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,9 +33,17 @@ msgid "Initial setup"
 msgstr ""
 
 #: tmp/initial_setup.glade.h:1
-msgid "_QUIT"
+msgid "DISTRIBUTION SETUP"
 msgstr ""
 
 #: tmp/initial_setup.glade.h:2
+msgid "INITIAL SETUP"
+msgstr ""
+
+#: tmp/initial_setup.glade.h:3
+msgid "_QUIT"
+msgstr ""
+
+#: tmp/initial_setup.glade.h:4
 msgid "_FINISH CONFIGURATION"
 msgstr ""
