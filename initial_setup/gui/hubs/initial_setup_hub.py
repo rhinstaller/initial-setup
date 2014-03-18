@@ -2,7 +2,7 @@ from pyanaconda.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.ui.gui.hubs import Hub
 from pyanaconda.ui.gui.spokes import Spoke
 from pyanaconda.ui.common import collect
-import os
+from initial_setup import product
 
 __all__ = ["InitialSetupMainHub"]
 
