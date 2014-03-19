@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.14
+Version: 0.3.15
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -125,6 +125,9 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Wed Mar 19 2014 Martin Kolman <mkolman@redhat.com> - 0.3.15-1
+- Import the product module (#1077390) (vpodzime)
+
 * Tue Feb 11 2014 Vratislav Podzimek <vpodzime@redhat.com> - 0.3.14-1
 - Try to quit plymouth before running our X server instance (#1058329)
 - Get rid of the empty debuginfo package (#1062738)
