@@ -25,6 +25,7 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     icon = "application-certificate-symbolic"
     title = N_("_LICENSE INFORMATION")
     category = LocalizationCategory
+    translationDomain = "initial-setup"
 
     def initialize(self):
         NormalSpoke.initialize(self)
