@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.11
+Version: 0.3.9.12
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -13,7 +13,7 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
-%define anacondaver 19.31.27
+%define anacondaver 19.31.75
 
 License: GPLv2+
 Group: System Environment/Base
@@ -100,6 +100,10 @@ fi
 
 
 %changelog
+* Tue Apr 1 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.12-1
+- Set initial-setup translation domain for the hub and EULA spoke (mkolman)
+  Resolves: rhbz#1040240
+
 * Tue Mar 18 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.11-1
 - Rebuild with new translations
   Resolves: rhbz#1040240
