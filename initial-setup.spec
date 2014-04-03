@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.15
+Version: 0.3.16
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -126,6 +126,9 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Thu Apr 04 2014 Martin Kolman <mkolman@redhat.com> - 0.3.16-1
+- initial-setup-gui requires the initial-setup package (vpodzime)
+
 * Wed Mar 19 2014 Martin Kolman <mkolman@redhat.com> - 0.3.15-1
 - Import the product module (#1077390) (vpodzime)
 
