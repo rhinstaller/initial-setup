@@ -49,6 +49,7 @@ a series of steps that allows for easier configuration of the machine.
 Summary: Graphical user interface for the initial-setup utility
 Requires: gtk3
 Requires: anaconda-gui >= %{anacondaver}
+Requires: initial-setup
 
 %description gui
 The initial-setup-gui package contains a graphical user interface for the
