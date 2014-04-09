@@ -29,6 +29,7 @@ class InitialSetupMainHub(Hub):
     uiFile = "initial_setup.glade"
     builderObjects = ["summaryWindow"]
     mainWidgetName = "summaryWindow"
+    translationDomain = "initial-setup"
 
     def __init__(self, *args):
         Hub.__init__(self, *args)
