@@ -1,5 +1,5 @@
 #!/bin/sh
-
+LANG=de_DE.UTF-8
 echo "Running initial_setup" | logger
 if python -m initial_setup; then
     echo "initial_setup finished successfully, disabling" | logger
