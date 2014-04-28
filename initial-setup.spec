@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.17
+Version: 0.3.18
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -126,6 +126,10 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Mon Apr 28 2014 Martin Kolman <mkolman@redhat.com> - 0.3.18-1
+- Remove debugging code that was left in the tarball by mistake (#1091470) (mkolman)
+- Translation update
+
 * Fri Apr 11 2014 Martin Kolman <mkolman@redhat.com> - 0.3.17-1
 - Set initial-setup translation domain for the hub (#1040240) (mkolman)
 
