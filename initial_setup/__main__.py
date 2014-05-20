@@ -4,6 +4,10 @@ import sys
 import signal
 import pykickstart
 from pyanaconda.users import Users
+from pyanaconda import iutil
+
+# set root to "/", we are now in the installed system
+iutil.setSysroot("/")
 
 signal.signal(signal.SIGINT, signal.SIG_IGN)
 
@@ -18,14 +22,6 @@ if mode == "gui":
     import gi.overrides
     for p in os.environ.get("ANACONDA_WIDGETS_OVERRIDES", "").split(":"):
         gi.overrides.__path__.insert(0, p)
-
-# set the root path to / so the imported spokes
-# know where to apply their changes
-from pyanaconda import constants
-
-# this has to stay in the form constants.ROOT_PATH so it modifies
-# the scalar in anaconda, not the local copy here
-constants.ROOT_PATH = "/"
 
 from pyanaconda.addons import collect_addon_paths
 
