@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.20
+Version: 0.3.19
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -126,9 +126,6 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
-* Thu May 22 2014 Martin Kolman <mkolman@redhat.com> - 0.3.20-1
-- Adapt Initial Setup to the new way Anaconda handles root path (#1099581) (vpodzime)
-
 * Tue May 06 2014 Martin Kolman <mkolman@redhat.com> - 0.3.19-1
 - Bump required Anaconda version due to TUI category handling change (mkolman)
 - Override Hub collect methods also in TUI hub (mkolman)
