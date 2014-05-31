@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
 Version: 0.3.21
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -35,7 +35,6 @@ Requires: anaconda-tui >= %{anacondaver}
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
-Requires: firstboot(windowmanager)
 Requires: libreport-python
 Requires: python-di
 Requires: util-linux
@@ -49,6 +48,7 @@ a series of steps that allows for easier configuration of the machine.
 Summary: Graphical user interface for the initial-setup utility
 Requires: gtk3
 Requires: anaconda-gui >= %{anacondaver}
+Requires: firstboot(windowmanager)
 Requires: initial-setup
 
 %description gui
@@ -127,6 +127,9 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Sat May 31 2014 Peter Robinson <pbrobinson@fedoraproject.org> 0.3.21-2
+- Only the GUI needs a window manager
+
 * Wed May 28 2014 Martin Kolman <mkolman@redhat.com> - 0.3.21-1
 - Adapt to python-nose API change (mkolman)
 
