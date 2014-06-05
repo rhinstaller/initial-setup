@@ -62,15 +62,15 @@ initial-setup utility.
 rm -rf *.egg-info
 
 %build
-%{__python} setup.py build
+python setup.py build
 make po-files
 
 %check
 export XDG_RUNTIME_DIR=/tmp
-%{__python} setup.py nosetests
+python setup.py nosetests
 
 %install
-%{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
+python setup.py install --skip-build --root $RPM_BUILD_ROOT
 make install-po-files
 %find_lang %{name}
 
