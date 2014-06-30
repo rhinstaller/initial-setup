@@ -27,12 +27,3 @@ class InitialSetupMainHub(Hub):
         for spoke in self._spokes.itervalues():
             spoke.window.set_property("distribution",
                                       product.product_title().upper())
-
-
-    @property
-    def continueButton(self):
-        return self.builder.get_object("continueButton")
-
-    @property
-    def quitButton(self):
-        return self.builder.get_object("quitButton")
