@@ -127,7 +127,7 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
-* Fri Jul 04 2014: Martin Kolman <mkolman@redhat.com> - 0.3.22-1
+* Fri Jul 04 2014 Martin Kolman <mkolman@redhat.com> - 0.3.22-1
 - Update the initial-setup hub for the new HubWindow API (dshea)
 
 * Sat May 31 2014 Peter Robinson <pbrobinson@fedoraproject.org> 0.3.21-2
