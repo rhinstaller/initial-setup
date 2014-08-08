@@ -1,6 +1,6 @@
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.ui.gui.hubs import Hub
-from pyanaconda.ui.gui.spokes import Spoke as GUI_spoke_class
+from pyanaconda.ui.gui.spokes import NormalSpoke as GUI_spoke_class
 from initial_setup import product
 from initial_setup import common
 

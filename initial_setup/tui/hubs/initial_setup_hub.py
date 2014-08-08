@@ -1,6 +1,6 @@
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.ui.tui.hubs import TUIHub
-from pyanaconda.ui.tui.spokes import Spoke as TUI_spoke_class
+from pyanaconda.ui.tui.spokes import NormalSpoke as TUI_spoke_class
 from initial_setup import product
 from initial_setup import common
 import gettext
