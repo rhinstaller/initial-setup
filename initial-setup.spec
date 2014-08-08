@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.22
+Version: 0.3.23
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -127,6 +127,9 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Fri Aug 08 2014 Martin Kolman <mkolman@redhat.com> - 0.3.23-1
+- Adapt to class changes in Anaconda (vpodzime)
+
 * Fri Jul 04 2014 Martin Kolman <mkolman@redhat.com> - 0.3.22-1
 - Update the initial-setup hub for the new HubWindow API (dshea)
 
