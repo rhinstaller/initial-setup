@@ -5,7 +5,7 @@ import gettext
 from gi.repository import Pango
 from pyanaconda.ui.common import FirstbootOnlySpokeMixIn
 from pyanaconda.ui.gui.spokes import NormalSpoke
-from pyanaconda.ui.gui.categories.localization import LocalizationCategory
+from pyanaconda.ui.gui.categories.licensing import LicensingCategory
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
 
 from initial_setup.product import get_license_file_name
@@ -24,7 +24,7 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
 
     icon = "application-certificate-symbolic"
     title = N_("_LICENSE INFORMATION")
-    category = LocalizationCategory
+    category = LicensingCategory
     translationDomain = "initial-setup"
 
     def initialize(self):
