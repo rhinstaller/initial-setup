@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.12
+Version: 0.3.9.13
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -100,6 +100,10 @@ fi
 
 
 %changelog
+* Mon Sep 8 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.13-1
+- Use the Licensing category for the EULA (#1039677) (mkolman)
+  Resolves: rhbz#1039677
+
 * Tue Apr 1 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.12-1
 - Set initial-setup translation domain for the hub and EULA spoke (mkolman)
   Resolves: rhbz#1040240
