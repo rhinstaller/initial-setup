@@ -13,7 +13,7 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
-%define anacondaver 19.31.88
+%define anacondaver 19.31.90
 
 License: GPLv2+
 Group: System Environment/Base
