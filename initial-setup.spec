@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.13
+Version: 0.3.9.14
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -109,6 +109,12 @@ fi
 
 
 %changelog
+* Thu Sep 11 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.14-1
+- Bump Anaconda version requirement for the GUI split (mkolman)
+  Related: rhbz#99946
+- Split GUI code into a separate package (#999464) (vpodzime)
+  Resolves: rhbz#99946
+
 * Mon Sep 8 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.13-1
 - Use the Licensing category for the EULA (#1039677) (mkolman)
   Resolves: rhbz#1039677
