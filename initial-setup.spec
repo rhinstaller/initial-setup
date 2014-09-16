@@ -111,9 +111,9 @@ fi
 %changelog
 * Thu Sep 11 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.14-1
 - Bump Anaconda version requirement for the GUI split (mkolman)
-  Related: rhbz#99946
+  Related: rhbz#999464
 - Split GUI code into a separate package (#999464) (vpodzime)
-  Resolves: rhbz#99946
+  Resolves: rhbz#999464
 
 * Mon Sep 8 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.13-1
 - Use the Licensing category for the EULA (#1039677) (mkolman)
