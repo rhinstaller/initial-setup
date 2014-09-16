@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.14
+Version: 0.3.9.15
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -109,6 +109,10 @@ fi
 
 
 %changelog
+* Tue Sep 16 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.15-1
+- Remove the modules folder (#999464) (mkolman)
+  Related: rhbz#999464
+
 * Thu Sep 11 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.14-1
 - Bump Anaconda version requirement for the GUI split (mkolman)
   Related: rhbz#999464
