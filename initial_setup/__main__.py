@@ -4,6 +4,7 @@ import sys
 import signal
 import pykickstart
 from pyanaconda.users import Users
+from initial_setup.post_installclass import InstallClass
 
 signal.signal(signal.SIGINT, signal.SIG_IGN)
 
@@ -91,7 +92,7 @@ if mode == "gui":
     gui.InitialSetupGraphicalUserInterface.update_paths(addon_module_paths)
 
     # Initialize the UI
-    ui = gui.InitialSetupGraphicalUserInterface(None, None, None)
+    ui = gui.InitialSetupGraphicalUserInterface(None, None, InstallClass())
 else:
     # Import IS gui specifics
     import tui

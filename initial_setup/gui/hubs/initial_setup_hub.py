@@ -32,6 +32,7 @@ class InitialSetupMainHub(Hub):
     builderObjects = ["summaryWindow"]
     mainWidgetName = "summaryWindow"
     translationDomain = "initial-setup"
+    helpFile = "InitialSetupHub.xml"
 
     def __init__(self, *args):
         Hub.__init__(self, *args)

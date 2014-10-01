@@ -21,6 +21,7 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     builderObjects = ["eulaBuffer", "eulaWindow"]
     mainWidgetName = "eulaWindow"
     uiFile = "eula.glade"
+    helpFile = "EULAspoke.xml"
 
     icon = "application-certificate-symbolic"
     title = N_("_LICENSE INFORMATION")
