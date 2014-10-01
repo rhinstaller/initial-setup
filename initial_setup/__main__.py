@@ -4,6 +4,7 @@ import sys
 import signal
 import pykickstart
 from pyanaconda.users import Users
+from initial_setup.post_installclass import PostInstallClass
 from pyanaconda import iutil
 
 # set root to "/", we are now in the installed system
@@ -86,7 +87,7 @@ if mode == "gui":
     gui.InitialSetupGraphicalUserInterface.update_paths(addon_module_paths)
 
     # Initialize the UI
-    ui = gui.InitialSetupGraphicalUserInterface(None, None, None)
+    ui = gui.InitialSetupGraphicalUserInterface(None, None, PostInstallClass())
 else:
     # Import IS gui specifics
     import tui
