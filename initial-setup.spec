@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.16
+Version: 0.3.9.17
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -109,6 +109,10 @@ fi
 
 
 %changelog
+* Thu Oct 2 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.17-1
+- Fix register_event_cb function signature (#1072033) (mkolman)
+  Related: rhbz#1072033
+
 * Mon Sep 29 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.16-1
 - Populate README (#1110178) (mkolman)
   Resolves: rhbz#1110178
