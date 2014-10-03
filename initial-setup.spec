@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.9.17
+Version: 0.3.9.18
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -109,6 +109,10 @@ fi
 
 
 %changelog
+* Fri Oct 3 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.18-1
+- Fix Initial Setup to correctly support the Anaconda built-in Help (#1072033) (mkolman)
+  Related: rhbz#1072033
+
 * Thu Oct 2 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.17-1
 - Fix register_event_cb function signature (#1072033) (mkolman)
   Related: rhbz#1072033
