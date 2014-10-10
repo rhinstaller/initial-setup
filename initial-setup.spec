@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.23
+Version: 0.3.24
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -127,6 +127,11 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Fri Oct 10 2014 Martin Kolman <mkolman@redhat.com> - 0.3.24-1
+- Fix Initial Setup to correctly support the Anaconda built-in Help (#1072033) (mkolman)
+- Populate README (#1110178) (master-log) (mkolman)
+- Remove the --disable-overwrite parameter for the Transifex client (mkolman)
+
 * Fri Aug 08 2014 Martin Kolman <mkolman@redhat.com> - 0.3.23-1
 - Adapt to class changes in Anaconda (vpodzime)
 
