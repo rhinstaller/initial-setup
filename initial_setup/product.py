@@ -1,6 +1,9 @@
 """Module providing information about the installed product."""
+import logging
 
 RELEASE_STRING_FILE = "/etc/os-release"
+
+log = logging.getLogger("initial-setup")
 
 def product_title():
     """
@@ -20,7 +23,7 @@ def product_title():
                 if key == "PRETTY_NAME":
                     return value.strip('"')
     except IOError:
-        pass
+        log.exception("failed to check the release string file")
 
     return ""
 
