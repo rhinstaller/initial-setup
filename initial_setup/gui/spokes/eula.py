@@ -1,6 +1,7 @@
 """EULA spoke for the Initial Setup"""
 
 import gettext
+import logging
 
 from gi.repository import Pango
 from pyanaconda.ui.common import FirstbootOnlySpokeMixIn
@@ -9,6 +10,8 @@ from pyanaconda.ui.gui.categories.licensing import LicensingCategory
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
 
 from initial_setup.product import get_license_file_name
+
+log = logging.getLogger("initial-setup")
 
 _ = lambda x: gettext.ldgettext("initial-setup", x)
 N_ = lambda x: x
@@ -29,6 +32,7 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     translationDomain = "initial-setup"
 
     def initialize(self):
+        log.debug("initializing the EULA spoke")
         NormalSpoke.initialize(self)
 
         self._have_eula = True
@@ -37,8 +41,10 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
         self._agree_label = self._agree_check_button.get_child()
         self._agree_text = self._agree_label.get_text()
 
+        log.debug("looking for the license file")
         license_file = get_license_file_name()
         if not license_file:
+            log.error("no license found")
             self._have_eula = False
             self._eula_buffer.set_text(_("No license found. Please report this "
                                          "at http://bugzilla.redhat.com"))
@@ -46,6 +52,7 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
 
         self._eula_buffer.set_text("")
         itr = self._eula_buffer.get_iter_at_offset(0)
+        log.debug("opening the license file")
         with open(license_file, "r") as fobj:
             fobj_lines = fobj.xreadlines()
 
@@ -86,6 +93,8 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
 
     def on_check_button_toggled(self, checkbutton, *args):
         if self._agree_check_button.get_active():
+            log.debug("license is now accepted")
             self._agree_label.set_markup("<b>%s</b>" % self._agree_text)
         else:
+            log.debug("license no longer accepted")
             self._agree_label.set_markup(self._agree_text)
