@@ -1,6 +1,6 @@
 Summary: Initial system configuration utility
 Name: initial-setup
-URL: http://fedoraproject.org/wiki/FirstBoot
+URL: http://fedoraproject.org/wiki/InitialSetup
 Version: 0.3.9.18
 Release: 1%{?dist}
 
