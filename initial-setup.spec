@@ -109,7 +109,7 @@ fi
 
 
 %changelog
-* thu Oct 23 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.19-1
+* Thu Oct 23 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.19-1
 - Point to the new Initial Setup wiki page (#1154656) (mkolman)
   Resolves: rhbz#1154656
 - Add syslog logging support (#1153768) (mkolman)
