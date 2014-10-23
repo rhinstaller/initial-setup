@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.18
+Version: 0.3.9.19
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -109,6 +109,12 @@ fi
 
 
 %changelog
+* thu Oct 23 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.19-1
+- Point to the new Initial Setup wiki page (#1154656) (mkolman)
+  Resolves: rhbz#1154656
+- Add syslog logging support (#1153768) (mkolman)
+  resolves: rhbz#1153768
+
 * Fri Oct 3 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.18-1
 - Fix Initial Setup to correctly support the Anaconda built-in Help (#1072033) (mkolman)
   Related: rhbz#1072033
