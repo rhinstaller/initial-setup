@@ -50,6 +50,7 @@ Requires: gtk3
 Requires: anaconda-gui >= %{anacondaver}
 Requires: firstboot(windowmanager)
 Requires: initial-setup
+Requires: %{name} = %{version}-%{release}
 
 %description gui
 The initial-setup-gui package contains a graphical user interface for the
