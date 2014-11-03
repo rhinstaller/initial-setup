@@ -128,7 +128,7 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
-* Mon Nov 1 2014 Martin Kolman <mkolman@redhat.com> - 0.3.26-1
+* Mon Nov 3 2014 Martin Kolman <mkolman@redhat.com> - 0.3.26-1
 - Explicitly require the main package in the GUI sub package (#1078917) (mkolman)
 
 * Thu Oct 23 2014 Martin Kolman <mkolman@redhat.com> - 0.3.25-1
