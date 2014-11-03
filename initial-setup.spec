@@ -110,7 +110,7 @@ fi
 
 
 %changelog
-* Mon Nov 1 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.20-1
+* Mon Nov 3 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.20-1
 - Explicitly require the main package in the GUI sub package (#1078917) (mkolman)
   Related: #1078917
 
