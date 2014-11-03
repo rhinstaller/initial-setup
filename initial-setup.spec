@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.19
+Version: 0.3.9.20
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -110,6 +110,10 @@ fi
 
 
 %changelog
+* Mon Nov 1 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.20-1
+- Explicitly require the main package in the GUI sub package (#1078917) (mkolman)
+  Related: #1078917
+
 * Thu Oct 23 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.19-1
 - Point to the new Initial Setup wiki page (#1154656) (mkolman)
   Resolves: rhbz#1154656
