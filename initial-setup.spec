@@ -35,7 +35,6 @@ Requires: anaconda-tui >= %{anacondaver}
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
-Requires: firstboot(windowmanager)
 Requires: libreport-python
 Requires: python-di
 Conflicts: firstboot < 19.2
@@ -49,6 +48,7 @@ Summary: Graphical user interface for the initial-setup utility
 Requires: gtk3
 Requires: anaconda-gui >= %{anacondaver}
 Requires: %{name} = %{version}-%{release}
+Requires: firstboot(windowmanager)
 
 %description gui
 The initial-setup-gui package contains a graphical user interface for the
