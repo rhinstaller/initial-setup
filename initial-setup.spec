@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.20
+Version: 0.3.9.21
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -110,6 +110,10 @@ fi
 
 
 %changelog
+* Fri Nov 21 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.21-1
+- Move the firstboot(windowmanager) dependency to the GUI package (#999464) (mkolman)
+  Related: rhbz#999464
+
 * Mon Nov 3 2014 Martin Kolman <mkolman@redhat.com> - 0.3.9.20-1
 - Explicitly require the main package in the GUI sub package (#1078917) (mkolman)
   Related: #1078917
