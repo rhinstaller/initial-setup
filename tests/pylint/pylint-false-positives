@@ -1,0 +1,1 @@
+^initial_setup/__main__.py:[[:digit:]]+: \[E1101\(no-member\), \] Instance of 'AnacondaKSHandler' has no '.*' member$
