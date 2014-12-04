@@ -97,7 +97,7 @@ if mode == "gui":
     try:
         # Try to import IS gui specifics
         log.debug("trying to import GUI")
-        import gui
+        import initial_setup.gui
     except ImportError:
         log.error("GUI import failed, falling back to TUI")
         mode = "tui"
@@ -106,21 +106,21 @@ if mode == "gui":
     # gui already imported (see above)
 
     # Add addons to search paths
-    gui.InitialSetupGraphicalUserInterface.update_paths(addon_module_paths)
+    initial_setup.gui.InitialSetupGraphicalUserInterface.update_paths(addon_module_paths)
 
     # Initialize the UI
     log.debug("initializing GUI")
-    ui = gui.InitialSetupGraphicalUserInterface(None, None, PostInstallClass())
+    ui = initial_setup.gui.InitialSetupGraphicalUserInterface(None, None, PostInstallClass())
 else:
     # Import IS gui specifics
-    import tui
+    import initial_setup.tui
 
     # Add addons to search paths
-    tui.InitialSetupTextUserInterface.update_paths(addon_module_paths)
+    initial_setup.tui.InitialSetupTextUserInterface.update_paths(addon_module_paths)
 
     # Initialize the UI
     log.debug("initializing TUI")
-    ui = tui.InitialSetupTextUserInterface(None, None, None)
+    ui = initial_setup.tui.InitialSetupTextUserInterface(None, None, None)
 
 # Pass the data object to user inteface
 log.debug("setting up the UI")
