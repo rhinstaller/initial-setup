@@ -16,9 +16,9 @@ class InitialSetupMainHub(TUIHub):
 
     prod_title = product.product_title()
     if prod_title:
-        title = _("Initial setup of %(product)s") % {"product": prod_title}
+        title = N_("Initial setup of %(product)s") % {"product": prod_title}
     else:
-        title = _("Initial setup")
+        title = N_("Initial setup")
 
     def __init__(self, *args):
         TUIHub.__init__(self, *args)
