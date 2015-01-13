@@ -1,7 +1,18 @@
 #!/bin/sh
 
 # This is the list of supported window manager binaries
-WMS=("metacity" "kwin" "xfwm4" "openbox" "marco")
+WMS=("run_metacity" "kwin" "xfwm4" "openbox" "marco")
+
+run_metacity()
+{
+    # Apply the anaconda overrides before running metacity
+    if [ -z "$XDG_DATA_DIRS" ] ; then
+        new_data_dirs="/usr/share/anaconda/window-manager:/usr/share"
+    else
+        new_data_dirs="/usr/share/anaconda/window-manager:${XDG_DATA_DIRS}"
+    fi
+    XDG_DATA_DIRS="$new_data_dirs" metacity
+}
 
 # Get the application binary to start and remove it from
 # the argument list
