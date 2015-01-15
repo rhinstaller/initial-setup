@@ -24,7 +24,11 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     builderObjects = ["eulaBuffer", "eulaWindow"]
     mainWidgetName = "eulaWindow"
     uiFile = "eula.glade"
-    helpFile = "EULAspoke.xml"
+    # The EULA spoke is self-explanatory, so just redirect its
+    # help button to the Initial Setup Hub help file,
+    # which covers the overall theory of Initial Setup
+    # usage.
+    helpFile = "InitialSetupHub.xml"
 
     icon = "application-certificate-symbolic"
     title = N_("_LICENSE INFORMATION")
