@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.22
+Version: 0.3.9.23
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -110,6 +110,10 @@ fi
 
 
 %changelog
+* Tue Jan 20 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.23-1
+- Redirect the EULA spoke help button to the Initial Setup hub help file (#1072033) (mkolman)
+  Related: rhbz#1072033
+
 * Fri Jan 9 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.22-1
 - Fixes for profile.d scripts (#1180576) (jstodola)
   Resolves: rhbz#1180576
