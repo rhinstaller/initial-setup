@@ -52,6 +52,6 @@ For a comprehensive documentation about Anaconda/Intial Setup see the
 Contributing
 ============
 * Initial Setup is released under GPLv2+
-* upstream source code repository is on Fedorahosted: https://git.fedorahosted.org/git/initial-setup.git
+* upstream source code repository is on GitHub: https://github.com/rhinstaller/initial-setup
 * for patch review Initial Setup uses the Anaconda Patches mailing list: https://lists.fedorahosted.org/mailman/listinfo/anaconda-patches
   (please note that you need to be subscribed to the list to send patches, due to previous issues with SPAM on the list)
