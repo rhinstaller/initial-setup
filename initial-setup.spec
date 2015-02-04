@@ -23,10 +23,7 @@ BuildRequires: python-setuptools
 BuildRequires: python-nose
 BuildRequires: systemd-units
 BuildRequires: gtk3-devel
-BuildRequires: gtk-doc
-BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
-BuildRequires: pygobject3
 BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: python-di
 
