@@ -13,7 +13,7 @@ and the user is only expected to create their own user account once
 the newly installed machine is started for the first time.
 
 Still, while Initial Setup normally does not have many options
-available, if the firstboot --recofing kickstart command is provided
+available, if the firstboot --reconfig kickstart command is provided
 in the installation kickstart, Initial Setup will show all configuration
 options available. This is usually used for OEM OS installations,
 where an OEM installs the computer, which is then shipped to the end user
@@ -25,7 +25,7 @@ Initial Setup is basically just a thin wrapper for running spokes from Anaconda.
 Still, it has its own Hub, one spoke (the EULA spoke) and a translation domain ("initial-setup").
 
 As with Anaconda, Initial Setup has both a GUI and TUI version and the package is split
-to a core and GUI & TUI sub packages.
+into a core and GUI & TUI sub packages.
 
 As Initial Setup needs to run during the early boot, it is started by a systemd unit
 configured to start before the normal login screen. On RHEL7 Initial Setup is by default
@@ -44,7 +44,7 @@ yet powerful modules that can configure the system based on data in kickstart
 while presenting a nice UI to the user. Addons can have a GUI, TUI or can be
 headless, working only with data in their kickstart section or from other sources.
 
-For a comprehensive documentation about Anaconda/Intial Setup see the
+For comprehensive documentation about Anaconda/Intial Setup see the
 "Anaconda Addon Development Guide" by Vratislav Podzimek:
 
 * https://vpodzime.fedorapeople.org/anaconda-addon-development-guide/
