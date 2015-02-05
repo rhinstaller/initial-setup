@@ -92,7 +92,7 @@ fi
 %systemd_postun_with_restart initial-setup-text.service
 
 %files -f %{name}.lang
-%doc COPYING README
+%doc COPYING README.rst
 %{python_sitelib}/initial_setup*
 %exclude %{python_sitelib}/initial_setup/gui
 %{_bindir}/initial-setup

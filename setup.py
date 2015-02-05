@@ -56,7 +56,7 @@ setup(
     data_files = data_files,
     setup_requires= ['nose>=1.0'],
     test_suite = "initial_setup",
-    long_description=read('README'),
+    long_description=read('README.rst'),
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: X11 Applications :: GTK",
