@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.27
+Version: 0.3.28
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -125,6 +125,9 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Thu Feb 05 2015 Martin Kolman <mkolman@redhat.com> - 0.3.28-1
+- Fix breakage caused by README file rename (mkolman)
+
 * Thu Feb 05 2015 Martin Kolman <mkolman@redhat.com> - 0.3.27-1
 - Remove unneeded dependencies (mkolman)
 - Add the rst suffix to the README file (mkolman)
