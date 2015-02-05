@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.26
+Version: 0.3.27
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -125,6 +125,15 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Thu Feb 05 2015 Martin Kolman <mkolman@redhat.com> - 0.3.27-1
+- Remove unneeded dependencies (mkolman)
+- Add the rst suffix to the README file (mkolman)
+- Update the link to the upstream source code repository (mkolman)
+- Add AnacondaKSHandler no-member error to pylint-false-positives. (mulhern)
+- Mark strings for translation when module is loaded. (mulhern)
+- Fix easy pylint errors. (mulhern)
+- Add pylint testing infrastructure. (mulhern)
+
 * Mon Nov 3 2014 Martin Kolman <mkolman@redhat.com> - 0.3.26-1
 - Explicitly require the main package in the GUI sub package (#1078917) (mkolman)
 
