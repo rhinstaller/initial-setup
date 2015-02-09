@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # Setup file for initial-setup
 #
 # Copyright (C) 2012  Red Hat, Inc.
