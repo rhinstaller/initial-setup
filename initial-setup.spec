@@ -78,18 +78,24 @@ if [ $1 -ne 2 -a ! -f /etc/sysconfig/initial-setup ]; then
   if [ "$platform" = "s390" -o "$platform" = "s390x" ]; then
     echo "RUN_INITIAL_SETUP=YES" > /etc/sysconfig/initial-setup
   else
-    %systemd_post initial-setup-graphical.service
     %systemd_post initial-setup-text.service
   fi
 fi
 
 %preun
-%systemd_preun initial-setup-graphical.service
 %systemd_preun initial-setup-text.service
 
 %postun
-%systemd_postun_with_restart initial-setup-graphical.service
 %systemd_postun_with_restart initial-setup-text.service
+
+%post gui
+%systemd_post initial-setup-graphical.service
+
+%preun gui
+%systemd_preun initial-setup-graphical.service
+
+%postun gui
+%systemd_postun_with_restart initial-setup-graphical.service
 
 %files -f %{name}.lang
 %doc COPYING README.rst
