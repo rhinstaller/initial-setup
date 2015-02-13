@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.28
+Version: 0.3.29
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -131,6 +131,10 @@ fi
 %systemd_postun_with_restart initial-setup-graphical.service
 
 %changelog
+* Fri Feb 13 2015 Martin Kolman <mkolman@redhat.com> - 0.3.29-1
+- Split scriptlets for the gui subpackage (mkolman)
+- Use /usr/bin/python2 in scripts (mkolman)
+
 * Thu Feb 05 2015 Martin Kolman <mkolman@redhat.com> - 0.3.28-1
 - Fix breakage caused by README file rename (mkolman)
 
