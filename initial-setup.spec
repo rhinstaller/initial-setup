@@ -114,22 +114,6 @@ fi
 %{python_sitelib}/initial_setup/gui/*
 %{_unitdir}/initial-setup-graphical.service
 
-%post gui
-if [ $1 -ne 2 -a ! -f /etc/sysconfig/initial-setup ]; then
-  platform="$(arch)"
-  if [ "$platform" = "s390" -o "$platform" = "s390x" ]; then
-    echo "RUN_INITIAL_SETUP=YES" > /etc/sysconfig/initial-setup
-  else
-    %systemd_post initial-setup-graphical.service
-  fi
-fi
-
-%preun gui
-%systemd_preun initial-setup-graphical.service
-
-%postun gui
-%systemd_postun_with_restart initial-setup-graphical.service
-
 %changelog
 * Fri Feb 13 2015 Martin Kolman <mkolman@redhat.com> - 0.3.29-1
 - Split scriptlets for the gui subpackage (mkolman)
