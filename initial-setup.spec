@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/FirstBoot
-Version: 0.3.30
+Version: 0.3.31
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -115,7 +115,7 @@ fi
 %{_unitdir}/initial-setup-graphical.service
 
 %changelog
-* Wed Mar 04 2015 Martin Kolman <mkolman@redhat.com> - 0.3.30-1
+* Wed Mar 04 2015 Martin Kolman <mkolman@redhat.com> - 0.3.31-1
 - Use kwin_x11 for kde/plasma spin (#1197135) (rdieter)
 
 * Fri Feb 13 2015 Martin Kolman <mkolman@redhat.com> - 0.3.29-1
