@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This is the list of supported window manager binaries
-WMS=("run_metacity" "kwin" "xfwm4" "openbox" "marco")
+WMS=("run_metacity" "kwin_x11" "kwin" "xfwm4" "openbox" "marco")
 
 run_metacity()
 {
