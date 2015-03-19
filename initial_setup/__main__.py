@@ -90,7 +90,7 @@ try:
     parser.readKickstart(INPUT_KICKSTART_PATH)
     log.info("kickstart parsing done")
 except pykickstart.errors.KickstartError as kserr:
-    log.exception("kickstart parsing failed")
+    log.exception("kickstart parsing failed: %s" % kserr)
     sys.exit(1)
 
 if mode == "gui":
