@@ -1,8 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[initial-setup.master]
-file_filter = po/<lang>.po
-source_file = po/initial-setup.pot
-source_lang = en
-
