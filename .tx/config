@@ -1,9 +1,0 @@
-[main]
-host = https://www.transifex.com
-
-[initial-setup.rhel7-branch]
-file_filter = po/<lang>.po
-source_file = po/initial-setup.pot
-source_lang = en
-type = PO
-

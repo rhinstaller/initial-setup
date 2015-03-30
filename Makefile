@@ -20,6 +20,9 @@
 ANACONDA_PATH=${HOME}/Work/anaconda/msivak
 PYKICKSTART_PATH=${HOME}/Work/pykickstart/master
 
+ZANATA_PULL_ARGS = --transdir po/
+ZANATA_PUSH_ARGS = --srcdir po/ --push-type source --force
+
 default: all
 
 all: po-files
@@ -77,7 +80,12 @@ potfile:
 	$(MAKE) -C po potfile
 
 po-pull:
-	tx pull -a --disable-overwrite
+	rpm -q zanata-python-client &>/dev/null || ( echo "need to run: dnf install zanata-python-client"; exit 1 )
+	zanata pull $(ZANATA_PULL_ARGS)
+
+po-push:
+	rpm -q zanata-python-client &>/dev/null || ( echo "need to run: dnf install zanata-python-client"; exit 1 )
+	zanata push $(ZANATA_PUSH_ARGS) || ( echo "zanata push failed"; exit 1 )
 
 install-po-files:
 	$(MAKE) -C po install
