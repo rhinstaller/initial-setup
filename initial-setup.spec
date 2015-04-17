@@ -9,7 +9,7 @@ Release: 1%{?dist}
 #
 # The source is thus available only from within this SRPM
 # or via direct git checkout:
-# git clone git://git.fedorahosted.org/initial-setup.git
+# git clone https://github.com/rhinstaller/initial-setup
 Source0: %{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
