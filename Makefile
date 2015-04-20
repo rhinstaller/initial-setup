@@ -17,9 +17,6 @@
 #
 # Author: Martin Sivak <msivak@redhat.com>
 
-ANACONDA_PATH=${HOME}/Work/anaconda/msivak
-PYKICKSTART_PATH=${HOME}/Work/pykickstart/master
-
 ZANATA_PULL_ARGS = --transdir po/
 
 default: all
@@ -28,52 +25,6 @@ all: po-files
 
 po-files:
 	$(MAKE) -C po
-
-# GUI TESTING
-rungui:
-	ANACONDA_DATA=${ANACONDA_PATH}/data \
-	ANACONDA_WIDGETS_OVERRIDES=${ANACONDA_PATH}/widgets/python \
-	ANACONDA_WIDGETS_DATA=${ANACONDA_PATH}/widgets/data \
-	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
-	PYTHONPATH=.:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/:${ANACONDA_PATH}:${PYKICKSTART_PATH} \
-	LD_LIBRARY_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	UIPATH=gui/:${ANACONDA_PATH}/pyanaconda/ui/gui/ \
-	GI_TYPELIB_PATH=${ANACONDA_PATH}/widgets/src/ \
-	GLADE_CATALOG_SEARCH_PATH=${ANACONDA_PATH}/widgets/glade \
-	GLADE_MODULE_SEARCH_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	./initial-setup
-
-runtui:
-	ANACONDA_DATA=${ANACONDA_PATH}/data \
-	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
-	PYTHONPATH=.:${ANACONDA_PATH}:${ANACONDA_PATH}/pyanaconda/isys/.libs:${PYKICKSTART_PATH}  \
-	DISPLAY= ./initial-setup
-
-runglade:
-	ANACONDA_DATA=${ANACONDA_PATH}/data \
-	ANACONDA_WIDGETS_OVERRIDES=${ANACONDA_PATH}/widgets/python \
-	ANACONDA_WIDGETS_DATA=${ANACONDA_PATH}/widgets/data \
-	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
-	PYTHONPATH=.:${ANACONDA_PATH}:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/ \
-	LD_LIBRARY_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	UIPATH=${ANACONDA_PATH}/pyanaconda/ui/gui/ \
-	GI_TYPELIB_PATH=${ANACONDA_PATH}/widgets/src/ \
-	GLADE_CATALOG_SEARCH_PATH=${ANACONDA_PATH}/widgets/glade \
-	GLADE_MODULE_SEARCH_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	glade ${GLADE_FILE}
-
-runpy:
-	ANACONDA_DATA=${ANACONDA_PATH}/data \
-	ANACONDA_WIDGETS_OVERRIDES=${ANACONDA_PATH}/widgets/python \
-	ANACONDA_WIDGETS_DATA=${ANACONDA_PATH}/widgets/data \
-	ANACONDA_INSTALL_CLASSES=${ANACONDA_PATH}/pyanaconda/installclasses \
-	PYTHONPATH=.:${ANACONDA_PATH}:${ANACONDA_PATH}/pyanaconda/isys/.libs:${ANACONDA_PATH}/widgets/python/:${ANACONDA_PATH}/widgets/src/.libs/ \
-	LD_LIBRARY_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	UIPATH=gui/:${ANACONDA_PATH}/pyanaconda/ui/gui/ \
-	GI_TYPELIB_PATH=${ANACONDA_PATH}/widgets/src/ \
-	GLADE_CATALOG_SEARCH_PATH=${ANACONDA_PATH}/widgets/glade \
-	GLADE_MODULE_SEARCH_PATH=${ANACONDA_PATH}/widgets/src/.libs \
-	ipython
 
 potfile:
 	$(MAKE) -C po potfile
