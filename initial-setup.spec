@@ -26,6 +26,7 @@ BuildRequires: gtk3-devel
 BuildRequires: glade-devel
 BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: python-di
+BuildRequires: intltool
 
 Requires: python
 Requires: anaconda-tui >= %{anacondaver}
@@ -60,17 +61,19 @@ initial-setup utility.
 rm -rf *.egg-info
 
 %build
-python setup.py build
-make po-files
+make
 
 %check
-export XDG_RUNTIME_DIR=/tmp
-python setup.py nosetests
+make test
 
 %install
-python setup.py install --skip-build --root $RPM_BUILD_ROOT
-make install-po-files
+rm -rf %{buildroot}
+make DESTDIR=%{buildroot} install
+
 %find_lang %{name}
+
+%clean
+rm -rf %{buildroot}
 
 %post
 if [ $1 -ne 2 -a ! -f /etc/sysconfig/initial-setup ]; then

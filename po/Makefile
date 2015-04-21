@@ -44,7 +44,7 @@ glade-po: $(GLADEFILES)
 		intltool-extract --type=gettext/glade -l $$f ;\
 	done
 
-update-po: Makefile refresh-po
+update-po: Makefile potfile refresh-po
 
 refresh-po: Makefile
 	for cat in $(POFILES); do \
