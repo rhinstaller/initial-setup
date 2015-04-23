@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.32
+Version: 0.3.33
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -118,6 +118,12 @@ fi
 %{_unitdir}/initial-setup-graphical.service
 
 %changelog
+* Thu Apr 23 2015 Martin Kolman <mkolman@redhat.com> - 0.3.33-1
+- Improve the Makefile (mkolman)
+- Remove old GUI testing code from the Makefile (mkolman)
+- Update upstream URL (#1213101) (mkolman)
+- Update upstream Git repository URL (mkolman)
+
 * Tue Mar 31 2015 Martin Kolman <mkolman@redhat.com> - 0.3.32-1
 - Point out the err in case that ks parsing failed (#1145130) (fabiand)
 - Switch to Zanata for translations (mkolman)

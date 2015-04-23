@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-11 16:12+0100\n"
+"POT-Creation-Date: 2015-04-23 17:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../initial_setup/tui/tui.py:16 ../initial_setup/gui/gui.py:18
+#: ../initial_setup/tui/tui.py:12 ../initial_setup/gui/gui.py:14
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with unusable system if you do."
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:17
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:19
 #, python-format
 msgid "Initial setup of %(product)s"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:19
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:21
 msgid "Initial setup"
 msgstr ""
 
