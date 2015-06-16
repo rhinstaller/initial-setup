@@ -108,7 +108,7 @@ if mode == "gui":
         log.debug("trying to import GUI")
         import gui
     except ImportError:
-        log.error("GUI import failed, falling back to TUI")
+        log.exception("GUI import failed, falling back to TUI")
         mode = "tui"
 
 if mode == "gui":
