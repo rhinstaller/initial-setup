@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <!-- interface-requires AnacondaWidgets 1.0 -->
+  <requires lib="gtk+" version="3.0"/>
+  <requires lib="AnacondaWidgets" version="3.0"/>
   <object class="AnacondaHubWindow" id="summaryWindow">
-    <property name="startup_id">filler</property>
     <property name="can_focus">False</property>
-    <property name="startup_id">filler</property>
-    <property name="mnemonics_visible">False</property>
-    <property name="focus_visible">False</property>
     <property name="distribution" translatable="yes">DISTRIBUTION SETUP</property>
     <property name="window_name" translatable="yes">INITIAL SETUP</property>
+    <property name="quit_button">quitButton</property>
+    <property name="continue_button">continueButton</property>
     <child internal-child="main_box">
       <object class="GtkBox" id="AnacondaHubWindow-main_box1">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <child internal-child="nav_area">
-          <object class="GtkGrid" id="AnacondaHubWindow-nav_area1">
+        <child internal-child="nav_box">
+          <object class="GtkEventBox" id="AnacondaHubWindow-nav_box1">
             <property name="can_focus">False</property>
-            <child>
-              <placeholder/>
+            <child internal-child="nav_area">
+              <object class="GtkGrid" id="AnacondaHubWindow-nav_area1">
+                <property name="can_focus">False</property>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
             </child>
           </object>
           <packing>

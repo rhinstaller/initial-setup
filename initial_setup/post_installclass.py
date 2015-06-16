@@ -19,7 +19,7 @@
 
 from pyanaconda.installclass import BaseInstallClass
 
-class InstallClass(BaseInstallClass):
+class PostInstallClass(BaseInstallClass):
     help_placeholder = "RHEL7Placeholder.html"
     help_placeholder_with_links = "RHEL7PlaceholderWithLinks.html"
 

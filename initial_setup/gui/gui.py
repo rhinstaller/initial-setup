@@ -1,12 +1,8 @@
-from pyanaconda.ui.gui import QuitDialog, GUIObject, GraphicalUserInterface
+from pyanaconda.ui.gui import QuitDialog, GraphicalUserInterface
 from initial_setup.product import product_title, is_final
 from .hubs import InitialSetupMainHub
-from pyanaconda.ui.gui.spokes import StandaloneSpoke
-import pyanaconda.ui.gui.spokes
-from pyanaconda.ui.common import collect, FirstbootSpokeMixIn
 import os
 from gi.repository import Gdk
-import logging
 import gettext
 from di import inject, usesclassinject
 

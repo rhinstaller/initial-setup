@@ -5,7 +5,7 @@ import signal
 import pykickstart
 import logging
 from pyanaconda.users import Users
-from initial_setup.post_installclass import InstallClass
+from initial_setup.post_installclass import PostInstallClass
 from initial_setup import initial_setup_log
 from pyanaconda import iutil
 
@@ -34,14 +34,6 @@ if mode == "gui":
     for p in os.environ.get("ANACONDA_WIDGETS_OVERRIDES", "").split(":"):
         gi.overrides.__path__.insert(0, p)
     log.debug("GI overrides imported")
-
-# set the root path to / so the imported spokes
-# know where to apply their changes
-from pyanaconda import constants
-
-# this has to stay in the form constants.ROOT_PATH so it modifies
-# the scalar in anaconda, not the local copy here
-constants.ROOT_PATH = "/"
 
 from pyanaconda.addons import collect_addon_paths
 
@@ -99,14 +91,14 @@ try:
     parser.readKickstart(INPUT_KICKSTART_PATH)
     log.info("kickstart parsing done")
 except pykickstart.errors.KickstartError as kserr:
-    log.exception("kickstart parsing failed")
+    log.exception("kickstart parsing failed: %s" % kserr)
     sys.exit(1)
 
 if mode == "gui":
     try:
         # Try to import IS gui specifics
         log.debug("trying to import GUI")
-        import gui
+        import initial_setup.gui
     except ImportError:
         log.exception("GUI import failed, falling back to TUI")
         mode = "tui"
@@ -115,21 +107,21 @@ if mode == "gui":
     # gui already imported (see above)
 
     # Add addons to search paths
-    gui.InitialSetupGraphicalUserInterface.update_paths(addon_module_paths)
+    initial_setup.gui.InitialSetupGraphicalUserInterface.update_paths(addon_module_paths)
 
     # Initialize the UI
     log.debug("initializing GUI")
-    ui = gui.InitialSetupGraphicalUserInterface(None, None, InstallClass())
+    ui = initial_setup.gui.InitialSetupGraphicalUserInterface(None, None, PostInstallClass())
 else:
     # Import IS gui specifics
-    import tui
+    import initial_setup.tui
 
     # Add addons to search paths
-    tui.InitialSetupTextUserInterface.update_paths(addon_module_paths)
+    initial_setup.tui.InitialSetupTextUserInterface.update_paths(addon_module_paths)
 
     # Initialize the UI
     log.debug("initializing TUI")
-    ui = tui.InitialSetupTextUserInterface(None, None, None)
+    ui = initial_setup.tui.InitialSetupTextUserInterface(None, None, None)
 
 # Pass the data object to user inteface
 log.debug("setting up the UI")

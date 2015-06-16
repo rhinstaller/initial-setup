@@ -3,13 +3,12 @@
 import gettext
 import logging
 
-from gi.repository import Pango
 from pyanaconda.ui.common import FirstbootOnlySpokeMixIn
 from pyanaconda.ui.gui.spokes import NormalSpoke
-from pyanaconda.ui.gui.categories.licensing import LicensingCategory
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
 
 from initial_setup.product import get_license_file_name
+from initial_setup.common import LicensingCategory
 
 log = logging.getLogger("initial-setup")
 
@@ -94,6 +93,12 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
             return _("No license found")
 
         return _("License accepted") if self.data.eula.agreed else _("License not accepted")
+
+    @classmethod
+    def should_run(cls, environment, data):
+        # the EULA spoke should always run, but only in Initial Setup
+        if environment == FIRSTBOOT_ENVIRON:
+            return True
 
     def on_check_button_toggled(self, checkbutton, *args):
         if self._agree_check_button.get_active():

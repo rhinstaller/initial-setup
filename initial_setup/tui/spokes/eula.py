@@ -9,6 +9,7 @@ from pyanaconda.ui.tui.simpleline.widgets import TextWidget, CheckboxWidget
 from pyanaconda.ui.tui.simpleline.base import UIScreen
 from pyanaconda.ui.common import FirstbootOnlySpokeMixIn
 from initial_setup.product import get_license_file_name
+from initial_setup.common import LicensingCategory
 
 log = logging.getLogger("initial-setup")
 
@@ -21,7 +22,7 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalTUISpoke):
     """The EULA spoke providing ways to read the license and agree/disagree with it."""
 
     title = _("License information")
-    category = "system"
+    category = LicensingCategory
 
     def __init__(self, *args, **kwargs):
         NormalTUISpoke.__init__(self, *args, **kwargs)
