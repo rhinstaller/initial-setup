@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.23
+Version: 0.3.9.24
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -110,6 +110,12 @@ fi
 
 
 %changelog
+* Wed Jun 17 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.24-1
+- Make Initial Setup compatible with rebased Anaconda (#1229747) (mkolman)
+  Resolves: rhbz#1229747
+- Log the reason if GUI import fails (#1229747) (mkolman)
+  Related: rhbz#1229747
+
 * Tue Jan 20 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.23-1
 - Redirect the EULA spoke help button to the Initial Setup hub help file (#1072033) (mkolman)
   Related: rhbz#1072033
