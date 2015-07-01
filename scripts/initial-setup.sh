@@ -1,23 +1,14 @@
 # initial-setup.sh
 
 IS_EXEC=/usr/bin/initial-setup
-IS_CONF=/etc/sysconfig/initial-setup
+IS_UNIT=initial-setup-text.service
 
-# source the config file
-[ -f $IS_CONF ] && . $IS_CONF
-
-# check if we should run initial-setup
-if [ -f $IS_EXEC ] && [ "${RUN_INITIAL_SETUP,,}" = "yes" ]; then
+IS_AVAILABLE=0
+# check if the Initial Setup unit is enabled and the executable is available
+systemctl -q is-enabled $IS_UNIT && [ -f $IS_EXEC ] && IS_AVAILABLE=1
+if [ $IS_AVAILABLE -eq 1 ]; then
     # check if we're not on 3270 terminal and root
     if [ $(/sbin/consoletype) = "pty" ] && [ $EUID -eq 0 ]; then
-        args=""
-        if grep -i "reconfig" /proc/cmdline >/dev/null || [ -f /etc/reconfigSys ]; then
-            args="--reconfig"
-        fi
-
-        . /etc/locale.conf
-        . /etc/vconsole.conf
-        $IS_EXEC $args
-        [ $? -eq 0 ] && sed -r -i 's/^RUN_INITIAL_SETUP\s*=\s*[yY][eE][sS]\s*/RUN_INITIAL_SETUP=NO/' $IS_CONF
+        $IS_EXEC && systemctl -q disable $IS_UNIT
     fi
 fi
