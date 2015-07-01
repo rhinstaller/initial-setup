@@ -90,11 +90,16 @@ commandMap = dict((k, kickstart.commandMap[k]) for k in kickstart_commands)
 # Prepare new data object
 data = kickstart.AnacondaKSHandler(addon_module_paths["ks"], commandUpdates=commandMap)
 
-log.info("parsing input kickstart %s", INPUT_KICKSTART_PATH)
+kickstart_path = INPUT_KICKSTART_PATH
+if os.path.exists(OUTPUT_KICKSTART_PATH):
+    log.info("using kickstart from previous run for input")
+    kickstart_path = OUTPUT_KICKSTART_PATH
+
+log.info("parsing input kickstart %s", kickstart_path)
 try:
     # Read the installed kickstart
     parser = kickstart.AnacondaKSParser(data)
-    parser.readKickstart(INPUT_KICKSTART_PATH)
+    parser.readKickstart(kickstart_path)
     log.info("kickstart parsing done")
 except pykickstart.errors.KickstartError as kserr:
     log.exception("kickstart parsing failed: %s" % kserr)
