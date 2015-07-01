@@ -6,6 +6,7 @@ import logging
 from pyanaconda.ui.common import FirstbootOnlySpokeMixIn
 from pyanaconda.ui.gui.spokes import NormalSpoke
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
+from pykickstart.constants import FIRSTBOOT_RECONFIG
 
 from initial_setup.product import get_license_file_name
 from initial_setup.common import LicensingCategory
@@ -96,8 +97,12 @@ class EULAspoke(FirstbootOnlySpokeMixIn, NormalSpoke):
 
     @classmethod
     def should_run(cls, environment, data):
-        # the EULA spoke should always run, but only in Initial Setup
+        # the EULA spoke should only run in Initial Setup
         if environment == FIRSTBOOT_ENVIRON:
+            # don't run if we are in reconfig mode and the EULA has already been accepted
+            if data and data.firstboot.firstboot == FIRSTBOOT_RECONFIG and data.eula.agreed:
+                log.debug("not running license spoke: reconfig mode & license already accepted")
+                return False
             return True
 
     def on_check_button_toggled(self, checkbutton, *args):
