@@ -8,14 +8,18 @@ from pyanaconda.users import Users
 from initial_setup.post_installclass import PostInstallClass
 from initial_setup import initial_setup_log
 from pyanaconda import iutil
+from pykickstart.constants import FIRSTBOOT_RECONFIG
 
 INPUT_KICKSTART_PATH = "/root/anaconda-ks.cfg"
 OUTPUT_KICKSTART_PATH = "/root/initial-setup-ks.cfg"
+RECONFIG_FILE = "/etc/reconfigSys"
 
 # set root to "/", we are now in the installed system
 iutil.setSysroot("/")
 
 signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+external_reconfig = os.path.exists(RECONFIG_FILE)
 
 initial_setup_log.init()
 log = logging.getLogger("initial-setup")
@@ -26,6 +30,9 @@ else:
     mode="tui"
 
 log.debug("display mode detected: %s", mode)
+
+if external_reconfig:
+    log.debug("running in externally triggered reconfig mode")
 
 if mode == "gui":
     # We need this so we can tell GI to look for overrides objects
@@ -93,6 +100,11 @@ try:
 except pykickstart.errors.KickstartError as kserr:
     log.exception("kickstart parsing failed: %s" % kserr)
     sys.exit(1)
+
+if external_reconfig:
+    # set the reconfig flag in kickstart so that
+    # relevant spokes show up
+    data.firstboot.firstboot = FIRSTBOOT_RECONFIG
 
 if mode == "gui":
     try:
@@ -175,8 +187,21 @@ for section in sections:
 log.info("executing addons")
 data.addons.execute(None, data, None, u)
 
+if external_reconfig:
+    # prevent the reconfig flag from being written out,
+    # to prevent the reconfig mode from being enabled
+    # without the /etc/reconfigSys file being present
+    data.firstboot.firstboot = None
+
 # Write the kickstart data to file
 log.info("writing the Initial Setup kickstart file %s", OUTPUT_KICKSTART_PATH)
 with open(OUTPUT_KICKSTART_PATH, "w") as f:
     f.write(str(data))
 log.info("finished writing the Initial Setup kickstart file")
+
+# Remove the reconfig file, if any - otherwise the reconfig mode
+# would start again next time the Initial Setup service is enabled
+if external_reconfig and os.path.exists(RECONFIG_FILE):
+    log.debug("removing the reconfig file")
+    os.remove(RECONFIG_FILE)
+    log.debug("the reconfig file has been removed")
