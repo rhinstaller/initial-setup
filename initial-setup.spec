@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
 Version: 0.3.9.25
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -110,7 +110,7 @@ fi
 
 
 %changelog
-* Wed Jul 3 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.25-1
+* Fri Jul 3 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.25-2
 - Don't show the EULA spoke in reconfig mode if license is already accepted (#1110439) (mkolman)
   Related: rhbz#1110439
 - Read the kickstart from previous IS run, if available (#1110439) (mkolman)
