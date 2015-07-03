@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.24
+Version: 0.3.9.25
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -110,6 +110,14 @@ fi
 
 
 %changelog
+* Wed Jul 3 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.25-1
+- Don't show the EULA spoke in reconfig mode if license is already accepted (#1110439) (mkolman)
+  Related: rhbz#1110439
+- Read the kickstart from previous IS run, if available (#1110439) (mkolman)
+  Related: rhbz#1110439
+- Add support for externally triggered reconfig mode (#1110439) (mkolman)
+  Resolves: rhbz#1110439
+
 * Wed Jun 17 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.24-1
 - Make Initial Setup compatible with rebased Anaconda (#1229747) (mkolman)
   Resolves: rhbz#1229747
