@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.25
+Version: 0.3.9.26
 Release: 2%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -110,6 +110,12 @@ fi
 
 
 %changelog
+* Thu Jul 9 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.26-1
+- Use systemd service status for run detection on the S390 console (#1181209) (mkolman)
+  Resolves: rhbz#1181209
+- Bump the required Anaconda version (#1229747) (mkolman)
+  Related: rhbz#1229747
+
 * Fri Jul 3 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.25-2
 - Don't show the EULA spoke in reconfig mode if license is already accepted (#1110439) (mkolman)
   Related: rhbz#1110439
