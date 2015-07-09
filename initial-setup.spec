@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
 Version: 0.3.9.26
-Release: 2%{?dist}
+Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
