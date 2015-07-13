@@ -27,7 +27,6 @@ BuildRequires: gtk-doc
 BuildRequires: gobject-introspection-devel
 BuildRequires: glade-devel
 BuildRequires: pygobject3
-BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: python-di
 
 Requires: python
@@ -65,7 +64,6 @@ rm -rf *.egg-info
 make po-files
 
 %check
-%{__python} setup.py nosetests
 
 %install
 %{__python} setup.py install --skip-build --root $RPM_BUILD_ROOT
