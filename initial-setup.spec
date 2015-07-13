@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
 Version: 0.3.9.26
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -108,6 +108,10 @@ fi
 
 
 %changelog
+* Mon Jul 13 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.26-2
+- Don't try to run nonexistent tests (#1229747) (mkolman)
+  Related: rhbz#1229747
+
 * Thu Jul 9 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.26-1
 - Use systemd service status for run detection on the S390 console (#1181209) (mkolman)
   Resolves: rhbz#1181209
