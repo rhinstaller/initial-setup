@@ -1,8 +1,8 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.26
-Release: 2%{?dist}
+Version: 0.3.9.27
+Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -108,6 +108,10 @@ fi
 
 
 %changelog
+* Wed Jul 22 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.27-1
+- Switch to Zanata for translations (#1229747) (mkolman)
+  Related: rhbz#1229747
+
 * Mon Jul 13 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.26-2
 - Don't try to run nonexistent tests (#1229747) (mkolman)
   Related: rhbz#1229747
