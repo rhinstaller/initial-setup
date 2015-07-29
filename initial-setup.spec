@@ -18,23 +18,21 @@ Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
 Group: System Environment/Base
 BuildRequires: gettext
-BuildRequires: python2-devel
-BuildRequires: python-setuptools
-BuildRequires: python-nose
+BuildRequires: python3-devel
+BuildRequires: python3-setuptools
+BuildRequires: python3-nose
 BuildRequires: systemd-units
 BuildRequires: gtk3-devel
 BuildRequires: glade-devel
 BuildRequires: anaconda >= %{anacondaver}
-BuildRequires: python-di
 BuildRequires: intltool
 
-Requires: python
+Requires: python3
 Requires: anaconda-tui >= %{anacondaver}
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
-Requires: libreport-python
-Requires: python-di
+Requires: libreport-python3
 Requires: util-linux
 Conflicts: firstboot < 19.2
 
@@ -102,8 +100,8 @@ fi
 
 %files -f %{name}.lang
 %doc COPYING README.rst
-%{python_sitelib}/initial_setup*
-%exclude %{python_sitelib}/initial_setup/gui
+%{python3_sitelib}/initial_setup*
+%exclude %{python3_sitelib}/initial_setup/gui
 %{_bindir}/initial-setup
 %{_bindir}/firstboot-windowmanager
 %{_unitdir}/initial-setup-text.service
@@ -114,7 +112,7 @@ fi
 %endif
 
 %files gui
-%{python_sitelib}/initial_setup/gui/*
+%{python3_sitelib}/initial_setup/gui/*
 %{_unitdir}/initial-setup-graphical.service
 
 %changelog

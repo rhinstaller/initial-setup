@@ -25,10 +25,6 @@ TAG=r$(VERSION)-$(RELEASE)
 
 PREFIX=/usr
 
-PYTHON2=python2
-PYTHON3=python3
-PYTHON=$(PYTHON2)
-
 ZANATA_PULL_ARGS = --transdir po/
 ZANATA_PUSH_ARGS = --srcdir po/ --push-type source --force
 
@@ -37,7 +33,7 @@ default: all
 all: po-files
 
 install:
-	$(PYTHON) setup.py install --root=$(DESTDIR)
+	$(python3) setup.py install --root=$(DESTDIR)
 	$(MAKE) -C po install
 
 clean:

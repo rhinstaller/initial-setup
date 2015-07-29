@@ -4,7 +4,6 @@ from .hubs import InitialSetupMainHub
 import os
 from gi.repository import Gdk
 import gettext
-from di import inject, usesclassinject
 
 # localization
 _ = lambda x: gettext.ldgettext("initial-setup", x)
@@ -14,7 +13,6 @@ class InitialSetupQuitDialog(QuitDialog):
     MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
                  "You might end up with unusable system if you do.")
 
-@inject(Gdk, product_title = product_title, is_final = is_final)
 class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     """This is the main Gtk based firstboot interface. It inherits from
        anaconda to make the look & feel as similar as possible.
@@ -22,7 +20,6 @@ class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
 
     screenshots_directory = "/tmp/initial-setup-screenshots"
 
-    @usesclassinject
     def __init__(self, storage, payload, instclass):
         GraphicalUserInterface.__init__(self, storage, payload, instclass,
                                         product_title, is_final,
