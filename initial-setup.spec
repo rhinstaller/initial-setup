@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.34
+Version: 0.3.35
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -116,6 +116,9 @@ fi
 %{_unitdir}/initial-setup-graphical.service
 
 %changelog
+* Thu Jul 30 2015 Martin Kolman <mkolman@redhat.com> - 0.3.35-1
+- Fix a typo in Makefile (#1244558) (mkolman)
+
 * Thu Jul 30 2015 Martin Kolman <mkolman@redhat.com> - 0.3.34-1
 - Switch Initial Setup to Python 3 (#1244558) (mkolman)
 
