@@ -33,7 +33,7 @@ default: all
 all: po-files
 
 install:
-	$(python3) setup.py install --root=$(DESTDIR)
+	python3 setup.py install --root=$(DESTDIR)
 	$(MAKE) -C po install
 
 clean:
