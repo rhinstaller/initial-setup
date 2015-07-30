@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-23 17:14+0200\n"
+"POT-Creation-Date: 2015-07-30 17:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../initial_setup/tui/tui.py:12 ../initial_setup/gui/gui.py:14
+#: ../initial_setup/tui/tui.py:11 ../initial_setup/gui/gui.py:13
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with unusable system if you do."
