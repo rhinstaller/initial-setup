@@ -9,6 +9,7 @@ from initial_setup.post_installclass import PostInstallClass
 from initial_setup import initial_setup_log
 from pyanaconda import iutil
 from pykickstart.constants import FIRSTBOOT_RECONFIG
+from pyanaconda.localization import setup_locale_environment, setup_locale
 
 INPUT_KICKSTART_PATH = "/root/anaconda-ks.cfg"
 OUTPUT_KICKSTART_PATH = "/root/initial-setup-ks.cfg"
@@ -110,6 +111,14 @@ if external_reconfig:
     # set the reconfig flag in kickstart so that
     # relevant spokes show up
     data.firstboot.firstboot = FIRSTBOOT_RECONFIG
+
+# Normalize the locale environment variables
+if data.lang.seen:
+    locale_arg = data.lang.lang
+else:
+    locale_arg = None
+setup_locale_environment(locale_arg, prefer_environment=True)
+setup_locale(os.environ['LANG'], text_mode=mode != "gui")
 
 if mode == "gui":
     try:
