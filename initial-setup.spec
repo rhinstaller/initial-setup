@@ -71,15 +71,8 @@ make install-po-files
 %find_lang %{name}
 
 %post
-if [ $1 -ne 2 -a ! -f /etc/sysconfig/initial-setup ]; then
-  platform="$(arch)"
-  if [ "$platform" = "s390" -o "$platform" = "s390x" ]; then
-    echo "RUN_INITIAL_SETUP=YES" > /etc/sysconfig/initial-setup
-  else
-    %systemd_post initial-setup-graphical.service
-    %systemd_post initial-setup-text.service
-  fi
-fi
+%systemd_post initial-setup-graphical.service
+%systemd_post initial-setup-text.service
 
 %preun
 %systemd_preun initial-setup-graphical.service
