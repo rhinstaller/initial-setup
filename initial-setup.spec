@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.27
+Version: 0.3.9.28
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -101,6 +101,14 @@ make install-po-files
 
 
 %changelog
+* Thu Aug 27 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.28-1
+- Run the TUI service before hvc0.service (#1209731) (mmatsuya)
+  Resolves: rhbz#1209731
+- Don't create /etc/sysconfig/initial-setup on s390 (#1181209) (mkolman)
+  Related: rhbz#1181209
+- Setup the locale before starting the UI (dshea)
+  Resolves: rhbz#1198642
+
 * Wed Jul 22 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.27-1
 - Switch to Zanata for translations (#1229747) (mkolman)
   Related: rhbz#1229747
