@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.35
+Version: 0.3.36
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -109,6 +109,15 @@ rm -rf %{buildroot}
 %{_unitdir}/initial-setup-graphical.service
 
 %changelog
+* Mon Aug 31 2015 Martin Kolman <mkolman@redhat.com> - 0.3.36-1
+- Setup the locale before starting the UI (dshea)
+- Run the TUI service before hvc0.service (#1209731) (mkolman)
+- Don't create /etc/sysconfig/initial-setup on s390 (#1181209) (mkolman)
+- Use systemd service status for run detection on S390 console (#1181209) (mkolman)
+- Read the kickstart from previous IS run, if available (#1110439) (mkolman)
+- Add support for externally triggered reconfig mode (#1110439) (mkolman)
+- Log the reason if GUI import fails (#1229747) (mkolman)
+
 * Thu Jul 30 2015 Martin Kolman <mkolman@redhat.com> - 0.3.35-1
 - Fix a typo in Makefile (#1244558) (mkolman)
 
