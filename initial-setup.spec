@@ -71,16 +71,22 @@ make install-po-files
 %find_lang %{name}
 
 %post
-%systemd_post initial-setup-graphical.service
 %systemd_post initial-setup-text.service
 
 %preun
-%systemd_preun initial-setup-graphical.service
 %systemd_preun initial-setup-text.service
 
 %postun
-%systemd_postun_with_restart initial-setup-graphical.service
 %systemd_postun_with_restart initial-setup-text.service
+
+%post gui
+%systemd_post initial-setup-graphical.service
+
+%preun gui
+%systemd_preun initial-setup-graphical.service
+
+%postun gui
+%systemd_postun_with_restart initial-setup-graphical.service
 
 %files -f %{name}.lang
 %doc COPYING README
