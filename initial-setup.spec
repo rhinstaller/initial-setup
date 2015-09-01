@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.28
+Version: 0.3.9.29
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -107,6 +107,10 @@ make install-po-files
 
 
 %changelog
+* Tue Sep 01 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.29-1
+- Move gui scriptlets to the gui subpackage (#1181209) (mkolman)
+  Resolves: rhbz#1181209
+
 * Thu Aug 27 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.28-1
 - Run the TUI service before hvc0.service (#1209731) (mmatsuya)
   Resolves: rhbz#1209731
