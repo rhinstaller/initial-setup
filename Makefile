@@ -25,6 +25,8 @@ TAG=r$(VERSION)-$(RELEASE)
 
 PREFIX=/usr
 
+PYTHON=python3
+
 ZANATA_PULL_ARGS = --transdir po/
 ZANATA_PUSH_ARGS = --srcdir po/ --push-type source --force
 
@@ -50,18 +52,30 @@ tag:
 	git tag -a -m "Tag as $(TAG)" -f $(TAG)
 	@echo "Tagged as $(TAG)"
 
-archive: tag local
+release: tag archive
+
+archive: po-pull
+	@rm -f ChangeLog
+	@make ChangeLog
+	git archive --format=tar --prefix=$(PKGNAME)-$(VERSION)/ $(TAG) > $(PKGNAME)-$(VERSION).tar
+	mkdir $(PKGNAME)-$(VERSION)
+	cp -r po $(PKGNAME)-$(VERSION)
+	cp ChangeLog $(PKGNAME)-$(VERSION)/
+	tar -rf $(PKGNAME)-$(VERSION).tar $(PKGNAME)-$(VERSION)
+	gzip -9 $(PKGNAME)-$(VERSION).tar
+	rm -rf $(PKGNAME)-$(VERSION)
+	git checkout -- po/$(PKGNAME).pot
+	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
 
 local: po-pull
 	@rm -f ChangeLog
 	@make ChangeLog
-	git archive --format=tar --prefix=$(PKGNAME)-$(VERSION)/ $(TAG) > $(PKGNAME)-$(VERSION).tar
-	mkdir -p $(PKGNAME)-$(VERSION)/po
-	cp ChangeLog $(PKGNAME)-$(VERSION)/
-	cp po/*.po $(PKGNAME)-$(VERSION)/po/
-	tar -rf $(PKGNAME)-$(VERSION).tar $(PKGNAME)-$(VERSION)
-	gzip -9 $(PKGNAME)-$(VERSION).tar
-	rm -rf $(PKGNAME)-$(VERSION)
+	@rm -rf $(PKGNAME)-$(VERSION).tar.gz
+	@rm -rf /tmp/$(PKGNAME)-$(VERSION) /tmp/$(PKGNAME)
+	@dir=$$PWD; cp -a $$dir /tmp/$(PKGNAME)-$(VERSION)
+	@cd /tmp/$(PKGNAME)-$(VERSION) ; $(PYTHON) setup.py -q sdist
+	@cp /tmp/$(PKGNAME)-$(VERSION)/dist/$(PKGNAME)-$(VERSION).tar.gz .
+	@rm -rf /tmp/$(PKGNAME)-$(VERSION)
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
 
 rpmlog:
