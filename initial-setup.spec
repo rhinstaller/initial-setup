@@ -80,7 +80,7 @@ rm -rf %{buildroot}
 %systemd_preun initial-setup-text.service
 
 %postun
-%systemd_postun_with_restart initial-setup-text.service
+%systemd_postun initial-setup-text.service
 
 %post gui
 %systemd_post initial-setup-graphical.service
@@ -89,7 +89,7 @@ rm -rf %{buildroot}
 %systemd_preun initial-setup-graphical.service
 
 %postun gui
-%systemd_postun_with_restart initial-setup-graphical.service
+%systemd_postun initial-setup-graphical.service
 
 %files -f %{name}.lang
 %doc COPYING README.rst
