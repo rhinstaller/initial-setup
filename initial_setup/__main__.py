@@ -209,9 +209,16 @@ if external_reconfig:
 
 # Write the kickstart data to file
 log.info("writing the Initial Setup kickstart file %s", OUTPUT_KICKSTART_PATH)
-with open(OUTPUT_KICKSTART_PATH, "w") as f:
-    f.write(str(data))
-log.info("finished writing the Initial Setup kickstart file")
+# Make sure that the output kickstart file is only readable by root (0600)
+try:
+    fd = iutil.eintr_retry_call(os.open, OUTPUT_KICKSTART_PATH, os.O_WRONLY | os.O_CREAT, 0o600)
+except OSError as e:
+    log.exception("can't open output kickstart file for writing: %s", OUTPUT_KICKSTART_PATH)
+    fd = None
+if fd is not None:
+    with os.fdopen(fd, "w") as f:
+        f.write(str(data))
+    log.info("finished writing the Initial Setup kickstart file")
 
 # Remove the reconfig file, if any - otherwise the reconfig mode
 # would start again next time the Initial Setup service is enabled
