@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.29
+Version: 0.3.9.30
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -107,6 +107,10 @@ make install-po-files
 
 
 %changelog
+* Tue Sep 22 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.30-1
+- Only root should be able to read the initial-setup-ks.cfg file (#1264336) (mkolman)
+  Resolves: rhbz#1264336
+
 * Tue Sep 01 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.29-1
 - Move gui scriptlets to the gui subpackage (#1181209) (mkolman)
   Resolves: rhbz#1181209
