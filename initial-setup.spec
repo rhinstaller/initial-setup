@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.36
+Version: 0.3.37
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -163,6 +163,12 @@ fi
 %{_unitdir}/initial-setup-graphical.service
 
 %changelog
+* Wed Sep 30 2015 Martin Kolman <mkolman@redhat.com> - 0.3.37-1
+- Stop any Initial Setup services before upgrading package (#1244394) (mkolman)
+- Replace systemd_postun_with_restart with systemd_postun (#1244394) (mkolman)
+- Fix 'bumpver' make target (vtrefny)
+- Add archive target to Makefile (vtrefny)
+
 * Mon Aug 31 2015 Martin Kolman <mkolman@redhat.com> - 0.3.36-1
 - Setup the locale before starting the UI (dshea)
 - Run the TUI service before hvc0.service (#1209731) (mkolman)
