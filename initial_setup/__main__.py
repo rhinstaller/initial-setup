@@ -103,7 +103,8 @@ try:
     parser.readKickstart(kickstart_path)
     log.info("kickstart parsing done")
 except pykickstart.errors.KickstartError as kserr:
-    log.exception("kickstart parsing failed: %s" % kserr)
+    log.critical("kickstart parsing failed: %s", kserr)
+    log.critical("Initial Setup startup failed due to invalid kickstart file")
     sys.exit(1)
 
 if external_reconfig:
