@@ -36,8 +36,8 @@ data_files = [('/usr/lib/systemd/system', glob('systemd/*.service'))]
 
 # add the firstboot start script for s390 architectures
 if os.uname()[4].startswith('s390'):
-    data_files.append(('/etc/profile.d', ['scripts/initial-setup.sh']))
-    data_files.append(('/etc/profile.d', ['scripts/initial-setup.csh']))
+    data_files.append(('/etc/profile.d', ['scripts/s390/initial-setup.sh']))
+    data_files.append(('/etc/profile.d', ['scripts/s390/initial-setup.csh']))
 
 setup(
     name = "initial-setup",
