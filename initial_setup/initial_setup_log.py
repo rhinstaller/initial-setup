@@ -41,10 +41,18 @@ class InitialSetupSyslogHandler(SysLogHandler):
         SysLogHandler.emit(self, record)
         record.msg = original_msg
 
-def init():
+def init(stdout_log):
     """Initialize the Initial Setup logging system"""
     log = logging.getLogger("initial-setup")
     log.setLevel(logging.DEBUG)
     syslogHandler = InitialSetupSyslogHandler('/dev/log', SysLogHandler.LOG_LOCAL1, "initial-setup")
     syslogHandler.setLevel(logging.DEBUG)
     log.addHandler(syslogHandler)
+
+    if stdout_log:
+        # also log to stdout because someone is apparently running Initial Setup manually,
+        # probably for debugging purposes
+        stdoutHandler = logging.StreamHandler()
+        stdoutHandler.setLevel(logging.DEBUG)
+        stdoutHandler.setFormatter(logging.Formatter('%(levelname)s %(name)s: %(message)s'))
+        log.addHandler(stdoutHandler)

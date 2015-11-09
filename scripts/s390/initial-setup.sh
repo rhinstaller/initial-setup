@@ -1,7 +1,7 @@
 # firstboot.sh
 
-IS_EXEC=/usr/bin/initial-setup
-IS_UNIT=initial-setup-text.service
+IS_EXEC=/lib/exec/initial-setup-text
+IS_UNIT=initial-setup.service
 
 IS_AVAILABLE=0
 # check if the Initial Setup unit is enabled and the executable is available

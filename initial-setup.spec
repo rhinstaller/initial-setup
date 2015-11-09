@@ -101,13 +101,13 @@ if [ $1 -gt 1 ] ; then
 fi
 
 %post
-%systemd_post initial-setup-text.service
+%systemd_post initial-setup.service
 
 %preun
-%systemd_preun initial-setup-text.service
+%systemd_post initial-setup.service
 
 %postun
-%systemd_postun initial-setup-text.service
+%systemd_post initial-setup.service
 
 %pre gui
 # There is a possibility that an initial setup service might be running
@@ -136,22 +136,14 @@ if [ $1 -gt 1 ] ; then
     fi
 fi
 
-%post gui
-%systemd_post initial-setup-graphical.service
-
-%preun gui
-%systemd_preun initial-setup-graphical.service
-
-%postun gui
-%systemd_postun initial-setup-graphical.service
-
 %files -f %{name}.lang
 %doc COPYING README.rst
 %{python3_sitelib}/initial_setup*
 %exclude %{python3_sitelib}/initial_setup/gui
-%{_bindir}/initial-setup
-%{_bindir}/firstboot-windowmanager
-%{_unitdir}/initial-setup-text.service
+%{_libexecdir}/%{name}/run-initial-setup
+%{_libexecdir}/%{name}/firstboot-windowmanager
+%{_libexecdir}/%{name}/initial-setup-text
+%{_unitdir}/initial-setup.service
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
@@ -159,8 +151,8 @@ fi
 %endif
 
 %files gui
+%{_libexecdir}/%{name}/initial-setup-graphical
 %{python3_sitelib}/initial_setup/gui/*
-%{_unitdir}/initial-setup-graphical.service
 
 %changelog
 * Wed Sep 30 2015 Martin Kolman <mkolman@redhat.com> - 0.3.37-1

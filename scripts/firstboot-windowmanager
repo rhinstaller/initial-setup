@@ -25,12 +25,12 @@ for WM in ${WMS[@]}; do
 
     if [ $FOUND -eq 0 -a -x "$FILE" ]; then
         # start window manager
-        echo "Running $FOUND window manager ($FILE)" | logger
+        printf "MESSAGE=Running $FOUND window manager ($FILE)\nPRIORITY=6" | logger --journald
         "$FILE" "$@" &
         pid=$!
 
         # start the application
-        echo "Running $BINARY" | logger
+        printf "MESSAGE=Running ${BINARY}\nPRIORITY=6" | logger --journald
         $BINARY
         res=$?
 
@@ -43,5 +43,5 @@ for WM in ${WMS[@]}; do
 done
 
 # No known window manager found
-echo "No supported window manager found!" | logger
+printf "MESSAGE=No supported window manager found!\nPRIORITY=3" | logger --journald
 exit 1

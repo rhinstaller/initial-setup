@@ -1,9 +1,0 @@
-#!/bin/sh
-
-echo "Running initial_setup" | logger
-if python3 -m initial_setup; then
-    echo "initial_setup finished successfully, disabling" | logger
-    /bin/systemctl disable initial-setup-graphical.service initial-setup-text.service &>/dev/null
-else
-    echo "initial_setup failed, keeping enabled" | logger
-fi

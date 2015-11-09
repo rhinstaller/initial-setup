@@ -102,6 +102,7 @@ bumpver: potfile
 	(head -n $$cl initial-setup.spec ; echo "$$DATELINE" ; make --quiet rpmlog 2>/dev/null ; echo ""; cat speclog) > initial-setup.spec.new ; \
 	mv initial-setup.spec.new initial-setup.spec ; rm -f speclog ; \
 	sed -i "s/Version: $(VERSION)/Version: $$NEWVERSION/" initial-setup.spec ; \
-	sed -i "s/version = \"$(VERSION)\"/version = \"$$NEWVERSION\"/" setup.py
+	sed -i "s/version = \"$(VERSION)\"/version = \"$$NEWVERSION\"/" setup.py ; \
+	sed -i "s/__version__ = \"$(VERSION)\"/__version__ = \"$$NEWVERSION\"/" initial_setup/__init__.py ; \
 
 .PHONY: clean install tag archive local
