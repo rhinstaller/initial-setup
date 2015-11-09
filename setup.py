@@ -32,7 +32,11 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
-data_files = [('/usr/lib/systemd/system', glob('systemd/*.service'))]
+data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
+              ('/usr/libexec/initial-setup/',
+              ["scripts/run-initial-setup", "scripts/firstboot-windowmanager",
+               "scripts/initial-setup-text", "scripts/initial-setup-graphical",
+               "scripts/graphical-service-is-deprecated", "scripts/text-service-is-deprecated"])]
 
 # add the firstboot start script for s390 architectures
 if os.uname()[4].startswith('s390'):
@@ -52,7 +56,6 @@ setup(
     package_data = {
         "": ["*.glade"]
     },
-    scripts = ["initial-setup", "firstboot-windowmanager"],
     data_files = data_files,
     setup_requires= ['nose>=1.0'],
     test_suite = "initial_setup",

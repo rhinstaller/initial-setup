@@ -1,0 +1,51 @@
+#!/bin/bash
+
+IS_TEXT="/usr/libexec/initial-setup/initial-setup-text"
+IS_GRAPHICAL="/usr/libexec/initial-setup/initial-setup-graphical"
+IS_UNIT=initial-setup.service
+IS_UNIT_TEXT=initial-setup-text.service
+IS_UNIT_GRAPHICAL=initial-setup-graphical.service
+TEXT_UNIT_ENABLED=0
+GRAPHICAL_UNIT_ENABLED=0
+GUI_INSTALLED=0
+
+WINDOWMANAGER_SCRIPT="/usr/libexec/initial-setup/firstboot-windowmanager"
+
+START_GUI_COMMAND="/bin/xinit ${WINDOWMANAGER_SCRIPT} ${IS_GRAPHICAL} --no-stdout-log -- /bin/Xorg :9 -ac -nolisten tcp"
+
+# check if the text and graphical services are enabled
+# Note: These services are deprecated and only supported for backward compatibility,
+#       use initial-setup.service instead.
+systemctl -q is-enabled $IS_UNIT_TEXT && TEXT_UNIT_ENABLED=1
+systemctl -q is-enabled $IS_UNIT_GRAPHICAL && GRAPHICAL_UNIT_ENABLED=1
+
+# check if the GUI is installed
+if [ -f ${IS_GRAPHICAL} ]; then
+    GUI_INSTALLED=1
+fi
+
+# check if graphical Initial Setup is installed
+if [ $GUI_INSTALLED -eq 1 ]; then
+    if [ $TEXT_UNIT_ENABLED -eq 1 ] && [ $GRAPHICAL_UNIT_ENABLED -eq 0 ]; then
+        echo "Starting Initial Setup TUI" | systemd-cat -t initial-setup -p 6
+        ${IS_TEXT} --no-stdout-log
+    else
+        echo "Starting Initial Setup GUI" | systemd-cat -t initial-setup -p 6
+        ${START_GUI_COMMAND}
+    fi
+else
+    echo "Starting Initial Setup TUI" | systemd-cat -t initial-setup -p 6
+    ${IS_TEXT} --no-stdout-log
+fi
+
+# check if the Initial Setup run was successfull by looking at the return code
+if [ $? -eq 0 ]; then
+    echo "Initial Setup finished successfully, disabling" | systemd-cat -t initial-setup -p 6
+    # one service per line in case of some of the service files (such as the graphical service)
+    # are not installed
+    systemctl -q is-enabled $IS_UNIT && systemctl disable $IS_UNIT
+    systemctl -q is-enabled $IS_UNIT_TEXT && systemctl disable $IS_UNIT_TEXT
+    systemctl -q is-enabled $IS_UNIT_GRAPHICAL && systemctl disable $IS_UNIT_GRAPHICAL
+else
+    echo "Initial Setup failed, keeping enabled" | systemd-cat -t initial-setup -p 3
+fi

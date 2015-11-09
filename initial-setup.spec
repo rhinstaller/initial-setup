@@ -72,12 +72,15 @@ make install-po-files
 
 %post
 %systemd_post initial-setup-text.service
+%systemd_post initial-setup.service
 
 %preun
 %systemd_preun initial-setup-text.service
+%systemd_preun initial-setup.service
 
 %postun
-%systemd_postun_with_restart initial-setup-text.service
+%systemd_postun initial-setup-text.service
+%systemd_postun initial-setup.service
 
 %post gui
 %systemd_post initial-setup-graphical.service
@@ -86,15 +89,18 @@ make install-po-files
 %systemd_preun initial-setup-graphical.service
 
 %postun gui
-%systemd_postun_with_restart initial-setup-graphical.service
+%systemd_postun initial-setup-graphical.service
 
 %files -f %{name}.lang
 %doc COPYING README
 %{python_sitelib}/initial_setup*
 %exclude %{python_sitelib}/initial_setup/gui
-%{_bindir}/initial-setup
-%{_bindir}/firstboot-windowmanager
 %{_unitdir}/initial-setup-text.service
+%{_unitdir}/initial-setup.service
+%{_libexecdir}/%{name}/run-initial-setup
+%{_libexecdir}/%{name}/firstboot-windowmanager
+%{_libexecdir}/%{name}/initial-setup-text
+%{_libexecdir}/%{name}/text-service-is-deprecated
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
@@ -104,6 +110,8 @@ make install-po-files
 %files gui
 %{python_sitelib}/initial_setup/gui/*
 %{_unitdir}/initial-setup-graphical.service
+%{_libexecdir}/%{name}/initial-setup-graphical
+%{_libexecdir}/%{name}/graphical-service-is-deprecated
 
 
 %changelog

@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+from initial_setup import InitialSetup, InitialSetupError
+
+is_instance = InitialSetup(gui_mode=False)
+
+try:
+    is_instance.run()
+except InitialSetupError:
+    # Initial Setup using with text interface apparently failed
+    exit(1)
+
+# Initial Setup using with text interface completed successfully
+exit(0)
