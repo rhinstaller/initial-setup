@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+from initial_setup import InitialSetup, InitialSetupError
+
+is_instance = InitialSetup(gui_mode=True)
+
+try:
+    is_instance.run()
+except InitialSetupError:
+    # Initial Setup with graphical interface apparently failed
+    exit(1)
+
+# Initial Setup with graphical interface completed successfully
+exit(0)

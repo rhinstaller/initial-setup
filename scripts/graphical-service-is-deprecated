@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "The initial-setup-graphical.service is deprecated, use initial-setup-service instead." | systemd-cat -t initial-setup -p 6

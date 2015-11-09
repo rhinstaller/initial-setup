@@ -1,2 +1,0 @@
-#!/bin/sh
-python -m initial_setup && /bin/systemctl disable initial-setup-graphical.service initial-setup-text.service &>/dev/null
