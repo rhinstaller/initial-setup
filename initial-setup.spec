@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.37
+Version: 0.3.38
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -155,6 +155,11 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Dec 01 2015 Martin Kolman <mkolman@redhat.com> - 0.3.38-1
+- Make Initial Setup startup more robust (mkolman)
+- Move the s390 profile scripts to a subfolder (mkolman)
+- Improve log messages for kickstart parsing error (mkolman)
+
 * Wed Sep 30 2015 Martin Kolman <mkolman@redhat.com> - 0.3.37-1
 - Stop any Initial Setup services before upgrading package (#1244394) (mkolman)
 - Replace systemd_postun_with_restart with systemd_postun (#1244394) (mkolman)
