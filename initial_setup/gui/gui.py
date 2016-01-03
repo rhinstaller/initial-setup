@@ -23,7 +23,8 @@ class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     def __init__(self, storage, payload, instclass):
         GraphicalUserInterface.__init__(self, storage, payload, instclass,
                                         product_title, is_final,
-                                        quitDialog = InitialSetupQuitDialog)
+                                        quitDialog = InitialSetupQuitDialog,
+                                        fullscreen=True)
 
     def _list_hubs(self):
         return [InitialSetupMainHub]
