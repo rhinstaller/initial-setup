@@ -20,7 +20,8 @@ fi
 # check if the Initial Setup run was successfull by looking at the return code
 if [ $? -eq 0 ]; then
     printf "MESSAGE=Initial Setup finished successfully, disabling\nPRIORITY=6" | logger --journald
-    /bin/systemctl disable initial-setup-graphical.service initial-setup-text.service &>/dev/null
+    /bin/systemctl disable initial-setup.service &>/dev/null
+    printf "MESSAGE=Initial Setup has been disabled\nPRIORITY=6" | logger --journald
 else
     printf "MESSAGE=Initial Setup failed, keeping enabled\nPRIORITY=3" | logger --journald
 fi
