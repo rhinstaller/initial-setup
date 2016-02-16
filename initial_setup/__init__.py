@@ -1,6 +1,6 @@
 #!/bin/python
 
-__version__ = "0.3.38"
+__version__ = "0.3.39"
 
 import os
 import sys

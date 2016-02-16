@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.38
+Version: 0.3.39
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -155,6 +155,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Feb 16 2016 Martin Kolman <mkolman@redhat.com> - 0.3.39-1
+- Disable the correct service on successful completion (#1298725) (mkolman)
+
 * Tue Dec 01 2015 Martin Kolman <mkolman@redhat.com> - 0.3.38-1
 - Make Initial Setup startup more robust (mkolman)
 - Move the s390 profile scripts to a subfolder (mkolman)
