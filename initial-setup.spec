@@ -10,7 +10,7 @@ Release: 1%{?dist}
 # The source is thus available only from within this SRPM
 # or via direct git checkout:
 # git clone https://github.com/rhinstaller/initial-setup
-Source0: %{name}-%{version}.tar.gz
+Source0: https://github.com/rhinstaller/initial-setup/archive/%{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
 %define anacondaver 24.0
