@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This is the list of supported window manager binaries
-WMS=("run_metacity" "kwin_x11" "kwin" "xfwm4" "openbox" "marco")
+WMS=("metacity" "kwin_x11" "kwin" "xfwm4" "openbox" "marco")
 
 run_metacity()
 {
@@ -11,7 +11,7 @@ run_metacity()
     else
         new_data_dirs="/usr/share/anaconda/window-manager:${XDG_DATA_DIRS}"
     fi
-    XDG_DATA_DIRS="$new_data_dirs" metacity
+    XDG_DATA_DIRS="$new_data_dirs" $1 &
 }
 
 # Get the application binary to start and remove it from
@@ -25,16 +25,24 @@ for WM in ${WMS[@]}; do
 
     if [ $FOUND -eq 0 -a -x "$FILE" ]; then
         # start window manager
-        printf "MESSAGE=Running $FOUND window manager ($FILE)\nPRIORITY=6" | logger --journald
-        "$FILE" "$@" &
+        if [ "$WM" == "metacity" ]; then
+            # if running Metacity apply the Anaconda/Initial Setup custom overrides
+            printf "MESSAGE=Running Metacity with custom overrides\nPRIORITY=6" | logger --journald
+            run_metacity "$FILE"
+        else
+            printf "MESSAGE=Running window manager ($FILE)\nPRIORITY=6" | logger --journald
+            "$FILE" &
+        fi
+
         pid=$!
 
         # start the application
-        printf "MESSAGE=Running ${BINARY}\nPRIORITY=6" | logger --journald
-        $BINARY
+        printf "MESSAGE=Running ($BINARY)\nPRIORITY=6" | logger --journald
+        $BINARY "$@"
         res=$?
 
         # stop window manager
+        printf "MESSAGE=Stopping the window manager ($FILE)\nPRIORITY=6" | logger --journald
         ps -p $pid >/dev/null && kill $pid
 
         # return result
