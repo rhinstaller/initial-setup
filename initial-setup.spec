@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.39
+Version: 0.3.40
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -156,6 +156,11 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Mar 24 2016 Martin Kolman <mkolman@redhat.com> - 0.3.40-1
+- Use blank title for the Initial Setup window (mkolman)
+- Start the window manager correctly (#1160891) (mkolman)
+- Fix some rpmlint warnings (mkolman)
+
 * Tue Feb 16 2016 Martin Kolman <mkolman@redhat.com> - 0.3.39-1
 - Disable the correct service on successful completion (#1298725) (mkolman)
 
