@@ -27,22 +27,22 @@ for WM in ${WMS[@]}; do
         # start window manager
         if [ "$WM" == "metacity" ]; then
             # if running Metacity apply the Anaconda/Initial Setup custom overrides
-            printf "MESSAGE=Running Metacity with custom overrides\nPRIORITY=6" | logger --journald
+            echo "Running Metacity with custom overrides" | systemd-cat -t initial-setup -p 6
             run_metacity "$FILE"
         else
-            printf "MESSAGE=Running window manager ($FILE)\nPRIORITY=6" | logger --journald
+            echo "Running window manager ($FILE)" | systemd-cat -t initial-setup -p 6
             "$FILE" &
         fi
 
         pid=$!
 
         # start the application
-        printf "MESSAGE=Running ($BINARY)\nPRIORITY=6" | logger --journald
+        echo "Running ($BINARY)" | systemd-cat -t initial-setup -p 6
         $BINARY "$@"
         res=$?
 
         # stop window manager
-        printf "MESSAGE=Stopping the window manager ($FILE)\nPRIORITY=6" | logger --journald
+        echo "Stopping the window manager ($FILE)" | systemd-cat -t initial-setup -p 6
         ps -p $pid >/dev/null && kill $pid
 
         # return result
@@ -51,5 +51,5 @@ for WM in ${WMS[@]}; do
 done
 
 # No known window manager found
-printf "MESSAGE=No supported window manager found!\nPRIORITY=3" | logger --journald
+echo "No supported window manager found!" | systemd-cat -t initial-setup -p 3
 exit 1
