@@ -1,7 +1,18 @@
 #!/bin/sh
 
 # This is the list of supported window manager binaries
-WMS=("metacity" "kwin" "xfwm4" "openbox" "marco")
+WMS=("metacity" "kwin_x11" "kwin" "xfwm4" "openbox" "marco")
+
+run_metacity()
+{
+    # Apply the anaconda overrides before running metacity
+    if [ -z "$XDG_DATA_DIRS" ] ; then
+        new_data_dirs="/usr/share/anaconda/window-manager:/usr/share"
+    else
+        new_data_dirs="/usr/share/anaconda/window-manager:${XDG_DATA_DIRS}"
+    fi
+    XDG_DATA_DIRS="$new_data_dirs" $1 &
+}
 
 # Get the application binary to start and remove it from
 # the argument list
@@ -14,15 +25,25 @@ for WM in ${WMS[@]}; do
 
     if [ $FOUND -eq 0 -a -x "$FILE" ]; then
         # start window manager
-        "$FILE" "$@" &
+        if [ "$WM" == "metacity" ]; then
+            # if running Metacity apply the Anaconda/Initial Setup custom overrides
+            echo "Running Metacity with custom overrides" | systemd-cat -t initial-setup -p 6
+            run_metacity "$FILE"
+        else
+            echo "Running window manager ($FILE)" | systemd-cat -t initial-setup -p 6
+            "$FILE" &
+        fi
+
         pid=$!
 
         # start the application
-        $BINARY
+        echo "Running ($BINARY)" | systemd-cat -t initial-setup -p 6
+        $BINARY "$@"
         res=$?
 
         # stop window manager
-        kill $pid
+        echo "Stopping the window manager ($FILE)" | systemd-cat -t initial-setup -p 6
+        ps -p $pid >/dev/null && kill $pid
 
         # return result
         exit $res
@@ -30,4 +51,5 @@ for WM in ${WMS[@]}; do
 done
 
 # No known window manager found
+echo "No supported window manager found!" | systemd-cat -t initial-setup -p 3
 exit 1
