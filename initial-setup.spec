@@ -104,10 +104,10 @@ fi
 %systemd_post initial-setup.service
 
 %preun
-%systemd_post initial-setup.service
+%systemd_preun initial-setup.service
 
 %postun
-%systemd_post initial-setup.service
+%systemd_postun initial-setup.service
 
 %pre gui
 # There is a possibility that an initial setup service might be running
