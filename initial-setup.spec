@@ -45,7 +45,6 @@ Summary: Graphical user interface for the initial-setup utility
 Requires: gtk3
 Requires: anaconda-gui >= %{anacondaver}
 Requires: firstboot(windowmanager)
-Requires: initial-setup
 Requires: %{name} = %{version}-%{release}
 
 %description gui
