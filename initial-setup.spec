@@ -113,7 +113,7 @@ fi
 # There is a possibility that an initial setup service might be running
 # during package upgrade, which can together with an old version
 # of initial setup (<= 0.3.36) cause the rpm transaction to deadlock.
-# So turn of and disable any Initial Setup services if the pre
+# So turn off and disable any Initial Setup services if the pre
 # scriptlet is running during upgrade or package removal to prevent
 # the deadlock.
 
