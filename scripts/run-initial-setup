@@ -10,18 +10,18 @@ START_GUI_COMMAND="/bin/xinit ${WINDOWMANAGER_SCRIPT} ${IS_GRAPHICAL} --no-stdou
 
 # check if graphical Initial Setup is installed
 if [ -f ${IS_GRAPHICAL} ]; then
-    printf "MESSAGE=starting Initial Setup GUI\nPRIORITY=6" | logger --journald
+    echo "Starting Initial Setup GUI" | systemd-cat -t initial-setup -p 6
     ${START_GUI_COMMAND}
 else
-    printf "MESSAGE=starting Initial Setup TUI\nPRIORITY=6" | logger --journald
+    echo "Starting Initial Setup TUI" | systemd-cat -t initial-setup -p 6
     ${IS_TEXT} --no-stdout-log
 fi
 
 # check if the Initial Setup run was successfull by looking at the return code
 if [ $? -eq 0 ]; then
-    printf "MESSAGE=Initial Setup finished successfully, disabling\nPRIORITY=6" | logger --journald
+    echo "Initial Setup finished successfully, disabling" | systemd-cat -t initial-setup -p 6
     /bin/systemctl disable initial-setup.service &>/dev/null
-    printf "MESSAGE=Initial Setup has been disabled\nPRIORITY=6" | logger --journald
+    echo "Initial Setup has been disabled" | systemd-cat -t initial-setup -p 6
 else
-    printf "MESSAGE=Initial Setup failed, keeping enabled\nPRIORITY=3" | logger --journald
+    echo "Initial Setup failed, keeping enabled" | systemd-cat -t initial-setup -p 3
 fi
