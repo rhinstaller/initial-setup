@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-11 16:53+0100\n"
+"POT-Creation-Date: 2016-05-02 19:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,57 +17,61 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../initial_setup/tui/tui.py:16 ../initial_setup/gui/gui.py:18
+#: ../initial_setup/common.py:62
+msgid "LICENSING"
+msgstr ""
+
+#: ../initial_setup/tui/tui.py:12 ../initial_setup/gui/gui.py:14
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with an unusable system if you do. Unless the License "
 "agreement is accepted, the system will be rebooted."
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:20
+#: ../initial_setup/tui/spokes/eula.py:26
 msgid "License information"
 msgstr ""
 
 #. make the options aligned to the same column (the checkbox has the
 #. '[ ]' prepended)
-#: ../initial_setup/tui/spokes/eula.py:39
+#: ../initial_setup/tui/spokes/eula.py:46
 msgid "Read the License Agreement"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:40
+#: ../initial_setup/tui/spokes/eula.py:47
 msgid "I accept the license agreement."
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:43
-#: ../initial_setup/gui/spokes/eula.py:41
+#: ../initial_setup/tui/spokes/eula.py:51
+#: ../initial_setup/gui/spokes/eula.py:53
 msgid "No license found. Please report this at http://bugzilla.redhat.com"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:59
-#: ../initial_setup/gui/spokes/eula.py:81
+#: ../initial_setup/tui/spokes/eula.py:67
+#: ../initial_setup/gui/spokes/eula.py:94
 msgid "No license found"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:61
-#: ../initial_setup/gui/spokes/eula.py:83
+#: ../initial_setup/tui/spokes/eula.py:69
+#: ../initial_setup/gui/spokes/eula.py:96
 msgid "License accepted"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:61
-#: ../initial_setup/gui/spokes/eula.py:83
+#: ../initial_setup/tui/spokes/eula.py:69
+#: ../initial_setup/gui/spokes/eula.py:96
 msgid "License not accepted"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:17
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:19
 #, python-format
 msgid "Initial setup of %(product)s"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:19
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:21
 msgid "Initial setup"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:26
+#: ../initial_setup/gui/spokes/eula.py:34
 msgid "_LICENSE INFORMATION"
 msgstr ""
 

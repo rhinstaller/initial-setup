@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.30
+Version: 0.3.9.31
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -115,6 +115,14 @@ make install-po-files
 
 
 %changelog
+* Mon May 02 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.31-1
+- Makefile improvements (#1249598) (mkolman)
+- Make Initial Setup startup more robust (#1249598) (mkolman)
+- Move the s390 profile scripts to a subfolder (#1249598) (mkolman)
+- Improve log messages for kickstart parsing error (#1249598) (mkolman)
+- Make sure full screen is used & window header bar is hidden (#1290321) (mkolman)
+- Use blank title for the Initial Setup window (#1310179) (mkolman)
+
 * Tue Sep 22 2015 Martin Kolman <mkolman@redhat.com> - 0.3.9.30-1
 - Only root should be able to read the initial-setup-ks.cfg file (#1264336) (mkolman)
   Resolves: rhbz#1264336
