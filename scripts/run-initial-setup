@@ -20,7 +20,7 @@ fi
 # check if the Initial Setup run was successfull by looking at the return code
 if [ $? -eq 0 ]; then
     echo "Initial Setup finished successfully, disabling" | systemd-cat -t initial-setup -p 6
-    /bin/systemctl disable initial-setup.service &>/dev/null
+    systemctl -q is-enabled $IS_UNIT && systemctl disable $IS_UNIT
     echo "Initial Setup has been disabled" | systemd-cat -t initial-setup -p 6
 else
     echo "Initial Setup failed, keeping enabled" | systemd-cat -t initial-setup -p 3
