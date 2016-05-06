@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 # Setup file for initial-setup
 #
 # Copyright (C) 2012  Red Hat, Inc.
@@ -21,7 +21,9 @@
 #
 
 import os
+import sys
 from setuptools import setup, find_packages
+from setuptools.command.sdist import sdist
 from glob import glob
 
 # Utility function to read the README file.
@@ -42,8 +44,20 @@ if os.uname()[4].startswith('s390'):
     data_files.append(('/etc/profile.d', ['scripts/s390/initial-setup.sh']))
     data_files.append(('/etc/profile.d', ['scripts/s390/initial-setup.csh']))
 
+# Extend the sdist command
+class initial_setup_sdist(sdist):
+    def make_release_tree(self, base_dir, files):
+        # Run the parent command first
+        sdist.make_release_tree(self, base_dir, files)
+
+        # Run translation-canary in release mode to remove any bad translations
+        sys.path.append('translation-canary')
+        from translation_canary.translated import testSourceTree    # pylint: disable=import-error
+        testSourceTree(base_dir, releaseMode=True)
+
 setup(
     name = "initial-setup",
+    cmdclass={"sdist": initial_setup_sdist},
     version = "0.3.40",
     author = "Martin Sivak",
     author_email = "msivak@redhat.com",
