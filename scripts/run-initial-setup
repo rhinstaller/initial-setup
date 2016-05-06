@@ -17,7 +17,7 @@ START_GUI_COMMAND="/bin/xinit ${WINDOWMANAGER_SCRIPT} ${IS_GRAPHICAL} --no-stdou
 # Note: These services are deprecated and only supported for backward compatibility,
 #       use initial-setup.service instead.
 systemctl -q is-enabled $IS_UNIT_TEXT && TEXT_UNIT_ENABLED=1
-systemctl -q is-enabled $IS_UNIT_GRAPHICAL && GRAPHICAL_UNIT_ENABLED=1
+systemctl -q is-enabled $IS_UNIT_GRAPHICAL 2>/dev/null && GRAPHICAL_UNIT_ENABLED=1
 
 # check if the GUI is installed
 if [ -f ${IS_GRAPHICAL} ]; then
@@ -45,7 +45,7 @@ if [ $? -eq 0 ]; then
     # are not installed
     systemctl -q is-enabled $IS_UNIT && systemctl disable $IS_UNIT
     systemctl -q is-enabled $IS_UNIT_TEXT && systemctl disable $IS_UNIT_TEXT
-    systemctl -q is-enabled $IS_UNIT_GRAPHICAL && systemctl disable $IS_UNIT_GRAPHICAL
+    systemctl -q is-enabled $IS_UNIT_GRAPHICAL 2>/dev/null && systemctl disable $IS_UNIT_GRAPHICAL
 else
     echo "Initial Setup failed, keeping enabled" | systemd-cat -t initial-setup -p 3
 fi
