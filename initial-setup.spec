@@ -144,6 +144,7 @@ fi
 %{_libexecdir}/%{name}/firstboot-windowmanager
 %{_libexecdir}/%{name}/initial-setup-text
 %{_unitdir}/initial-setup.service
+%{_unitdir}/initial-setup-reconfiguration.service
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
