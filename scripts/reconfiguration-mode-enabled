@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "The /.unconfigured file has been detected, enabling Initial Setup in reconfiguration mode." | systemd-cat -t initial-setup -p 6

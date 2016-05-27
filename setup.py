@@ -36,7 +36,8 @@ data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
               ('/usr/libexec/initial-setup/',
               ["scripts/run-initial-setup", "scripts/firstboot-windowmanager",
                "scripts/initial-setup-text", "scripts/initial-setup-graphical",
-               "scripts/graphical-service-is-deprecated", "scripts/text-service-is-deprecated"])]
+               "scripts/graphical-service-is-deprecated", "scripts/text-service-is-deprecated",
+               "reconfiguration-mode-enabled"])]
 
 # add the firstboot start script for s390 architectures
 if os.uname()[4].startswith('s390'):
