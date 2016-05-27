@@ -97,6 +97,7 @@ make install-po-files
 %exclude %{python_sitelib}/initial_setup/gui
 %{_unitdir}/initial-setup-text.service
 %{_unitdir}/initial-setup.service
+%{_unitdir}/initial-setup-reconfiguration.service
 %{_libexecdir}/%{name}/run-initial-setup
 %{_libexecdir}/%{name}/firstboot-windowmanager
 %{_libexecdir}/%{name}/initial-setup-text
