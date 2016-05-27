@@ -206,7 +206,7 @@ class InitialSetup(object):
 
         # Configure all addons
         log.info("executing addons")
-        self.data.addons.execute(None, self.data, None, u)
+        self.data.addons.execute(None, self.data, None, u, None)
 
         if external_reconfig:
             # prevent the reconfig flag from being written out,
