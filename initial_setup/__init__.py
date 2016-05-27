@@ -137,7 +137,7 @@ class InitialSetup(object):
         """String id of the current GUI mode
 
         :returns: "gui" if gui_mode is True, "tui" otherwise
-        :rtype str:
+        :rtype: str
         """
         if self.gui_mode:
             return "gui"
@@ -201,6 +201,8 @@ class InitialSetup(object):
         # Do not execute sections that were part of the original
         # anaconda kickstart file (== have .seen flag set)
 
+        log.info("applying changes")
+
         sections = [self.data.keyboard, self.data.lang, self.data.timezone]
 
         # data.selinux
@@ -251,12 +253,15 @@ class InitialSetup(object):
                     log.debug("removing reconfig trigger file: %s" % reconfig_file)
                     os.remove(reconfig_file)
 
+        # and we are done with applying changes
+        log.info("all changes have been applied")
+
     def run(self):
         """Run Initial setup
 
         GUI will be used when the gui_mode property is True (TUI mode is the default).
 
-        :returns: True if the IS run was successfull, False if it failed
+        :returns: True if the IS run was successful, False if it failed
         :rtype: bool
         """
 
@@ -292,7 +297,7 @@ class InitialSetup(object):
             log.debug("initializing TUI")
             ui = initial_setup.tui.InitialSetupTextUserInterface(None, None, None)
 
-        # Pass the data object to user inteface
+        # Pass the data object to user interface
         log.debug("setting up the UI")
         ui.setup(self.data)
 
