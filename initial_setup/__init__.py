@@ -20,7 +20,7 @@ class InitialSetupError(Exception):
 
 INPUT_KICKSTART_PATH = "/root/anaconda-ks.cfg"
 OUTPUT_KICKSTART_PATH = "/root/initial-setup-ks.cfg"
-RECONFIG_FILE = "/etc/reconfigSys"
+RECONFIG_FILES = ["/etc/reconfigSys", "/.unconfigured"]
 
 SUPPORTED_KICKSTART_COMMANDS = ["user",
                                 "eula",
@@ -37,8 +37,6 @@ SUPPORTED_KICKSTART_COMMANDS = ["user",
 iutil.setSysroot("/")
 
 signal.signal(signal.SIGINT, signal.SIG_IGN)
-
-external_reconfig = os.path.exists(RECONFIG_FILE)
 
 # setup logging
 log = logging.getLogger("initial-setup")
@@ -70,7 +68,17 @@ class InitialSetup(object):
         else:
             log.debug("running in TUI mode")
 
-        if external_reconfig:
+        self._external_reconfig = False
+
+        # check if the reconfig mode should be enabled
+        # by checking if at least one of the reconfig
+        # files exist
+        for reconfig_file in RECONFIG_FILES:
+            if os.path.exists(reconfig_file):
+                self.external_reconfig = True
+                log.debug("reconfig trigger file found: %s", reconfig_file) 
+
+        if self.external_reconfig:
             log.debug("running in externally triggered reconfig mode")
 
         if self.gui_mode:
@@ -108,6 +116,21 @@ class InitialSetup(object):
         log.debug("initializing network logging")
         from pyanaconda.network import setup_ifcfg_log
         setup_ifcfg_log()
+
+    @property
+    def external_reconfig(self):
+        """External reconfig status.
+
+        Reports if external (eq. not triggered by kickstart) has been enabled.
+
+        :returns: True if external reconfig mode has been enabled, else False.
+        :rtype: bool
+        """
+        return self._external_reconfig
+
+    @external_reconfig.setter
+    def external_reconfig(self, value):
+        self._external_reconfig = value
 
     @property
     def gui_mode_id(self):
@@ -159,7 +182,7 @@ class InitialSetup(object):
             log.critical("Initial Setup startup failed due to invalid kickstart file")
             raise InitialSetupError
 
-        if external_reconfig:
+        if self.external_reconfig:
             # set the reconfig flag in kickstart so that
             # relevant spokes show up
             self.data.firstboot.firstboot = FIRSTBOOT_RECONFIG
@@ -208,10 +231,10 @@ class InitialSetup(object):
         log.info("executing addons")
         self.data.addons.execute(None, self.data, None, u)
 
-        if external_reconfig:
-            # prevent the reconfig flag from being written out,
-            # to prevent the reconfig mode from being enabled
-            # without the /etc/reconfigSys file being present
+        if self.external_reconfig:
+            # prevent the reconfig flag from being written out
+            # to kickstart if neither /etc/reconfigSys or /.unconfigured
+            # are present
             self.data.firstboot.firstboot = None
 
         # Write the kickstart data to file
@@ -220,12 +243,13 @@ class InitialSetup(object):
             f.write(str(self.data))
         log.info("finished writing the Initial Setup kickstart file")
 
-        # Remove the reconfig file, if any - otherwise the reconfig mode
-        # would start again next time the Initial Setup service is enabled
-        if external_reconfig and os.path.exists(RECONFIG_FILE):
-            log.debug("removing the reconfig file")
-            os.remove(RECONFIG_FILE)
-            log.debug("the reconfig file has been removed")
+        # Remove the reconfig files, if any - otherwise the reconfig mode
+        # would start again next time the Initial Setup service is enabled.
+        if self.external_reconfig:
+            for reconfig_file in RECONFIG_FILES:
+                if os.path.exists(reconfig_file):
+                    log.debug("removing reconfig trigger file: %s" % reconfig_file)
+                    os.remove(reconfig_file)
 
     def run(self):
         """Run Initial setup

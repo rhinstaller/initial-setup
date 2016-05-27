@@ -33,6 +33,7 @@ def read(fname):
 
 
 data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
+              ('/lib/systemd/system-generators', 'systemd/initial-setup-generator'),
               ('/usr/libexec/initial-setup/',
               ["scripts/run-initial-setup", "scripts/firstboot-windowmanager",
                "scripts/initial-setup-text", "scripts/initial-setup-graphical",
