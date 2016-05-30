@@ -8,6 +8,15 @@ import signal
 import pykickstart
 import logging
 import argparse
+
+# initThreading() initializes the threadMgr instance, we need to run it
+# as early as possible or else Anaconda modules might get stale
+# data
+# - they would get threadMgr == None if they did "from pyanaconda.threads import threadMgr"
+#   before initThreading() was called
+from pyanaconda.threads import initThreading
+initThreading()
+
 from pyanaconda.users import Users
 from initial_setup.post_installclass import PostInstallClass
 from initial_setup import initial_setup_log
@@ -97,12 +106,6 @@ class InitialSetup(object):
         log.debug("initializing the Anaconda log")
         from pyanaconda import anaconda_log
         anaconda_log.init()
-
-        # init threading before Gtk can do anything and before we start using threads
-        # initThreading initializes the threadMgr instance, import it afterwards
-        log.debug("initializing threading")
-        from pyanaconda.threads import initThreading
-        initThreading()
 
         # initialize network logging (needed by the Network spoke that may be shown)
         log.debug("initializing network logging")
