@@ -23,6 +23,8 @@ from initial_setup import initial_setup_log
 from pyanaconda import iutil
 from pykickstart.constants import FIRSTBOOT_RECONFIG
 from pyanaconda.localization import setup_locale_environment, setup_locale
+from pyanaconda.constants import FIRSTBOOT_ENVIRON
+from pyanaconda.flags import flags
 
 class InitialSetupError(Exception):
     pass
@@ -41,6 +43,9 @@ SUPPORTED_KICKSTART_COMMANDS = ["user",
                                 "logging",
                                 "selinux",
                                 "firewall"]
+
+# set the environment so that spokes can behave accordingly
+flags.environs = [FIRSTBOOT_ENVIRON]
 
 # set root to "/", we are now in the installed system
 iutil.setSysroot("/")
