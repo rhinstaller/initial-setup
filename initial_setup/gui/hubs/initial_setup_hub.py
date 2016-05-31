@@ -1,4 +1,3 @@
-from pyanaconda.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.ui.gui.hubs import Hub
 from pyanaconda.ui.gui.spokes import NormalSpoke as GUI_spoke_class
 from initial_setup import product
@@ -16,7 +15,6 @@ class InitialSetupMainHub(Hub):
 
     def __init__(self, *args):
         Hub.__init__(self, *args)
-        self._environs = [FIRSTBOOT_ENVIRON]
 
     def _collectCategoriesAndSpokes(self):
         return common.collectCategoriesAndSpokes(self, GUI_spoke_class)
