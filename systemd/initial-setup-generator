@@ -1,0 +1,26 @@
+#!/bin/bash
+### uncomment the following two lines to enable debugging ###
+#[ -w /dev/kmsg ] && exec 30>/dev/kmsg && BASH_XTRACEFD=30
+#set -x
+
+[ ! -e /.unconfigured ] && exit 0
+
+if [ $# -ne 3 ] ; then
+    echo "illegal number of parameters"
+    exit 1
+fi
+
+destdir=$1
+unitdir="/usr/lib/systemd/system"
+
+if [ -e "${unitdir}/initial-setup.service" ] ; then
+    unitfile="initial-setup.service"
+else
+    echo "the inital-setup.service is missing"
+    exit 1
+fi
+
+mkdir -p "${destdir}/default.target.wants"
+ln -s "${unitdir}/${unitfile}" "${destdir}/default.target.wants/${unitfile}"
+
+exit 0
