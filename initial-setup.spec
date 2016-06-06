@@ -102,6 +102,7 @@ make install-po-files
 %{_libexecdir}/%{name}/firstboot-windowmanager
 %{_libexecdir}/%{name}/initial-setup-text
 %{_libexecdir}/%{name}/text-service-is-deprecated
+%{_libexecdir}/%{name}/reconfiguration-mode-enabled
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
