@@ -143,6 +143,7 @@ fi
 %{_libexecdir}/%{name}/run-initial-setup
 %{_libexecdir}/%{name}/firstboot-windowmanager
 %{_libexecdir}/%{name}/initial-setup-text
+%{_libexecdir}/%{name}/reconfiguration-mode-enabled
 %{_unitdir}/initial-setup.service
 %{_unitdir}/initial-setup-reconfiguration.service
 
