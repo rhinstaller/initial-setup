@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.31
+Version: 0.3.9.32
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -117,6 +117,24 @@ make install-po-files
 
 
 %changelog
+* Mon Jun 06 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.32-1
+- Fix reconfiguration service name (mkolman)
+  Related: rhbz#1257624
+- Fix installation path for a reconfiguration related script (mkolman)
+  Related: rhbz#1257624
+- Use the environs flag when setting the environment (mkolman)
+  Related: rhbz#1270354
+- Some typo fixes and logging improvements (mkolman)
+  Related: rhbz#1257624
+- Add a systemd service that enables Initial Setup if /.unconfigured exists (#1257624) (mkolman)
+  Resolves: rhbz#1257624
+- Initialize Thread Manager as early as possible (#1249598) (mkolman)
+  Related: rhbz#1249598
+- Adapt to addon execute() signature change (mkolman)
+  Related: rhbz#1288636
+- Suppress an error message about missing initial-setup-graphical.unit (#1249598) (mkolman)
+  Related: rhbz#1249598
+
 * Mon May 02 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.31-1
 - Makefile improvements (#1249598) (mkolman)
   Related: rhbz#1249598

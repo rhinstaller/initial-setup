@@ -1,6 +1,6 @@
 """Initial Setup"""
 
-__version__ = "0.3.9.31"
+__version__ = "0.3.9.32"
 
 import os
 import sys

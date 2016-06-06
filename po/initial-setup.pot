@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-02 19:23+0200\n"
+"POT-Creation-Date: 2016-06-06 17:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,12 +62,12 @@ msgstr ""
 msgid "License not accepted"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:19
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:18
 #, python-format
 msgid "Initial setup of %(product)s"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:21
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:20
 msgid "Initial setup"
 msgstr ""
 
