@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.40
+Version: 0.3.41
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -157,6 +157,21 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed Jun 08 2016 Martin Kolman <mkolman@redhat.com> - 0.3.41-1
+- Fix reconfiguration service name (mkolman)
+- Fix installation path for the reconfiguration-mode-enabled script (mkolman)
+- Use the environs flag when setting the environment (mkolman)
+- Some typo fixes and logging improvements (mkolman)
+- Add a systemd service that enables Initial Setup if /.unconfigured exists (#1257624) (mkolman)
+- Adapt to addon execute() signature change (mkolman)
+- Replace hardcoded python3 call by a variable (mkolman)
+- Nicer systemctl calls (mkolman)
+- Use systemd-cat also for the run-initial-setup script (mkolman)
+- Remove a redundant Requires: line (mkolman)
+- Fix a typo (mkolman)
+- Run correct systemd scriptlets (mkolman)
+- Use systemd-cat for logging to the journal (mkolman)
+
 * Thu Mar 24 2016 Martin Kolman <mkolman@redhat.com> - 0.3.40-1
 - Use blank title for the Initial Setup window (mkolman)
 - Start the window manager correctly (#1160891) (mkolman)
