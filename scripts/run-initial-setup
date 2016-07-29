@@ -51,7 +51,7 @@ else
     ${IS_TEXT} --no-stdout-log
 fi
 
-# check if the Initial Setup run was successfull by looking at the return code
+# check if the Initial Setup run was successful by looking at the return code
 if [ $? -eq 0 ]; then
     echo "Initial Setup finished successfully, disabling" | systemd-cat -t initial-setup -p 6
     # one service per line in case of some of the service files (such as the graphical service)
