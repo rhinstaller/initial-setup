@@ -9,6 +9,10 @@ TEXT_UNIT_ENABLED=0
 GRAPHICAL_UNIT_ENABLED=0
 GUI_INSTALLED=0
 
+# systemd targets
+GRAPHICAL_TARGET=/usr/lib/systemd/system/graphical.target
+CURRENT_DEFAULT_TARGET=$(readlink /etc/systemd/system/default.target)
+
 WINDOWMANAGER_SCRIPT="/usr/libexec/initial-setup/firstboot-windowmanager"
 
 START_GUI_COMMAND="/bin/xinit ${WINDOWMANAGER_SCRIPT} ${IS_GRAPHICAL} --no-stdout-log -- /bin/Xorg :9 -ac -nolisten tcp"
@@ -30,15 +34,24 @@ if [ $GUI_INSTALLED -eq 1 ]; then
         echo "Starting Initial Setup TUI" | systemd-cat -t initial-setup -p 6
         ${IS_TEXT} --no-stdout-log
     else
-        echo "Starting Initial Setup GUI" | systemd-cat -t initial-setup -p 6
-        ${START_GUI_COMMAND}
+        # don't run the GUI on text-only systems (default.target != graphical.target),
+        # users are not expecting a graphical interface do start in such case
+        # and there might not even be any displays connected
+        if [ "$CURRENT_DEFAULT_TARGET" == "$GRAPHICAL_TARGET" ]; then
+            echo "Starting Initial Setup GUI" | systemd-cat -t initial-setup -p 6
+            ${START_GUI_COMMAND}
+        else
+            echo "Initial Setup GUI is installed, but default.target != graphical.target" | systemd-cat -t initial-setup -p 5
+            echo "Starting Initial Setup TUI" | systemd-cat -t initial-setup -p 6
+            ${IS_TEXT} --no-stdout-log
+        fi
     fi
 else
     echo "Starting Initial Setup TUI" | systemd-cat -t initial-setup -p 6
     ${IS_TEXT} --no-stdout-log
 fi
 
-# check if the Initial Setup run was successfull by looking at the return code
+# check if the Initial Setup run was successful by looking at the return code
 if [ $? -eq 0 ]; then
     echo "Initial Setup finished successfully, disabling" | systemd-cat -t initial-setup -p 6
     # one service per line in case of some of the service files (such as the graphical service)
