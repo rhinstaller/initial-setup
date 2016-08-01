@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.32
+Version: 0.3.9.33
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -117,6 +117,10 @@ make install-po-files
 
 
 %changelog
+* Mon Aug 01 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.33-1
+- Don't run the GUI on text-only systems (#1360343) (mkolman)
+  Resolves:#1360343
+
 * Mon Jun 06 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.32-1
 - Fix reconfiguration service name (mkolman)
   Related: rhbz#1257624
