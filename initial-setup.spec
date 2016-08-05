@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.41
+Version: 0.3.42
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -157,6 +157,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri Aug 05 2016 Martin Kolman <mkolman@redhat.com> - 0.3.42-1
+- Fix a typo (mkolman)
+- Don't run the GUI on text-only systems (#1360343) (mkolman)
+
 * Wed Jun 08 2016 Martin Kolman <mkolman@redhat.com> - 0.3.41-1
 - Fix reconfiguration service name (mkolman)
 - Fix installation path for the reconfiguration-mode-enabled script (mkolman)
