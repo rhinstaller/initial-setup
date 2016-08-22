@@ -1,6 +1,6 @@
 # initial-setup.sh
 
-IS_EXEC=/lib/exec/initial-setup-text
+IS_EXEC=/usr/libexec/initial-setup/initial-setup-text
 IS_UNIT=initial-setup.service
 
 # the initial-setup-text.service is deprecated, use initial-setup.service instead
