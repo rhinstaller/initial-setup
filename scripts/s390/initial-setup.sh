@@ -1,6 +1,6 @@
 # firstboot.sh
 
-IS_EXEC=/lib/exec/initial-setup-text
+IS_EXEC=/usr/libexec/initial-setup/initial-setup-text
 IS_UNIT=initial-setup.service
 
 IS_AVAILABLE=0

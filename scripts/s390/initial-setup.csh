@@ -1,6 +1,6 @@
 # initial-setup.csh
 
-set IS_EXEC = /lib/exec/initial-setup-text
+set IS_EXEC = /usr/libexec/initial-setup/initial-setup-text
 set IS_UNIT = initial-setup.service
 
 # check if the Initial Setup unit is enabled and the executable is available
