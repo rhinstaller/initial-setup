@@ -11,7 +11,7 @@ GUI_INSTALLED=0
 
 # systemd targets
 GRAPHICAL_TARGET=/usr/lib/systemd/system/graphical.target
-CURRENT_DEFAULT_TARGET=$(readlink /etc/systemd/system/default.target)
+CURRENT_DEFAULT_TARGET=$(readlink -e /etc/systemd/system/default.target)
 
 WINDOWMANAGER_SCRIPT="/usr/libexec/initial-setup/firstboot-windowmanager"
 
