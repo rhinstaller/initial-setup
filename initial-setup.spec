@@ -119,8 +119,11 @@ make install-po-files
 %changelog
 * Tue Aug 23 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.34-1
 - Suppress logging to stdout when TUI is started by s390 startup scripts (mkolman)
+  Related: rhbz#1366776
 - Fix path to TUI executable in the s390 startup scripts (#1366776) (mkolman)
+  Resolves: rhbz#1366776
 - Canonicalize symlinks returned by readlink (mkolman)
+  Related: rhbz#1360343
 
 * Mon Aug 01 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.33-1
 - Don't run the GUI on text-only systems (#1360343) (mkolman)
