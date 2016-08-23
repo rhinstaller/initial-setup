@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.33
+Version: 0.3.9.34
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -117,6 +117,11 @@ make install-po-files
 
 
 %changelog
+* Tue Aug 23 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.34-1
+- Suppress logging to stdout when TUI is started by s390 startup scripts (mkolman)
+- Fix path to TUI executable in the s390 startup scripts (#1366776) (mkolman)
+- Canonicalize symlinks returned by readlink (mkolman)
+
 * Mon Aug 01 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.33-1
 - Don't run the GUI on text-only systems (#1360343) (mkolman)
   Resolves:#1360343
