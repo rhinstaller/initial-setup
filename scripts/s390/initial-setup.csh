@@ -7,6 +7,6 @@ set IS_UNIT = initial-setup.service
 if ( { systemctl -q is-enabled $IS_UNIT } && -x $IS_EXEC ) then
     # check if we're not on 3270 terminal and root
     if (( `/sbin/consoletype` == "pty" ) && ( `/usr/bin/id -u` == 0 )) then
-        $IS_EXEC && systemctl -q is-enabled $IS_UNIT && systemctl -q disable $IS_UNIT
+        $IS_EXEC --no-stdout-log && systemctl -q is-enabled $IS_UNIT && systemctl -q disable $IS_UNIT
     endif
 endif
