@@ -73,14 +73,17 @@ make install-po-files
 %post
 %systemd_post initial-setup-text.service
 %systemd_post initial-setup.service
+%systemd_post initial-setup-reconfiguration.service
 
 %preun
 %systemd_preun initial-setup-text.service
 %systemd_preun initial-setup.service
+%systemd_preun initial-setup-reconfiguration.service
 
 %postun
 %systemd_postun initial-setup-text.service
 %systemd_postun initial-setup.service
+%systemd_postun initial-setup-reconfiguration.service
 
 %post gui
 %systemd_post initial-setup-graphical.service
