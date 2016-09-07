@@ -9,7 +9,6 @@ Before=initial-setup.service
 Conflicts=plymouth-quit-wait.service
 ConditionKernelCommandLine=!rd.live.image
 ConditionPathExists=/.unconfigured
-Requires=initial-setup.service
 
 [Service]
 Type=oneshot
@@ -17,7 +16,10 @@ TimeoutSec=0
 StandardInput=tty
 StandardOutput=tty
 RemainAfterExit=yes
+ExecStartPre=/bin/kill -55 1
+ExecStartPre=-/bin/plymouth quit
 ExecStart=/usr/libexec/initial-setup/reconfiguration-mode-enabled
+ExecStartPost=/bin/kill -54 1
 TimeoutSec=0
 RemainAfterExit=no
 
