@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.34
+Version: 0.3.9.35
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -120,6 +120,12 @@ make install-po-files
 
 
 %changelog
+* Wed Sep 07 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.35-1
+- Change how Initial Setup reconfig mode is started (#1342536) (mkolman)
+  Related: rhbz#1342536
+- Add systemd scriptlets for initial-setup-reconfigure.service (#1342536) (mkolman)
+  Related: rhbz#1342536
+
 * Tue Aug 23 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.34-1
 - Suppress logging to stdout when TUI is started by s390 startup scripts (mkolman)
   Related: rhbz#1366776
