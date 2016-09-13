@@ -63,6 +63,8 @@ class InitialSetup(object):
         self.gui_mode = gui_mode
         # kickstart data
         self.data = None
+        # reboot on quit flag
+        self._reboot_on_quit = False
 
         # parse any command line arguments
         args = self._parse_arguments()
@@ -151,6 +153,11 @@ class InitialSetup(object):
             return "gui"
         else:
             return "tui"
+
+    @property
+    def reboot_on_quit(self):
+        # should the machine be rebooted once Initial Setup quits
+        return self._reboot_on_quit
 
     def _parse_arguments(self):
         """Parse command line arguments"""
@@ -312,6 +319,11 @@ class InitialSetup(object):
         # Start the application
         log.info("starting the UI")
         ret = ui.run()
+
+        # we need to reboot the machine if the EULA was not agreed
+        if not self.data.eula.agreed:
+            log.warning("EULA has not been agreed - the system will be rebooted.")
+            self._reboot_on_quit = True
 
         # TUI returns False if the app was ended prematurely
         # all other cases return True or None
