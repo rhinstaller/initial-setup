@@ -17,6 +17,7 @@ import argparse
 from pyanaconda.threads import initThreading
 initThreading()
 
+import traceback
 from pyanaconda.users import Users
 from initial_setup.post_installclass import PostInstallClass
 from initial_setup import initial_setup_log
@@ -55,6 +56,29 @@ signal.signal(signal.SIGINT, signal.SIG_IGN)
 # setup logging
 log = logging.getLogger("initial-setup")
 
+logging_initialized = False
+
+def log_to_journal(message, priority=3):
+    """A quick-and-dirty direct Journal logger.
+
+    A quick-and-dirty direct Journal logger used to log errors that occur
+    before the normal Python logging system is setup and connected to Journal.
+
+    :param str message: message to send to Journal
+    :param int priority: message priority (2 - critical, 3 - error, 4 - warning, 5 - notice, 6 - info)
+    """
+    os.system('echo "%s" | systemd-cat -t initial-setup -p %s' % (message, priority))
+
+def log_exception(*exception_info):
+    exception_text = "".join(traceback.format_exception(*exception_info))
+    error_message = "Initial Setup crashed due to unhandled exception:\n%s" % exception_text
+    if logging_initialized:
+        log.error(error_message)
+    else:
+        log_to_journal(error_message)
+
+sys.excepthook = log_exception
+
 class InitialSetup(object):
     def __init__(self, gui_mode):
         """Initialize the Initial Setup internals"""
@@ -71,6 +95,8 @@ class InitialSetup(object):
 
         # initialize logging
         initial_setup_log.init(stdout_log=not args.no_stdout_log)
+        global logging_initialized
+        logging_initialized = True
 
         log.info("Initial Setup %s" % __version__)
 
