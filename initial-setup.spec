@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.42
+Version: 0.3.43
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -13,7 +13,7 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
-%define anacondaver 25.16
+%define anacondaver 25.20.3
 
 License: GPLv2+
 Group: System Environment/Base
@@ -157,6 +157,13 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed Sep 21 2016 Martin Kolman <mkolman@redhat.com> - 0.3.43-1
+- Initialize SAM on startup (#1375721) (mkolman)
+- Log unhandled exceptions to Journal (mkolman)
+- Suppress logging to stdout when TUI is started by s390 startup scripts (mkolman)
+- Fix path to TUI executable in the s390 startup scripts (#1366776) (mkolman)
+- Canonicalize symlinks returned by readlink (mkolman)
+
 * Fri Aug 05 2016 Martin Kolman <mkolman@redhat.com> - 0.3.42-1
 - Fix a typo (mkolman)
 - Don't run the GUI on text-only systems (#1360343) (mkolman)
