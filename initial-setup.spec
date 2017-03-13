@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.36
+Version: 0.3.9.37
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -120,6 +120,10 @@ make install-po-files
 
 
 %changelog
+* Mon Mar 13 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.37-1
+- Log unhandled exceptions to Journal (#1431227) (mkolman)
+  Resolves: rhbz#1431227
+
 * Wed Sep 14 2016 Martin Kolman <mkolman@redhat.com> - 0.3.9.36-1
 - Reboot the system if EULA is not accepted (#1365539) (mkolman)
   Resolves: rhbz#1365539
