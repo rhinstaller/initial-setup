@@ -26,6 +26,7 @@ from pykickstart.constants import FIRSTBOOT_RECONFIG
 from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.flags import flags
+from pyanaconda import screen_access
 
 class InitialSetupError(Exception):
     pass
@@ -308,6 +309,9 @@ class InitialSetup(object):
 
         self._load_kickstart()
         self._setup_locale()
+
+        # initialize the screen access manager before launching the UI
+        screen_access.initSAM()
 
         if self.gui_mode:
             try:
