@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.37
+Version: 0.3.9.38
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -120,6 +120,10 @@ make install-po-files
 
 
 %changelog
+* Thu Mar 16 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.38-1
+- Initialize SAM on startup (mkolman)
+  Related: rhbz#1422867
+
 * Mon Mar 13 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.37-1
 - Log unhandled exceptions to Journal (#1431227) (mkolman)
   Resolves: rhbz#1431227
