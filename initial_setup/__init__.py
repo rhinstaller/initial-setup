@@ -92,10 +92,10 @@ class InitialSetup(object):
         self._reboot_on_quit = False
 
         # parse any command line arguments
-        args = self._parse_arguments()
+        self.args = self._parse_arguments()
 
         # initialize logging
-        initial_setup_log.init(stdout_log=not args.no_stdout_log)
+        initial_setup_log.init(stdout_log=not self.args.no_stdout_log)
         global logging_initialized
         logging_initialized = True
 
@@ -193,6 +193,7 @@ class InitialSetup(object):
                                          description="Initial Setup can run during the first start of a newly installed"
                                          "system to configure it according to the needs of the user.")
         parser.add_argument("--no-stdout-log", action="store_true", default=False, help="don't log to stdout")
+        parser.add_argument("--show-window-header", action="store_true", default=False, help="show window header (GUI only)")
         parser.add_argument('--version', action='version', version=__version__)
 
         # parse arguments and return the result
@@ -331,6 +332,9 @@ class InitialSetup(object):
             # Initialize the UI
             log.debug("initializing GUI")
             ui = initial_setup.gui.InitialSetupGraphicalUserInterface(None, None, PostInstallClass())
+
+            # set Window header visibility based on command line options
+            ui.mainWindow.set_hide_titlebar_when_maximized(not self.args.show_window_header)
         else:
             # Import IS tui specifics
             import initial_setup.tui
