@@ -95,7 +95,8 @@ class InitialSetup(object):
         self.args = self._parse_arguments()
 
         # initialize logging
-        initial_setup_log.init(stdout_log=not self.args.no_stdout_log)
+        initial_setup_log.init(stdout_log=not self.args.no_stdout_log,
+                               stdout_log_level=self.args.stdout_log_level)
         global logging_initialized
         logging_initialized = True
 
@@ -193,6 +194,8 @@ class InitialSetup(object):
                                          description="Initial Setup can run during the first start of a newly installed"
                                          "system to configure it according to the needs of the user.")
         parser.add_argument("--no-stdout-log", action="store_true", default=False, help="don't log to stdout")
+        parser.add_argument("--stdout-log-level", default="debug", choices=["warning", "info", "debug"],
+                            metavar="LOG_LEVEL", help='stdout log level')
         parser.add_argument("--show-window-header", action="store_true", default=False, help="show window header (GUI only)")
         parser.add_argument('--version', action='version', version=__version__)
 
