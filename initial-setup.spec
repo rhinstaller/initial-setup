@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.38
+Version: 0.3.9.39
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -120,6 +120,14 @@ make install-po-files
 
 
 %changelog
+* Wed Apr 05 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.39-1
+- Run GUI on the s390 if possible (#1378082) (mkolman)
+  Resolves: rhbz#1378082
+- Make it possible to set stdout log verbosity level (mkolman)
+  Related: rhbz#1378082
+- Make it possible to show window header (mkolman)
+  Related: rhbz#1378082
+
 * Thu Mar 16 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.38-1
 - Initialize SAM on startup (mkolman)
   Related: rhbz#1422867
