@@ -22,6 +22,11 @@
 import logging
 from logging.handlers import SysLogHandler, SYSLOG_UDP_PORT
 
+LOG_LEVEL_MAP = {"warning": logging.WARNING,
+                 "info": logging.INFO,
+                 "debug": logging.DEBUG
+                 }
+
 class InitialSetupSyslogHandler(SysLogHandler):
     """A SysLogHandler subclass that makes sure the Initial Setup
     messages are easy to identify in the syslog/Journal
@@ -41,8 +46,22 @@ class InitialSetupSyslogHandler(SysLogHandler):
         SysLogHandler.emit(self, record)
         record.msg = original_msg
 
-def init(stdout_log):
-    """Initialize the Initial Setup logging system"""
+def parse_log_level(log_level_name):
+    """Covert a string to log level constant.
+
+    We only support "warning", "info" and "critical".
+
+    :param str log_level_name: lowercase log level name
+    :returns: log level constants, logging.DEBUG if log level name is unknown
+    """
+    return LOG_LEVEL_MAP.get(log_level_name, logging.DEBUG)
+
+def init(stdout_log, stdout_log_level):
+    """Initialize the Initial Setup logging system.
+
+    :param bool stdout_log: if stdout log should be initialized
+    :param str stdout_log_level: log level name for the stdout log
+    """
     log = logging.getLogger("initial-setup")
     log.setLevel(logging.DEBUG)
     syslogHandler = InitialSetupSyslogHandler('/dev/log', SysLogHandler.LOG_LOCAL1, "initial-setup")
@@ -53,6 +72,6 @@ def init(stdout_log):
         # also log to stdout because someone is apparently running Initial Setup manually,
         # probably for debugging purposes
         stdoutHandler = logging.StreamHandler()
-        stdoutHandler.setLevel(logging.DEBUG)
+        stdoutHandler.setLevel(parse_log_level(stdout_log_level))
         stdoutHandler.setFormatter(logging.Formatter('%(levelname)s %(name)s: %(message)s'))
         log.addHandler(stdoutHandler)

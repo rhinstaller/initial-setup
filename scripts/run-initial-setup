@@ -34,12 +34,25 @@ if [ $GUI_INSTALLED -eq 1 ]; then
         echo "Starting Initial Setup TUI" | systemd-cat -t initial-setup -p 6
         ${IS_TEXT} --no-stdout-log
     else
-        # don't run the GUI on text-only systems (default.target != graphical.target),
+        # Don't run the GUI on text-only systems (default.target != graphical.target),
         # users are not expecting a graphical interface do start in such case
-        # and there might not even be any displays connected
-        if [ "$CURRENT_DEFAULT_TARGET" == "$GRAPHICAL_TARGET" ]; then
+        # and there might not even be any displays connected.
+        # But do run the GUI on text-only systems that have $DISPLAY defined,
+        # as that basically indicated X-forwarding and might be used on the s390.
+        if [ "$CURRENT_DEFAULT_TARGET" == "$GRAPHICAL_TARGET" ] || [ -n "$DISPLAY" ]; then
             echo "Starting Initial Setup GUI" | systemd-cat -t initial-setup -p 6
-            ${START_GUI_COMMAND}
+            if [ -n "$DISPLAY" ]; then
+                # $DISPLAY being defined basically identifies X-forwarding. In such case
+                # we want to run Initial Setup as an application and there is no need to
+                # start our own X server and window manager.
+                # And also tell Initial Setup to show window header, so that it's
+                # window does not look out of place.
+                ${IS_GRAPHICAL} --show-window-header  --stdout-log-level=info
+            else
+                # This is not X forwarding - start X server, window manager and then
+                # graphical Initial Setup.
+                ${START_GUI_COMMAND}
+            fi
         else
             echo "Initial Setup GUI is installed, but default.target != graphical.target" | systemd-cat -t initial-setup -p 5
             echo "Starting Initial Setup TUI" | systemd-cat -t initial-setup -p 6
