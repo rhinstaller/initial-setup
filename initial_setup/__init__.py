@@ -346,5 +346,10 @@ class InitialSetup(object):
         # apply changes
         self._apply()
 
+        # in the TUI mode shutdown the multi TTY handler
+        if not self.gui_mode:
+            # TODO: wait for this to finish or make it blockng ?
+            ui.multi_tty_handler.shutdown()
+
         # and we are done
         return True

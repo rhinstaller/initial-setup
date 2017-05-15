@@ -1,7 +1,15 @@
 """Common methods for Initial Setup"""
 
+import os
+
 from pyanaconda.ui.common import collect
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
+
+# a set of excluded console names
+# - console, tty, tty0 -> these appear to be just aliases to the  default console,
+#                         leaving them in would result in duplicate input on and output from
+#                         the default console
+TUI_EXCLUDED_CONSOLES = {"console", "tty", "tty0"}
 
 def collect_spokes(mask_paths, spoke_parent_class):
     """Return a list of all spoke subclasses that should appear for a given
@@ -52,3 +60,27 @@ def collectCategoriesAndSpokes(hub_instance, spoke_parent_class):
         ret[spoke.category].append(spoke)
 
     return ret
+
+def console_filter(console_name):
+    """Filter out consoles we don't want to attempt running the TUI on.
+
+    This at the moment just means console aliases, but it's possible more
+    consoles will have to be added for other reasons in the guture.
+
+    :param str console_name: console name to check
+    :returns: if the console name is considered usable for IS TUI
+    :rtype: bool
+    """
+    return console_name not in TUI_EXCLUDED_CONSOLES
+
+def list_usable_consoles_for_tui():
+    """List suitable consoles for running the Initial Setup TUI.
+
+    We basically want to list any console a user might using,
+    as we can't really be sure which console is in use or not.
+
+    :returns: a list of console names considered usable for the IS TUI
+    :rtype: list
+    """
+    console_names = [c for c in os.listdir("/sys/class/tty/") if console_filter(c)]
+    return sorted(console_names)
