@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.44
+Version: 0.3.45
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -157,6 +157,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed May 17 2017 Martin Kolman <mkolman@redhat.com> - 0.3.45-1
+- Remove stdin & stdout definition from unit files (#1438046) (mkolman)
+
 * Mon May 15 2017 Martin Kolman <mkolman@redhat.com> - 0.3.44-1
 - Run the Initial Setup TUI on all usable consoles (#1438046) (mkolman)
 
