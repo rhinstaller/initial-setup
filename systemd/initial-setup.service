@@ -11,8 +11,6 @@ ConditionKernelCommandLine=!rd.live.image
 [Service]
 Type=oneshot
 TimeoutSec=0
-StandardInput=tty
-StandardOutput=tty
 RemainAfterExit=yes
 ExecStartPre=/bin/kill -55 1
 ExecStartPre=-/bin/plymouth quit

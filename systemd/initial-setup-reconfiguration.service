@@ -14,8 +14,6 @@ Requires=initial-setup.service
 [Service]
 Type=oneshot
 TimeoutSec=0
-StandardInput=tty
-StandardOutput=tty
 RemainAfterExit=yes
 ExecStart=/usr/libexec/initial-setup/reconfiguration-mode-enabled
 TimeoutSec=0
