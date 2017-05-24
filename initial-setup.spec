@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
 Version: 0.3.46
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -13,7 +13,7 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
-%define anacondaver 26.21.6
+%define anacondaver 25.20.3
 
 License: GPLv2+
 Group: System Environment/Base
@@ -157,6 +157,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed May 24 2017 Martin Kolman <mkolman@redhat.com> - 0.3.46-2
+- Drop Anaconda version bump for now (mkolman)
+
 * Wed May 24 2017 Martin Kolman <mkolman@redhat.com> - 0.3.46-1
 - Add support for password entry from arbitrary consoles (#1438046) (mkolman)
 
