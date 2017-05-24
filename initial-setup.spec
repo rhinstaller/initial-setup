@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.45
+Version: 0.3.46
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -157,6 +157,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed May 24 2017 Martin Kolman <mkolman@redhat.com> - 0.3.46-1
+- Add support for password entry from arbitrary consoles (#1438046) (mkolman)
+
 * Wed May 17 2017 Martin Kolman <mkolman@redhat.com> - 0.3.45-1
 - Remove stdin & stdout definition from unit files (#1438046) (mkolman)
 
