@@ -132,8 +132,8 @@ class InitialSetup(object):
 
         # Too bad anaconda does not have modularized logging
         log.debug("initializing the Anaconda log")
-        from pyanaconda import anaconda_log
-        anaconda_log.init()
+        from pyanaconda import anaconda_logging
+        anaconda_logging.init()
 
         # init threading before Gtk can do anything and before we start using threads
         # initThreading initializes the threadMgr instance, import it afterwards
