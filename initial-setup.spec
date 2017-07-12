@@ -1,8 +1,8 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.46
-Release: 2%{?dist}
+Version: 0.3.47
+Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -157,6 +157,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri Jun 02 2017 Martin Kolman <mkolman@redhat.com> - 0.3.47-1
+- Adapt to anaconda_log module name change (mkolman)
+
 * Wed May 24 2017 Martin Kolman <mkolman@redhat.com> - 0.3.46-2
 - Drop Anaconda version bump for now (mkolman)
 
