@@ -9,7 +9,6 @@ import gettext
 import select
 import contextlib
 import termios
-import time
 import logging
 log = logging.getLogger("initial-setup")
 
