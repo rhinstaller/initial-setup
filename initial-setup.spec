@@ -31,6 +31,7 @@ BuildRequires: python-di
 
 Requires: python
 Requires: anaconda-tui >= %{anacondaver}
+Requires: systemd >= 219-44
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
