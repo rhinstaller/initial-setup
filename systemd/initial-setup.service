@@ -2,11 +2,11 @@
 Description=Initial Setup configuration program
 After=livesys.service plymouth-quit-wait.service
 After=systemd-vconsole-setup.service
-Before=display-manager.service getty@tty1.service getty@ttyUSB0.service
-Before=serial-getty@ttyS0.service serial-getty@ttyS1.service serial-getty@ttyO0.service serial-getty@ttyO2.service
-Before=serial-getty@ttyAMA0.service serial-getty@ttyAMA1.service serial-getty@ttyAMA2.service
-Before=serial-getty@ttymxc0.service serial-getty@ttymxc3.service serial-getty@hvc0.service serial-getty@ttyMV0.service
-Before=serial-getty@ttyMSM0.service serial-getty@ttySAC2.service serial-getty@ttyAS1.service serial-getty@ttyAML0.service
+# getty-pre.target is a pasive target, we need to request it before we can use it
+Wants=getty-pre.target
+# prevent getty from running on any consoles before we are done
+Before=getty-pre.target
+Before=display-manager.service
 Conflicts=plymouth-quit-wait.service initial-setup-text.service initial-setup-graphical.service
 ConditionKernelCommandLine=!rd.live.image
 
