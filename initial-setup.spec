@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.49
+Version: 0.3.50
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -157,6 +157,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon Sep 11 2017 Martin Kolman <mkolman@redhat.com> - 0.3.50-1
+- Use constant+offset when turning systemd console logging on/off (mkolman)
+- Add some more serial console options (pbrobinson)
+
 * Wed Aug 30 2017 Martin Kolman <mkolman@redhat.com> - 0.3.49-1
 - Use new Simpleline package (jkonecny)
 - Remove unused import (jkonecny)
