@@ -52,7 +52,11 @@ tag:
 	git tag -a -m "Tag as $(TAG)" -f $(TAG)
 	@echo "Tagged as $(TAG)"
 
-release: tag archive
+release:
+	$(MAKE) bumpver
+	$(MAKE) commit
+	$(MAKE) tag
+	$(MAKE) archive
 
 archive: po-pull
 	@rm -f ChangeLog
@@ -104,5 +108,9 @@ bumpver: potfile
 	sed -i "s/Version: $(VERSION)/Version: $$NEWVERSION/" initial-setup.spec ; \
 	sed -i "s/version = \"$(VERSION)\"/version = \"$$NEWVERSION\"/" setup.py ; \
 	sed -i "s/__version__ = \"$(VERSION)\"/__version__ = \"$$NEWVERSION\"/" initial_setup/__init__.py ; \
+
+commit:
+	git add initial-setup.spec initial_setup/__init__.py po/initial-setup.pot setup.py ; \
+	git commit -m "New version $(VERSION)" ; \
 
 .PHONY: clean install tag archive local
