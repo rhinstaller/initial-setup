@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.40
+Version: 0.3.9.41
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -121,6 +121,10 @@ make install-po-files
 
 
 %changelog
+* Mon Sep 25 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.41-1
+- Use getty-pre.target to prevent getty from running (#1488535) (mkolman)
+  Resolves: rhbz#1488535
+
 * Thu May 25 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.40-1
 - Update translations
   Resolves: rhbz#1382646
