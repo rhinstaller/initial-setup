@@ -17,10 +17,13 @@ TimeoutSec=0
 StandardInput=tty
 StandardOutput=tty
 RemainAfterExit=yes
-ExecStartPre=/bin/kill -55 1
+# tell systemd to stop logging to the console, to prevent it's messages
+# with interfering with the Initial Setup TUI potentially running there
+ExecStartPre=/bin/kill -SIGRTMIN+21 1
 ExecStartPre=-/bin/plymouth quit
 ExecStart=/usr/libexec/initial-setup/run-initial-setup
-ExecStartPost=/bin/kill -54 1
+# re-enable systemd console logging once Initial Setup is done
+ExecStartPost=/bin/kill -SIGRTMIN+20 1
 TimeoutSec=0
 RemainAfterExit=no
 
