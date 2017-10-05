@@ -103,7 +103,7 @@ bumpver: potfile
 	DATELINE="* `LANG=c date "+%a %b %d %Y"` `git config user.name` <`git config user.email`> - $$NEWVERSION-1"  ; \
 	cl=`grep -n %changelog initial-setup.spec |cut -d : -f 1` ; \
 	tail --lines=+$$(($$cl + 1)) initial-setup.spec > speclog ; \
-	(head -n $$cl initial-setup.spec ; echo "$$DATELINE" ; make --quiet rpmlog 2>/dev/null ; echo ""; cat speclog) > initial-setup.spec.new ; \
+	(head -n $$cl initial-setup.spec ; echo "$$DATELINE" ; make --quiet --no-print-directory rpmlog 2>/dev/null ; echo ""; cat speclog) > initial-setup.spec.new ; \
 	mv initial-setup.spec.new initial-setup.spec ; rm -f speclog ; \
 	sed -i "s/Version: $(VERSION)/Version: $$NEWVERSION/" initial-setup.spec ; \
 	sed -i "s/version = \"$(VERSION)\"/version = \"$$NEWVERSION\"/" setup.py ; \
