@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.41
+Version: 0.3.9.42
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -121,6 +121,10 @@ make install-po-files
 
 
 %changelog
+* Thu Oct 05 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.42-1
+- Use constant+offset when turning systemd console logging on/off (#1479787) (mkolman)
+  Resolves: rhbz#1479787
+
 * Mon Sep 25 2017 Martin Kolman <mkolman@redhat.com> - 0.3.9.41-1
 - Use getty-pre.target to prevent getty from running (#1488535) (mkolman)
   Resolves: rhbz#1488535
