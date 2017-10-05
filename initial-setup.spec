@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.50
+Version: 0.3.51
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -157,6 +157,13 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Oct 05 2017 Martin Kolman <mkolman@redhat.com> - 0.3.51-1
+- Don't print directory changes when outputting the changelog (mkolman)
+- Automate release creation (mkolman)
+- Don't include merges in the spec file changelog (mkolman)
+- Update initial-setup-reconfiguration.service too, add another (mvebu) serial console (pbrobinson)
+- Add some more serial console options for ARM (pbrobinson)
+
 * Mon Sep 11 2017 Martin Kolman <mkolman@redhat.com> - 0.3.50-1
 - Use constant+offset when turning systemd console logging on/off (mkolman)
 - Add some more serial console options (pbrobinson)
