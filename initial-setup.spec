@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.51
+Version: 0.3.52
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -158,6 +158,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed Nov 29 2017 Martin Kolman <mkolman@redhat.com> - 0.3.52-1
+- Use getty-pre.target to prevent getty from running (mkolman)
+
 * Thu Oct 05 2017 Martin Kolman <mkolman@redhat.com> - 0.3.51-1
 - Don't print directory changes when outputting the changelog (mkolman)
 - Automate release creation (mkolman)
