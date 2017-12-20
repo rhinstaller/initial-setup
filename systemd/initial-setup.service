@@ -2,6 +2,8 @@
 Description=Initial Setup configuration program
 After=livesys.service plymouth-quit-wait.service
 After=systemd-vconsole-setup.service
+Requires=initial-setup-boss.service
+After=initial-setup-boss.service
 # getty-pre.target is a pasive target, we need to request it before we can use it
 Wants=getty-pre.target
 # prevent getty from running on any consoles before we are done
