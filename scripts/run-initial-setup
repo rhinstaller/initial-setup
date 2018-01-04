@@ -72,6 +72,8 @@ if [ $? -eq 0 ]; then
     systemctl -q is-enabled $IS_UNIT && systemctl disable $IS_UNIT
     systemctl -q is-enabled $IS_UNIT_TEXT && systemctl disable $IS_UNIT_TEXT
     systemctl -q is-enabled $IS_UNIT_GRAPHICAL 2>/dev/null && systemctl disable $IS_UNIT_GRAPHICAL
+    exit 0
 else
     echo "Initial Setup failed, keeping enabled" | systemd-cat -t initial-setup -p 3
+    exit 1
 fi
