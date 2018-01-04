@@ -35,6 +35,8 @@ if [ $? -eq 0 ]; then
     echo "Initial Setup finished successfully, disabling" | systemd-cat -t initial-setup -p 6
     systemctl -q is-enabled $IS_UNIT && systemctl disable $IS_UNIT
     echo "Initial Setup has been disabled" | systemd-cat -t initial-setup -p 6
+    exit 0
 else
     echo "Initial Setup failed, keeping enabled" | systemd-cat -t initial-setup -p 3
+    exit 1
 fi
