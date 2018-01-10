@@ -16,6 +16,7 @@ from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.flags import flags
 from pyanaconda import screen_access
+from pyanaconda import startup_utils
 
 class InitialSetupError(Exception):
     pass
@@ -210,6 +211,9 @@ class InitialSetup(object):
             log.critical("kickstart parsing failed: %s", kserr)
             log.critical("Initial Setup startup failed due to invalid kickstart file")
             raise InitialSetupError
+
+        # if we got this far the kickstart should be valid, so send it to Boss as well
+        startup_utils.distribute_kickstart_with_boss(kickstart_path)
 
         if self.external_reconfig:
             # set the reconfig flag in kickstart so that
