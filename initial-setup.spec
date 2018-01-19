@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.52
+Version: 0.3.53
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -158,6 +158,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri Jan 19 2018 Martin Kolman <mkolman@redhat.com> - 0.3.53-1
+- Fix imports after Anaconda refactoring (jkonecny)
+- Return correct code at startup script success/failure (mkolman)
+
 * Wed Nov 29 2017 Martin Kolman <mkolman@redhat.com> - 0.3.52-1
 - Use getty-pre.target to prevent getty from running (mkolman)
 
