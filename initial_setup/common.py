@@ -3,7 +3,7 @@
 import os
 
 from pyanaconda.ui.common import collect
-from pyanaconda.constants import FIRSTBOOT_ENVIRON
+from pyanaconda.core.constants import FIRSTBOOT_ENVIRON
 
 # a set of excluded console names
 # - console, tty, tty0 -> these appear to be just aliases to the  default console,

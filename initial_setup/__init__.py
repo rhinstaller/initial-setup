@@ -10,10 +10,10 @@ import traceback
 from pyanaconda.users import Users
 from initial_setup.post_installclass import PostInstallClass
 from initial_setup import initial_setup_log
-from pyanaconda import iutil
+from pyanaconda.core import util
 from pykickstart.constants import FIRSTBOOT_RECONFIG
 from pyanaconda.localization import setup_locale_environment, setup_locale
-from pyanaconda.constants import FIRSTBOOT_ENVIRON
+from pyanaconda.core.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.flags import flags
 from pyanaconda import screen_access
 
@@ -38,7 +38,7 @@ SUPPORTED_KICKSTART_COMMANDS = ["user",
 flags.environs = [FIRSTBOOT_ENVIRON]
 
 # set root to "/", we are now in the installed system
-iutil.setSysroot("/")
+util.setSysroot("/")
 
 signal.signal(signal.SIGINT, signal.SIG_IGN)
 
