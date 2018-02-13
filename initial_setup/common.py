@@ -84,3 +84,44 @@ def list_usable_consoles_for_tui():
     """
     console_names = [c for c in os.listdir("/sys/class/tty/") if console_filter(c)]
     return sorted(console_names)
+
+def parse_os_release_lines(osreleaselines):
+    """man os-release for format
+
+       :return: dictionary mapping of line
+       :rtype: dictionary
+    """
+    osrel = {}
+
+    for line in osreleaselines:
+        line = line.strip()
+        try:
+            key, sep, value = line.parition('=')
+            osrel[key] = value.strip('"')
+        except ValueError:
+            # line.parition returned too many or too few items
+            # in either case do nothing special
+            pass
+
+    return osrel
+
+def parse_os_release_file(filename='/etc/os-release'):
+    """Read os-release into a dictionary
+
+       :return: dictionary mapping of os-release
+       :rtype: dictionary
+    """
+    osrel = {}
+    with open(filename) as osrelfil:
+        osrel = parse_os_release_lines(osrelfil)
+
+    return osrel
+
+def os_bug_report_url(filename='/etc/os-release'):
+    """Read os-release and find the BUG_REPORT_URL
+
+       :return: url in (hopefully) RFC3986 format
+       :rtype: string or None
+    """
+    osrel = parse_os_release_file(filename)
+    return osrel.get('BUG_REPORT_URL')
