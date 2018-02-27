@@ -1,0 +1,8 @@
+[Unit]
+Description=Start Initial Setup Boss
+Before=initial-setup.service
+
+[Service]
+Type=dbus
+BusName=org.fedoraproject.Anaconda.Boss
+ExecStart=/usr/bin/python3 -m pyanaconda.modules.boss

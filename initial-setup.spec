@@ -146,6 +146,7 @@ fi
 %{_libexecdir}/%{name}/initial-setup-text
 %{_libexecdir}/%{name}/reconfiguration-mode-enabled
 %{_unitdir}/initial-setup.service
+%{_unitdir}/initial-setup-boss.service
 %{_unitdir}/initial-setup-reconfiguration.service
 
 %ifarch s390 s390x
