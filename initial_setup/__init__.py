@@ -7,6 +7,7 @@ import pykickstart
 import logging
 import argparse
 import traceback
+import atexit
 from pyanaconda.users import Users
 from initial_setup.post_installclass import PostInstallClass
 from initial_setup import initial_setup_log
@@ -16,6 +17,9 @@ from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.flags import flags
 from pyanaconda import screen_access
+from pyanaconda import startup_utils
+from pyanaconda.dbus import DBus, launcher
+from pyanaconda.dbus.constants import DBUS_BOSS_NAME, DBUS_BOSS_PATH, DBUS_FLAG_NONE
 
 class InitialSetupError(Exception):
     pass
@@ -211,6 +215,16 @@ class InitialSetup(object):
             log.critical("Initial Setup startup failed due to invalid kickstart file")
             raise InitialSetupError
 
+        # if we got this far the kickstart should be valid, so send it to Boss as well
+        boss = DBus.get_proxy(DBUS_BOSS_NAME, DBUS_BOSS_PATH)
+
+        boss.SplitKickstart(kickstart_path)
+        errors = boss.DistributeKickstart()
+
+        if errors:
+            message = "\n\n".join("{error_message}".format_map(e) for e in errors)
+            raise InitialSetupError(message)
+
         if self.external_reconfig:
             # set the reconfig flag in kickstart so that
             # relevant spokes show up
@@ -294,6 +308,17 @@ class InitialSetup(object):
         :rtype: bool
         """
 
+        self.ensure_running_dbus()
+        self.run_boss()
+
+        # also register boss shutdown via exit handler
+        atexit.register(self.stop_boss)
+
+        # Make sure that all DBus modules are ready.
+        if not startup_utils.wait_for_modules(timeout=30):
+            log.error("Anaconda DBus modules failed to start on time.")
+            return True
+
         self._load_kickstart()
         self._setup_locale()
 
@@ -353,3 +378,20 @@ class InitialSetup(object):
 
         # and we are done
         return True
+
+    def ensure_running_dbus(self):
+        """Ensure suitable DBus is running. If not, start a new session."""
+        if not launcher.is_dbus_session_running():
+            launcher.start_dbus_session()
+
+        launcher.write_bus_address()
+
+    def run_boss(self):
+        bus_proxy = DBus.get_dbus_proxy()
+        bus_proxy.StartServiceByName(DBUS_BOSS_NAME, DBUS_FLAG_NONE)
+
+    def stop_boss(self):
+        boss_proxy = DBus.get_proxy(DBUS_BOSS_NAME, DBUS_BOSS_PATH)
+        boss_proxy.Quit()
+
+
