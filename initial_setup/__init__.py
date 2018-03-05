@@ -20,7 +20,8 @@ from pyanaconda import screen_access
 from pyanaconda import startup_utils
 from pyanaconda.dbus import DBus
 from pyanaconda.dbus.launcher import DBusLauncher
-from pyanaconda.dbus.constants import DBUS_BOSS_NAME, DBUS_BOSS_PATH, DBUS_FLAG_NONE, MODULE_LOCALIZATION_NAME, MODULE_LOCALIZATION_PATH
+from pyanaconda.dbus.constants import DBUS_BOSS_NAME, DBUS_BOSS_PATH, DBUS_FLAG_NONE, MODULE_LOCALIZATION_NAME, MODULE_LOCALIZATION_PATH, \
+                                      MODULE_TIMEZONE_NAME, MODULE_TIMEZONE_PATH, MODULE_USER_NAME, MODULE_USER_PATH
 from pyanaconda.startup_utils import run_boss, stop_boss
 
 class InitialSetupError(Exception):
@@ -259,6 +260,12 @@ class InitialSetup(object):
         # data.selinux
         # data.firewall
 
+        localization_proxy = DBus.get_proxy(MODULE_LOCALIZATION_NAME, MODULE_LOCALIZATION_PATH)
+        self.data.lang.seen = localization_proxy.Kickstarted
+
+        timezone_proxy = DBus.get_proxy(MODULE_TIMEZONE_NAME, MODULE_TIMEZONE_PATH)
+        self.data.timezone.seen = timezone_proxy.Kickstarted
+
         log.info("executing kickstart")
         for section in sections:
             section_msg = "%s on line %d" % (repr(section), section.lineno)
@@ -272,6 +279,10 @@ class InitialSetup(object):
         u = Users()
 
         sections = [self.data.group, self.data.user, self.data.rootpw]
+
+        user_proxy = DBus.get_proxy(MODULE_USER_NAME, MODULE_USER_PATH)
+        self.data.rootpw.seen = user_proxy.IsRootpwKickstarted
+
         for section in sections:
             section_msg = "%s on line %d" % (repr(section), section.lineno)
             if section.seen:
