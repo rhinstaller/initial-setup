@@ -18,8 +18,10 @@ from pyanaconda.core.constants import FIRSTBOOT_ENVIRON
 from pyanaconda.flags import flags
 from pyanaconda import screen_access
 from pyanaconda import startup_utils
-from pyanaconda.dbus import DBus, launcher
-from pyanaconda.dbus.constants import DBUS_BOSS_NAME, DBUS_BOSS_PATH, DBUS_FLAG_NONE
+from pyanaconda.dbus import DBus
+from pyanaconda.dbus.launcher import DBusLauncher
+from pyanaconda.dbus.constants import DBUS_BOSS_NAME, DBUS_BOSS_PATH, DBUS_FLAG_NONE, MODULE_LOCALIZATION_NAME, MODULE_LOCALIZATION_PATH
+from pyanaconda.startup_utils import run_boss, stop_boss
 
 class InitialSetupError(Exception):
     pass
@@ -150,6 +152,9 @@ class InitialSetup(object):
         from pyanaconda.network import setup_ifcfg_log
         setup_ifcfg_log()
 
+        # create class for launching our dbus session
+        self._dbus_launcher = DBusLauncher()
+
     @property
     def external_reconfig(self):
         """External reconfig status.
@@ -232,9 +237,12 @@ class InitialSetup(object):
 
     def _setup_locale(self):
         log.debug("setting up locale")
+
+        localization_proxy = DBus.get_proxy(MODULE_LOCALIZATION_NAME, MODULE_LOCALIZATION_PATH)
+
         # Normalize the locale environment variables
-        if self.data.lang.seen:
-            locale_arg = self.data.lang.lang
+        if localization_proxy.Kickstarted:
+            locale_arg = localization_proxy.Language
         else:
             locale_arg = None
         setup_locale_environment(locale_arg, prefer_environment=True)
@@ -307,12 +315,11 @@ class InitialSetup(object):
         :returns: True if the IS run was successful, False if it failed
         :rtype: bool
         """
+        # start Boss & our DBUS session
+        self.run_boss_with_dbus()
 
-        self.ensure_running_dbus()
-        self.run_boss()
-
-        # also register boss shutdown via exit handler
-        atexit.register(self.stop_boss)
+        # also register boss shutdown & DBUS session cleanup via exit handler
+        atexit.register(self.cleanup_dbus_session)
 
         # Make sure that all DBus modules are ready.
         if not startup_utils.wait_for_modules(timeout=30):
@@ -379,19 +386,16 @@ class InitialSetup(object):
         # and we are done
         return True
 
-    def ensure_running_dbus(self):
+    def run_boss_with_dbus(self):
         """Ensure suitable DBus is running. If not, start a new session."""
-        if not launcher.is_dbus_session_running():
-            launcher.start_dbus_session()
+        self._dbus_launcher.start_dbus_session()
+        self._dbus_launcher.write_bus_address()
+        run_boss()
 
-        launcher.write_bus_address()
+    def cleanup_dbus_session(self):
+        """Stop our DBus services and our DBus session if it is our private DBus session.
 
-    def run_boss(self):
-        bus_proxy = DBus.get_dbus_proxy()
-        bus_proxy.StartServiceByName(DBUS_BOSS_NAME, DBUS_FLAG_NONE)
-
-    def stop_boss(self):
-        boss_proxy = DBus.get_proxy(DBUS_BOSS_NAME, DBUS_BOSS_PATH)
-        boss_proxy.Quit()
-
-
+        Our DBus is started when no session DBus is available.
+        """
+        stop_boss()
+        self._dbus_launcher.stop()
