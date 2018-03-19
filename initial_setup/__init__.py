@@ -12,16 +12,15 @@ from pyanaconda.users import Users
 from initial_setup.post_installclass import PostInstallClass
 from initial_setup import initial_setup_log
 from pyanaconda.core import util
-from pykickstart.constants import FIRSTBOOT_RECONFIG
 from pyanaconda.localization import setup_locale_environment, setup_locale
-from pyanaconda.core.constants import FIRSTBOOT_ENVIRON
+from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG, \
+    SETUP_ON_BOOT_DEFAULT
 from pyanaconda.flags import flags
 from pyanaconda import screen_access
 from pyanaconda import startup_utils
-from pyanaconda.dbus import DBus
 from pyanaconda.dbus.launcher import DBusLauncher
-from pyanaconda.dbus.constants import DBUS_BOSS_NAME, DBUS_BOSS_PATH, DBUS_FLAG_NONE, MODULE_LOCALIZATION_NAME, MODULE_LOCALIZATION_PATH, \
-                                      MODULE_TIMEZONE_NAME, MODULE_TIMEZONE_PATH, MODULE_USER_NAME, MODULE_USER_PATH
+from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USER, \
+    SERVICES
 from pyanaconda.startup_utils import run_boss, stop_boss
 
 class InitialSetupError(Exception):
@@ -222,7 +221,7 @@ class InitialSetup(object):
             raise InitialSetupError
 
         # if we got this far the kickstart should be valid, so send it to Boss as well
-        boss = DBus.get_proxy(DBUS_BOSS_NAME, DBUS_BOSS_PATH)
+        boss = BOSS.get_proxy()
 
         boss.SplitKickstart(kickstart_path)
         errors = boss.DistributeKickstart()
@@ -234,12 +233,13 @@ class InitialSetup(object):
         if self.external_reconfig:
             # set the reconfig flag in kickstart so that
             # relevant spokes show up
-            self.data.firstboot.firstboot = FIRSTBOOT_RECONFIG
+            services_proxy = SERVICES.get_proxy()
+            services_proxy.SetSetupOnBoot(SETUP_ON_BOOT_RECONFIG)
 
     def _setup_locale(self):
         log.debug("setting up locale")
 
-        localization_proxy = DBus.get_proxy(MODULE_LOCALIZATION_NAME, MODULE_LOCALIZATION_PATH)
+        localization_proxy = LOCALIZATION.get_proxy()
 
         # Normalize the locale environment variables
         if localization_proxy.Kickstarted:
@@ -260,10 +260,11 @@ class InitialSetup(object):
         # data.selinux
         # data.firewall
 
-        localization_proxy = DBus.get_proxy(MODULE_LOCALIZATION_NAME, MODULE_LOCALIZATION_PATH)
-        self.data.lang.seen = localization_proxy.Kickstarted
+        localization_proxy = LOCALIZATION.get_proxy()
+        self.data.keyboard.seen = localization_proxy.KeyboardKickstarted
+        self.data.lang.seen = localization_proxy.LanguageKickstarted
 
-        timezone_proxy = DBus.get_proxy(MODULE_TIMEZONE_NAME, MODULE_TIMEZONE_PATH)
+        timezone_proxy = TIMEZONE.get_proxy()
         self.data.timezone.seen = timezone_proxy.Kickstarted
 
         log.info("executing kickstart")
@@ -280,7 +281,7 @@ class InitialSetup(object):
 
         sections = [self.data.group, self.data.user, self.data.rootpw]
 
-        user_proxy = DBus.get_proxy(MODULE_USER_NAME, MODULE_USER_PATH)
+        user_proxy = USER.get_proxy()
         self.data.rootpw.seen = user_proxy.IsRootpwKickstarted
 
         for section in sections:
@@ -299,7 +300,8 @@ class InitialSetup(object):
             # prevent the reconfig flag from being written out
             # to kickstart if neither /etc/reconfigSys or /.unconfigured
             # are present
-            self.data.firstboot.firstboot = None
+            services_proxy = SERVICES.get_proxy()
+            services_proxy.SetSetupOnBoot(SETUP_ON_BOOT_DEFAULT)
 
         # Write the kickstart data to file
         log.info("writing the Initial Setup kickstart file %s", OUTPUT_KICKSTART_PATH)
