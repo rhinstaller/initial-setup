@@ -256,9 +256,8 @@ class InitialSetupTextUserInterface(TextUserInterface):
         # Make sure custom getpass() from multi-tty handler is used instead of regular getpass.
         # This needs to be done as the default getpass() implementation cant work with arbitrary
         # consoles and always defaults to /dev/tty for input.
-        screen_scheduler = App.get_scheduler()
-        io_manager = screen_scheduler.io_manager
-        io_manager.set_pass_func(self.multi_tty_handler.custom_getpass)
+        configuration = App.get_configuration()
+        configuration.password_function = self.multi_tty_handler.custom_getpass
 
     def _list_hubs(self):
         return [InitialSetupMainHub]
