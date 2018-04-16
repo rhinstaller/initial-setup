@@ -20,7 +20,7 @@ from pyanaconda import screen_access
 from pyanaconda import startup_utils
 from pyanaconda.dbus.launcher import DBusLauncher
 from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USER, \
-    SERVICES
+    SERVICES, SECURITY, NETWORK
 from pyanaconda.startup_utils import run_boss, stop_boss
 
 class InitialSetupError(Exception):
@@ -29,6 +29,15 @@ class InitialSetupError(Exception):
 INPUT_KICKSTART_PATH = "/root/anaconda-ks.cfg"
 OUTPUT_KICKSTART_PATH = "/root/initial-setup-ks.cfg"
 RECONFIG_FILES = ["/etc/reconfigSys", "/.unconfigured"]
+
+SUPPORTED_KICKSTART_MODULES = [
+    TIMEZONE,
+    NETWORK,
+    LOCALIZATION,
+    SECURITY,
+    USER,
+    SERVICES
+]
 
 SUPPORTED_KICKSTART_COMMANDS = ["user",
                                 "group",
@@ -403,7 +412,7 @@ class InitialSetup(object):
         """Ensure suitable DBus is running. If not, start a new session."""
         self._dbus_launcher.start_dbus_session()
         self._dbus_launcher.write_bus_address()
-        run_boss()
+        run_boss(kickstart_modules=SUPPORTED_KICKSTART_MODULES)
 
     def cleanup_dbus_session(self):
         """Stop our DBus services and our DBus session if it is our private DBus session.
