@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.58
+Version: 0.3.59
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -158,6 +158,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon Apr 23 2018 Martin Kolman <mkolman@redhat.com> - 0.3.59-1
+- Fix version number in setup.py (mkolman)
+
 * Thu Apr 19 2018 Martin Kolman <mkolman@redhat.com> - 0.3.58-1
 - Run only the supported kickstart modules (#1566621) (vponcova)
 
