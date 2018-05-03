@@ -344,7 +344,7 @@ class InitialSetup(object):
         atexit.register(self.cleanup_dbus_session)
 
         # Make sure that all DBus modules are ready.
-        if not startup_utils.wait_for_modules(timeout=30):
+        if not startup_utils.wait_for_modules():
             log.error("Anaconda DBus modules failed to start on time.")
             return True
 
