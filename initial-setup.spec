@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.59
+Version: 0.3.60
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -158,6 +158,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri May 04 2018 Martin Kolman <mkolman@redhat.com> - 0.3.60-1
+- Fix name of the Zanata Python client package (mkolman)
+- Use the Anaconda default for DBUS module timeout (mkolman)
+
 * Mon Apr 23 2018 Martin Kolman <mkolman@redhat.com> - 0.3.59-1
 - Fix version number in setup.py (mkolman)
 
