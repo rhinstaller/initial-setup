@@ -30,6 +30,9 @@ PYTHON=python3
 ZANATA_PULL_ARGS = --transdir po/
 ZANATA_PUSH_ARGS = --srcdir po/ --push-type source --force
 
+# the Zanata Python client is unfortunately Python 2 only at the moment
+ZANATA_CLIENT_PKG=python2-zanata-client
+
 default: all
 
 all: po-files
@@ -93,7 +96,7 @@ potfile:
 	$(MAKE) -C po potfile
 
 po-pull:
-	rpm -q zanata-python-client &>/dev/null || ( echo "need to run: dnf install zanata-python-client"; exit 1 )
+	rpm -q $(ZANATA_CLIENT_PKG) &>/dev/null || ( echo "need to run: dnf install $(ZANATA_CLIENT_PKG)"; exit 1 )
 	zanata pull $(ZANATA_PULL_ARGS)
 
 bumpver: potfile
