@@ -19,7 +19,7 @@ from pyanaconda.flags import flags
 from pyanaconda import screen_access
 from pyanaconda import startup_utils
 from pyanaconda.dbus.launcher import DBusLauncher
-from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USER, \
+from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USERS, \
     SERVICES, SECURITY, NETWORK
 from pyanaconda.startup_utils import run_boss, stop_boss
 
@@ -35,7 +35,7 @@ SUPPORTED_KICKSTART_MODULES = [
     NETWORK,
     LOCALIZATION,
     SECURITY,
-    USER,
+    USERS,
     SERVICES
 ]
 
@@ -290,8 +290,8 @@ class InitialSetup(object):
 
         sections = [self.data.group, self.data.user, self.data.rootpw]
 
-        user_proxy = USER.get_proxy()
-        self.data.rootpw.seen = user_proxy.IsRootpwKickstarted
+        users_proxy = USERS.get_proxy()
+        self.data.rootpw.seen = users_proxy.IsRootpwKickstarted
 
         for section in sections:
             section_msg = "%s on line %d" % (repr(section), section.lineno)
