@@ -1,5 +1,5 @@
 from pyanaconda.ui.gui import QuitDialog, GraphicalUserInterface
-from initial_setup.product import product_title, is_final
+from initial_setup.product import product_title, is_final, eula_available
 from .hubs import InitialSetupMainHub
 import os
 from gi.repository import Gdk
@@ -9,9 +9,17 @@ import gettext
 _ = lambda x: gettext.ldgettext("initial-setup", x)
 N_ = lambda x: x
 
+def get_quit_message():
+    if eula_available():
+        return N_("Are you sure you want to quit the configuration process?\n"
+                  "You might end up with an unusable system if you do. Unless the "
+                  "License agreement is accepted, the system will be rebooted.")
+    else:
+        return N_("Are you sure you want to quit the configuration process?\n"
+                  "You might end up with unusable system if you do.")
+
 class InitialSetupQuitDialog(QuitDialog):
-    MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
-                 "You might end up with unusable system if you do.")
+    MESSAGE = get_quit_message()
 
 class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     """This is the main Gtk based firstboot interface. It inherits from

@@ -1,7 +1,7 @@
 from pyanaconda.ui.tui import TextUserInterface
 from pyanaconda import threading
 
-from initial_setup.product import product_title, is_final
+from initial_setup.product import product_title, is_final, eula_available
 from initial_setup.common import list_usable_consoles_for_tui
 from .hubs import InitialSetupMainHub
 
@@ -20,8 +20,16 @@ log = logging.getLogger("initial-setup")
 _ = lambda x: gettext.ldgettext("initial-setup", x)
 N_ = lambda x: x
 
-QUIT_MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
+def get_quit_message():
+    if eula_available():
+        return N_("Are you sure you want to quit the configuration process?\n"
+                  "You might end up with an unusable system if you do. Unless the "
+                  "License agreement is accepted, the system will be rebooted.")
+    else:
+        return N_("Are you sure you want to quit the configuration process?\n"
                   "You might end up with unusable system if you do.")
+
+QUIT_MESSAGE = get_quit_message()
 
 class MultipleTTYHandler(object):
     """Run the Initial Setup TUI on all usable consoles.
