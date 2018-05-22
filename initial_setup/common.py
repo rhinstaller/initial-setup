@@ -4,6 +4,8 @@ import os
 
 from pyanaconda.ui.common import collect
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON
+from pyanaconda.core.i18n import N_
+from pyanaconda.ui.categories import SpokeCategory
 
 # a set of excluded console names
 # - console, tty, tty0 -> these appear to be just aliases to the  default console,
@@ -125,3 +127,9 @@ def os_bug_report_url(filename='/etc/os-release'):
     """
     osrel = parse_os_release_file(filename)
     return osrel.get('BUG_REPORT_URL')
+
+class LicensingCategory(SpokeCategory):
+    displayOnHubGUI = "ProgressHub"
+    displayOnHubTUI = "SummaryHub"
+    sortOrder = 100
+    title = N_("LICENSING")
