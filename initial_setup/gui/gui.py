@@ -1,17 +1,13 @@
 from pyanaconda.ui.gui import QuitDialog, GraphicalUserInterface
 from initial_setup.product import product_title, is_final
+from initial_setup.common import get_quit_message
+from initial_setup.i18n import _, N_
 from .hubs import InitialSetupMainHub
 import os
 from gi.repository import Gdk
-import gettext
-
-# localization
-_ = lambda x: gettext.ldgettext("initial-setup", x)
-N_ = lambda x: x
 
 class InitialSetupQuitDialog(QuitDialog):
-    MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
-                 "You might end up with unusable system if you do.")
+    MESSAGE = get_quit_message()
 
 class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     """This is the main Gtk based firstboot interface. It inherits from

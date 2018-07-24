@@ -4,6 +4,10 @@ import os
 
 from pyanaconda.ui.common import collect
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON
+from pyanaconda.core.i18n import N_
+from pyanaconda.ui.categories import SpokeCategory
+
+from initial_setup.product import eula_available
 
 # a set of excluded console names
 # - console, tty, tty0 -> these appear to be just aliases to the  default console,
@@ -125,3 +129,18 @@ def os_bug_report_url(filename='/etc/os-release'):
     """
     osrel = parse_os_release_file(filename)
     return osrel.get('BUG_REPORT_URL')
+
+def get_quit_message():
+    if eula_available():
+        return N_("Are you sure you want to quit the configuration process?\n"
+                  "You might end up with an unusable system if you do. Unless the "
+                  "License agreement is accepted, the system will be rebooted.")
+    else:
+        return N_("Are you sure you want to quit the configuration process?\n"
+                  "You might end up with unusable system if you do.")
+
+class LicensingCategory(SpokeCategory):
+    displayOnHubGUI = "ProgressHub"
+    displayOnHubTUI = "SummaryHub"
+    sortOrder = 100
+    title = N_("LICENSING")

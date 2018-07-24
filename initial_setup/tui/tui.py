@@ -2,26 +2,21 @@ from pyanaconda.ui.tui import TextUserInterface
 from pyanaconda import threading
 
 from initial_setup.product import product_title, is_final
-from initial_setup.common import list_usable_consoles_for_tui
+from initial_setup.common import list_usable_consoles_for_tui, get_quit_message
+from initial_setup.i18n import _, N_
 from .hubs import InitialSetupMainHub
 
 from simpleline import App
 
 import os
 import sys
-import gettext
 import select
 import contextlib
 import termios
 import logging
 log = logging.getLogger("initial-setup")
 
-# localization
-_ = lambda x: gettext.ldgettext("initial-setup", x)
-N_ = lambda x: x
-
-QUIT_MESSAGE = N_("Are you sure you want to quit the configuration process?\n"
-                  "You might end up with unusable system if you do.")
+QUIT_MESSAGE = get_quit_message()
 
 class MultipleTTYHandler(object):
     """Run the Initial Setup TUI on all usable consoles.

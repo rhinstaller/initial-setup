@@ -2,13 +2,9 @@ from pyanaconda.ui.tui.hubs import TUIHub
 from pyanaconda.ui.tui.spokes import NormalSpoke as TUI_spoke_class
 from initial_setup import product
 from initial_setup import common
-import gettext
+from initial_setup.i18n import _, N_
 
 __all__ = ["InitialSetupMainHub"]
-
-# localization
-_ = lambda x: gettext.ldgettext("initial-setup", x)
-N_ = lambda x: x
 
 class InitialSetupMainHub(TUIHub):
     categories = ["user", "localization"]
