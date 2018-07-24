@@ -46,6 +46,8 @@ Summary: Graphical user interface for the initial-setup utility
 Requires: gtk3
 Requires: anaconda-gui >= %{anacondaver}
 Requires: firstboot(windowmanager)
+Requires: xorg-x11-xinit
+Requires: xorg-x11-server-Xorg
 Requires: %{name} = %{version}-%{release}
 
 %description gui
