@@ -13,7 +13,9 @@ from initial_setup.product import eula_available
 # - console, tty, tty0 -> these appear to be just aliases to the  default console,
 #                         leaving them in would result in duplicate input on and output from
 #                         the default console
-TUI_EXCLUDED_CONSOLES = {"console", "tty", "tty0"}
+# - ptmx -> pseudoterminal configuration device not intended as general user-facing console that
+#           starts to block on write after some ammount of characters has been written to it
+TUI_EXCLUDED_CONSOLES = {"console", "tty", "tty0", "ptmx"}
 
 def collect_spokes(mask_paths, spoke_parent_class):
     """Return a list of all spoke subclasses that should appear for a given
