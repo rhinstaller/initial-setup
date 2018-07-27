@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.61
+Version: 0.3.62
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -160,6 +160,12 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri Jul 27 2018 Martin Kolman <mkolman@redhat.com> - 0.3.62-1
+- Make EULA spoke name compatible with three column hub (mkolman)
+- Blacklist the ptmx console from multi-tty use (mkolman)
+- Add support for showing an EULA spoke (mkolman)
+- Add explicit dependency on X server for the GUI sub-package (mkolman)
+
 * Wed May 09 2018 Martin Kolman <mkolman@redhat.com> - 0.3.61-1
 - Fix the users module import (#1575650) (mkolman)
 
