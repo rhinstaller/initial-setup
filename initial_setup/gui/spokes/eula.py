@@ -28,7 +28,7 @@ class EULASpoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     helpFile = "InitialSetupHub.xml"
 
     icon = "application-certificate-symbolic"
-    title = N_("_LICENSE INFORMATION")
+    title = N_("_License Information")
     category = LicensingCategory
     translationDomain = "initial-setup"
 
