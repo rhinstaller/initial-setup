@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import os
+
 from initial_setup import InitialSetup, InitialSetupError
 
 is_instance = InitialSetup(gui_mode=True)
@@ -9,6 +11,11 @@ try:
 except InitialSetupError:
     # Initial Setup with graphical interface apparently failed
     exit(1)
+
+# check if we should reboot the machine instead of continuing to
+# the login screen
+if is_instance.reboot_on_quit:
+    os.system("reboot")
 
 # Initial Setup with graphical interface completed successfully
 exit(0)
