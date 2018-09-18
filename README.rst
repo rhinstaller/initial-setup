@@ -47,7 +47,7 @@ headless, working only with data in their kickstart section or from other source
 For comprehensive documentation about Anaconda/Intial Setup see the
 "Anaconda Addon Development Guide" by Vratislav Podzimek:
 
-* https://vpodzime.fedorapeople.org/anaconda-addon-development-guide/
+* https://rhinstaller.github.io/anaconda-addon-development-guide/
 
 Contributing
 ============
