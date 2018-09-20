@@ -2,7 +2,7 @@ Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
 Version: 0.3.62
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -27,7 +27,7 @@ BuildRequires: glade-devel
 BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: intltool
 
-Requires: python3
+Requires: %{__python3}
 Requires: anaconda-tui >= %{anacondaver}
 Requires: systemd >= 235
 Requires(post): systemd
@@ -160,6 +160,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Sep 20 2018 Tomas Orsava <torsava@redhat.com> - 0.3.62-2
+- Require the Python interpreter directly instead of using the package name
+- Related: rhbz#1619153
+
 * Fri Jul 27 2018 Martin Kolman <mkolman@redhat.com> - 0.3.62-1
 - Make EULA spoke name compatible with three column hub (mkolman)
 - Blacklist the ptmx console from multi-tty use (mkolman)
