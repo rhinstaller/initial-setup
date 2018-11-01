@@ -18,11 +18,9 @@ from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG,
     SETUP_ON_BOOT_DEFAULT
 from pyanaconda.flags import flags
 from pyanaconda import screen_access
-from pyanaconda import startup_utils
-from pyanaconda.dbus.launcher import DBusLauncher
+from pyanaconda.dbus.launcher import AnacondaDBusLauncher
 from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USERS, \
-    SERVICES, SECURITY, NETWORK
-from pyanaconda.startup_utils import run_boss, stop_boss
+    SERVICES
 
 class InitialSetupError(Exception):
     pass
@@ -30,15 +28,6 @@ class InitialSetupError(Exception):
 INPUT_KICKSTART_PATH = "/root/anaconda-ks.cfg"
 OUTPUT_KICKSTART_PATH = "/root/initial-setup-ks.cfg"
 RECONFIG_FILES = ["/etc/reconfigSys", "/.unconfigured"]
-
-SUPPORTED_KICKSTART_MODULES = [
-    TIMEZONE,
-    NETWORK,
-    LOCALIZATION,
-    SECURITY,
-    USERS,
-    SERVICES
-]
 
 SUPPORTED_KICKSTART_COMMANDS = ["user",
                                 "group",
@@ -165,7 +154,7 @@ class InitialSetup(object):
         setup_ifcfg_log()
 
         # create class for launching our dbus session
-        self._dbus_launcher = DBusLauncher()
+        self._dbus_launcher = AnacondaDBusLauncher()
 
     @property
     def external_reconfig(self):
@@ -345,15 +334,14 @@ class InitialSetup(object):
         :returns: True if the IS run was successful, False if it failed
         :rtype: bool
         """
-        # start Boss & our DBUS session
-        self.run_boss_with_dbus()
-
         # also register boss shutdown & DBUS session cleanup via exit handler
-        atexit.register(self.cleanup_dbus_session)
+        atexit.register(self._dbus_launcher.stop)
 
-        # Make sure that all DBus modules are ready.
-        if not startup_utils.wait_for_modules():
-            log.error("Anaconda DBus modules failed to start on time.")
+        # start dbus session (if not already running) and run boss in it
+        try:
+            self._dbus_launcher.start()
+        except TimeoutError as e:
+            log.error(str(e))
             return True
 
         self._load_kickstart()
@@ -420,17 +408,3 @@ class InitialSetup(object):
 
         # and we are done
         return True
-
-    def run_boss_with_dbus(self):
-        """Ensure suitable DBus is running. If not, start a new session."""
-        self._dbus_launcher.start_dbus_session()
-        self._dbus_launcher.write_bus_address()
-        run_boss(kickstart_modules=SUPPORTED_KICKSTART_MODULES)
-
-    def cleanup_dbus_session(self):
-        """Stop our DBus services and our DBus session if it is our private DBus session.
-
-        Our DBus is started when no session DBus is available.
-        """
-        stop_boss()
-        self._dbus_launcher.stop()

@@ -13,7 +13,7 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
-%define anacondaver 29.13
+%define anacondaver 30.9
 
 License: GPLv2+
 Group: System Environment/Base
@@ -149,6 +149,7 @@ fi
 %{_libexecdir}/%{name}/reconfiguration-mode-enabled
 %{_unitdir}/initial-setup.service
 %{_unitdir}/initial-setup-reconfiguration.service
+%{_sysconfdir}/anaconda/conf.d/10-initial-setup.conf
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
