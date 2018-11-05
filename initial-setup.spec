@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.62
+Version: 0.3.63
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -161,6 +161,11 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon Nov 05 2018 Martin Kolman <mkolman@redhat.com> - 0.3.63-1
+- Disable modules in the configuration file (vponcova)
+- Let the DBus launcher to set up the modules (vponcova)
+- README.rst: update link to anaconda addon dev guide (kenyon)
+
 * Fri Jul 27 2018 Martin Kolman <mkolman@redhat.com> - 0.3.62-1
 - Make EULA spoke name compatible with three column hub (mkolman)
 - Blacklist the ptmx console from multi-tty use (mkolman)
