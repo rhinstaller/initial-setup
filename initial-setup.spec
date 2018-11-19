@@ -29,6 +29,7 @@ BuildRequires: intltool
 
 Requires: python3
 Requires: anaconda-tui >= %{anacondaver}
+Requires: python3-simpleline >= 1.4
 Requires: systemd >= 235
 Requires(post): systemd
 Requires(preun): systemd

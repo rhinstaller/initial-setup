@@ -7,6 +7,7 @@ from initial_setup.i18n import _, N_
 from .hubs import InitialSetupMainHub
 
 from simpleline import App
+from simpleline.errors import NothingScheduledError
 
 import os
 import sys
@@ -253,6 +254,12 @@ class InitialSetupTextUserInterface(TextUserInterface):
         # consoles and always defaults to /dev/tty for input.
         configuration = App.get_configuration()
         configuration.password_function = self.multi_tty_handler.custom_getpass
+
+    def run(self):
+        try:
+            super().run()
+        except NothingScheduledError:
+            log.info("not starting the text UI as no user interaction is required")
 
     def _list_hubs(self):
         return [InitialSetupMainHub]
