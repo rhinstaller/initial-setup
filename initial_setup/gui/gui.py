@@ -16,10 +16,9 @@ class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
 
     screenshots_directory = "/tmp/initial-setup-screenshots"
 
-    def __init__(self, storage, payload, instclass):
-        GraphicalUserInterface.__init__(self, storage, payload, instclass,
-                                        product_title, is_final,
-                                        quitDialog = InitialSetupQuitDialog)
+    def __init__(self):
+        GraphicalUserInterface.__init__(self, None, None, product_title, is_final,
+                                        quitDialog=InitialSetupQuitDialog)
         self.mainWindow.set_title("")
 
     def _list_hubs(self):
