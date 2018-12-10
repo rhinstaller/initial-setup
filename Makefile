@@ -101,8 +101,8 @@ po-pull:
 
 bumpver: potfile
 	zanata push $(ZANATA_PUSH_ARGS) || ( echo "zanata push failed"; exit 1 )
-	@NEWSUBVER=$$((`echo $(VERSION) |cut -d . -f 3` + 1)) ; \
-	NEWVERSION=`echo $(VERSION).$$NEWSUBVER |cut -d . -f 1,2,4` ; \
+	@NEWSUBVER=$$((`echo $(VERSION) |cut -d . -f 4` + 1)) ; \
+	NEWVERSION=`echo $(VERSION).$$NEWSUBVER |cut -d . -f 1,2,3,5` ; \
 	DATELINE="* `LANG=c date "+%a %b %d %Y"` `git config user.name` <`git config user.email`> - $$NEWVERSION-1"  ; \
 	cl=`grep -n %changelog initial-setup.spec |cut -d : -f 1` ; \
 	tail --lines=+$$(($$cl + 1)) initial-setup.spec > speclog ; \

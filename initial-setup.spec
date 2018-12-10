@@ -1,8 +1,8 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.62
-Release: 2%{?dist}
+Version: 0.3.62.1
+Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -160,6 +160,11 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon Dec 10 2018 Martin Kolman <mkolman@redhat.com> - 0.3.62.1-1
+- Update Zanata config for RHEL8 (mkolman)
+  Resolves: rhbz#1608303
+- Require the Python interpreter directly instead of using the package name (torsava)
+  Related: rhbz#1619153
 * Thu Sep 20 2018 Tomas Orsava <torsava@redhat.com> - 0.3.62-2
 - Require the Python interpreter directly instead of using the package name
 - Related: rhbz#1619153
