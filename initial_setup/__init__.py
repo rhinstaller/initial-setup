@@ -9,7 +9,6 @@ import argparse
 import traceback
 import atexit
 from pyanaconda.users import Users
-from initial_setup.post_installclass import PostInstallClass
 from initial_setup.product import eula_available
 from initial_setup import initial_setup_log
 from pyanaconda.core import util
@@ -367,7 +366,7 @@ class InitialSetup(object):
 
             # Initialize the UI
             log.debug("initializing GUI")
-            ui = initial_setup.gui.InitialSetupGraphicalUserInterface(None, None, PostInstallClass())
+            ui = initial_setup.gui.InitialSetupGraphicalUserInterface()
         else:
             # Import IS gui specifics
             import initial_setup.tui
@@ -377,7 +376,7 @@ class InitialSetup(object):
 
             # Initialize the UI
             log.debug("initializing TUI")
-            ui = initial_setup.tui.InitialSetupTextUserInterface(None, None, None)
+            ui = initial_setup.tui.InitialSetupTextUserInterface()
 
         # Pass the data object to user interface
         log.debug("setting up the UI")

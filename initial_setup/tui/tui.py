@@ -226,9 +226,9 @@ class InitialSetupTextUserInterface(TextUserInterface):
 
     ENVIRONMENT = "firstboot"
 
-    def __init__(self, storage, payload, instclass):
-        TextUserInterface.__init__(self, storage, payload, instclass,
-                                   product_title, is_final, quitMessage=QUIT_MESSAGE)
+    def __init__(self):
+        TextUserInterface.__init__(self, None, None, product_title, is_final,
+                                   quitMessage=QUIT_MESSAGE)
 
         # redirect stdin and stdout to custom pipes
 
