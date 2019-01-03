@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.64
+Version: 0.3.65
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -162,6 +162,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Jan 03 2019 Martin Kolman <mkolman@redhat.com> - 0.3.65-1
+- Remove install classes from the initial setup (vponcova)
+
 * Mon Nov 19 2018 Martin Kolman <mkolman@redhat.com> - 0.3.64-1
 - Handle simpleline having an empty stack (mkolman)
 
