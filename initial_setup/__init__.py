@@ -141,12 +141,6 @@ class InitialSetup(object):
         from pyanaconda import anaconda_logging
         anaconda_logging.init()
 
-        # init threading before Gtk can do anything and before we start using threads
-        # initThreading initializes the threadMgr instance, import it afterwards
-        log.debug("initializing threading")
-        from pyanaconda.threading import initThreading
-        initThreading()
-
         # initialize network logging (needed by the Network spoke that may be shown)
         log.debug("initializing network logging")
         from pyanaconda.network import setup_ifcfg_log
