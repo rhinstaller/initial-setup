@@ -273,7 +273,7 @@ class InitialSetup(object):
                 log.debug("skipping %s", section_msg)
                 continue
             log.debug("executing %s", section_msg)
-            section.execute(None, self.data, None)
+            section.execute()
 
         # Prepare the user database tools
         u = Users()
@@ -289,11 +289,11 @@ class InitialSetup(object):
                 log.debug("skipping %s", section_msg)
                 continue
             log.debug("executing %s", section_msg)
-            section.execute(None, self.data, None, u)
+            section.execute(storage=None, ksdata=self.data, users=u)
 
         # Configure all addons
         log.info("executing addons")
-        self.data.addons.execute(None, self.data, None, u, None)
+        self.data.addons.execute(storage=None, ksdata=self.data, users=u, payload=None)
 
         if self.external_reconfig:
             # prevent the reconfig flag from being written out
