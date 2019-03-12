@@ -16,7 +16,6 @@ Source0: %{name}-%{version}.tar.gz
 %define anacondaver 30.25.3-4
 
 License: GPLv2+
-Group: System Environment/Base
 BuildRequires: gettext
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
