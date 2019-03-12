@@ -19,7 +19,7 @@ from pyanaconda.flags import flags
 from pyanaconda import screen_access
 from pyanaconda.dbus.launcher import AnacondaDBusLauncher
 from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USERS, \
-    SERVICES
+    SERVICES, NETWORK
 
 class InitialSetupError(Exception):
     pass
@@ -248,6 +248,11 @@ class InitialSetup(object):
         setup_locale_environment(locale_arg, prefer_environment=True)
         setup_locale(os.environ['LANG'], text_mode=not self.gui_mode)
 
+    def _initialize_network(self):
+        log.debug("initializing network")
+        network_proxy = NETWORK.get_proxy()
+        network_proxy.CreateDeviceConfigurations()
+
     def _apply(self):
         # Do not execute sections that were part of the original
         # anaconda kickstart file (== have .seen flag set)
@@ -339,6 +344,7 @@ class InitialSetup(object):
 
         self._load_kickstart()
         self._setup_locale()
+        self._initialize_network()
 
         # initialize the screen access manager before launching the UI
         screen_access.initSAM()
