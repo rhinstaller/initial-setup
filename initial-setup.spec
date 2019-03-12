@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.66
+Version: 0.3.67
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -162,6 +162,11 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Mar 12 2019 Martin Kolman <mkolman@redhat.com> - 0.3.67-1
+- Initialize network module (device configurations) (#1685992) (rvykydal)
+- Specify the type of the installation system (#1685992) (vponcova)
+- Update arguments of the execute methods (#1666849) (vponcova)
+
 * Mon Jan 21 2019 Martin Kolman <mkolman@redhat.com> - 0.3.66-1
 - Don't call initThreading (#1666849) (vponcova)
 

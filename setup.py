@@ -46,7 +46,7 @@ if os.uname()[4].startswith('s390'):
 
 setup(
     name = "initial-setup",
-    version = "0.3.66",
+    version = "0.3.67",
     author = "Martin Sivak",
     author_email = "msivak@redhat.com",
     description='Post-installation configuration utility',
