@@ -141,11 +141,6 @@ class InitialSetup(object):
         from pyanaconda import anaconda_logging
         anaconda_logging.init()
 
-        # initialize network logging (needed by the Network spoke that may be shown)
-        log.debug("initializing network logging")
-        from pyanaconda.network import setup_ifcfg_log
-        setup_ifcfg_log()
-
         # create class for launching our dbus session
         self._dbus_launcher = AnacondaDBusLauncher()
 
