@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.68
+Version: 0.3.69
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -161,6 +161,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Apr 04 2019 Martin Kolman <mkolman@redhat.com> - 0.3.69-1
+- Adapt to removal of ifcfg.log (#1695967) (rvykydal)
+
 * Tue Mar 12 2019 Martin Kolman <mkolman@redhat.com> - 0.3.68-1
 - Remove obsolete Group definition from the spec file (mkolman)
 - Initialize network module (device configurations) (#1685992) (rvykydal)
