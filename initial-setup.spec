@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.69
+Version: 0.3.70
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -161,6 +161,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed May 15 2019 Martin Kolman <mkolman@redhat.com> - 0.3.70-1
+- Adjust to changes in the Users DBus module (mkolman)
+
 * Thu Apr 04 2019 Martin Kolman <mkolman@redhat.com> - 0.3.69-1
 - Adapt to removal of ifcfg.log (#1695967) (rvykydal)
 
