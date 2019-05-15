@@ -8,7 +8,6 @@ import logging
 import argparse
 import traceback
 import atexit
-from pyanaconda.users import Users
 from initial_setup.product import eula_available
 from initial_setup import initial_setup_log
 from pyanaconda.core import util
@@ -18,6 +17,7 @@ from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG,
 from pyanaconda.flags import flags
 from pyanaconda import screen_access
 from pyanaconda.dbus.launcher import AnacondaDBusLauncher
+from pyanaconda.modules.common.task import sync_run_task
 from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USERS, \
     SERVICES, NETWORK
 
@@ -144,6 +144,11 @@ class InitialSetup(object):
         # create class for launching our dbus session
         self._dbus_launcher = AnacondaDBusLauncher()
 
+        # group, user, root password set-before tracking
+        self._groups_already_configured = False
+        self._users_already_configured = False
+        self._root_password_already_configured = False
+
     @property
     def external_reconfig(self):
         """External reconfig status.
@@ -230,6 +235,13 @@ class InitialSetup(object):
             services_proxy = SERVICES.get_proxy()
             services_proxy.SetSetupOnBoot(SETUP_ON_BOOT_RECONFIG)
 
+        # Record if groups, users or root password has been set before Initial Setup
+        # has been started, so that we don't trample over existing configuration.
+        users_proxy = USERS.get_proxy()
+        self._groups_already_configured = bool(users_proxy.Groups)
+        self._users_already_configured = bool(users_proxy.Users)
+        self._root_password_already_configured = users_proxy.IsRootPasswordSet
+
     def _setup_locale(self):
         log.debug("setting up locale")
 
@@ -254,6 +266,9 @@ class InitialSetup(object):
 
         log.info("applying changes")
 
+        services_proxy = SERVICES.get_proxy()
+        reconfig_mode = services_proxy.SetSetupOnBoot == SETUP_ON_BOOT_RECONFIG
+
         sections = [self.data.keyboard, self.data.lang, self.data.timezone]
 
         # data.selinux
@@ -275,25 +290,43 @@ class InitialSetup(object):
             log.debug("executing %s", section_msg)
             section.execute()
 
-        # Prepare the user database tools
-        u = Users()
-
-        sections = [self.data.group, self.data.user, self.data.rootpw]
-
+        # Configure groups, users & root account
+        #
+        # NOTE: We only configure groups, users & root account if the respective
+        #       kickstart commands are *not* seen in the input kickstart.
+        #       This basically means that we will configure only what was
+        #       set in the Initial Setup UI and will not attempt to configure
+        #       anything that looks like it was configured previously in
+        #       the Anaconda UI or installation kickstart.
         users_proxy = USERS.get_proxy()
-        self.data.rootpw.seen = users_proxy.IsRootpwKickstarted
 
-        for section in sections:
-            section_msg = "%s on line %d" % (repr(section), section.lineno)
-            if section.seen:
-                log.debug("skipping %s", section_msg)
-                continue
-            log.debug("executing %s", section_msg)
-            section.execute(storage=None, ksdata=self.data, users=u)
+        if self._groups_already_configured and not reconfig_mode:
+            log.debug("skipping user group configuration - already configured")
+        elif users_proxy.Groups:  # only run of there are some groups to create
+            groups_task = users_proxy.ConfigureGroupsWithTask((util.getSysroot()))
+            task_proxy = USERS.get_proxy(groups_task)
+            log.debug("configuring user groups via %s task", task_proxy.Name)
+            sync_run_task(task_proxy)
+
+        if self._users_already_configured and not reconfig_mode:
+            log.debug("skipping user configuration - already configured")
+        elif users_proxy.Users:  # only run if there are some users to create
+            users_task = users_proxy.ConfigureUsersWithTask((util.getSysroot()))
+            task_proxy = USERS.get_proxy(users_task)
+            log.debug("configuring users via %s task", task_proxy.Name)
+            sync_run_task(task_proxy)
+
+        if self._root_password_already_configured and not reconfig_mode:
+            log.debug("skipping root password configuration - already configured")
+        else:
+            root_task = users_proxy.SetRootPasswordWithTask((util.getSysroot()))
+            task_proxy = USERS.get_proxy(root_task)
+            log.debug("configuring root password via %s task", task_proxy.Name)
+            sync_run_task(task_proxy)
 
         # Configure all addons
         log.info("executing addons")
-        self.data.addons.execute(storage=None, ksdata=self.data, users=u, payload=None)
+        self.data.addons.execute(storage=None, ksdata=self.data, users=None, payload=None)
 
         if self.external_reconfig:
             # prevent the reconfig flag from being written out
