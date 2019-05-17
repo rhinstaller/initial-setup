@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: http://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.9.43
+Version: 0.3.9.44
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -121,6 +121,10 @@ make install-po-files
 
 
 %changelog
+* Fri May 17 2019 Martin Kolman <mkolman@redhat.com> - 0.3.9.44-1
+- Update translations
+  Resolves: rhbz#1688240
+
 * Thu Jan 04 2018 Martin Kolman <mkolman@redhat.com> - 0.3.9.43-1
 - Make sure correct return code is emitted by the startup script (mkolman)
   Related: rhbz#1524785
