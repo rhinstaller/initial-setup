@@ -33,7 +33,7 @@ def read(fname):
 
 
 data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
-              ('/etc/anaconda/conf.d', glob('data/*.conf')),
+              ('/etc/initial-setup/conf.d', glob('data/*.conf')),
               ('/usr/libexec/initial-setup/',
               ["scripts/run-initial-setup", "scripts/firstboot-windowmanager",
                "scripts/initial-setup-text", "scripts/initial-setup-graphical",

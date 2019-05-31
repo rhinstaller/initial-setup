@@ -98,6 +98,10 @@ class InitialSetup(object):
             log.critical("Initial Setup needs to be run as root")
             raise InitialSetupError
 
+        # load configuration files
+        from pyanaconda.core.configuration.anaconda import conf
+        conf.set_from_files(["/etc/initial-setup/conf.d/"])
+
         if self.gui_mode:
             log.debug("running in GUI mode")
         else:
