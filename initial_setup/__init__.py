@@ -143,7 +143,7 @@ class InitialSetup(object):
         # Too bad anaconda does not have modularized logging
         log.debug("initializing the Anaconda log")
         from pyanaconda import anaconda_logging
-        anaconda_logging.init()
+        anaconda_logging.init(write_to_journal=True)
 
         # create class for launching our dbus session
         self._dbus_launcher = AnacondaDBusLauncher()
