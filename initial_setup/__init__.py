@@ -15,7 +15,6 @@ from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG, \
     SETUP_ON_BOOT_DEFAULT
 from pyanaconda.flags import flags
-from pyanaconda import screen_access
 from pyanaconda.dbus.launcher import AnacondaDBusLauncher
 from pyanaconda.modules.common.task import sync_run_task
 from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USERS, \
@@ -373,9 +372,6 @@ class InitialSetup(object):
         self._load_kickstart()
         self._setup_locale()
         self._initialize_network()
-
-        # initialize the screen access manager before launching the UI
-        screen_access.initSAM()
 
         if self.gui_mode:
             try:
