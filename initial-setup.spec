@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.70
+Version: 0.3.71
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -161,6 +161,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Jun 13 2019 Martin Kolman <mkolman@redhat.com> - 0.3.71-1
+- Don't initialize the screen access manager (vponcova)
+
 * Wed May 15 2019 Martin Kolman <mkolman@redhat.com> - 0.3.70-1
 - Adjust to changes in the Users DBus module (mkolman)
 
