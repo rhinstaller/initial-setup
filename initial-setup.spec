@@ -149,7 +149,9 @@ fi
 %{_libexecdir}/%{name}/reconfiguration-mode-enabled
 %{_unitdir}/initial-setup.service
 %{_unitdir}/initial-setup-reconfiguration.service
-%{_sysconfdir}/anaconda/conf.d/10-initial-setup.conf
+%dir %{_sysconfdir}/%{name}
+%dir %{_sysconfdir}/%{name}/conf.d
+%config %{_sysconfdir}/%{name}/conf.d/*
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh

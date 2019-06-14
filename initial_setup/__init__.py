@@ -97,6 +97,10 @@ class InitialSetup(object):
             log.critical("Initial Setup needs to be run as root")
             raise InitialSetupError
 
+        # load configuration files
+        from pyanaconda.core.configuration.anaconda import conf
+        conf.set_from_files(["/etc/initial-setup/conf.d/"])
+
         if self.gui_mode:
             log.debug("running in GUI mode")
         else:
@@ -138,7 +142,7 @@ class InitialSetup(object):
         # Too bad anaconda does not have modularized logging
         log.debug("initializing the Anaconda log")
         from pyanaconda import anaconda_logging
-        anaconda_logging.init()
+        anaconda_logging.init(write_to_journal=True)
 
         # create class for launching our dbus session
         self._dbus_launcher = AnacondaDBusLauncher()
