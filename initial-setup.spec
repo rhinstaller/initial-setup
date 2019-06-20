@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.71
+Version: 0.3.72
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -163,6 +163,11 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Jun 20 2019 Martin Kolman <mkolman@redhat.com> - 0.3.72-1
+- Set physical and system roots in the configuration file (vponcova)
+- Write Anaconda logs to journal (vponcova)
+- Read configuration files from /etc/initial-setup/conf.d (#1713506) (vponcova)
+
 * Thu Jun 13 2019 Martin Kolman <mkolman@redhat.com> - 0.3.71-1
 - Don't initialize the screen access manager (vponcova)
 
