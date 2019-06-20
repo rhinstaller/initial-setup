@@ -40,9 +40,6 @@ SUPPORTED_KICKSTART_COMMANDS = ["user",
 # set the environment so that spokes can behave accordingly
 flags.environs = [FIRSTBOOT_ENVIRON]
 
-# set root to "/", we are now in the installed system
-util.setSysroot("/")
-
 signal.signal(signal.SIGINT, signal.SIG_IGN)
 
 # setup logging
