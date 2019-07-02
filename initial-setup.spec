@@ -33,7 +33,7 @@ Requires: systemd >= 235
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
-Requires: libreport-python3
+Requires: python3-libreport
 Requires: util-linux
 Conflicts: firstboot < 19.2
 
