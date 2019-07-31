@@ -303,7 +303,7 @@ class InitialSetup(object):
         if self._groups_already_configured and not reconfig_mode:
             log.debug("skipping user group configuration - already configured")
         elif users_proxy.Groups:  # only run of there are some groups to create
-            groups_task = users_proxy.ConfigureGroupsWithTask((util.getSysroot()))
+            groups_task = users_proxy.ConfigureGroupsWithTask()
             task_proxy = USERS.get_proxy(groups_task)
             log.debug("configuring user groups via %s task", task_proxy.Name)
             sync_run_task(task_proxy)
@@ -311,7 +311,7 @@ class InitialSetup(object):
         if self._users_already_configured and not reconfig_mode:
             log.debug("skipping user configuration - already configured")
         elif users_proxy.Users:  # only run if there are some users to create
-            users_task = users_proxy.ConfigureUsersWithTask((util.getSysroot()))
+            users_task = users_proxy.ConfigureUsersWithTask()
             task_proxy = USERS.get_proxy(users_task)
             log.debug("configuring users via %s task", task_proxy.Name)
             sync_run_task(task_proxy)
@@ -319,7 +319,7 @@ class InitialSetup(object):
         if self._root_password_already_configured and not reconfig_mode:
             log.debug("skipping root password configuration - already configured")
         else:
-            root_task = users_proxy.SetRootPasswordWithTask((util.getSysroot()))
+            root_task = users_proxy.SetRootPasswordWithTask()
             task_proxy = USERS.get_proxy(root_task)
             log.debug("configuring root password via %s task", task_proxy.Name)
             sync_run_task(task_proxy)
