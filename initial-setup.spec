@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.72
+Version: 0.3.73
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -163,6 +163,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed Jul 31 2019 Martin Kolman <mkolman@redhat.com> - 0.3.73-1
+- Remove system root from DBus calls (vponcova)
+- Correct the name for libreport Python3 require (mkutlak)
+
 * Thu Jun 20 2019 Martin Kolman <mkolman@redhat.com> - 0.3.72-1
 - Set physical and system roots in the configuration file (vponcova)
 - Write Anaconda logs to journal (vponcova)
