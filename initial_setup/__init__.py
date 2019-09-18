@@ -267,7 +267,7 @@ class InitialSetup(object):
         log.info("applying changes")
 
         services_proxy = SERVICES.get_proxy()
-        reconfig_mode = services_proxy.SetSetupOnBoot == SETUP_ON_BOOT_RECONFIG
+        reconfig_mode = services_proxy.SetupOnBoot == SETUP_ON_BOOT_RECONFIG
 
         sections = [self.data.keyboard, self.data.lang, self.data.timezone]
 
