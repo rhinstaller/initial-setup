@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.73
+Version: 0.3.74
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -163,6 +163,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed Sep 18 2019 Martin Kolman <mkolman@redhat.com> - 0.3.74-1
+- Fix typo in reconfig mode detection (#1752554) (mkolman)
+
 * Wed Jul 31 2019 Martin Kolman <mkolman@redhat.com> - 0.3.73-1
 - Remove system root from DBus calls (vponcova)
 - Correct the name for libreport Python3 require (mkutlak)
