@@ -14,8 +14,11 @@ from initial_setup.product import eula_available
 #                         leaving them in would result in duplicate input on and output from
 #                         the default console
 # - ptmx -> pseudoterminal configuration device not intended as general user-facing console that
-#           starts to block on write after some ammount of characters has been written to it
-TUI_EXCLUDED_CONSOLES = {"console", "tty", "tty0", "ptmx"}
+#           starts to block on write after some amount of characters has been written to it
+# - ttyUSB0-4 -> used by some GSM modems apparently, blocks when TUI tries to use it,
+#                 see rhbz#1755580 for more details about the hardware in question
+
+TUI_EXCLUDED_CONSOLES = {"console", "tty", "tty0", "ptmx", "ttyUSB0", "ttyUSB1", "ttyUSB2", "ttyUSB3", "ttyUSB4"}
 
 def collect_spokes(mask_paths, spoke_parent_class):
     """Return a list of all spoke subclasses that should appear for a given
