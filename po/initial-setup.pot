@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-18 12:32+0200\n"
+"POT-Creation-Date: 2019-10-03 19:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,20 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../initial_setup/common.py:137
+#: ../initial_setup/common.py:140
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with an unusable system if you do. Unless the License "
 "agreement is accepted, the system will be rebooted."
 msgstr ""
 
-#: ../initial_setup/common.py:141
+#: ../initial_setup/common.py:144
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with unusable system if you do."
 msgstr ""
 
-#: ../initial_setup/common.py:148
+#: ../initial_setup/common.py:151
 msgid "LICENSING"
 msgstr ""
 
