@@ -290,6 +290,14 @@ class InitialSetup(object):
             log.debug("executing %s", section_msg)
             section.execute()
 
+        # Configure persistent hostname
+        network_proxy = NETWORK.get_proxy()
+        network_task = network_proxy.ConfigureHostnameWithTask(True)
+        task_proxy = NETWORK.get_proxy(network_task)
+        sync_run_task(task_proxy)
+        # Set current hostname
+        network_proxy.SetCurrentHostname(network_proxy.Hostname)
+
         # Configure groups, users & root account
         #
         # NOTE: We only configure groups, users & root account if the respective
