@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.75
+Version: 0.3.76
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -163,6 +163,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri Oct 04 2019 Martin Kolman <mkolman@redhat.com> - 0.3.76-1
+- Fix configuration of network hostname (#1757960) (rvykydal)
+
 * Thu Oct 03 2019 Martin Kolman <mkolman@redhat.com> - 0.3.75-1
 - Blacklist some USB consoles from multi-TTY handler (#1755580) (mkolman)
 
