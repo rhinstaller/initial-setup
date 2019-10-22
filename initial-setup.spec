@@ -55,7 +55,7 @@ The initial-setup-gui package contains a graphical user interface for the
 initial-setup utility.
 
 %prep
-%setup -q
+%autosetup -p 1
 
 # remove upstream egg-info
 rm -rf *.egg-info
