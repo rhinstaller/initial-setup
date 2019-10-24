@@ -10,7 +10,6 @@ import traceback
 import atexit
 from initial_setup.product import eula_available
 from initial_setup import initial_setup_log
-from pyanaconda.core import util
 from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG, \
     SETUP_ON_BOOT_DEFAULT
@@ -19,6 +18,8 @@ from pyanaconda.dbus.launcher import AnacondaDBusLauncher
 from pyanaconda.modules.common.task import sync_run_task
 from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USERS, \
     SERVICES, NETWORK
+from pyanaconda.modules.common.structures.kickstart import KickstartReport
+
 
 class InitialSetupError(Exception):
     pass
@@ -221,12 +222,12 @@ class InitialSetup(object):
 
         # if we got this far the kickstart should be valid, so send it to Boss as well
         boss = BOSS.get_proxy()
+        report = KickstartReport.from_structure(
+            boss.ReadKickstartFile(kickstart_path)
+        )
 
-        boss.SplitKickstart(kickstart_path)
-        errors = boss.DistributeKickstart()
-
-        if errors:
-            message = "\n\n".join("{error_message}".format_map(e) for e in errors)
+        if not report.is_valid():
+            message = "\n\n".join(map(str, report.error_messages))
             raise InitialSetupError(message)
 
         if self.external_reconfig:
@@ -269,14 +270,13 @@ class InitialSetup(object):
         services_proxy = SERVICES.get_proxy()
         reconfig_mode = services_proxy.SetupOnBoot == SETUP_ON_BOOT_RECONFIG
 
-        sections = [self.data.keyboard, self.data.lang, self.data.timezone]
+        sections = [self.data.keyboard, self.data.timezone]
 
         # data.selinux
         # data.firewall
 
         localization_proxy = LOCALIZATION.get_proxy()
         self.data.keyboard.seen = localization_proxy.KeyboardKickstarted
-        self.data.lang.seen = localization_proxy.LanguageKickstarted
 
         timezone_proxy = TIMEZONE.get_proxy()
         self.data.timezone.seen = timezone_proxy.Kickstarted
@@ -289,6 +289,11 @@ class InitialSetup(object):
                 continue
             log.debug("executing %s", section_msg)
             section.execute()
+
+        # Configure the localization.
+        for task_path in localization_proxy.InstallWithTasks():
+            task_proxy = LOCALIZATION.get_proxy(task_path)
+            sync_run_task(task_proxy)
 
         # Configure persistent hostname
         network_proxy = NETWORK.get_proxy()
