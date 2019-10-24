@@ -270,14 +270,13 @@ class InitialSetup(object):
         services_proxy = SERVICES.get_proxy()
         reconfig_mode = services_proxy.SetupOnBoot == SETUP_ON_BOOT_RECONFIG
 
-        sections = [self.data.keyboard, self.data.lang, self.data.timezone]
+        sections = [self.data.keyboard, self.data.timezone]
 
         # data.selinux
         # data.firewall
 
         localization_proxy = LOCALIZATION.get_proxy()
         self.data.keyboard.seen = localization_proxy.KeyboardKickstarted
-        self.data.lang.seen = localization_proxy.LanguageKickstarted
 
         timezone_proxy = TIMEZONE.get_proxy()
         self.data.timezone.seen = timezone_proxy.Kickstarted
@@ -290,6 +289,11 @@ class InitialSetup(object):
                 continue
             log.debug("executing %s", section_msg)
             section.execute()
+
+        # Configure the localization.
+        for task_path in localization_proxy.InstallWithTasks():
+            task_proxy = LOCALIZATION.get_proxy(task_path)
+            sync_run_task(task_proxy)
 
         # Configure persistent hostname
         network_proxy = NETWORK.get_proxy()
