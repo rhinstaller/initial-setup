@@ -341,6 +341,11 @@ class InitialSetup(object):
         log.info("executing addons")
         self.data.addons.execute(storage=None, ksdata=self.data, users=None, payload=None)
 
+        boss_proxy = BOSS.get_proxy()
+        task_path = boss_proxy.InstallSystemWithTask()
+        task_proxy = BOSS.get_proxy(task_path)
+        sync_run_task(task_proxy)
+
         if self.external_reconfig:
             # prevent the reconfig flag from being written out
             # to kickstart if neither /etc/reconfigSys or /.unconfigured
