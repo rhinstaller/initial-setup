@@ -14,7 +14,7 @@ from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG, \
     SETUP_ON_BOOT_DEFAULT
 from pyanaconda.flags import flags
-from pyanaconda.core.startup.dbus_launcher import AnacondaDBusLauncher
+from pyanaconda.dbus.launcher import AnacondaDBusLauncher
 from pyanaconda.modules.common.task import sync_run_task
 from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USERS, \
     SERVICES, NETWORK
