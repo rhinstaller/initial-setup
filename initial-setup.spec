@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.77
+Version: 0.3.78
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -163,6 +163,12 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Nov 12 2019 Martin Kolman <martin.kolman@gmail.com> - 0.3.78-1
+- Revert "Fix import of the DBus launcher" (martin.kolman)
+- Run the installation tasks of the DBus addons (vponcova)
+- Run the installation tasks of the Timezone module (vponcova)
+- Fix import of the DBus launcher (vponcova)
+
 * Thu Oct 24 2019 Martin Kolman <mkolman@redhat.com> - 0.3.77-1
 - Run the installation tasks of the Localization module (vponcova)
 - Use new DBus support for reading a kickstart file (vponcova)
