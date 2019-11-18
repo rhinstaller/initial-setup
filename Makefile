@@ -29,9 +29,7 @@ PYTHON=python3
 
 ZANATA_PULL_ARGS = --transdir po/
 ZANATA_PUSH_ARGS = --srcdir po/ --push-type source --force
-
-# the Zanata Python client is unfortunately Python 2 only at the moment
-ZANATA_CLIENT_PKG=python2-zanata-client
+ZANATA_CLIENT_BIN=zanata
 
 default: all
 
@@ -96,11 +94,11 @@ potfile:
 	$(MAKE) -C po potfile
 
 po-pull:
-	rpm -q $(ZANATA_CLIENT_PKG) &>/dev/null || ( echo "need to run: dnf install $(ZANATA_CLIENT_PKG)"; exit 1 )
-	zanata pull $(ZANATA_PULL_ARGS)
+	which $(ZANATA_CLIENT_BIN) &>/dev/null || ( echo "need to install zanata python client package"; exit 1 )
+	$(ZANATA_CLIENT_BIN) $(ZANATA_PULL_ARGS)
 
 bumpver: potfile
-	zanata push $(ZANATA_PUSH_ARGS) || ( echo "zanata push failed"; exit 1 )
+	$(ZANATA_CLIENT_BIN) push $(ZANATA_PUSH_ARGS) || ( echo "zanata push failed"; exit 1 )
 	@NEWSUBVER=$$((`echo $(VERSION) |cut -d . -f 3` + 1)) ; \
 	NEWVERSION=`echo $(VERSION).$$NEWSUBVER |cut -d . -f 1,2,4` ; \
 	DATELINE="* `LANG=c date "+%a %b %d %Y"` `git config user.name` <`git config user.email`> - $$NEWVERSION-1"  ; \
