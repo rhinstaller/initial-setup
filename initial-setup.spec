@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.78
+Version: 0.3.79
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -163,6 +163,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon Nov 18 2019 Martin Kolman <mkolman@redhat.com> - 0.3.79-1
+- Fix import of the DBus launcher (vponcova)
+
 * Tue Nov 12 2019 Martin Kolman <martin.kolman@gmail.com> - 0.3.78-1
 - Revert "Fix import of the DBus launcher" (martin.kolman)
 - Run the installation tasks of the DBus addons (vponcova)
