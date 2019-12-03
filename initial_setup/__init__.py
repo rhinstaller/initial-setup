@@ -270,28 +270,20 @@ class InitialSetup(object):
         services_proxy = SERVICES.get_proxy()
         reconfig_mode = services_proxy.SetupOnBoot == SETUP_ON_BOOT_RECONFIG
 
-        sections = [self.data.keyboard]
-
         # data.selinux
         # data.firewall
-
-        localization_proxy = LOCALIZATION.get_proxy()
-        self.data.keyboard.seen = localization_proxy.KeyboardKickstarted
-
-        log.info("executing kickstart")
-        for section in sections:
-            section_msg = "%s on line %d" % (repr(section), section.lineno)
-            if section.seen:
-                log.debug("skipping %s", section_msg)
-                continue
-            log.debug("executing %s", section_msg)
-            section.execute()
 
         # Configure the timezone.
         timezone_proxy = TIMEZONE.get_proxy()
         for task_path in timezone_proxy.InstallWithTasks():
             task_proxy = TIMEZONE.get_proxy(task_path)
             sync_run_task(task_proxy)
+
+        # Get missing keyboard values
+        localization_proxy = LOCALIZATION.get_proxy()
+        task_path = localization_proxy.PopulateMissingKeyboardConfigurationWithTask()
+        task_proxy = LOCALIZATION.get_proxy(task_path)
+        sync_run_task(task_proxy)
 
         # Configure the localization.
         for task_path in localization_proxy.InstallWithTasks():
