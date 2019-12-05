@@ -279,13 +279,8 @@ class InitialSetup(object):
             task_proxy = TIMEZONE.get_proxy(task_path)
             sync_run_task(task_proxy)
 
-        # Get missing keyboard values
-        localization_proxy = LOCALIZATION.get_proxy()
-        task_path = localization_proxy.PopulateMissingKeyboardConfigurationWithTask()
-        task_proxy = LOCALIZATION.get_proxy(task_path)
-        sync_run_task(task_proxy)
-
         # Configure the localization.
+        localization_proxy = LOCALIZATION.get_proxy()
         for task_path in localization_proxy.InstallWithTasks():
             task_proxy = LOCALIZATION.get_proxy(task_path)
             sync_run_task(task_proxy)
