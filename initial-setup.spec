@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.79
+Version: 0.3.80
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -163,6 +163,11 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Dec 10 2019 Martin Kolman <mkolman@redhat.com> - 0.3.80-1
+- Do not call a task which has been moved into install keyboard task (rvykydal)
+- Adapt to changes in localization module (rvykydal)
+- Fix Zanata client detection in Makefile (mkolman)
+
 * Mon Nov 18 2019 Martin Kolman <mkolman@redhat.com> - 0.3.79-1
 - Fix import of the DBus launcher (vponcova)
 
