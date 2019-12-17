@@ -95,7 +95,7 @@ potfile:
 
 po-pull:
 	which $(ZANATA_CLIENT_BIN) &>/dev/null || ( echo "need to install zanata python client package"; exit 1 )
-	$(ZANATA_CLIENT_BIN) $(ZANATA_PULL_ARGS)
+	$(ZANATA_CLIENT_BIN) pull $(ZANATA_PULL_ARGS)
 
 bumpver: potfile
 	$(ZANATA_CLIENT_BIN) push $(ZANATA_PUSH_ARGS) || ( echo "zanata push failed"; exit 1 )
