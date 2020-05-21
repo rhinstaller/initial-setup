@@ -26,7 +26,7 @@ BuildRequires: glade-devel
 BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: intltool
 
-Requires: python3
+Requires: %{__python3}
 Requires: anaconda-tui >= %{anacondaver}
 Requires: python3-simpleline >= 1.4
 Requires: systemd >= 235
