@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.81
+Version: 0.3.81.1
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -13,7 +13,7 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
-%define anacondaver 33.16.3.1-1
+%define anacondaver 34.16.3.1-1
 
 License: GPLv2+
 BuildRequires: gettext
@@ -162,6 +162,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon May 25 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.1-1
+- Rebased Initial Setup to upstream version 0.3.81
+  Resolves: rhbz#1696277
+
 * Fri May 22 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81-1
 - Use macro for Python 3 requirement in spec file (mkolman)
 - Remove outdated dependency on python3-libreport (vslavik)
