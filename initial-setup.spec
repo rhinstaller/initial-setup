@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.81.2
+Version: 0.3.81.3
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -161,6 +161,9 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue May 26 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.3-1
+- Fix typo in rebased Anaconda version (mkolman)
+
 * Mon May 25 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.2-1
 - Revert "Handle simpleline having an empty stack" (mkolman)
   Related: rhbz#1696277
