@@ -48,6 +48,11 @@ Requires: xorg-x11-xinit
 Requires: xorg-x11-server-Xorg
 Requires: %{name} = %{version}-%{release}
 
+# native i686 installations are not supported on RHEL8 and Initial Setup
+# is not a i686 compatibility library, so building it for i686 does not
+# make sense
+ExcludeArch: i686
+
 %description gui
 The initial-setup-gui package contains a graphical user interface for the
 initial-setup utility.
