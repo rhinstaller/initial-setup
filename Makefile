@@ -29,10 +29,6 @@ PREFIX=/usr
 
 PYTHON=python3
 
-ZANATA_PULL_ARGS = --transdir po/
-ZANATA_PUSH_ARGS = --srcdir po/ --push-type source --force
-ZANATA_CLIENT_BIN=zanata
-
 # LOCALIZATION SETTINGS
 L10N_REPOSITORY ?= https://github.com/rhinstaller/initial-setup-l10n.git
 L10N_REPOSITORY_RW ?= git@github.com:rhinstaller/initial-setup-l10n.git
@@ -136,8 +132,9 @@ po-push: potfile
 		echo "$$TEMP_DIR" ; \
 	fi ;
 
-bumpver: potfile
-	$(ZANATA_CLIENT_BIN) push $(ZANATA_PUSH_ARGS) || ( echo "zanata push failed"; exit 1 )
+bumpver: po-push
+	read -p "Please see the above message. Verify and push localization commit. Press anything to continue." -n 1 -r
+
 	@NEWSUBVER=$$((`echo $(VERSION) |cut -d . -f 4` + 1)) ; \
 	NEWVERSION=`echo $(VERSION).$$NEWSUBVER |cut -d . -f 1,2,3,5` ; \
 	DATELINE="* `LANG=c date "+%a %b %d %Y"` `git config user.name` <`git config user.email`> - $$NEWVERSION-1"  ; \
