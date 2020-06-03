@@ -1,6 +1,6 @@
 # Taken from the anaconda and python-meh sources
 #
-# Copyright (C) 2009-2015  Red Hat, Inc.
+# Copyright (C) 2009-2020  Red Hat, Inc.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
@@ -18,6 +18,8 @@
 # Author: Martin Sivak <msivak@redhat.com>
 # Author: Martin Kolman <mkolman@redhat.com>
 
+include ./branch-config.mk
+
 PKGNAME=initial-setup
 VERSION=$(shell awk '/Version:/ { print $$2 }' $(PKGNAME).spec)
 RELEASE=$(shell awk '/Release:/ { print $$2 }' $(PKGNAME).spec | sed -e 's|%.*$$||g')
@@ -30,6 +32,12 @@ PYTHON=python3
 ZANATA_PULL_ARGS = --transdir po/
 ZANATA_PUSH_ARGS = --srcdir po/ --push-type source --force
 ZANATA_CLIENT_BIN=zanata
+
+# LOCALIZATION SETTINGS
+L10N_REPOSITORY ?= https://github.com/rhinstaller/initial-setup-l10n.git
+L10N_REPOSITORY_RW ?= git@github.com:rhinstaller/initial-setup-l10n.git
+# Branch used in localization repository. This should be master all the time.
+GIT_L10N_BRANCH ?= master
 
 default: all
 
@@ -94,8 +102,10 @@ potfile:
 	$(MAKE) -C po potfile
 
 po-pull:
-	which $(ZANATA_CLIENT_BIN) &>/dev/null || ( echo "need to install zanata python client package"; exit 1 )
-	$(ZANATA_CLIENT_BIN) pull $(ZANATA_PULL_ARGS)
+	TEMP_DIR=$$(mktemp --tmpdir -d initial-setup-localization-XXXXXXXXXX) && \
+	git clone --depth 1 -b $(GIT_L10N_BRANCH) -- $(L10N_REPOSITORY) $$TEMP_DIR && \
+	cp $$TEMP_DIR/$(L10N_DIR)/*.po ./po/ && \
+	rm -rf $$TEMP_DIR
 
 bumpver: potfile
 	$(ZANATA_CLIENT_BIN) push $(ZANATA_PUSH_ARGS) || ( echo "zanata push failed"; exit 1 )
