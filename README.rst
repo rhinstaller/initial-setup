@@ -1,5 +1,10 @@
 Initial Setup
 =============
+
+.. image:: https://translate.fedoraproject.org/widgets/initial-setup/-/master/svg-badge.svg
+    :alt: Translation status
+    :target: https://translate.fedoraproject.org/engage/initial-setup/?utm_source=widget
+
 Initial Setup is an application that can run during the first start
 of a newly installed computer and makes it possible to configure the
 computer according to the needs of the user.
