@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.81
+Version: 0.3.82
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -162,6 +162,13 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon Jun 08 2020 Martin Kolman <mkolman@redhat.com> - 0.3.82-1
+- Add translation badge to the README file (jkonecny)
+- Remove unused PREFIX variable from Makefile (jkonecny)
+- Use new po-push instead of Zanata (jkonecny)
+- Add po-push using localization repository (jkonecny)
+- Use translation repository to pull the translations (jkonecny)
+
 * Fri May 22 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81-1
 - Use macro for Python 3 requirement in spec file (mkolman)
 - Remove outdated dependency on python3-libreport (vslavik)
