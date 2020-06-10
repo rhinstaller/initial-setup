@@ -33,12 +33,20 @@ As with Anaconda, Initial Setup has both a GUI and TUI version and the package i
 into a core and GUI & TUI sub packages.
 
 As Initial Setup needs to run during the early boot, it is started by a systemd unit
-configured to start before the normal login screen. On RHEL7 Initial Setup is by default
-followed by the legacy Firstboot utility, which hosts the Subscription Manager plugin.
-If the given OS instance uses the Gnome 3 desktop environment, Firstboot is followed by
-the Gnome Initial Setup, which enables the user to customize their computer even more.
+configured to start before the normal login screen.
+
+On RHEL7 Initial Setup is by default followed by the legacy Firstboot utility,
+which at the moment does not have any plugins by default and should thus terminate
+immediately. If the given OS instance uses the Gnome 3 desktop environment,
+Firstboot is followed by the Gnome Initial Setup(GIS), which enables the user to customize
+their computer even more.
+
+On RHEL8 Firstboot is no longer available and thus Initial Setup is followed by Gnome Initial Setup
+on RHEL Workstation installs and directly with the login screen elsewhere.
+
 On Fedora Initial Setup is followed directly by GIS, provided Gnome 3 is installed.
 
+* RHEL8: IS -> [GIS]
 * RHEL7: IS -> Firstboot -> [GIS]
 * Fedora: IS -> [GIS]
 
@@ -58,5 +66,3 @@ Contributing
 ============
 * Initial Setup is released under GPLv2+
 * upstream source code repository is on GitHub: https://github.com/rhinstaller/initial-setup
-* for patch review Initial Setup uses the Anaconda Patches mailing list: https://lists.fedorahosted.org/mailman/listinfo/anaconda-patches
-  (please note that you need to be subscribed to the list to send patches, due to previous issues with SPAM on the list)
