@@ -1,6 +1,7 @@
 include COPYING
 include README.rst
 include Makefile
+include branch-config.mk
 recursive-include systemd *
 recursive-include scripts *
 recursive-include po *.po *.pot Makefile
