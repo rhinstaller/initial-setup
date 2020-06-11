@@ -1,6 +1,10 @@
 Initial Setup
 =============
 
+.. image:: https://copr.fedorainfracloud.org/coprs/g/rhinstaller/Anaconda/package/initial-setup/status_image/last_build.png
+    :alt: Build status
+    :target: https://copr.fedorainfracloud.org/coprs/g/rhinstaller/Anaconda/package/initial-setup/
+
 .. image:: https://translate.fedoraproject.org/widgets/initial-setup/-/master/svg-badge.svg
     :alt: Translation status
     :target: https://translate.fedoraproject.org/engage/initial-setup/?utm_source=widget
