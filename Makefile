@@ -96,7 +96,7 @@ potfile:
 	$(MAKE) -C po potfile
 
 po-pull:
-	TEMP_DIR=$$(mktemp --tmpdir -d initial-setup-localization-XXXXXXXXXX) && \
+	TEMP_DIR=$$(mktemp --tmpdir -d $(PKGNAME)-localization-XXXXXXXXXX) && \
 	git clone --depth 1 -b $(GIT_L10N_BRANCH) -- $(L10N_REPOSITORY) $$TEMP_DIR && \
 	cp $$TEMP_DIR/$(L10N_DIR)/*.po ./po/ && \
 	rm -rf $$TEMP_DIR
