@@ -81,10 +81,10 @@ class InitialSetup(object):
         self._reboot_on_quit = False
 
         # parse any command line arguments
-        args = self._parse_arguments()
+        self._args = self._parse_arguments()
 
         # initialize logging
-        initial_setup_log.init(stdout_log=not args.no_stdout_log)
+        initial_setup_log.init(stdout_log=not self._args.no_stdout_log)
         global logging_initialized
         logging_initialized = True
 
@@ -189,6 +189,8 @@ class InitialSetup(object):
                                          description="Initial Setup is can run during the first start of a newly installed"
                                          "system to configure it according to the needs of the user.")
         parser.add_argument("--no-stdout-log", action="store_true", default=False, help="don't log to stdout")
+        parser.add_argument("--no-multi-tty", action="store_true", default=False,
+                            help="Don't run on multiple consoles.")
         parser.add_argument('--version', action='version', version=__version__)
 
         # parse arguments and return the result
@@ -409,7 +411,7 @@ class InitialSetup(object):
 
             # Initialize the UI
             log.debug("initializing TUI")
-            ui = initial_setup.tui.InitialSetupTextUserInterface()
+            ui = initial_setup.tui.InitialSetupTextUserInterface(self._args)
 
         # Pass the data object to user interface
         log.debug("setting up the UI")
@@ -433,8 +435,8 @@ class InitialSetup(object):
         # apply changes
         self._apply()
 
-        # in the TUI mode shutdown the multi TTY handler
-        if not self.gui_mode:
+        # in the TUI mode shutdown the multi TTY handler (if any)
+        if not self.gui_mode and ui.multi_tty_handler:
             # TODO: wait for this to finish or make it blockng ?
             ui.multi_tty_handler.shutdown()
 

@@ -225,34 +225,50 @@ class InitialSetupTextUserInterface(TextUserInterface):
 
     ENVIRONMENT = "firstboot"
 
-    def __init__(self):
+    def __init__(self, cli_args):
+        """Initialize the Initial Setup text UI.
+
+        :param cli_args: command line arguments parsed by Argparse
+        """
         TextUserInterface.__init__(self, None, None, product_title, is_final,
                                    quitMessage=QUIT_MESSAGE)
 
-        # redirect stdin and stdout to custom pipes
+        self.multi_tty_handler = None
+        self._use_multi_tty_handler = not cli_args.no_multi_tty
 
-        # stdin
-        stdin_fd, tui_stdin_fd = os.pipe()
-        sys.stdin = os.fdopen(stdin_fd, "r")
+        # In some case, such as when running Initial Setup directly
+        # in console or from an SSH session script, we should not
+        # start the multi TTY handler and just run in the single
+        # local console.
+        if self._use_multi_tty_handler:
+            # redirect stdin and stdout to custom pipes
 
-        # stdout
-        tui_stdout_fd, stdout_fd = os.pipe()
-        sys.stdout = os.fdopen(stdout_fd, "w")
+            # stdin
+            stdin_fd, tui_stdin_fd = os.pipe()
+            sys.stdin = os.fdopen(stdin_fd, "r")
 
-        # instantiate and start the multi TTY handler
-        self.multi_tty_handler = MultipleTTYHandler(tui_stdin_fd=tui_stdin_fd, tui_stdout_fd=tui_stdout_fd)
-        # start the multi-tty handler
-        threading.threadMgr.add(
-            threading.AnacondaThread(name="initial_setup_multi_tty_thread", target=self.multi_tty_handler.run)
-        )
+            # stdout
+            tui_stdout_fd, stdout_fd = os.pipe()
+            sys.stdout = os.fdopen(stdout_fd, "w")
+
+            # instantiate and start the multi TTY handler
+            self.multi_tty_handler = MultipleTTYHandler(tui_stdin_fd=tui_stdin_fd,
+                                                        tui_stdout_fd=tui_stdout_fd)
+            # start the multi-tty handler
+            threading.threadMgr.add(
+                threading.AnacondaThread(name="initial_setup_multi_tty_thread",
+                                         target=self.multi_tty_handler.run)
+            )
 
     def setup(self, data):
         TextUserInterface.setup(self, data)
-        # Make sure custom getpass() from multi-tty handler is used instead of regular getpass.
-        # This needs to be done as the default getpass() implementation cant work with arbitrary
-        # consoles and always defaults to /dev/tty for input.
-        configuration = App.get_configuration()
-        configuration.password_function = self.multi_tty_handler.custom_getpass
+        if self._use_multi_tty_handler:
+            # Make sure custom getpass() from multi-tty handler is used instead
+            # of regular getpass. This needs to be done as the default getpass()
+            # implementation cant work with arbitrary consoles and always defaults
+            # to /dev/tty for input.
+            configuration = App.get_configuration()
+            configuration.password_function = self.multi_tty_handler.custom_getpass
 
     def _list_hubs(self):
         return [InitialSetupMainHub]
