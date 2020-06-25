@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.81.4
+Version: 0.3.81.5
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -166,6 +166,17 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Jun 25 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.5-1
+- Disable multi TTY handler when running in SSH session (mkolman)
+- Add CLI option to disable multi TTY handler (mkolman)
+- Add PEP8 Speaks configuration (mkolman)
+- Add missing branch config to manifest file (jkonecny)
+- Add translation badge to the README file (jkonecny)
+- Remove unused PREFIX variable from Makefile (jkonecny)
+- Use new po-push instead of Zanata (jkonecny)
+- Add po-push using localization repository (jkonecny)
+- Use translation repository to pull the translations (jkonecny)
+
 * Tue May 26 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.4-1
 - Do not build Initial Setup on i686 (mkolman)
   Related: rhbz#1696277
