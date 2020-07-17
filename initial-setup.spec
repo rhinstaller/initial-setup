@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.81.5
+Version: 0.3.81.6
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -112,6 +112,9 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri Jul 17 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.6-1
+- Remove old failing pre scriptlet (mkolman)
+
 * Thu Jun 25 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.5-1
 - Disable multi TTY handler when running in SSH session (mkolman)
 - Add CLI option to disable multi TTY handler (mkolman)
