@@ -78,33 +78,6 @@ make DESTDIR=%{buildroot} install
 %clean
 rm -rf %{buildroot}
 
-%pre
-# There is a possibility that an initial setup service might be running
-# during package upgrade, which can together with an old version
-# of initial setup (<= 0.3.36) cause the rpm transaction to deadlock.
-# So turn of and disable any Initial Setup services if the pre
-# scriptlet is running during upgrade or package removal to prevent
-# the deadlock.
-
-# upgrade or package removal only
-if [ $1 -gt 1 ] ; then
-    IS_GRAPHICAL="initial-setup-graphical.service"
-    IS_TEXT="initial-setup-text.service"
-    IS_GRAPHICAL_AVAILABLE=0
-    IS_TEXT_AVAILABLE=0
-    # check if the Initial Setup unit is enabled and the executable is available
-    systemctl is-enabled $IS_GRAPHICAL && IS_GRAPHICAL_AVAILABLE=1
-    systemctl is-enabled $IS_TEXT && IS_TEXT_AVAILABLE=1
-    if [ $IS_GRAPHICAL_AVAILABLE -eq 1 ]; then
-        systemctl stop $IS_GRAPHICAL
-        systemctl disable $IS_GRAPHICAL
-    fi
-    if [ $IS_TEXT_AVAILABLE -eq 1 ]; then
-        systemctl stop $IS_TEXT
-        systemctl disable $IS_TEXT
-    fi
-fi
-
 %post
 %systemd_post initial-setup.service
 
@@ -113,33 +86,6 @@ fi
 
 %postun
 %systemd_postun initial-setup.service
-
-%pre gui
-# There is a possibility that an initial setup service might be running
-# during package upgrade, which can together with an old version
-# of initial setup (<= 0.3.36) cause the rpm transaction to deadlock.
-# So turn off and disable any Initial Setup services if the pre
-# scriptlet is running during upgrade or package removal to prevent
-# the deadlock.
-
-# upgrade or package removal only
-if [ $1 -gt 1 ] ; then
-    IS_GRAPHICAL="initial-setup-graphical.service"
-    IS_TEXT="initial-setup-text.service"
-    IS_GRAPHICAL_AVAILABLE=0
-    IS_TEXT_AVAILABLE=0
-    # check if the Initial Setup unit is enabled and the executable is available
-    systemctl is-enabled $IS_GRAPHICAL && IS_GRAPHICAL_AVAILABLE=1
-    systemctl is-enabled $IS_TEXT && IS_TEXT_AVAILABLE=1
-    if [ $IS_GRAPHICAL_AVAILABLE -eq 1 ]; then
-        systemctl stop $IS_GRAPHICAL
-        systemctl disable $IS_GRAPHICAL
-    fi
-    if [ $IS_TEXT_AVAILABLE -eq 1 ]; then
-        systemctl stop $IS_TEXT
-        systemctl disable $IS_TEXT
-    fi
-fi
 
 %files -f %{name}.lang
 %doc README.rst
