@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.82
+Version: 0.3.83
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -162,6 +162,13 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Wed Aug 19 2020 Martin Kolman <mkolman@redhat.com> - 0.3.83-1
+- Add PEP8 Speaks configuration (mkolman)
+- Remove hard coded name of the translation repo in tmp (jkonecny)
+- Update README.rst (mkolman)
+- Add missing branch config to manifest file (jkonecny)
+- Add COPR daily builds badge (jkonecny)
+
 * Mon Jun 08 2020 Martin Kolman <mkolman@redhat.com> - 0.3.82-1
 - Add translation badge to the README file (jkonecny)
 - Remove unused PREFIX variable from Makefile (jkonecny)
