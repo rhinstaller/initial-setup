@@ -34,9 +34,14 @@ class MultipleTTYHandler(object):
         self._tui_stdin_fd = tui_stdin_fd
         self._tui_stdin = os.fdopen(tui_stdin_fd, "w")
 
+        self._tui_active_out_fd, active_out_fd = os.pipe()
+        self._tui_active_out = os.fdopen(self._tui_active_out_fd, "r")
+        self._active_out = os.fdopen(active_out_fd, "w")
+
         self._shutdown = False
 
-        self._active_console = None
+        self._active_console_in = None
+        self._active_console_out = None
 
         self._console_read_fos = {}
         self._console_write_fos = []
@@ -82,6 +87,7 @@ class MultipleTTYHandler(object):
         fds = list(self._console_read_fos.keys())
         # as well as from the anaconda stdout
         fds.append(self._tui_stdout_fd)
+        fds.append(self._tui_active_out_fd)
         log.info("multi TTY handler starting")
         while True:
             # Watch the consoles and IS TUI stdout for data and
@@ -93,41 +99,58 @@ class MultipleTTYHandler(object):
             if self._shutdown:
                 log.info("multi TTY handler shutting down")
                 break
-            for fd in rlist:
-                if fd == self._tui_stdout_fd:
-                    # We need to set the TUI stdout fd to non-blocking,
-                    # as otherwise reading from it would (predictably) result in
-                    # the readline() function blocking once it runs out of data.
-                    os.set_blocking(fd, False)
+            if self._tui_stdout_fd in rlist:
+                # We need to set the TUI stdout fd to non-blocking,
+                # as otherwise reading from it would (predictably) result in
+                # the readline() function blocking once it runs out of data.
+                os.set_blocking(self._tui_stdout_fd, False)
 
-                    # The IS TUI wants to write something,
-                    # read all the lines.
-                    lines = self._tui_stdout.readlines()
+                # The IS TUI wants to write something,
+                # read all the lines.
+                lines = self._tui_stdout.readlines()
 
-                    # After we finish reading all the data we need to set
-                    # the TUI stdout fd to blocking again.
-                    # Otherwise the fd will not be usable when we try to read from
-                    # it again for unclear reasons.
-                    os.set_blocking(fd, True)
+                # After we finish reading all the data we need to set
+                # the TUI stdout fd to blocking again.
+                # Otherwise the fd will not be usable when we try to read from
+                # it again for unclear reasons.
+                os.set_blocking(self._tui_stdout_fd, True)
 
-                    lines.append("\n")  # seems to get lost somewhere on the way
+                lines.append("\n")  # seems to get lost somewhere on the way
 
-                    # Write all the lines IS wrote to stdout to all consoles
-                    # that we consider usable for the IS TUI.
-                    for console_fo in self._console_write_fos.values():
-                        for one_line in lines:
-                            try:
-                                console_fo.write(one_line)
-                            except OSError:
-                                log.exception("failed to write %s to console %s", one_line, console_fo)
-                else:
+                # Write all the lines IS wrote to stdout to all consoles
+                # that we consider usable for the IS TUI.
+                for console_fo in self._console_write_fos.values():
+                    for one_line in lines:
+                        try:
+                            console_fo.write(one_line)
+                        except OSError:
+                            log.exception("failed to write %s to console %s", one_line, console_fo)
+
+                # Don't go processing the events on other file descriptors until
+                # we're done with everything that's supposed to be on stdout
+                continue
+            elif self._tui_active_out_fd in rlist:
+                # Essentially the same as above but for the acrive console only
+                os.set_blocking(self._tui_active_out_fd, False)
+                lines = self._tui_active_out.readlines()
+                os.set_blocking(self._tui_active_out_fd, True)
+                write_fo = self._active_console_out
+                try:
+                    for one_line in lines:
+                        write_fo.write(one_line)
+                    write_fo.flush()
+                except OSError:
+                    log.exception("failed to write %s to active console", lines)
+            else:
+                for fd in rlist:
                     # Someone typed some input to a console and hit enter,
                     # forward the input to the IS TUI stdin.
                     read_fo = self._console_read_fos[fd]
                     write_fo = self._console_write_fos[fd]
                     # as the console is getting input we consider it to be
                     # the currently active console
-                    self._active_console = read_fo, write_fo
+                    self._active_console_in = read_fo
+                    self._active_console_out = write_fo
                     try:
                         data = read_fo.readline()
                     except TypeError:
@@ -148,7 +171,10 @@ class MultipleTTYHandler(object):
 
         Always restores terminal settings before returning.
         """
-        input_fo, output_fo = self._active_console
+
+        input_fo = self._active_console_in
+        output_fo = self._active_out
+
         passwd = None
         with contextlib.ExitStack() as stack:
             input_fd = input_fo.fileno()
@@ -179,6 +205,7 @@ class MultipleTTYHandler(object):
                     passwd = self._fallback_getpass(prompt, output_fo, input_fo)
 
             output_fo.write('\n')
+            output_fo.flush()
             return passwd
 
     def _fallback_getpass(self, prompt='Password: ', output_fo=None, input_fo=None):
@@ -239,6 +266,7 @@ class InitialSetupTextUserInterface(TextUserInterface):
         # stdout
         tui_stdout_fd, stdout_fd = os.pipe()
         sys.stdout = os.fdopen(stdout_fd, "w")
+        sys.stdout.reconfigure(line_buffering=True)
 
         # instantiate and start the multi TTY handler
         self.multi_tty_handler = MultipleTTYHandler(tui_stdin_fd=tui_stdin_fd, tui_stdout_fd=tui_stdout_fd)
