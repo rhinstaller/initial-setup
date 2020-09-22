@@ -32,6 +32,11 @@ class EULASpoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     category = LicensingCategory
     translationDomain = "initial-setup"
 
+    def __init__(self, *args, **kwargs):
+        NormalSpoke.__init__(self, *args, **kwargs)
+        # workaround for https://bugzilla.redhat.com/show_bug.cgi?id=1673071
+        self.title = _(self.title)
+
     def initialize(self):
         log.debug("initializing the EULA spoke")
         NormalSpoke.initialize(self)
