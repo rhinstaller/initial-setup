@@ -4,7 +4,7 @@ import os
 
 from pyanaconda.ui.common import collect
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON
-from pyanaconda.core.i18n import N_
+from initial_setup.i18n import _, N_
 from pyanaconda.ui.categories import SpokeCategory
 
 from initial_setup.product import eula_available
@@ -145,7 +145,11 @@ def get_quit_message():
                   "You might end up with unusable system if you do.")
 
 class LicensingCategory(SpokeCategory):
-    displayOnHubGUI = "ProgressHub"
-    displayOnHubTUI = "SummaryHub"
-    sortOrder = 100
-    title = N_("LICENSING")
+
+    @staticmethod
+    def get_title():
+        return _("LICENSING")
+
+    @staticmethod
+    def get_sort_order():
+        return 100
