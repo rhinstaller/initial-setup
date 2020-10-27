@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.83
+Version: 0.3.84
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -162,6 +162,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Oct 27 2020 Martin Kolman <mkolman@redhat.com> - 0.3.84-1
+- Adjust to logging command changes in Anaconda (#1891621) (mkolman)
+- Make sure the output from custom_getpass() is serialized after stdout (lkundrak)
+
 * Wed Aug 19 2020 Martin Kolman <mkolman@redhat.com> - 0.3.83-1
 - Add PEP8 Speaks configuration (mkolman)
 - Remove hard coded name of the translation repo in tmp (jkonecny)
