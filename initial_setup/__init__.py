@@ -34,7 +34,6 @@ SUPPORTED_KICKSTART_COMMANDS = ["user",
                                 "lang",
                                 "rootpw",
                                 "timezone",
-                                "logging",
                                 "selinux",
                                 "firewall"]
 
