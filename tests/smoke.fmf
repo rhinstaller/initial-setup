@@ -1,0 +1,15 @@
+summary: Smoke test
+description: Import project main module in python.
+contact: Jiri Konecny <jkonecny@redhat.com>
+duration: 10m
+framework: shell
+path: /
+test: python3 -c "import initial_setup"
+
+# Make this `path` adjustment only when we are in the Packit environement.
+# Packit will install RPM of this package and we should test on that. By
+# changing the `path` attribute we are changing also local PYTHONPATH, so
+# we won't be testing local ``initial_setup`` directory.
+adjust:
+  path: /data
+  when: trigger == code

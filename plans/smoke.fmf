@@ -1,0 +1,13 @@
+summary: Basic smoke test
+discover:
+    how: fmf
+provision:
+    how: container
+    image: fedora:rawhide
+prepare:
+    how: install
+    copr: '@rhinstaller/Anaconda'
+    package: anaconda
+    missing: skip
+execute:
+    how: tmt
