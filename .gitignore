@@ -8,4 +8,6 @@ po/*.gmo
 po/tmp
 tests/pylint/.pylint.d
 dist/
+# created by `make test` call
+build/
 ChangeLog

@@ -35,6 +35,9 @@ L10N_REPOSITORY_RW ?= git@github.com:rhinstaller/initial-setup-l10n.git
 # Branch used in localization repository. This should be master all the time.
 GIT_L10N_BRANCH ?= master
 
+# Name of our local TMT run
+TMT_ID ?= initial-setup-tests
+
 default: all
 
 all: po-files
@@ -46,12 +49,24 @@ install:
 
 .PHONY: clean
 clean:
-	-rm *.tar.gz ChangeLog
+	-rm *.tar.gz ChangeLog initial-setup-*.src.rpm
+	-rm -rf $(TEST_BUILD_DIR) dist/ initial_setup.egg-info
 	-find . -name "*.pyc" -exec rm -rf {} \;
 
+# local run of TMT tests
+# local run will be executed on source instead of RPM. It's much faster and easier, however,
+# Packit and Gating will execute the tests on an installed RPM; see test fmf specification.
 .PHONY: test
 test:
-	echo 'tests not yet implemented'
+# Command will execute all steps first time (see TMT plans to find out more). On repeated run only
+# discover and execute steps will be executed. This will save a lot of time during test development.
+# To run the skipped prepare steps again please call `make test-cleanup`.
+	tmt run -vvv --id $(TMT_ID) --until report discover -f execute -f --interactive
+
+# clean the container and test data
+.PHONY: test-cleanup
+test-cleanup:
+	tmt run -vvv --rm --id $(TMT_ID) --after report finish -f
 
 .PHONY: ChangeLog
 ChangeLog:
