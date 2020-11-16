@@ -26,6 +26,8 @@ RELEASE=$(shell awk '/Release:/ { print $$2 }' $(PKGNAME).spec | sed -e 's|%.*$$
 TAG=r$(VERSION)-$(RELEASE)
 
 PYTHON=python3
+# Arguments used for setup.py call for creating archive
+BUILD_ARGS ?= sdist bdist_wheel
 
 # LOCALIZATION SETTINGS
 L10N_REPOSITORY ?= https://github.com/rhinstaller/initial-setup-l10n.git
@@ -69,14 +71,7 @@ release:
 
 .PHONY: archive
 archive: po-pull ChangeLog
-	git archive --format=tar --prefix=$(PKGNAME)-$(VERSION)/ $(TAG) > $(PKGNAME)-$(VERSION).tar
-	mkdir $(PKGNAME)-$(VERSION)
-	cp -r po $(PKGNAME)-$(VERSION)
-	cp ChangeLog $(PKGNAME)-$(VERSION)/
-	tar -rf $(PKGNAME)-$(VERSION).tar $(PKGNAME)-$(VERSION)
-	gzip -9 $(PKGNAME)-$(VERSION).tar
-	rm -rf $(PKGNAME)-$(VERSION)
-	git checkout -- po/$(PKGNAME).pot
+	$(PYTHON) setup.py $(BUILD_ARGS)
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
 
 .PHONY: local
