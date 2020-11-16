@@ -7,3 +7,4 @@ po/*.po
 po/*.gmo
 po/tmp
 tests/pylint/.pylint.d
+ChangeLog

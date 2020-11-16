@@ -138,7 +138,7 @@ if [ $1 -gt 1 ] ; then
 fi
 
 %files -f %{name}.lang
-%doc README.rst
+%doc README.rst ChangeLog
 %license COPYING
 %{python3_sitelib}/initial_setup*
 %exclude %{python3_sitelib}/initial_setup/gui
