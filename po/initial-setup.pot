@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 15:52+0200\n"
+"POT-Creation-Date: 2020-11-24 22:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,12 +49,12 @@ msgid "I accept the license agreement."
 msgstr ""
 
 #: ../initial_setup/tui/spokes/eula.py:64
-#: ../initial_setup/gui/spokes/eula.py:91
+#: ../initial_setup/gui/spokes/eula.py:96
 msgid "License accepted"
 msgstr ""
 
 #: ../initial_setup/tui/spokes/eula.py:64
-#: ../initial_setup/gui/spokes/eula.py:91
+#: ../initial_setup/gui/spokes/eula.py:96
 msgid "License not accepted"
 msgstr ""
 
@@ -71,11 +71,11 @@ msgstr ""
 msgid "_License Information"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:50
+#: ../initial_setup/gui/spokes/eula.py:55
 msgid "No license found. Please report this at http://bugzilla.redhat.com"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:89
+#: ../initial_setup/gui/spokes/eula.py:94
 msgid "No license found"
 msgstr ""
 

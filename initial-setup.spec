@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.81.6
+Version: 0.3.81.7
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -112,6 +112,9 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Nov 24 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.7-1
+- Fix translations for EULA spoke related strings (mkolman)
+
 * Fri Jul 17 2020 Martin Kolman <mkolman@redhat.com> - 0.3.81.6-1
 - Remove old failing pre scriptlet (mkolman)
 
