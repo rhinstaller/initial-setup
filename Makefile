@@ -37,6 +37,7 @@ GIT_L10N_BRANCH ?= master
 
 # Name of our local TMT run
 TMT_ID ?= initial-setup-tests
+TMT_COPR_ANACONDA_REPO ?=
 
 default: all
 
@@ -61,7 +62,11 @@ test:
 # Command will execute all steps first time (see TMT plans to find out more). On repeated run only
 # discover and execute steps will be executed. This will save a lot of time during test development.
 # To run the skipped prepare steps again please call `make test-cleanup`.
-	tmt run -vvv --id $(TMT_ID) --until report discover -f execute -f --interactive
+	if [ -z "$(TMT_COPR_ANACONDA_REPO)" ]; then \
+		tmt run -vvv --id $(TMT_ID) --until report discover -f execute -f; \
+	else \
+		tmt run -vvv --id $(TMT_ID) --until report prepare -h install --copr "$(TMT_COPR_ANACONDA_REPO)" --package anaconda discover -f execute -f; \
+	fi
 
 # clean the container and test data
 .PHONY: test-cleanup
