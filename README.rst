@@ -66,6 +66,25 @@ For comprehensive documentation about Anaconda/Intial Setup see the
 
 * https://rhinstaller.github.io/anaconda-addon-development-guide/
 
+Testing
+=======
+To start tests please first install package ``tmt-all`` to your system and call::
+
+    make test
+
+First time you call the above it will setup all dependencies and then execute the tests.
+If you need to do the initialization of the tests again, please run::
+
+    make test-cleanup
+
+In case you want to use custom Anaconda code, please provide a COPR repository with the Anaconda
+(can be easily created by ``packit copr-build`` in the Anaconda branch) and execute::
+
+    make test TMT_COPR_ANACONDA_REPO=<owner/anaconda>
+
+Please note, you need to call ``make test-cleanup`` first to re-initialize test environment with
+your custom Anaconda code.
+
 Contributing
 ============
 * Initial Setup is released under GPLv2+

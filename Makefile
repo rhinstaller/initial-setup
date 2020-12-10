@@ -26,6 +26,8 @@ RELEASE=$(shell awk '/Release:/ { print $$2 }' $(PKGNAME).spec | sed -e 's|%.*$$
 TAG=r$(VERSION)-$(RELEASE)
 
 PYTHON=python3
+# Arguments used for setup.py call for creating archive
+BUILD_ARGS ?= sdist bdist_wheel
 
 # LOCALIZATION SETTINGS
 L10N_REPOSITORY ?= https://github.com/rhinstaller/initial-setup-l10n.git
@@ -33,50 +35,67 @@ L10N_REPOSITORY_RW ?= git@github.com:rhinstaller/initial-setup-l10n.git
 # Branch used in localization repository. This should be master all the time.
 GIT_L10N_BRANCH ?= master
 
+# Name of our local TMT run
+TMT_ID ?= initial-setup-tests
+TMT_COPR_ANACONDA_REPO ?=
+
 default: all
 
 all: po-files
 
+.PHONY: install
 install:
 	$(PYTHON) setup.py install --root=$(DESTDIR)
 	$(MAKE) -C po install
 
+.PHONY: clean
 clean:
-	-rm *.tar.gz ChangeLog
+	-rm *.tar.gz ChangeLog initial-setup-*.src.rpm
+	-rm -rf $(TEST_BUILD_DIR) dist/ initial_setup.egg-info
 	-find . -name "*.pyc" -exec rm -rf {} \;
 
+# local run of TMT tests
+# local run will be executed on source instead of RPM. It's much faster and easier, however,
+# Packit and Gating will execute the tests on an installed RPM; see test fmf specification.
+.PHONY: test
 test:
-	echo 'tests not yet implemented'
+# Command will execute all steps first time (see TMT plans to find out more). On repeated run only
+# discover and execute steps will be executed. This will save a lot of time during test development.
+# To run the skipped prepare steps again please call `make test-cleanup`.
+	if [ -z "$(TMT_COPR_ANACONDA_REPO)" ]; then \
+		tmt run -vvv --id $(TMT_ID) --until report discover -f execute -f; \
+	else \
+		tmt run -vvv --id $(TMT_ID) --until report prepare -h install --copr "$(TMT_COPR_ANACONDA_REPO)" --package anaconda discover -f execute -f; \
+	fi
 
+# clean the container and test data
+.PHONY: test-cleanup
+test-cleanup:
+	tmt run -vvv --rm --id $(TMT_ID) --after report finish -f
+
+.PHONY: ChangeLog
 ChangeLog:
 	(GIT_DIR=.git git log > .changelog.tmp && mv .changelog.tmp ChangeLog; rm -f .changelog.tmp) || (touch ChangeLog; echo 'git directory not found: installing possibly empty changelog.' >&2)
 
+.PHONY: tag
 tag:
 	git tag -a -m "Tag as $(TAG)" -f $(TAG)
 	@echo "Tagged as $(TAG)"
 
+.PHONY: release
 release:
 	$(MAKE) bumpver
 	$(MAKE) commit
 	$(MAKE) tag
 	$(MAKE) archive
 
-archive: po-pull
-	@rm -f ChangeLog
-	@make ChangeLog
-	git archive --format=tar --prefix=$(PKGNAME)-$(VERSION)/ $(TAG) > $(PKGNAME)-$(VERSION).tar
-	mkdir $(PKGNAME)-$(VERSION)
-	cp -r po $(PKGNAME)-$(VERSION)
-	cp ChangeLog $(PKGNAME)-$(VERSION)/
-	tar -rf $(PKGNAME)-$(VERSION).tar $(PKGNAME)-$(VERSION)
-	gzip -9 $(PKGNAME)-$(VERSION).tar
-	rm -rf $(PKGNAME)-$(VERSION)
-	git checkout -- po/$(PKGNAME).pot
+.PHONY: archive
+archive: po-pull ChangeLog
+	$(PYTHON) setup.py $(BUILD_ARGS)
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
 
-local: po-pull
-	@rm -f ChangeLog
-	@make ChangeLog
+.PHONY: local
+local: po-pull ChangeLog
 	@rm -rf $(PKGNAME)-$(VERSION).tar.gz
 	@rm -rf /tmp/$(PKGNAME)-$(VERSION) /tmp/$(PKGNAME)
 	@dir=$$PWD; cp -a $$dir /tmp/$(PKGNAME)-$(VERSION)
@@ -85,22 +104,27 @@ local: po-pull
 	@rm -rf /tmp/$(PKGNAME)-$(VERSION)
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
 
+.PHONY: rpmlog
 rpmlog:
 	@git log --no-merges --pretty="format:- %s (%ae)" $(TAG).. |sed -e 's/@.*)/)/'
 	@echo
 
+.PHONY: po-files
 po-files:
 	$(MAKE) -C po
 
+.PHONY: potfile
 potfile:
 	$(MAKE) -C po potfile
 
+.PHONY: po-pull
 po-pull:
 	TEMP_DIR=$$(mktemp --tmpdir -d $(PKGNAME)-localization-XXXXXXXXXX) && \
 	git clone --depth 1 -b $(GIT_L10N_BRANCH) -- $(L10N_REPOSITORY) $$TEMP_DIR && \
 	cp $$TEMP_DIR/$(L10N_DIR)/*.po ./po/ && \
 	rm -rf $$TEMP_DIR
 
+.PHONY: potfile
 po-push: potfile
 # This algorithm will make these steps:
 # - clone localization repository
@@ -130,6 +154,7 @@ po-push: potfile
 		echo "$$TEMP_DIR" ; \
 	fi ;
 
+.PHONY: po-push
 bumpver: po-push
 	read -p "Please see the above message. Verify and push localization commit. Press anything to continue." -n 1 -r
 
@@ -144,8 +169,7 @@ bumpver: po-push
 	sed -i "s/version = \"$(VERSION)\"/version = \"$$NEWVERSION\"/" setup.py ; \
 	sed -i "s/__version__ = \"$(VERSION)\"/__version__ = \"$$NEWVERSION\"/" initial_setup/__init__.py ; \
 
+.PHONY: commit
 commit:
 	git add initial-setup.spec initial_setup/__init__.py po/initial-setup.pot setup.py ; \
 	git commit -m "New version $(VERSION)" ; \
-
-.PHONY: clean install tag archive local

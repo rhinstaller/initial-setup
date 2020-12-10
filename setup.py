@@ -1,7 +1,7 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 # Setup file for initial-setup
 #
-# Copyright (C) 2012  Red Hat, Inc.
+# Copyright (C) 2020  Red Hat, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,19 +17,10 @@
 # along with this program.  If not, see
 # <http://www.gnu.org/licenses/>.
 #
-# Red Hat Author(s): Martin Sivak <msivak@redhat.com>
-#
 
 import os
-from setuptools import setup, find_packages
 from glob import glob
-
-# Utility function to read the README file.
-# Used for the long_description.  It's nice, because now 1) we have a top level
-# README file and 2) it's easier to type in the README file than to put a raw
-# string in below ...
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+from setuptools import setup, find_packages
 
 
 data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
@@ -37,36 +28,41 @@ data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
               ('/usr/libexec/initial-setup/',
               ["scripts/run-initial-setup", "scripts/firstboot-windowmanager",
                "scripts/initial-setup-text", "scripts/initial-setup-graphical",
-               "scripts/reconfiguration-mode-enabled"])]
+               "scripts/reconfiguration-mode-enabled"]),
+              ('/usr/share/doc/initial-setup/', ["ChangeLog"])]
 
 # add the firstboot start script for s390 architectures
 if os.uname()[4].startswith('s390'):
     data_files.append(('/etc/profile.d', ['scripts/s390/initial-setup.sh']))
     data_files.append(('/etc/profile.d', ['scripts/s390/initial-setup.csh']))
 
-setup(
-    name = "initial-setup",
-    version = "0.3.85",
-    author = "Martin Sivak",
-    author_email = "msivak@redhat.com",
-    description='Post-installation configuration utility',
-    url='http://fedoraproject.org/wiki/FirstBoot',
-    license = "GPLv2+",
-    keywords = "firstboot initial setup",
-    packages = find_packages(),
-    package_data = {
-        "": ["*.glade"]
-    },
-    data_files = data_files,
-    setup_requires= ['nose>=1.0'],
-    test_suite = "initial_setup",
-    long_description=read('README.rst'),
-    classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Environment :: X11 Applications :: GTK",
-        "Environment :: Console",
-        "Intended Audience :: System Administrators",
-        "Topic :: System :: Systems Administration",
-        "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
-    ],
+with open("README.rst", "r") as f:
+    long_description = f.read()
+
+setup(name="initial-setup",
+      version="0.3.85",
+      author="Martin Kolman",
+      author_email="mkolman@redhat.com",
+      description='Post-installation configuration utility',
+      long_description=long_description,
+      long_description_content_type="text/x-rst",
+      url='https://fedoraproject.org/wiki/InitialSetup',
+      license="GPLv2+",
+      keywords="firstboot initial setup",
+      packages=find_packages(),
+      package_data={
+          "": ["*.glade"]
+      },
+      data_files=data_files,
+      setup_requires=['nose>=1.0'],
+      test_suite="initial_setup",
+      classifiers=[
+          "Development Status :: 3 - Alpha",
+          "Environment :: X11 Applications :: GTK",
+          "Environment :: Console",
+          "Intended Audience :: System Administrators",
+          "Topic :: System :: Systems Administration",
+          "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+          "Programming Language :: Python :: 3",
+      ],
 )

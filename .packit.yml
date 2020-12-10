@@ -1,0 +1,20 @@
+specfile_path: initial-setup.spec
+upstream_package_name: initial-setup
+upstream_tag_template: r{version}-1
+actions:
+  create-archive:
+    - "make BUILD_ARGS=sdist archive"
+    - 'bash -c "cp dist/*.tar.gz ."'
+    - 'bash -c "ls -1 initial-setup-*.tar.gz"'
+jobs:
+  - job: tests
+    trigger: pull_request
+    metadata:
+      targets:
+        - fedora-rawhide
+
+  - job: copr_build
+    trigger: pull_request
+    metadata:
+      targets:
+        - fedora-eln
