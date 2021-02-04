@@ -124,14 +124,13 @@ class InitialSetup(object):
                 gi.overrides.__path__.insert(0, p)
             log.debug("GI overrides imported")
 
-        from pyanaconda.addons import collect_addon_paths
-
+        from pyanaconda.ui.lib.addons import collect_addon_ui_paths
         addon_paths = ["/usr/share/initial-setup/modules", "/usr/share/anaconda/addons"]
 
         # append ADDON_PATHS dirs at the end
         sys.path.extend(addon_paths)
 
-        self._addon_module_paths = collect_addon_paths(addon_paths, self.gui_mode_id)
+        self._addon_module_paths = collect_addon_ui_paths(addon_paths, self.gui_mode_id)
         log.info("found %d addon modules:", len(self._addon_module_paths))
         for addon_path in self._addon_module_paths:
             log.debug(addon_path)
@@ -201,7 +200,7 @@ class InitialSetup(object):
         commandMap = dict((k, kickstart.commandMap[k]) for k in SUPPORTED_KICKSTART_COMMANDS)
 
         # Prepare new data object
-        self.data = kickstart.AnacondaKSHandler(self._addon_module_paths["ks"], commandUpdates=commandMap)
+        self.data = kickstart.AnacondaKSHandler(commandUpdates=commandMap)
 
         kickstart_path = INPUT_KICKSTART_PATH
         if os.path.exists(OUTPUT_KICKSTART_PATH):
@@ -328,8 +327,6 @@ class InitialSetup(object):
 
         # Configure all addons
         log.info("executing addons")
-        self.data.addons.execute(storage=None, ksdata=self.data, users=None, payload=None)
-
         boss_proxy = BOSS.get_proxy()
         task_path = boss_proxy.InstallSystemWithTask()
         task_proxy = BOSS.get_proxy(task_path)
