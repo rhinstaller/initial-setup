@@ -3,7 +3,6 @@ from pyanaconda import threading
 
 from initial_setup.product import product_title, is_final
 from initial_setup.common import list_usable_consoles_for_tui, get_quit_message
-from initial_setup.i18n import _, N_
 from .hubs import InitialSetupMainHub
 
 from simpleline import App
@@ -18,6 +17,7 @@ import logging
 log = logging.getLogger("initial-setup")
 
 QUIT_MESSAGE = get_quit_message()
+
 
 class MultipleTTYHandler(object):
     """Run the Initial Setup TUI on all usable consoles.
@@ -215,7 +215,6 @@ class MultipleTTYHandler(object):
         print("Warning: Password input may be echoed.", file=output_fo)
         return self._raw_input(prompt, output_fo, input_fo)
 
-
     def _raw_input(self, prompt="", output_fo=None, input_fo=None):
         # This doesn't save the string in the GNU readline history.
 
@@ -298,4 +297,3 @@ class InitialSetupTextUserInterface(TextUserInterface):
         "spokes": [(basemask + ".spokes.%s", os.path.join(basepath, "spokes"))],
         "categories": [(basemask + ".categories.%s", os.path.join(basepath, "categories"))],
         }
-

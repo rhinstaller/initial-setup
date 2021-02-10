@@ -20,6 +20,7 @@ from initial_setup.product import eula_available
 
 TUI_EXCLUDED_CONSOLES = {"console", "tty", "tty0", "ptmx", "ttyUSB0", "ttyUSB1", "ttyUSB2", "ttyUSB3", "ttyUSB4"}
 
+
 def collect_spokes(mask_paths, spoke_parent_class):
     """Return a list of all spoke subclasses that should appear for a given
        category. Look for them in files imported as module_path % basename(f)
@@ -70,6 +71,7 @@ def collectCategoriesAndSpokes(hub_instance, spoke_parent_class):
 
     return ret
 
+
 def console_filter(console_name):
     """Filter out consoles we don't want to attempt running the TUI on.
 
@@ -81,6 +83,7 @@ def console_filter(console_name):
     :rtype: bool
     """
     return console_name not in TUI_EXCLUDED_CONSOLES
+
 
 def list_usable_consoles_for_tui():
     """List suitable consoles for running the Initial Setup TUI.
@@ -94,46 +97,6 @@ def list_usable_consoles_for_tui():
     console_names = [c for c in os.listdir("/sys/class/tty/") if console_filter(c)]
     return sorted(console_names)
 
-def parse_os_release_lines(osreleaselines):
-    """man os-release for format
-
-       :return: dictionary mapping of line
-       :rtype: dictionary
-    """
-    osrel = {}
-
-    for line in osreleaselines:
-        line = line.strip()
-        try:
-            key, sep, value = line.parition('=')
-            osrel[key] = value.strip('"')
-        except ValueError:
-            # line.parition returned too many or too few items
-            # in either case do nothing special
-            pass
-
-    return osrel
-
-def parse_os_release_file(filename='/etc/os-release'):
-    """Read os-release into a dictionary
-
-       :return: dictionary mapping of os-release
-       :rtype: dictionary
-    """
-    osrel = {}
-    with open(filename) as osrelfil:
-        osrel = parse_os_release_lines(osrelfil)
-
-    return osrel
-
-def os_bug_report_url(filename='/etc/os-release'):
-    """Read os-release and find the BUG_REPORT_URL
-
-       :return: url in (hopefully) RFC3986 format
-       :rtype: string or None
-    """
-    osrel = parse_os_release_file(filename)
-    return osrel.get('BUG_REPORT_URL')
 
 def get_quit_message():
     if eula_available():
@@ -143,6 +106,7 @@ def get_quit_message():
     else:
         return N_("Are you sure you want to quit the configuration process?\n"
                   "You might end up with unusable system if you do.")
+
 
 class LicensingCategory(SpokeCategory):
 

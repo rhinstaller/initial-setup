@@ -1,13 +1,13 @@
 from pyanaconda.ui.gui import QuitDialog, GraphicalUserInterface
 from initial_setup.product import product_title, is_final
 from initial_setup.common import get_quit_message
-from initial_setup.i18n import _, N_
 from .hubs import InitialSetupMainHub
 import os
-from gi.repository import Gdk
+
 
 class InitialSetupQuitDialog(QuitDialog):
     MESSAGE = get_quit_message()
+
 
 class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     """This is the main Gtk based firstboot interface. It inherits from
@@ -30,4 +30,3 @@ class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
         "spokes": [(basemask + ".spokes.%s", os.path.join(basepath, "spokes"))],
         "categories": [(basemask + ".categories.%s", os.path.join(basepath, "categories"))],
         }
-

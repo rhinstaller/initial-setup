@@ -12,8 +12,8 @@ from initial_setup.i18n import _, N_
 
 log = logging.getLogger("initial-setup")
 
-
 __all__ = ["EULASpoke"]
+
 
 class EULASpoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     """The EULA spoke"""
@@ -103,7 +103,7 @@ class EULASpoke(FirstbootOnlySpokeMixIn, NormalSpoke):
             return True
         return False
 
-    def on_check_button_toggled(self, checkbutton, *args):
+    def on_check_button_toggled(self, *args):
         if self._agree_check_button.get_active():
             log.debug("license is now accepted")
             self._agree_label.set_markup("<b>%s</b>" % self._agree_text)
