@@ -30,5 +30,5 @@ class InitialSetupMainHub(Hub):
 
         # override spokes' distribution strings set by the pyanaconda module
         for spoke in self._spokes.values():
-            spoke.window.set_property("distribution",
-                                      product.product_title().upper())
+            title = product.get_product_title().upper()
+            spoke.window.set_property("distribution", title)

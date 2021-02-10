@@ -9,7 +9,7 @@ import argparse
 import traceback
 import atexit
 
-from initial_setup.product import eula_available
+from initial_setup.product import eula_available, get_product_name
 from initial_setup import initial_setup_log
 
 from pyanaconda.core.dbus import DBus
@@ -103,7 +103,13 @@ class InitialSetup(object):
             raise InitialSetupError
 
         # load configuration files
+        from pyanaconda.core.configuration.base import ConfigurationError
         from pyanaconda.core.configuration.anaconda import conf
+        try:
+            conf.set_from_product(get_product_name())
+        except ConfigurationError as e:
+            log.warning(str(e))
+
         conf.set_from_files(["/etc/initial-setup/conf.d/"])
 
         if self.gui_mode:
