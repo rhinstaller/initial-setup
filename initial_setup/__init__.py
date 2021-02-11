@@ -8,8 +8,11 @@ import logging
 import argparse
 import traceback
 import atexit
+
 from initial_setup.product import eula_available
 from initial_setup import initial_setup_log
+
+from pyanaconda.core.dbus import DBus
 from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG, \
     SETUP_ON_BOOT_DEFAULT
@@ -328,9 +331,9 @@ class InitialSetup(object):
         # Configure all addons
         log.info("executing addons")
         boss_proxy = BOSS.get_proxy()
-        task_path = boss_proxy.InstallSystemWithTask()
-        task_proxy = BOSS.get_proxy(task_path)
-        sync_run_task(task_proxy)
+        for service_name, object_path in boss_proxy.CollectInstallSystemTasks():
+            task_proxy = DBus.get_proxy(service_name, object_path)
+            sync_run_task(task_proxy)
 
         if self.external_reconfig:
             # prevent the reconfig flag from being written out
