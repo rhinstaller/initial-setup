@@ -19,7 +19,6 @@ License: GPLv2+
 BuildRequires: gettext
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
-BuildRequires: python3-nose
 BuildRequires: systemd-units
 BuildRequires: gtk3-devel
 BuildRequires: glade-devel

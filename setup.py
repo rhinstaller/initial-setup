@@ -54,7 +54,6 @@ setup(name="initial-setup",
           "": ["*.glade"]
       },
       data_files=data_files,
-      setup_requires=['nose>=1.0'],
       test_suite="initial_setup",
       classifiers=[
           "Development Status :: 3 - Alpha",
