@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.85
+Version: 0.3.86
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -158,6 +158,20 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri Feb 12 2021 Martin Kolman <mkolman@redhat.com> - 0.3.86-1
+- Drop python-nose from the dependencies (#1916799) (vponcova)
+- Add the makeupdates script (vponcova)
+- Remove deprecated support for add-ons (vponcova)
+- Don't run installation tasks of add-ons in a meta task (vponcova)
+- Migrate COPR builds from Jenkins to Packit (jkonecny)
+- Add documentation for the new test solution (jkonecny)
+- Add support for custom Anaconda COPR repository (jkonecny)
+- Use `make test` to run TMT tests locally (jkonecny)
+- Add TMT configuration to get Anaconda COPR build (jkonecny)
+- Add Packit support for initial-setup (jkonecny)
+- Update and use setup.py for archive creation (jkonecny)
+- Fix ChangeLog generation in Makefile (jkonecny)
+
 * Mon Dec 07 2020 Martin Kolman <mkolman@redhat.com> - 0.3.85-1
 - Adapt to category title translation fix in Anaconda (mkolman)
 
