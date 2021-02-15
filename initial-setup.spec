@@ -24,6 +24,7 @@ BuildRequires: gtk3-devel
 BuildRequires: glade-devel
 BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: intltool
+BuildRequires: make
 
 Requires: %{__python3}
 Requires: anaconda-tui >= %{anacondaver}
