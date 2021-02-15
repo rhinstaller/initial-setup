@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.86
+Version: 0.3.87
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -159,6 +159,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon Feb 15 2021 Martin Kolman <mkolman@redhat.com> - 0.3.87-1
+- Add BuildRequires: make (tstellar)
+- Fixup version number in setup.py (mkolman)
+
 * Fri Feb 12 2021 Martin Kolman <mkolman@redhat.com> - 0.3.86-1
 - Drop python-nose from the dependencies (#1916799) (vponcova)
 - Add the makeupdates script (vponcova)
