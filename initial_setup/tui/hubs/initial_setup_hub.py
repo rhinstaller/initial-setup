@@ -6,6 +6,7 @@ from initial_setup.i18n import _, N_
 
 __all__ = ["InitialSetupMainHub"]
 
+
 class InitialSetupMainHub(TUIHub):
     categories = ["user", "localization"]
 

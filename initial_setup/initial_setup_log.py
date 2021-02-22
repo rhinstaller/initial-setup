@@ -22,6 +22,7 @@
 import logging
 from logging.handlers import SysLogHandler, SYSLOG_UDP_PORT
 
+
 class InitialSetupSyslogHandler(SysLogHandler):
     """A SysLogHandler subclass that makes sure the Initial Setup
     messages are easy to identify in the syslog/Journal
@@ -40,6 +41,7 @@ class InitialSetupSyslogHandler(SysLogHandler):
         record.msg = '%s: %s' % (self.tag, original_msg)
         SysLogHandler.emit(self, record)
         record.msg = original_msg
+
 
 def init(stdout_log):
     """Initialize the Initial Setup logging system"""

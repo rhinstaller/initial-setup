@@ -27,6 +27,7 @@ from pyanaconda.modules.common.structures.kickstart import KickstartReport
 class InitialSetupError(Exception):
     pass
 
+
 INPUT_KICKSTART_PATH = "/root/anaconda-ks.cfg"
 OUTPUT_KICKSTART_PATH = "/root/initial-setup-ks.cfg"
 RECONFIG_FILES = ["/etc/reconfigSys", "/.unconfigured"]
@@ -50,6 +51,7 @@ log = logging.getLogger("initial-setup")
 
 logging_initialized = False
 
+
 def log_to_journal(message, priority=3):
     """A quick-and-dirty direct Journal logger.
 
@@ -61,6 +63,7 @@ def log_to_journal(message, priority=3):
     """
     os.system('echo "%s" | systemd-cat -t initial-setup -p %s' % (message, priority))
 
+
 def log_exception(*exception_info):
     exception_text = "".join(traceback.format_exception(*exception_info))
     error_message = "Initial Setup crashed due to unhandled exception:\n%s" % exception_text
@@ -69,7 +72,9 @@ def log_exception(*exception_info):
     else:
         log_to_journal(error_message)
 
+
 sys.excepthook = log_exception
+
 
 class InitialSetup(object):
     def __init__(self, gui_mode):

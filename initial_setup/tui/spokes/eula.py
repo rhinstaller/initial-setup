@@ -1,21 +1,19 @@
 """EULA TUI spoke for the Initial Setup"""
 
-import codecs
 import logging
 
 from pyanaconda.ui.tui.spokes import NormalTUISpoke
-from simpleline.render.widgets import TextWidget, CheckboxWidget, SeparatorWidget
+from simpleline.render.widgets import TextWidget, CheckboxWidget
 from simpleline.render.containers import ListRowContainer
 from simpleline.render.screen import UIScreen, InputState
 from simpleline.render.screen_handler import ScreenHandler
 from pyanaconda.ui.common import FirstbootOnlySpokeMixIn
 from initial_setup.product import get_license_file_name, eula_available
 from initial_setup.common import LicensingCategory
-from initial_setup.i18n import _, N_
+from initial_setup.i18n import _
 from pykickstart.constants import FIRSTBOOT_RECONFIG
 
 log = logging.getLogger("initial-setup")
-
 
 __all__ = ["EULASpoke"]
 

@@ -11,6 +11,7 @@ LICENSE_FILE_GLOB = "/usr/share/redhat-release*/EULA*"
 
 log = logging.getLogger("initial-setup")
 
+
 def product_title():
     """
     Get product title.
@@ -33,6 +34,7 @@ def product_title():
 
     return ""
 
+
 def is_final():
     """
     Whether it is a final release of the product or not.
@@ -43,6 +45,7 @@ def is_final():
 
     # doesn't really matter for the Initial Setup
     return True
+
 
 def get_license_file_name():
     """Get filename of the license file best matching current localization settings.
@@ -80,6 +83,7 @@ def get_license_file_name():
 
     return best_eula
 
+
 def eula_available():
     """ Report if it looks like there is an EULA available on the system.
 
@@ -87,4 +91,3 @@ def eula_available():
     :rtype: bool
     """
     return bool(get_license_file_name())
-
