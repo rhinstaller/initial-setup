@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-15 18:19+0100\n"
+"POT-Creation-Date: 2021-02-22 18:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,53 +17,53 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../initial_setup/common.py:140
+#: ../initial_setup/common.py:103
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with an unusable system if you do. Unless the License "
 "agreement is accepted, the system will be rebooted."
 msgstr ""
 
-#: ../initial_setup/common.py:144
+#: ../initial_setup/common.py:107
 msgid ""
 "Are you sure you want to quit the configuration process?\n"
 "You might end up with unusable system if you do."
 msgstr ""
 
-#: ../initial_setup/common.py:151
+#: ../initial_setup/common.py:115
 msgid "LICENSING"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:30
+#: ../initial_setup/tui/spokes/eula.py:28
 msgid "License information"
 msgstr ""
 
 #. make the options aligned to the same column (the checkbox has the
 #. '[ ]' prepended)
-#: ../initial_setup/tui/spokes/eula.py:44
+#: ../initial_setup/tui/spokes/eula.py:42
 msgid "Read the License Agreement"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:47
+#: ../initial_setup/tui/spokes/eula.py:45
 msgid "I accept the license agreement."
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:64
+#: ../initial_setup/tui/spokes/eula.py:62
 #: ../initial_setup/gui/spokes/eula.py:91
 msgid "License accepted"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:64
+#: ../initial_setup/tui/spokes/eula.py:62
 #: ../initial_setup/gui/spokes/eula.py:91
 msgid "License not accepted"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:14
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:15
 #, python-format
 msgid "Initial setup of %(product)s"
 msgstr ""
 
-#: ../initial_setup/tui/hubs/initial_setup_hub.py:16
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:17
 msgid "Initial setup"
 msgstr ""
 
