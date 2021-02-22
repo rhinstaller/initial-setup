@@ -10,7 +10,7 @@ __all__ = ["InitialSetupMainHub"]
 class InitialSetupMainHub(TUIHub):
     categories = ["user", "localization"]
 
-    prod_title = product.product_title()
+    prod_title = product.get_product_title()
     if prod_title:
         title = N_("Initial setup of %(product)s") % {"product": prod_title}
     else:

@@ -1,5 +1,5 @@
 from pyanaconda.ui.gui import QuitDialog, GraphicalUserInterface
-from initial_setup.product import product_title, is_final
+from initial_setup.product import get_product_title, is_final
 from initial_setup.common import get_quit_message
 from .hubs import InitialSetupMainHub
 import os
@@ -17,7 +17,7 @@ class InitialSetupGraphicalUserInterface(GraphicalUserInterface):
     screenshots_directory = "/tmp/initial-setup-screenshots"
 
     def __init__(self):
-        GraphicalUserInterface.__init__(self, None, None, product_title, is_final,
+        GraphicalUserInterface.__init__(self, None, None, get_product_title, is_final(),
                                         quitDialog=InitialSetupQuitDialog)
         self.mainWindow.set_title("")
 

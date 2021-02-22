@@ -1,7 +1,7 @@
 from pyanaconda.ui.tui import TextUserInterface
 from pyanaconda import threading
 
-from initial_setup.product import product_title, is_final
+from initial_setup.product import get_product_title, is_final
 from initial_setup.common import list_usable_consoles_for_tui, get_quit_message
 from .hubs import InitialSetupMainHub
 
@@ -253,7 +253,7 @@ class InitialSetupTextUserInterface(TextUserInterface):
     ENVIRONMENT = "firstboot"
 
     def __init__(self):
-        TextUserInterface.__init__(self, None, None, product_title, is_final,
+        TextUserInterface.__init__(self, None, None, get_product_title, is_final(),
                                    quitMessage=QUIT_MESSAGE)
 
         # redirect stdin and stdout to custom pipes
