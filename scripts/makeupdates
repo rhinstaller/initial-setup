@@ -113,12 +113,16 @@ def copyUpdatedFiles(tag, updates):
 
         if gitfile.endswith('.spec') or (gitfile.find('Makefile') != -1) or \
            gitfile.endswith('.c') or gitfile.endswith('.h') or \
-           gitfile.endswith('.sh') or gitfile == 'setup.py':
+           gitfile.endswith('.sh') or gitfile == 'setup.py' or \
+           gitfile.endswith('makeupdates'):
             continue
 
         if gitfile.startswith('initial_setup/'):
             dirname = os.path.join(SITE_PACKAGES_PATH, os.path.dirname(gitfile))
             install_to_dir(gitfile, dirname)
+
+        if gitfile.startswith('scripts'):
+            install_to_dir(gitfile, "./usr/libexec/initial-setup/")
 
 
 def addRpms(updates, add_rpms):
