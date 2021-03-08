@@ -1,18 +1,19 @@
 #!/bin/sh
 
 # This is the list of supported window manager binaries
-WMS=("metacity" "kwin_x11" "kwin" "xfwm4" "openbox" "marco")
+WMS=("mutter" "kwin_x11" "kwin" "xfwm4" "openbox" "marco")
 
-run_metacity()
+run_mutter()
 {
-    # Apply the anaconda overrides before running metacity
+    # Apply the anaconda overrides before running mutter
     if [ -z "$XDG_DATA_DIRS" ] ; then
         new_data_dirs="/usr/share/anaconda/window-manager:/usr/share"
     else
         new_data_dirs="/usr/share/anaconda/window-manager:${XDG_DATA_DIRS}"
     fi
-    XDG_DATA_DIRS="$new_data_dirs" $1 &
+    XDG_SESSION_TYPE=x11 XDG_DATA_DIRS="$new_data_dirs" $1 --sm-disable &
 }
+
 
 # Get the application binary to start and remove it from
 # the argument list
@@ -25,10 +26,10 @@ for WM in ${WMS[@]}; do
 
     if [ $FOUND -eq 0 -a -x "$FILE" ]; then
         # start window manager
-        if [ "$WM" == "metacity" ]; then
+        if [ "$WM" == "mutter" ]; then
             # if running Metacity apply the Anaconda/Initial Setup custom overrides
-            echo "Running Metacity with custom overrides" | systemd-cat -t initial-setup -p 6
-            run_metacity "$FILE"
+-           echo "Running mutter with custom overrides" | systemd-cat -t initial-setup -p 6
+            run_mutter "$FILE"
         else
             echo "Running window manager ($FILE)" | systemd-cat -t initial-setup -p 6
             "$FILE" &
