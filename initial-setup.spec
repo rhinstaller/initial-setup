@@ -22,7 +22,6 @@ BuildRequires: python3-setuptools
 BuildRequires: systemd-units
 BuildRequires: gtk3-devel
 BuildRequires: glade-devel
-BuildRequires: anaconda >= %{anacondaver}
 BuildRequires: intltool
 BuildRequires: make
 
