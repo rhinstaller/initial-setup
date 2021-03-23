@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.88
+Version: 0.3.89
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -158,6 +158,10 @@ fi
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Mar 23 2021 Martin Kolman <mkolman@redhat.com> - 0.3.89-1
+- Include scripts in the updates image (vponcova)
+- Drop build time dependency on the anaconda package (mkolman)
+
 * Mon Feb 22 2021 Martin Kolman <mkolman@redhat.com> - 0.3.88-1
 - Load the product configuration files (vponcova)
 - Clean up the code (vponcova)

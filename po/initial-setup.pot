@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-22 18:59+0100\n"
+"POT-Creation-Date: 2021-03-23 17:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,27 +34,25 @@ msgstr ""
 msgid "LICENSING"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:28
-msgid "License information"
+#: ../initial_setup/gui/spokes/eula.py:31
+msgid "_License Information"
 msgstr ""
 
-#. make the options aligned to the same column (the checkbox has the
-#. '[ ]' prepended)
-#: ../initial_setup/tui/spokes/eula.py:42
-msgid "Read the License Agreement"
+#: ../initial_setup/gui/spokes/eula.py:50
+msgid "No license found. Please report this at http://bugzilla.redhat.com"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:45
-msgid "I accept the license agreement."
+#: ../initial_setup/gui/spokes/eula.py:89
+msgid "No license found"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:62
 #: ../initial_setup/gui/spokes/eula.py:91
+#: ../initial_setup/tui/spokes/eula.py:62
 msgid "License accepted"
 msgstr ""
 
-#: ../initial_setup/tui/spokes/eula.py:62
 #: ../initial_setup/gui/spokes/eula.py:91
+#: ../initial_setup/tui/spokes/eula.py:62
 msgid "License not accepted"
 msgstr ""
 
@@ -67,16 +65,18 @@ msgstr ""
 msgid "Initial setup"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:31
-msgid "_License Information"
+#: ../initial_setup/tui/spokes/eula.py:28
+msgid "License information"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:50
-msgid "No license found. Please report this at http://bugzilla.redhat.com"
+#. make the options aligned to the same column (the checkbox has the
+#. '[ ]' prepended)
+#: ../initial_setup/tui/spokes/eula.py:42
+msgid "Read the License Agreement"
 msgstr ""
 
-#: ../initial_setup/gui/spokes/eula.py:89
-msgid "No license found"
+#: ../initial_setup/tui/spokes/eula.py:45
+msgid "I accept the license agreement."
 msgstr ""
 
 #: tmp/eula.glade.h:1
