@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.89
+Version: 0.3.90
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -104,6 +104,9 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Tue Mar 30 2021 Martin Kolman <mkolman@redhat.com> - 0.3.90-1
+- Remove old failing pre scriptlet (mkolman)
+
 * Tue Mar 23 2021 Martin Kolman <mkolman@redhat.com> - 0.3.89-1
 - Include scripts in the updates image (vponcova)
 - Drop build time dependency on the anaconda package (mkolman)
