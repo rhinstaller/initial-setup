@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.90.1
+Version: 0.3.90.2
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -104,6 +104,10 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Fri Jun 11 2021 Martin Kolman <mkolman@redhat.com> - 0.3.90.2-1
+- Disable multi TTY handler when running in SSH session (#1951577) (mkolman)
+  Resolves: rhbz#1951577
+
 * Thu Jun 10 2021 Martin Kolman <mkolman@redhat.com> - 0.3.90.1-1
 - Add gnome-kiosk to window managers usable by initial-setup (#1962198) (vponcova)
   Resolves: rhbz#1962198
