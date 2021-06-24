@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.91
+Version: 0.3.92
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -104,6 +104,11 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Thu Jun 24 2021 Martin Kolman <mkolman@redhat.com> - 0.3.92-1
+- Fixup version in setup.py (mkolman)
+- Add gnome-kiosk to window managers usable by initial-setup (rvykydal)
+- Add copr builds also for branched Fedora (jkonecny)
+
 * Tue Apr 27 2021 Martin Kolman <mkolman@redhat.com> - 0.3.91-1
 - Disable multi TTY handler when running in SSH session (mkolman)
 - Add CLI option to disable multi TTY handler (mkolman)
