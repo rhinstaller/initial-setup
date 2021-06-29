@@ -13,7 +13,7 @@ Release: 1%{?dist}
 Source0: %{name}-%{version}.tar.gz
 
 %define debug_package %{nil}
-%define anacondaver 34.9-1
+%define anacondaver 35.19-1
 
 License: GPLv2+
 BuildRequires: gettext

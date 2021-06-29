@@ -7,14 +7,6 @@ from pyanaconda.core.util import get_os_release_value
 log = logging.getLogger("initial-setup")
 
 
-def get_product_name():
-    """Get a product name
-
-    :return: a product name
-    """
-    return get_os_release_value("NAME") or ""
-
-
 def get_product_title():
     """Get product title.
 
