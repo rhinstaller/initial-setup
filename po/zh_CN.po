@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Silence Zhou <silence_zhou@126.com>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-06-24 17:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Silence Zhou <silence_zhou@126.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../initial_setup/common.py:103
+msgid ""
+"Are you sure you want to quit the configuration process?\n"
+"You might end up with an unusable system if you do. Unless the License "
+"agreement is accepted, the system will be rebooted."
+msgstr "确定要退出配置过程吗?\n"
+"如果这样做，您可能最终会得到一个不可用的系统。除非接受许可协议，否则系统将重新启动。"
+
+#: ../initial_setup/common.py:107
+msgid ""
+"Are you sure you want to quit the configuration process?\n"
+"You might end up with unusable system if you do."
+msgstr "确定要退出配置过程吗?\n"
+“如果这样做，可能会导致系统无法使用。”
+
+#: ../initial_setup/common.py:115
+msgid "LICENSING"
+msgstr "许可"
+
+#: ../initial_setup/gui/spokes/eula.py:31
+msgid "_License Information"
+msgstr "授权信息(_L)"
+
+#: ../initial_setup/gui/spokes/eula.py:50
+msgid "No license found. Please report this at http://bugzilla.redhat.com"
+msgstr "没有找到许可证。 请在 http://bugzilla.redhat.com 报告"
+
+#: ../initial_setup/gui/spokes/eula.py:89
+msgid "No license found"
+msgstr "没有找到许可证"
+
+#: ../initial_setup/gui/spokes/eula.py:91
+#: ../initial_setup/tui/spokes/eula.py:62
+msgid "License accepted"
+msgstr "授权成功"
+
+#: ../initial_setup/gui/spokes/eula.py:91
+#: ../initial_setup/tui/spokes/eula.py:62
+msgid "License not accepted"
+msgstr "授权失败"
+
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:15
+#, python-format
+msgid "Initial setup of %(product)s"
+msgstr "%(产品)s 的初始设置"
+
+#: ../initial_setup/tui/hubs/initial_setup_hub.py:17
+msgid "Initial setup"
+msgstr "初始设定"
+
+#: ../initial_setup/tui/spokes/eula.py:28
+msgid "License information"
+msgstr "授权信息"
+
+#. make the options aligned to the same column (the checkbox has the
+#. '[ ]' prepended)
+#: ../initial_setup/tui/spokes/eula.py:42
+msgid "Read the License Agreement"
+msgstr "阅读许可协议"
+
+#: ../initial_setup/tui/spokes/eula.py:45
+msgid "I accept the license agreement."
+msgstr "我接受许可协议。"
+
+#: tmp/eula.glade.h:1
+msgid "License Information"
+msgstr "授权信息"
+
+#: tmp/eula.glade.h:2
+msgid "License Agreement:"
+msgstr "许可证协议"
+
+#: tmp/eula.glade.h:3
+msgid "I _accept the license agreement."
+msgstr "我接受许可协议。(_accept)"
+
+#: tmp/initial_setup.glade.h:1
+msgid "DISTRIBUTION SETUP"
+msgstr "分配设置"
+
+#: tmp/initial_setup.glade.h:2
+msgid "INITIAL SETUP"
+msgstr "初始设定"
+
+#: tmp/initial_setup.glade.h:3
+msgid "_QUIT"
+msgstr "退出(_Q)"
+
+#: tmp/initial_setup.glade.h:4
+msgid "_FINISH CONFIGURATION"
+msgstr "完成配置(_FINISH)"
