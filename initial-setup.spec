@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.92
+Version: 0.3.93
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -104,6 +104,10 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/*
 
 %changelog
+* Mon Jul 12 2021 Martin Kolman <mkolman@redhat.com> - 0.3.93-1
+- Use profiles instead of product configuration files (vponcova)
+- Change the Python version to 3.10 in the makeupdates script (vponcova)
+
 * Thu Jun 24 2021 Martin Kolman <mkolman@redhat.com> - 0.3.92-1
 - Fixup version in setup.py (mkolman)
 - Add gnome-kiosk to window managers usable by initial-setup (rvykydal)
