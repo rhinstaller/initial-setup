@@ -9,10 +9,11 @@ import argparse
 import traceback
 import atexit
 
-from initial_setup.product import eula_available, get_product_name
+from initial_setup.product import eula_available
 from initial_setup import initial_setup_log
 
 from pyanaconda.core.dbus import DBus
+from pyanaconda.core.util import get_os_release_value
 from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG, \
     SETUP_ON_BOOT_DEFAULT
@@ -106,7 +107,9 @@ class InitialSetup(object):
         from pyanaconda.core.configuration.base import ConfigurationError
         from pyanaconda.core.configuration.anaconda import conf
         try:
-            conf.set_from_product(get_product_name())
+            conf.set_from_detected_profile(
+                get_os_release_value("ID")
+            )
         except ConfigurationError as e:
             log.warning(str(e))
 
