@@ -1,5 +1,6 @@
 """Module providing information about the installed product."""
 import logging
+import os
 
 from pyanaconda.core.configuration.anaconda import conf
 from pyanaconda.core.util import get_os_release_value
@@ -30,7 +31,13 @@ def get_license_file_name():
     :return: filename of the license file or None if no license file found
     :rtype: str or None
     """
-    return conf.license.eula or None
+    if not conf.license.eula:
+        return None
+
+    if not os.path.exists(conf.license.eula):
+        return None
+
+    return conf.license.eula
 
 
 def eula_available():
