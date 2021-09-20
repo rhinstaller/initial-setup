@@ -101,7 +101,7 @@ rm -rf %{buildroot}
 
 %files gui
 %{_libexecdir}/%{name}/initial-setup-graphical
-%{python3_sitelib}/initial_setup/gui
+%{python3_sitelib}/initial_setup/gui/
 
 %changelog
 * Mon Jul 12 2021 Martin Kolman <mkolman@redhat.com> - 0.3.93-1
