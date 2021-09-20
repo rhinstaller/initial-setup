@@ -158,8 +158,8 @@ po-push: potfile
 bumpver: po-push
 	read -p "Please see the above message. Verify and push localization commit. Press anything to continue." -n 1 -r
 
-	@NEWSUBVER=$$((`echo $(VERSION) |cut -d . -f 3` + 1)) ; \
-	NEWVERSION=`echo $(VERSION).$$NEWSUBVER |cut -d . -f 1,2,4` ; \
+	@NEWSUBVER=$$((`echo $(VERSION) |cut -d . -f 4` + 1)) ; \
+	NEWVERSION=`echo $(VERSION).$$NEWSUBVER |cut -d . -f 1,2,3,5` ; \
 	DATELINE="* `LANG=c date "+%a %b %d %Y"` `git config user.name` <`git config user.email`> - $$NEWVERSION-1"  ; \
 	cl=`grep -n %changelog initial-setup.spec |cut -d : -f 1` ; \
 	tail --lines=+$$(($$cl + 1)) initial-setup.spec > speclog ; \

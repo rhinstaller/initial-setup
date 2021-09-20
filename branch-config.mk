@@ -21,4 +21,4 @@
 
 
 # Directory in localization repository specific for this branch.
-L10N_DIR ?= master
+L10N_DIR ?= rhel-9
