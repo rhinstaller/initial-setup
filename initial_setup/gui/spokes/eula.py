@@ -32,6 +32,11 @@ class EULASpoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     category = LicensingCategory
     translationDomain = "initial-setup"
 
+    @staticmethod
+    def get_screen_id():
+        """Return a unique id of this UI screen."""
+        return "license-information"
+
     def initialize(self):
         log.debug("initializing the EULA spoke")
         NormalSpoke.initialize(self)

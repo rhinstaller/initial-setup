@@ -19,6 +19,11 @@ class InitialSetupMainHub(Hub):
     # are no spokes to be shown.
     continue_if_empty = True
 
+    @staticmethod
+    def get_screen_id():
+        """Return a unique id of this UI screen."""
+        return "initial-setup-summary"
+
     def __init__(self, *args):
         Hub.__init__(self, *args)
 

@@ -16,6 +16,11 @@ class InitialSetupMainHub(TUIHub):
     else:
         title = N_("Initial setup")
 
+    @staticmethod
+    def get_screen_id():
+        """Return a unique id of this UI screen."""
+        return "initial-setup-summary"
+
     def __init__(self, *args):
         TUIHub.__init__(self, *args)
 
