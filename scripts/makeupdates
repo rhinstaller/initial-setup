@@ -120,9 +120,10 @@ def copyUpdatedFiles(tag, updates):
         if gitfile.startswith('initial_setup/'):
             dirname = os.path.join(SITE_PACKAGES_PATH, os.path.dirname(gitfile))
             install_to_dir(gitfile, dirname)
-
-        if gitfile.startswith('scripts'):
+        elif gitfile.startswith('scripts'):
             install_to_dir(gitfile, "./usr/libexec/initial-setup/")
+        elif gitfile.startswith('data'):
+            install_to_dir(gitfile, "./etc/initial-setup/conf.d/")
 
 
 def addRpms(updates, add_rpms):
