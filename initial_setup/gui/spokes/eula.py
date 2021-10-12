@@ -21,16 +21,15 @@ class EULASpoke(FirstbootOnlySpokeMixIn, NormalSpoke):
     builderObjects = ["eulaBuffer", "eulaWindow"]
     mainWidgetName = "eulaWindow"
     uiFile = "eula.glade"
-    # The EULA spoke is self-explanatory, so just redirect its
-    # help button to the Initial Setup Hub help file,
-    # which covers the overall theory of Initial Setup
-    # usage.
-    helpFile = "InitialSetupHub.xml"
-
     icon = "application-certificate-symbolic"
     title = N_("_License Information")
     category = LicensingCategory
     translationDomain = "initial-setup"
+
+    @staticmethod
+    def get_screen_id():
+        """Return a unique id of this UI screen."""
+        return "license-information"
 
     def initialize(self):
         log.debug("initializing the EULA spoke")

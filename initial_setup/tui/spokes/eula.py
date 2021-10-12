@@ -23,6 +23,11 @@ class EULASpoke(FirstbootOnlySpokeMixIn, NormalTUISpoke):
 
     category = LicensingCategory
 
+    @staticmethod
+    def get_screen_id():
+        """Return a unique id of this UI screen."""
+        return "license-information"
+
     def __init__(self, *args, **kwargs):
         NormalTUISpoke.__init__(self, *args, **kwargs)
         self.title = _("License information")

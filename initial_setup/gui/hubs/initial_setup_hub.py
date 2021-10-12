@@ -11,13 +11,17 @@ class InitialSetupMainHub(Hub):
     builderObjects = ["summaryWindow"]
     mainWidgetName = "summaryWindow"
     translationDomain = "initial-setup"
-    helpFile = "InitialSetupHub.xml"
 
     # Should we automatically go to next hub if processing is done and there are no
     # spokes on the hub ? The correct value for Initial Setup is True, due to the
     # long standing Initial Setup policy of continuing with system startup if there
     # are no spokes to be shown.
     continue_if_empty = True
+
+    @staticmethod
+    def get_screen_id():
+        """Return a unique id of this UI screen."""
+        return "initial-setup-summary"
 
     def __init__(self, *args):
         Hub.__init__(self, *args)
