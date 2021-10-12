@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.93
+Version: 0.3.94
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -104,6 +104,15 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/
 
 %changelog
+* Tue Oct 12 2021 Martin Kolman <mkolman@redhat.com> - 0.3.94-1
+- Remove the default_help_pages configuration option (vponcova)
+- Add the configuration files to the updates image (vponcova)
+- Remove the helpFile attribute (vponcova)
+- Specify unique screen ids (vponcova)
+- Apply suggestions from code review (martin.kolman)
+- Fix ownership of the gui folder (#1812463) (mkolman)
+- Don't show the EULA spoke if the license file doesn't exist (vponcova)
+
 * Mon Jul 12 2021 Martin Kolman <mkolman@redhat.com> - 0.3.93-1
 - Use profiles instead of product configuration files (vponcova)
 - Change the Python version to 3.10 in the makeupdates script (vponcova)
