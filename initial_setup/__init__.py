@@ -251,7 +251,7 @@ class InitialSetup(object):
             # set the reconfig flag in kickstart so that
             # relevant spokes show up
             services_proxy = SERVICES.get_proxy()
-            services_proxy.SetSetupOnBoot(SETUP_ON_BOOT_RECONFIG)
+            services_proxy.SetupOnBoot = SETUP_ON_BOOT_RECONFIG
 
         # Record if groups, users or root password has been set before Initial Setup
         # has been started, so that we don't trample over existing configuration.
@@ -356,7 +356,7 @@ class InitialSetup(object):
             # to kickstart if neither /etc/reconfigSys or /.unconfigured
             # are present
             services_proxy = SERVICES.get_proxy()
-            services_proxy.SetSetupOnBoot(SETUP_ON_BOOT_DEFAULT)
+            services_proxy.SetupOnBoot = SETUP_ON_BOOT_DEFAULT
 
         # Write the kickstart data to file
         log.info("writing the Initial Setup kickstart file %s", OUTPUT_KICKSTART_PATH)
