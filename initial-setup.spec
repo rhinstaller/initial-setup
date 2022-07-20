@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.94
+Version: 0.3.95
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -104,6 +104,9 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/
 
 %changelog
+* Wed Jul 20 2022 Martin Kolman <mkolman@redhat.com> - 0.3.95-1
+- Use Anaconda DBus read-write properties (vponcova)
+
 * Tue Oct 12 2021 Martin Kolman <mkolman@redhat.com> - 0.3.94-1
 - Remove the default_help_pages configuration option (vponcova)
 - Add the configuration files to the updates image (vponcova)
