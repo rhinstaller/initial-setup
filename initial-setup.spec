@@ -15,7 +15,7 @@ Source0: %{name}-%{version}.tar.gz
 %define debug_package %{nil}
 %define anacondaver 37.8-1
 
-License: GPLv2+
+License: GPL-2.0-or-later
 BuildRequires: gettext
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
