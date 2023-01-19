@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.95
+Version: 0.3.96
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -104,6 +104,10 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/
 
 %changelog
+* Thu Jan 19 2023 Martin Kolman <mkolman@redhat.com> - 0.3.96-1
+- SPDX compatible License: line (mkolman)
+- Fixup version in setup.py (mkolman)
+
 * Wed Jul 20 2022 Martin Kolman <mkolman@redhat.com> - 0.3.95-1
 - Use Anaconda DBus read-write properties (vponcova)
 
