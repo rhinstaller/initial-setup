@@ -280,12 +280,14 @@ class InitialSetup(object):
         # Do not execute sections that were part of the original
         # anaconda kickstart file (== have .seen flag set)
 
-        task = InitialSetupTask(
-            groups_already_configured=self._groups_already_configured,
-            users_already_configured=self._users_already_configured,
-            root_password_already_configured=self._root_password_already_configured,
-        )
-        task.start()
+        if not self.gui_mode:
+            # GUI has it already executed, but in TUI do it here
+            task = InitialSetupTask(
+                groups_already_configured=self._groups_already_configured,
+                users_already_configured=self._users_already_configured,
+                root_password_already_configured=self._root_password_already_configured,
+            )
+            task.start()
 
         if self.external_reconfig:
             # prevent the reconfig flag from being written out
