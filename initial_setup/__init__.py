@@ -221,31 +221,41 @@ class InitialSetup(object):
         # Prepare new data object
         self.data = kickstart.AnacondaKSHandler(commandUpdates=commandMap)
 
-        kickstart_path = INPUT_KICKSTART_PATH
-        if os.path.exists(OUTPUT_KICKSTART_PATH):
+        # lets assume there might be no kickstart file
+        kickstart_path = None
+        # only then try to find one
+        if os.path.exists(INPUT_KICKSTART_PATH):
+            log.info("using kickstart from Anaconda run for input")
+            kickstart_path = INPUT_KICKSTART_PATH
+        elif os.path.exists(OUTPUT_KICKSTART_PATH):
             log.info("using kickstart from previous run for input")
             kickstart_path = OUTPUT_KICKSTART_PATH
+        else:
+            log.info("using no kickstart file for input")
 
-        log.info("parsing input kickstart %s", kickstart_path)
-        try:
-            # Read the installed kickstart
-            parser = kickstart.AnacondaKSParser(self.data)
-            parser.readKickstart(kickstart_path)
-            log.info("kickstart parsing done")
-        except pykickstart.errors.KickstartError as kserr:
-            log.critical("kickstart parsing failed: %s", kserr)
-            log.critical("Initial Setup startup failed due to invalid kickstart file")
-            raise InitialSetupError
+        # only parse kickstart (and tell Boss to parse kickstart)
+        # after we actually found a kickstart file
+        if kickstart_path:
+            log.info("parsing input kickstart %s", kickstart_path)
+            try:
+                # Read the installed kickstart
+                parser = kickstart.AnacondaKSParser(self.data)
+                parser.readKickstart(kickstart_path)
+                log.info("kickstart parsing done")
+            except pykickstart.errors.KickstartError as kserr:
+                log.critical("kickstart parsing failed: %s", kserr)
+                log.critical("Initial Setup startup failed due to invalid kickstart file")
+                raise InitialSetupError
 
-        # if we got this far the kickstart should be valid, so send it to Boss as well
-        boss = BOSS.get_proxy()
-        report = KickstartReport.from_structure(
-            boss.ReadKickstartFile(kickstart_path)
-        )
+            # if we got this far the kickstart should be valid, so send it to Boss as well
+            boss = BOSS.get_proxy()
+            report = KickstartReport.from_structure(
+                boss.ReadKickstartFile(kickstart_path)
+            )
 
-        if not report.is_valid():
-            message = "\n\n".join(map(str, report.error_messages))
-            raise InitialSetupError(message)
+            if not report.is_valid():
+                message = "\n\n".join(map(str, report.error_messages))
+                raise InitialSetupError(message)
 
         if self.external_reconfig:
             # set the reconfig flag in kickstart so that
