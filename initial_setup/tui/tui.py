@@ -1,5 +1,5 @@
 from pyanaconda.ui.tui import TextUserInterface
-from pyanaconda import threading
+from pyanaconda.core import threads
 
 from initial_setup.product import get_product_title, is_final
 from initial_setup.common import list_usable_consoles_for_tui, get_quit_message
@@ -283,10 +283,10 @@ class InitialSetupTextUserInterface(TextUserInterface):
             self.multi_tty_handler = MultipleTTYHandler(tui_stdin_fd=tui_stdin_fd,
                                                         tui_stdout_fd=tui_stdout_fd)
             # start the multi-tty handler
-            threading.threadMgr.add(
-                threading.AnacondaThread(name="initial_setup_multi_tty_thread",
-                                         target=self.multi_tty_handler.run)
-            )
+            threads.thread_manager.add(threads.AnacondaThread(
+                name="initial_setup_multi_tty_thread",
+                target=self.multi_tty_handler.run
+            ))
 
     def setup(self, data):
         TextUserInterface.setup(self, data)
