@@ -100,12 +100,12 @@ def list_usable_consoles_for_tui():
 
 def get_quit_message():
     if eula_available():
-        return N_("Are you sure you want to quit the configuration process?\n"
-                  "You might end up with an unusable system if you do. Unless the "
-                  "License agreement is accepted, the system will be rebooted.")
+        return _("Are you sure you want to quit the configuration process?\n"
+                 "You might end up with an unusable system if you do. Unless the "
+                 "License agreement is accepted, the system will be rebooted.")
     else:
-        return N_("Are you sure you want to quit the configuration process?\n"
-                  "You might end up with unusable system if you do.")
+        return _("Are you sure you want to quit the configuration process?\n"
+                 "You might end up with unusable system if you do.")
 
 
 class LicensingCategory(SpokeCategory):
