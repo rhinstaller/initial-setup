@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.97
+Version: 0.3.98
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -104,6 +104,9 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup/gui/
 
 %changelog
+* Mon Oct 09 2023 Martin Kolman <mkolman@redhat.com> - 0.3.98-1
+- Fix Anaconda module startup (#2241274) (mkolman)
+
 * Mon Feb 13 2023 Martin Kolman <mkolman@redhat.com> - 0.3.97-1
 - Make it possible to run with no kickstart (mkolman)
 - Fixup packit SRPM build deps (mkolman)
