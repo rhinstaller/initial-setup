@@ -1,0 +1,6 @@
+#!/bin/sh
+
+## Runs the GUI program from $@ in Xorg with one of the supported window managers
+
+WINDOWMANAGER_SCRIPT="/usr/libexec/initial-setup/firstboot-windowmanager"
+/bin/xinit ${WINDOWMANAGER_SCRIPT} $@ -- /bin/Xorg :9 -ac -nolisten tcp

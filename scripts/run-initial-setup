@@ -8,9 +8,7 @@ IS_UNIT=initial-setup.service
 GRAPHICAL_TARGET=/usr/lib/systemd/system/graphical.target
 CURRENT_DEFAULT_TARGET=$(readlink -e /etc/systemd/system/default.target)
 
-WINDOWMANAGER_SCRIPT="/usr/libexec/initial-setup/firstboot-windowmanager"
-
-START_GUI_COMMAND="/bin/xinit ${WINDOWMANAGER_SCRIPT} ${IS_GRAPHICAL} --no-stdout-log -- /bin/Xorg :9 -ac -nolisten tcp"
+START_GUI_COMMAND="/usr/libexec/initial-setup/run-gui-backend ${IS_GRAPHICAL} --no-stdout-log"
 
 # check if graphical Initial Setup is installed
 if [ -f ${IS_GRAPHICAL} ]; then
