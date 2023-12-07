@@ -1,0 +1,31 @@
+#!/bin/sh
+
+## Runs the GUI program from $@ in Weston
+
+CONFIG_FILE=$(mktemp --suffix="-wl-weston-firstboot-ini")
+RUN_SCRIPT=$(mktemp --suffix="-wl-weston-firstboot-run")
+EXIT_CODE_SAVE=$(mktemp --suffix="-wl-weston-firstboot-exit")
+
+cat > ${CONFIG_FILE} << EOF
+[core]
+shell=kiosk
+xwayland=true
+
+[autolaunch]
+path=${RUN_SCRIPT}
+watch=true
+EOF
+
+cat > ${RUN_SCRIPT} << EOF
+#!/bin/sh
+GDK_BACKEND=x11 $@
+echo $? > ${EXIT_CODE_SAVE}
+EOF
+
+chmod +x ${RUN_SCRIPT}
+
+weston --config=${CONFIG_FILE} --socket=wl-firstboot-0
+exit_code=$(< ${EXIT_CODE_SAVE})
+
+rm ${CONFIG_FILE} ${RUN_SCRIPT} ${EXIT_CODE_SAVE}
+exit $exit_code

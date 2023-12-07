@@ -28,7 +28,8 @@ data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
               ('/usr/libexec/initial-setup/',
               ["scripts/run-initial-setup", "scripts/firstboot-windowmanager",
                "scripts/initial-setup-text", "scripts/initial-setup-graphical",
-               "scripts/run-gui-backend",
+               "scripts/run-gui-backend.guixorg", "scripts/run-gui-backend.guiweston",
+               "scripts/run-gui-backend",  # symlink to the default backend
                "scripts/reconfiguration-mode-enabled"]),
               ('/usr/share/doc/initial-setup/', ["ChangeLog"])]
 
