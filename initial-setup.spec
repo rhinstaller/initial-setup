@@ -121,6 +121,7 @@ rm -rf %{buildroot}
 %dir %{_sysconfdir}/%{name}
 %dir %{_sysconfdir}/%{name}/conf.d
 %config %{_sysconfdir}/%{name}/conf.d/*
+%{_sysconfdir}/pam.d/initial-setup
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
