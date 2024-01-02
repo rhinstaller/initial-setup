@@ -18,7 +18,7 @@ EOF
 
 cat > ${RUN_SCRIPT} << EOF
 #!/bin/sh
-GDK_BACKEND=x11 $@
+$@
 echo $? > ${EXIT_CODE_SAVE}
 EOF
 
