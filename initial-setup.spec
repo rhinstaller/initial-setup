@@ -1,8 +1,9 @@
-Summary: Initial system configuration utility
 Name: initial-setup
-URL: https://fedoraproject.org/wiki/InitialSetup
 Version: 0.3.99
 Release: 1%{?dist}
+Summary: Initial system configuration utility
+URL: https://fedoraproject.org/wiki/InitialSetup
+License: GPL-2.0-or-later
 
 # This is a Red Hat maintained package which is specific to
 # our distribution.
@@ -27,6 +28,7 @@ BuildRequires: make
 
 Requires: %{__python3}
 Requires: anaconda-tui >= %{anacondaver}
+Requires: libxkbcommon
 Requires: python3-simpleline >= 1.4
 Requires: systemd >= 235
 Requires(post): systemd
@@ -85,19 +87,15 @@ RemovePathPostfixes: .guiweston
 rm -rf *.egg-info
 
 %build
-make
+%make_build
 
 %install
-rm -rf %{buildroot}
-make DESTDIR=%{buildroot} install
+%make_install
 
 # Remove the default link, provide subpackages for alternatives
 rm %{buildroot}%{_libexecdir}/%{name}/run-gui-backend
 
 %find_lang %{name}
-
-%clean
-rm -rf %{buildroot}
 
 %post
 %systemd_post initial-setup.service
@@ -109,8 +107,8 @@ rm -rf %{buildroot}
 %systemd_postun initial-setup.service
 
 %files -f %{name}.lang
-%doc README.rst ChangeLog
 %license COPYING
+%doc README.rst ChangeLog
 %{python3_sitelib}/initial_setup*
 %exclude %{python3_sitelib}/initial_setup/gui
 %{_libexecdir}/%{name}/run-initial-setup
