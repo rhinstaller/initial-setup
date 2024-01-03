@@ -5,7 +5,7 @@ Name: initial-setup
 Summary: Initial system configuration utility
 URL: https://fedoraproject.org/wiki/InitialSetup
 License: GPL-2.0-or-later
-Version: 0.3.99
+Version: 0.3.100
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -156,6 +156,10 @@ rm -v %{buildroot}%{_libexecdir}/%{name}/firstboot-windowmanager
 %find_lang %{name}
 
 %changelog
+* Wed Jan 03 2024 Martin Kolman <mkolman@redhat.com> - 0.3.100-1
+- spec: Disable shipping the X11 backend for all but RHEL < 10 (neal)
+- spec: Restructure and modernize (neal)
+
 * Wed Jan 03 2024 Martin Kolman <mkolman@redhat.com> - 0.3.99-1
 - Default initial-setup-gui GDK to X11 for all display servers (ales.astone)
 - Configure a seat session for running wayland compositors (ales.astone)
