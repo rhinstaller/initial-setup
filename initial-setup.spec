@@ -43,14 +43,40 @@ a series of steps that allows for easier configuration of the machine.
 Summary: Graphical user interface for the initial-setup utility
 Requires: gtk3
 Requires: anaconda-gui >= %{anacondaver}
-Requires: firstboot(windowmanager)
-Requires: xorg-x11-xinit
-Requires: xorg-x11-server-Xorg
+Requires: firstboot(gui-backend)
 Requires: %{name} = %{version}-%{release}
+Suggests: %{name}-gui-wayland-generic
 
 %description gui
 The initial-setup-gui package contains a graphical user interface for the
 initial-setup utility.
+
+%package gui-xorg
+Summary: Run the initial-setup GUI in Xorg
+Requires: %{name}-gui = %{version}-%{release}
+Requires: xorg-x11-xinit
+Requires: xorg-x11-server-Xorg
+Requires: firstboot(windowmanager)
+
+Provides:  firstboot(gui-backend)
+Conflicts: firstboot(gui-backend)
+RemovePathPostfixes: .guixorg
+
+%description gui-xorg
+%{summary}.
+
+%package gui-wayland-generic
+Summary: Run the initial-setup GUI in Wayland
+Requires: %{name}-gui = %{version}-%{release}
+Requires: weston
+Requires: xorg-x11-server-Xwayland
+
+Provides:  firstboot(gui-backend)
+Conflicts: firstboot(gui-backend)
+RemovePathPostfixes: .guiweston
+
+%description gui-wayland-generic
+%{summary}.
 
 %prep
 %autosetup -p 1
@@ -64,6 +90,9 @@ make
 %install
 rm -rf %{buildroot}
 make DESTDIR=%{buildroot} install
+
+# Remove the default link, provide subpackages for alternatives
+rm %{buildroot}%{_libexecdir}/%{name}/run-gui-backend
 
 %find_lang %{name}
 
@@ -85,7 +114,6 @@ rm -rf %{buildroot}
 %{python3_sitelib}/initial_setup*
 %exclude %{python3_sitelib}/initial_setup/gui
 %{_libexecdir}/%{name}/run-initial-setup
-%{_libexecdir}/%{name}/firstboot-windowmanager
 %{_libexecdir}/%{name}/initial-setup-text
 %{_libexecdir}/%{name}/reconfiguration-mode-enabled
 %{_unitdir}/initial-setup.service
@@ -93,6 +121,7 @@ rm -rf %{buildroot}
 %dir %{_sysconfdir}/%{name}
 %dir %{_sysconfdir}/%{name}/conf.d
 %config %{_sysconfdir}/%{name}/conf.d/*
+%{_sysconfdir}/pam.d/initial-setup
 
 %ifarch s390 s390x
 %{_sysconfdir}/profile.d/initial-setup.sh
@@ -102,6 +131,13 @@ rm -rf %{buildroot}
 %files gui
 %{_libexecdir}/%{name}/initial-setup-graphical
 %{python3_sitelib}/initial_setup/gui/
+
+%files gui-xorg
+%{_libexecdir}/%{name}/run-gui-backend.guixorg
+%{_libexecdir}/%{name}/firstboot-windowmanager
+
+%files gui-wayland-generic
+%{_libexecdir}/%{name}/run-gui-backend.guiweston
 
 %changelog
 * Mon Oct 09 2023 Martin Kolman <mkolman@redhat.com> - 0.3.98-1

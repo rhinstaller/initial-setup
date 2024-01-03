@@ -4,6 +4,9 @@ import os
 
 from initial_setup import InitialSetup, InitialSetupError
 
+# Doesn't work with native Wayland yet
+os.environ["GDK_BACKEND"] = "x11"
+
 is_instance = InitialSetup(gui_mode=True)
 
 try:

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This is the list of supported window manager binaries
-WMS=("gnome-kiosk" "metacity" "kwin_x11" "kwin" "xfwm4" "openbox" "marco")
+WMS=("gnome-kiosk" "metacity" "kwin_x11" "xfwm4" "openbox" "marco")
 
 run_gnome_kiosk()
 {

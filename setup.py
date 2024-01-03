@@ -25,9 +25,12 @@ from setuptools import setup, find_packages
 
 data_files = [('/usr/lib/systemd/system', glob('systemd/*.service')),
               ('/etc/initial-setup/conf.d', glob('data/*.conf')),
+              ('/etc/pam.d', glob('pam/*')),
               ('/usr/libexec/initial-setup/',
               ["scripts/run-initial-setup", "scripts/firstboot-windowmanager",
                "scripts/initial-setup-text", "scripts/initial-setup-graphical",
+               "scripts/run-gui-backend.guixorg", "scripts/run-gui-backend.guiweston",
+               "scripts/run-gui-backend",  # symlink to the default backend
                "scripts/reconfiguration-mode-enabled"]),
               ('/usr/share/doc/initial-setup/', ["ChangeLog"])]
 
