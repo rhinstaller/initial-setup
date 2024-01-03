@@ -1,7 +1,7 @@
 Summary: Initial system configuration utility
 Name: initial-setup
 URL: https://fedoraproject.org/wiki/InitialSetup
-Version: 0.3.98
+Version: 0.3.99
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -140,6 +140,13 @@ rm -rf %{buildroot}
 %{_libexecdir}/%{name}/run-gui-backend.guiweston
 
 %changelog
+* Wed Jan 03 2024 Martin Kolman <mkolman@redhat.com> - 0.3.99-1
+- Default initial-setup-gui GDK to X11 for all display servers (ales.astone)
+- Configure a seat session for running wayland compositors (ales.astone)
+- Add support for generic Wayland support through Weston (neal)
+- Allow running the graphical setup in graphic servers other than Xorg (ales.astone)
+- windowmanager: Remove kwin (ales.astone)
+
 * Mon Oct 09 2023 Martin Kolman <mkolman@redhat.com> - 0.3.98-1
 - Fix Anaconda module startup (#2241274) (mkolman)
 

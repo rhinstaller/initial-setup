@@ -43,7 +43,7 @@ with open("README.rst", "r") as f:
     long_description = f.read()
 
 setup(name="initial-setup",
-      version="0.3.98",
+      version="0.3.99",
       author="Martin Kolman",
       author_email="mkolman@redhat.com",
       description='Post-installation configuration utility',
