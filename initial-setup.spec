@@ -5,7 +5,7 @@ Name: initial-setup
 Summary: Initial system configuration utility
 URL: https://fedoraproject.org/wiki/InitialSetup
 License: GPL-2.0-or-later
-Version: 0.3.100
+Version: 0.3.101
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -156,6 +156,9 @@ rm -v %{buildroot}%{_libexecdir}/%{name}/firstboot-windowmanager
 %find_lang %{name}
 
 %changelog
+* Fri Jul 19 2024 Martin Kolman <mkolman@redhat.com> - 0.3.101-1
+- Use threads.py submodule in favor of compatibility file threading.py (kkoukiou)
+
 * Wed Jan 03 2024 Martin Kolman <mkolman@redhat.com> - 0.3.100-1
 - spec: Disable shipping the X11 backend for all but RHEL < 10 (neal)
 - spec: Restructure and modernize (neal)
