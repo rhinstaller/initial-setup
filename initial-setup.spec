@@ -57,6 +57,7 @@ a series of steps that allows for easier configuration of the machine.
 %license COPYING
 %{python3_sitelib}/initial_setup*
 %exclude %{python3_sitelib}/initial_setup/gui
+%dir %{_libexecdir}/%{name}
 %{_libexecdir}/%{name}/run-initial-setup
 %{_libexecdir}/%{name}/initial-setup-text
 %{_libexecdir}/%{name}/reconfiguration-mode-enabled
