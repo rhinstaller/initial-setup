@@ -97,6 +97,7 @@ Summary: Run the initial-setup GUI in Wayland
 Requires: %{name}-gui = %{version}-%{release}
 Requires: weston
 Requires: xorg-x11-server-Xwayland
+Requires: kbd
 
 Provides:  firstboot(gui-backend)
 Conflicts: firstboot(gui-backend)
