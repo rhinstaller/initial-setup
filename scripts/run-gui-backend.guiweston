@@ -31,7 +31,13 @@ if [ -n "$XDG_VTNR" ]; then
     chvt "${XDG_VTNR}"
 fi
 
-weston --config=${CONFIG_FILE} --socket=wl-firstboot-0
+cards=$(ls -d /sys/class/drm/card*| grep -v -- -| cut -d / -f 5)
+primary_card=$(echo "$cards" | head -1 )
+secondary_cards=$(echo "$cards"|
+                  tail -n +2|
+                  xargs printf "%s,")
+
+weston --config=${CONFIG_FILE} --socket=wl-firstboot-0 --drm-device="$primary_card" --additional-devices="$secondary_cards"
 exit_code=$(< ${EXIT_CODE_SAVE})
 
 rm ${CONFIG_FILE} ${RUN_SCRIPT} ${EXIT_CODE_SAVE}
