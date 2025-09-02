@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This is the list of supported window manager binaries
-WMS=("gnome-kiosk" "metacity" "kwin_x11" "xfwm4" "openbox" "marco")
+WMS=("gnome-kiosk")
 
 run_gnome_kiosk()
 {
@@ -12,17 +12,6 @@ run_gnome_kiosk()
         new_data_dirs="/usr/share/anaconda/window-manager:${XDG_DATA_DIRS}"
     fi
     XDG_DATA_DIRS="$new_data_dirs" $1 --x11 &
-}
-
-run_metacity()
-{
-    # Apply the anaconda overrides before running metacity
-    if [ -z "$XDG_DATA_DIRS" ] ; then
-        new_data_dirs="/usr/share/anaconda/window-manager:/usr/share"
-    else
-        new_data_dirs="/usr/share/anaconda/window-manager:${XDG_DATA_DIRS}"
-    fi
-    XDG_DATA_DIRS="$new_data_dirs" $1 &
 }
 
 # Get the application binary to start and remove it from
@@ -40,10 +29,6 @@ for WM in ${WMS[@]}; do
             # if running gnome-kiosk apply the Anaconda/Initial Setup custom overrides
             echo "Running gnome-kiosk with custom overrides" | systemd-cat -t initial-setup -p 6
             run_gnome_kiosk "$FILE"
-        elif [ "$WM" == "metacity" ]; then
-            # if running Metacity apply the Anaconda/Initial Setup custom overrides
-            echo "Running Metacity with custom overrides" | systemd-cat -t initial-setup -p 6
-            run_metacity "$FILE"
         else
             echo "Running window manager ($FILE)" | systemd-cat -t initial-setup -p 6
             "$FILE" &
