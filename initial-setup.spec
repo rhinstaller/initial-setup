@@ -1,5 +1,4 @@
-# Enable X11 for RHEL 9 and older only
-%bcond x11 %[0%{?rhel} && 0%{?rhel} < 10]
+
 
 Name: initial-setup
 Summary: Initial system configuration utility
@@ -110,28 +109,6 @@ RemovePathPostfixes: .guiweston
 
 # --------------------------------------------------------------------------
 
-%if %{with x11}
-%package gui-xorg
-Summary: Run the initial-setup GUI in Xorg
-Requires: %{name}-gui = %{version}-%{release}
-Requires: xorg-x11-xinit
-Requires: xorg-x11-server-Xorg
-Requires: firstboot(windowmanager)
-
-Provides:  firstboot(gui-backend)
-Conflicts: firstboot(gui-backend)
-RemovePathPostfixes: .guixorg
-
-%description gui-xorg
-%{summary}.
-
-%files gui-xorg
-%{_libexecdir}/%{name}/run-gui-backend.guixorg
-%{_libexecdir}/%{name}/firstboot-windowmanager
-%endif
-
-# --------------------------------------------------------------------------
-
 %prep
 %autosetup -p 1
 
@@ -146,12 +123,6 @@ rm -rf *.egg-info
 
 # Remove the default link, provide subpackages for alternatives
 rm %{buildroot}%{_libexecdir}/%{name}/run-gui-backend
-
-%if ! %{with x11}
-# We do not want to ship X11 support anymore
-rm -v %{buildroot}%{_libexecdir}/%{name}/run-gui-backend.guixorg
-rm -v %{buildroot}%{_libexecdir}/%{name}/firstboot-windowmanager
-%endif
 
 %find_lang %{name}
 
