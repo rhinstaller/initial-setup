@@ -126,7 +126,6 @@ RemovePathPostfixes: .guixorg
 %{summary}.
 
 %files gui-xorg
-%{_libexecdir}/%{name}/run-gui-backend.guixorg
 %{_libexecdir}/%{name}/firstboot-windowmanager
 %endif
 
@@ -149,7 +148,6 @@ rm %{buildroot}%{_libexecdir}/%{name}/run-gui-backend
 
 %if ! %{with x11}
 # We do not want to ship X11 support anymore
-rm -v %{buildroot}%{_libexecdir}/%{name}/run-gui-backend.guixorg
 rm -v %{buildroot}%{_libexecdir}/%{name}/firstboot-windowmanager
 %endif
 
