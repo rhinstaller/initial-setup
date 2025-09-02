@@ -124,9 +124,6 @@ rm -rf *.egg-info
 # Remove the default link, provide subpackages for alternatives
 rm %{buildroot}%{_libexecdir}/%{name}/run-gui-backend
 
-# Remove the firstboot-windowmanager script
-rm -v %{buildroot}%{_libexecdir}/%{name}/firstboot-windowmanager
-
 %find_lang %{name}
 
 %changelog
