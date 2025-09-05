@@ -92,6 +92,14 @@ release:
 .PHONY: archive
 archive: po-pull ChangeLog
 	$(BUILD_CMD)
+	# Fix naming: setuptools creates initial_setup-* but we want initial-setup-*
+	if [ -f "dist/initial_setup-$(VERSION).tar.gz" ]; then \
+		cd dist && \
+		tar -xzf initial_setup-$(VERSION).tar.gz && \
+		mv initial_setup-$(VERSION) $(PKGNAME)-$(VERSION) && \
+		tar -czf $(PKGNAME)-$(VERSION).tar.gz $(PKGNAME)-$(VERSION) && \
+		rm -rf initial_setup-$(VERSION).tar.gz $(PKGNAME)-$(VERSION); \
+	fi
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
 
 .PHONY: local
