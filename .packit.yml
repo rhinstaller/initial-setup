@@ -3,6 +3,7 @@ upstream_package_name: initial-setup
 upstream_tag_template: r{version}-1
 srpm_build_deps:
   - make
+  - python3-build
 actions:
   create-archive:
     - "make BUILD_ARGS=sdist archive"

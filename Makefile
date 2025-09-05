@@ -26,8 +26,8 @@ RELEASE=$(shell awk '/Release:/ { print $$2 }' $(PKGNAME).spec | sed -e 's|%.*$$
 TAG=r$(VERSION)-$(RELEASE)
 
 PYTHON=python3
-# Arguments used for setup.py call for creating archive
-BUILD_ARGS ?= sdist bdist_wheel
+# Use modern python -m build instead of setup.py
+BUILD_CMD ?= $(PYTHON) -m build
 
 # LOCALIZATION SETTINGS
 L10N_REPOSITORY ?= https://github.com/rhinstaller/initial-setup-l10n.git
@@ -45,13 +45,13 @@ all: po-files
 
 .PHONY: install
 install:
-	$(PYTHON) setup.py install --root=$(DESTDIR)
+	$(PYTHON) -m pip install . --root=$(DESTDIR) --verbose --no-deps --no-build-isolation
 	$(MAKE) -C po install
 
 .PHONY: clean
 clean:
 	-rm *.tar.gz ChangeLog initial-setup-*.src.rpm
-	-rm -rf $(TEST_BUILD_DIR) dist/ initial_setup.egg-info
+	-rm -rf $(TEST_BUILD_DIR) dist/ build/ *.egg-info
 	-find . -name "*.pyc" -exec rm -rf {} \;
 
 # local run of TMT tests
@@ -91,7 +91,7 @@ release:
 
 .PHONY: archive
 archive: po-pull ChangeLog
-	$(PYTHON) setup.py $(BUILD_ARGS)
+	$(BUILD_CMD)
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
 
 .PHONY: local
@@ -99,7 +99,7 @@ local: po-pull ChangeLog
 	@rm -rf $(PKGNAME)-$(VERSION).tar.gz
 	@rm -rf /tmp/$(PKGNAME)-$(VERSION) /tmp/$(PKGNAME)
 	@dir=$$PWD; cp -a $$dir /tmp/$(PKGNAME)-$(VERSION)
-	@cd /tmp/$(PKGNAME)-$(VERSION) ; $(PYTHON) setup.py -q sdist
+	@cd /tmp/$(PKGNAME)-$(VERSION) ; $(PYTHON) -m build --sdist --no-isolation
 	@cp /tmp/$(PKGNAME)-$(VERSION)/dist/$(PKGNAME)-$(VERSION).tar.gz .
 	@rm -rf /tmp/$(PKGNAME)-$(VERSION)
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
