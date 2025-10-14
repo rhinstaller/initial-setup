@@ -21,7 +21,6 @@ Source0: %{name}-%{version}.tar.gz
 
 BuildRequires: gettext
 BuildRequires: python3-devel
-BuildRequires: python3-setuptools
 BuildRequires: systemd-units
 BuildRequires: gtk3-devel
 BuildRequires: glade-devel
@@ -138,11 +137,20 @@ RemovePathPostfixes: .guixorg
 # remove upstream egg-info
 rm -rf *.egg-info
 
+%generate_buildrequires
+%pyproject_buildrequires
+
 %build
 %make_build
 
 %install
 %make_install
+
+# Manually install configuration files to /etc (avoid /usr/etc issue)
+install -d %{buildroot}%{_sysconfdir}/%{name}/conf.d
+install -m 644 data/10-initial-setup.conf %{buildroot}%{_sysconfdir}/%{name}/conf.d/
+install -d %{buildroot}%{_sysconfdir}/pam.d
+install -m 644 pam/initial-setup %{buildroot}%{_sysconfdir}/pam.d/
 
 # Remove the default link, provide subpackages for alternatives
 rm %{buildroot}%{_libexecdir}/%{name}/run-gui-backend

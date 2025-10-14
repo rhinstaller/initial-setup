@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "initial-setup"
+version = "0.3.101"
+authors = [
+    {name = "Martin Kolman", email = "mkolman@redhat.com"}
+]
+description = "Post-installation configuration utility"
+readme = "README.rst"
+license = {text = "GPL-2.0-or-later"}
+keywords = ["firstboot", "initial", "setup"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: X11 Applications :: GTK",
+    "Environment :: Console", 
+    "Intended Audience :: System Administrators",
+    "Topic :: System :: Systems Administration",
+    "Programming Language :: Python :: 3",
+]
+requires-python = ">=3.8"
+dynamic = ["dependencies"]
+
+[project.urls]
+Homepage = "https://fedoraproject.org/wiki/InitialSetup"
+Repository = "https://github.com/rhinstaller/initial-setup"
+issues = "https://github.com/rhinstaller/initial-setup/issues"
+
+[tool.setuptools.packages.find]
+exclude = ["po*", "scripts*", "systemd*", "tests*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.glade"]
+
+[tool.setuptools.data-files]
+"lib/systemd/system" = ["systemd/*.service"]
+"libexec/initial-setup" = [
+    "scripts/run-initial-setup",
+    "scripts/firstboot-windowmanager",
+    "scripts/initial-setup-text",
+    "scripts/initial-setup-graphical",
+    "scripts/run-gui-backend.guixorg",
+    "scripts/run-gui-backend.guiweston",
+    "scripts/run-gui-backend",
+    "scripts/reconfiguration-mode-enabled"
+]
+"share/doc/initial-setup" = ["ChangeLog"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}

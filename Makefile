@@ -26,8 +26,8 @@ RELEASE=$(shell awk '/Release:/ { print $$2 }' $(PKGNAME).spec | sed -e 's|%.*$$
 TAG=r$(VERSION)-$(RELEASE)
 
 PYTHON=python3
-# Arguments used for setup.py call for creating archive
-BUILD_ARGS ?= sdist bdist_wheel
+# Use modern python -m build instead of setup.py
+BUILD_CMD ?= $(PYTHON) -m build
 
 # LOCALIZATION SETTINGS
 L10N_REPOSITORY ?= https://github.com/rhinstaller/initial-setup-l10n.git
@@ -45,13 +45,13 @@ all: po-files
 
 .PHONY: install
 install:
-	$(PYTHON) setup.py install --root=$(DESTDIR)
+	$(PYTHON) -m pip install . --root=$(DESTDIR) --verbose --no-deps --no-build-isolation
 	$(MAKE) -C po install
 
 .PHONY: clean
 clean:
 	-rm *.tar.gz ChangeLog initial-setup-*.src.rpm
-	-rm -rf $(TEST_BUILD_DIR) dist/ initial_setup.egg-info
+	-rm -rf $(TEST_BUILD_DIR) dist/ build/ *.egg-info
 	-find . -name "*.pyc" -exec rm -rf {} \;
 
 # local run of TMT tests
@@ -91,7 +91,15 @@ release:
 
 .PHONY: archive
 archive: po-pull ChangeLog
-	$(PYTHON) setup.py $(BUILD_ARGS)
+	$(BUILD_CMD)
+	# Fix naming: setuptools creates initial_setup-* but we want initial-setup-*
+	if [ -f "dist/initial_setup-$(VERSION).tar.gz" ]; then \
+		cd dist && \
+		tar -xzf initial_setup-$(VERSION).tar.gz && \
+		mv initial_setup-$(VERSION) $(PKGNAME)-$(VERSION) && \
+		tar -czf $(PKGNAME)-$(VERSION).tar.gz $(PKGNAME)-$(VERSION) && \
+		rm -rf initial_setup-$(VERSION).tar.gz $(PKGNAME)-$(VERSION); \
+	fi
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
 
 .PHONY: local
@@ -99,7 +107,7 @@ local: po-pull ChangeLog
 	@rm -rf $(PKGNAME)-$(VERSION).tar.gz
 	@rm -rf /tmp/$(PKGNAME)-$(VERSION) /tmp/$(PKGNAME)
 	@dir=$$PWD; cp -a $$dir /tmp/$(PKGNAME)-$(VERSION)
-	@cd /tmp/$(PKGNAME)-$(VERSION) ; $(PYTHON) setup.py -q sdist
+	@cd /tmp/$(PKGNAME)-$(VERSION) ; $(PYTHON) -m build --sdist --no-isolation
 	@cp /tmp/$(PKGNAME)-$(VERSION)/dist/$(PKGNAME)-$(VERSION).tar.gz .
 	@rm -rf /tmp/$(PKGNAME)-$(VERSION)
 	@echo "The archive is in $(PKGNAME)-$(VERSION).tar.gz"
@@ -166,10 +174,10 @@ bumpver: po-push
 	(head -n $$cl initial-setup.spec ; echo "$$DATELINE" ; make --quiet --no-print-directory rpmlog 2>/dev/null ; echo ""; cat speclog) > initial-setup.spec.new ; \
 	mv initial-setup.spec.new initial-setup.spec ; rm -f speclog ; \
 	sed -i "s/Version: $(VERSION)/Version: $$NEWVERSION/" initial-setup.spec ; \
-	sed -i "s/version = \"$(VERSION)\"/version = \"$$NEWVERSION\"/" setup.py ; \
+	sed -i "s/version = \"$(VERSION)\"/version = \"$$NEWVERSION\"/" pyproject.toml ; \
 	sed -i "s/__version__ = \"$(VERSION)\"/__version__ = \"$$NEWVERSION\"/" initial_setup/__init__.py ; \
 
 .PHONY: commit
 commit:
-	git add initial-setup.spec initial_setup/__init__.py po/initial-setup.pot setup.py ; \
+	git add initial-setup.spec initial_setup/__init__.py po/initial-setup.pot pyproject.toml ; \
 	git commit -m "New version $(VERSION)" ; \
