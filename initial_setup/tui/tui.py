@@ -27,7 +27,7 @@ class MultipleTTYHandler(object):
     the Initial Setup stdin.
     """
 
-    def __init__(self, tui_stdout_fd, tui_stdin_fd):
+    def __init__(self, tui_stdout_fd, tui_stdin_fd, console):
         # create file objects for the TUI stdout and stdin fds
         self._tui_stdout_fd = tui_stdout_fd
         self._tui_stdout = os.fdopen(tui_stdout_fd, "r")
@@ -43,6 +43,8 @@ class MultipleTTYHandler(object):
         self._active_console_in = None
         self._active_console_out = None
 
+        self._origin_console = console
+
         self._console_read_fos = {}
         self._console_write_fos = []
         self._open_all_consoles()
@@ -55,10 +57,12 @@ class MultipleTTYHandler(object):
         """Open all consoles suitable for running the Initial Setup TUI."""
         console_write_fos = {}
         console_read_fos = {}
-        console_paths = (os.path.join("/dev", c) for c in list_usable_consoles_for_tui())
+        console_paths = [os.path.join("/dev", c) for c in list_usable_consoles_for_tui()]
+        if self._origin_console:
+            console_paths.append(self._origin_console)
         usable_console_paths = []
         unusable_console_paths = []
-        for console_path in console_paths:
+        for console_path in set(console_paths):
             try:
                 write_fo = open(console_path, "w")
                 read_fo = open(console_path, "r")
@@ -268,6 +272,11 @@ class InitialSetupTextUserInterface(TextUserInterface):
         # start the multi TTY handler and just run in the single
         # local console.
         if self._use_multi_tty_handler:
+            # save current console
+            current_console = None
+            if os.isatty(sys.stdout.fileno()):
+                current_console = os.ttyname(sys.stdout.fileno())
+
             # redirect stdin and stdout to custom pipes
 
             # stdin
@@ -281,7 +290,8 @@ class InitialSetupTextUserInterface(TextUserInterface):
 
             # instantiate and start the multi TTY handler
             self.multi_tty_handler = MultipleTTYHandler(tui_stdin_fd=tui_stdin_fd,
-                                                        tui_stdout_fd=tui_stdout_fd)
+                                                        tui_stdout_fd=tui_stdout_fd,
+                                                        console=current_console)
             # start the multi-tty handler
             thread_manager.add_thread(
                 name="initial_setup_multi_tty_thread",
