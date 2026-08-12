@@ -37,7 +37,7 @@ secondary_cards=$(echo "$cards"|
                   tail -n +2|
                   xargs printf "%s,")
 
-weston --config=${CONFIG_FILE} --socket=wl-firstboot-0 --drm-device="$primary_card" --additional-devices="$secondary_cards"
+LIBSEAT_BACKEND=noop weston --config=${CONFIG_FILE} --socket=wl-firstboot-0 --drm-device="$primary_card" --additional-devices="$secondary_cards"
 exit_code=$(< ${EXIT_CODE_SAVE})
 
 rm ${CONFIG_FILE} ${RUN_SCRIPT} ${EXIT_CODE_SAVE}
