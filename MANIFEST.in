@@ -7,3 +7,5 @@ recursive-include scripts *
 recursive-include po *.po *.pot Makefile
 recursive-include initial_setup *.py *.glade
 recursive-exclude modules *.pyc *.pyo
+include data/10-initial-setup.conf
+include pam/initial-setup
