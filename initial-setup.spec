@@ -1,5 +1,6 @@
 # Enable X11 for RHEL 9 and older only
 %bcond x11 %[0%{?rhel} && 0%{?rhel} < 10]
+%bcond glade %[%{undefined rhel} && %{undefined eln}]
 
 Name: initial-setup
 Summary: Initial system configuration utility
@@ -23,7 +24,9 @@ BuildRequires: gettext
 BuildRequires: python3-devel
 BuildRequires: systemd-units
 BuildRequires: gtk3-devel
+%if %{with glade}
 BuildRequires: glade-devel
+%endif
 BuildRequires: intltool
 BuildRequires: make
 

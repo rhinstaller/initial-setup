@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -29,7 +29,7 @@ Repository = "https://github.com/rhinstaller/initial-setup"
 issues = "https://github.com/rhinstaller/initial-setup/issues"
 
 [tool.setuptools.packages.find]
-exclude = ["po*", "scripts*", "systemd*", "tests*"]
+exclude = ["po*", "scripts*", "systemd*", "tests*", "data*", "pam*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.glade"]

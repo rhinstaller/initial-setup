@@ -21,6 +21,7 @@ jobs:
     metadata:
       targets:
         - fedora-eln
+        - fedora-rawhide
 
   - job: copr_build
     trigger: commit
