@@ -35,6 +35,7 @@ Requires: anaconda-tui >= %{anacondaver}
 Requires: libxkbcommon
 Requires: python3-simpleline >= 1.4
 Requires: systemd >= 235
+Requires: kmscon >= 10.0.1
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
