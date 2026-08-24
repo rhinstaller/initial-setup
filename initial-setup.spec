@@ -6,7 +6,7 @@ Name: initial-setup
 Summary: Initial system configuration utility
 URL: https://fedoraproject.org/wiki/InitialSetup
 License: GPL-2.0-or-later
-Version: 0.3.101
+Version: 0.3.102
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -169,6 +169,20 @@ rm -v %{buildroot}%{_libexecdir}/%{name}/firstboot-windowmanager
 %find_lang %{name}
 
 %changelog
+* Mon Aug 24 2026 Martin Kolman <mkolman@redhat.com> - 0.3.102-1
+- Update the systemd service, to use kmscon instead of fbcon (jfalempe)
+- Add Fedora Rahide for COPR build in Packit (mkolman)
+- Drop python-wheel dependecny (mkolman)
+- Prevent Glade dependency from breaking ELN tests (mkolman)
+- Use LIBSEAT_BACKEND=noop for weston in run-gui-backend (jgroman)
+- Fix pam and config file handling (mkolman)
+- Fix makebumpver to also bump version in pyproject.toml (mkolman)
+- Adjust spec file to setup.py changes (mkolman)
+- Fixup tarball & folder naming (mkolman)
+- Modernize setup.py (mkolman)
+- Try to use outputs on all cards (marmarek)
+- Switch VT before starting weston (marmarek)
+
 * Fri Jul 19 2024 Martin Kolman <mkolman@redhat.com> - 0.3.101-1
 - Use threads.py submodule in favor of compatibility file threading.py (kkoukiou)
 
