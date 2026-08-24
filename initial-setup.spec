@@ -157,6 +157,12 @@ install -m 644 data/10-initial-setup.conf %{buildroot}%{_sysconfdir}/%{name}/con
 install -d %{buildroot}%{_sysconfdir}/pam.d
 install -m 644 pam/initial-setup %{buildroot}%{_sysconfdir}/pam.d/
 
+%ifarch s390 s390x
+install -d %{buildroot}%{_sysconfdir}/profile.d
+install -m 644 scripts/s390/initial-setup.sh %{buildroot}%{_sysconfdir}/profile.d/
+install -m 644 scripts/s390/initial-setup.csh %{buildroot}%{_sysconfdir}/profile.d/
+%endif
+
 # Remove the default link, provide subpackages for alternatives
 rm %{buildroot}%{_libexecdir}/%{name}/run-gui-backend
 

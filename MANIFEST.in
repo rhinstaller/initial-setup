@@ -9,3 +9,5 @@ recursive-include initial_setup *.py *.glade
 recursive-exclude modules *.pyc *.pyo
 include data/10-initial-setup.conf
 include pam/initial-setup
+include scripts/s390/initial-setup.csh
+include scripts/s390/initial-setup.sh
