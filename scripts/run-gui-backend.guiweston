@@ -26,16 +26,21 @@ chmod +x ${RUN_SCRIPT}
 
 original_vt=
 if [ -n "$XDG_VTNR" ]; then
-    original_vt=$(fgconsole)
-    # change to VT on which we run to get access to devices
-    chvt "${XDG_VTNR}"
+    original_vt=$(fgconsole 2>/dev/null)
+    # When running inside a terminal emulator that holds DRM master (e.g.,
+    # kmscon on tty7), we must switch to a different VT to force it to
+    # release DRM master so Weston can acquire it.
+    weston_vt=$((XDG_VTNR + 1))
+    chvt "$weston_vt"
 fi
 
 # Find the primary KMS-capable card by looking for connectors with a
 # known display type. Cards with only "Unknown" connectors (simpledrm)
 # or "Writeback" connectors are not usable as primary display devices.
 
-# Poll up to 10 seconds for usable card
+# DRM drivers may still be loading at this point (e.g. vc4 on RPi4 registers
+# several seconds after simpledrm and v3d), so poll up to 10 seconds for
+# usable card to appear.
 primary_card=
 attempt=0
 while [ $attempt -lt 10 ]; do
