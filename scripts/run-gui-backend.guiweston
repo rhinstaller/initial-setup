@@ -26,19 +26,61 @@ chmod +x ${RUN_SCRIPT}
 
 original_vt=
 if [ -n "$XDG_VTNR" ]; then
-    original_vt=$(fgconsole)
-    # change to VT on which we run to get access to devices
-    chvt "${XDG_VTNR}"
+    original_vt=$(fgconsole 2>/dev/null)
+    # When running inside a terminal emulator that holds DRM master (e.g.,
+    # kmscon on tty7), we must switch to a different VT to force it to
+    # release DRM master so Weston can acquire it.
+    weston_vt=$((XDG_VTNR + 1))
+    chvt "$weston_vt"
 fi
 
-cards=$(ls -d /sys/class/drm/card*| grep -v -- -| cut -d / -f 5)
-primary_card=$(echo "$cards" | head -1 )
-secondary_cards=$(echo "$cards"|
-                  tail -n +2|
-                  xargs printf "%s,")
+# Find the primary KMS-capable card by looking for connectors with a
+# known display type. Cards with only "Unknown" connectors (simpledrm)
+# or "Writeback" connectors are not usable as primary display devices.
 
-LIBSEAT_BACKEND=noop weston --config=${CONFIG_FILE} --socket=wl-firstboot-0 --drm-device="$primary_card" --additional-devices="$secondary_cards"
-exit_code=$(< ${EXIT_CODE_SAVE})
+# DRM drivers may still be loading at this point (e.g. vc4 on RPi4 registers
+# several seconds after simpledrm and v3d), so poll up to 10 seconds for
+# usable card to appear.
+primary_card=
+attempt=0
+while [ $attempt -lt 10 ]; do
+    cards=$(ls -d /sys/class/drm/card[0-9]* 2>/dev/null | grep -v -- - | cut -d / -f 5)
+    for card in $cards; do
+        if ls /sys/class/drm/${card}-* >/dev/null 2>&1 | grep -qvE "Unknown|Writeback"; then
+            primary_card=$card
+            break 2
+        fi
+    done
+    attempt=$((attempt + 1))
+    sleep 1
+done
+
+secondary_cards=
+if [ -n "$primary_card" ]; then
+    for card in $cards; do
+        if [ "$card" != "$primary_card" ]; then
+            secondary_cards="${secondary_cards:+${secondary_cards},}${card}"
+        fi
+    done
+fi
+
+if [ -z "$primary_card" ]; then
+    connectors=$(ls -d /sys/class/drm/card[0-9]*-* 2>/dev/null | grep -v -- - | cut -d / -f 5 | tr '\n' ' ')
+    echo "run-gui-backend: no KMS-capable DRM device found" \
+         "(cards: ${cards:-none}, connectors: ${connectors:-none})" |
+        systemd-cat -t run-gui-backend -p 3
+    weston_exit_code=1
+else
+    echo "run-gui-backend: using $primary_card" |
+        systemd-cat -t run-gui-backend -p 6
+    LIBSEAT_BACKEND=noop weston --config=${CONFIG_FILE} --socket=wl-firstboot-0 --drm-device="$primary_card" --additional-devices="$secondary_cards"
+    weston_exit_code=$?
+fi
+
+# The autolaunch script saves the initial-setup exit code to EXIT_CODE_SAVE file.
+# If the file is empty, fall back to weston's own exit code
+exit_code=$(cat "${EXIT_CODE_SAVE}")
+exit_code=${exit_code:-$weston_exit_code}
 
 rm ${CONFIG_FILE} ${RUN_SCRIPT} ${EXIT_CODE_SAVE}
 if [ -n "$original_vt" ]; then
