@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "initial-setup"
-version = "0.3.104"
+version = "0.3.105"
 authors = [
     {name = "Martin Kolman", email = "mkolman@redhat.com"}
 ]

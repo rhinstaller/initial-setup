@@ -6,7 +6,7 @@ Name: initial-setup
 Summary: Initial system configuration utility
 URL: https://fedoraproject.org/wiki/InitialSetup
 License: GPL-2.0-or-later
-Version: 0.3.104
+Version: 0.3.105
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -175,6 +175,9 @@ rm -v %{buildroot}%{_libexecdir}/%{name}/firstboot-windowmanager
 %find_lang %{name}
 
 %changelog
+* Wed Sep 09 2026 Martin Kolman <mkolman@redhat.com> - 0.3.105-1
+- Fix connector enumeration for weston (jgroman)
+
 * Wed Sep 09 2026 Martin Kolman <mkolman@redhat.com> - 0.3.104-1
 - Fix DRM master handover when running inside kmscon (jgroman)
 - Fix review findings: - replace `udevadm settle` with polling - filter correct connectors - properly store weston's exit code (jgroman)
