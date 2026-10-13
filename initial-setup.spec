@@ -6,7 +6,7 @@ Name: initial-setup
 Summary: Initial system configuration utility
 URL: https://fedoraproject.org/wiki/InitialSetup
 License: GPL-2.0-or-later
-Version: 0.3.105
+Version: 0.3.106
 Release: 1%{?dist}
 
 # This is a Red Hat maintained package which is specific to
@@ -175,6 +175,9 @@ rm -v %{buildroot}%{_libexecdir}/%{name}/firstboot-windowmanager
 %find_lang %{name}
 
 %changelog
+* Tue Oct 13 2026 Katerina Koukiou <kkoukiou@redhat.com> - 0.3.106-1
+- initial-setup.service: Fix serial console (jfalempe)
+
 * Wed Sep 09 2026 Martin Kolman <mkolman@redhat.com> - 0.3.105-1
 - Fix connector enumeration for weston (jgroman)
 
