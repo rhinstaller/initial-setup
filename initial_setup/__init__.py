@@ -13,7 +13,7 @@ from initial_setup.product import eula_available
 from initial_setup import initial_setup_log
 
 from pyanaconda.core.dbus import DBus
-from pyanaconda.core.util import get_os_release_value
+from pyanaconda.core.os_release import get_os_release_value
 from pyanaconda.localization import setup_locale_environment, setup_locale
 from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG, \
     SETUP_ON_BOOT_DEFAULT

@@ -3,7 +3,7 @@ import logging
 import os
 
 from pyanaconda.core.configuration.anaconda import conf
-from pyanaconda.core.util import get_os_release_value
+from pyanaconda.core.os_release import get_os_release_value
 
 log = logging.getLogger("initial-setup")
 
