@@ -11,16 +11,14 @@ import atexit
 
 from initial_setup.product import eula_available
 from initial_setup import initial_setup_log
+from initial_setup.task import InitialSetupTask
 
-from pyanaconda.core.dbus import DBus
 from pyanaconda.core.util import get_os_release_value
 from pyanaconda.localization import setup_locale_environment, setup_locale
-from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG, \
-    SETUP_ON_BOOT_DEFAULT
+from pyanaconda.core.constants import FIRSTBOOT_ENVIRON, SETUP_ON_BOOT_RECONFIG
 from pyanaconda.flags import flags
 from pyanaconda.core.startup.dbus_launcher import AnacondaDBusLauncher
-from pyanaconda.modules.common.task import sync_run_task
-from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, TIMEZONE, USERS, \
+from pyanaconda.modules.common.constants.services import BOSS, LOCALIZATION, USERS, \
     SERVICES, NETWORK
 from pyanaconda.modules.common.structures.kickstart import KickstartReport
 
@@ -292,74 +290,14 @@ class InitialSetup(object):
         # Do not execute sections that were part of the original
         # anaconda kickstart file (== have .seen flag set)
 
-        log.info("applying changes")
-
-        services_proxy = SERVICES.get_proxy()
-        reconfig_mode = services_proxy.SetupOnBoot == SETUP_ON_BOOT_RECONFIG
-
-        # data.selinux
-        # data.firewall
-
-        # Configure the timezone.
-        timezone_proxy = TIMEZONE.get_proxy()
-        for task_path in timezone_proxy.InstallWithTasks():
-            task_proxy = TIMEZONE.get_proxy(task_path)
-            sync_run_task(task_proxy)
-
-        # Configure the localization.
-        localization_proxy = LOCALIZATION.get_proxy()
-        for task_path in localization_proxy.InstallWithTasks():
-            task_proxy = LOCALIZATION.get_proxy(task_path)
-            sync_run_task(task_proxy)
-
-        # Configure persistent hostname
-        network_proxy = NETWORK.get_proxy()
-        network_task = network_proxy.ConfigureHostnameWithTask(True)
-        task_proxy = NETWORK.get_proxy(network_task)
-        sync_run_task(task_proxy)
-        # Set current hostname
-        network_proxy.SetCurrentHostname(network_proxy.Hostname)
-
-        # Configure groups, users & root account
-        #
-        # NOTE: We only configure groups, users & root account if the respective
-        #       kickstart commands are *not* seen in the input kickstart.
-        #       This basically means that we will configure only what was
-        #       set in the Initial Setup UI and will not attempt to configure
-        #       anything that looks like it was configured previously in
-        #       the Anaconda UI or installation kickstart.
-        users_proxy = USERS.get_proxy()
-
-        if self._groups_already_configured and not reconfig_mode:
-            log.debug("skipping user group configuration - already configured")
-        elif users_proxy.Groups:  # only run of there are some groups to create
-            groups_task = users_proxy.ConfigureGroupsWithTask()
-            task_proxy = USERS.get_proxy(groups_task)
-            log.debug("configuring user groups via %s task", task_proxy.Name)
-            sync_run_task(task_proxy)
-
-        if self._users_already_configured and not reconfig_mode:
-            log.debug("skipping user configuration - already configured")
-        elif users_proxy.Users:  # only run if there are some users to create
-            users_task = users_proxy.ConfigureUsersWithTask()
-            task_proxy = USERS.get_proxy(users_task)
-            log.debug("configuring users via %s task", task_proxy.Name)
-            sync_run_task(task_proxy)
-
-        if self._root_password_already_configured and not reconfig_mode:
-            log.debug("skipping root password configuration - already configured")
-        else:
-            root_task = users_proxy.SetRootPasswordWithTask()
-            task_proxy = USERS.get_proxy(root_task)
-            log.debug("configuring root password via %s task", task_proxy.Name)
-            sync_run_task(task_proxy)
-
-        # Configure all addons
-        log.info("executing addons")
-        boss_proxy = BOSS.get_proxy()
-        for service_name, object_path in boss_proxy.CollectInstallSystemTasks():
-            task_proxy = DBus.get_proxy(service_name, object_path)
-            sync_run_task(task_proxy)
+        if not self.gui_mode:
+            # GUI has it already executed, but in TUI do it here
+            task = InitialSetupTask(
+                groups_already_configured=self._groups_already_configured,
+                users_already_configured=self._users_already_configured,
+                root_password_already_configured=self._root_password_already_configured,
+            )
+            task.start()
 
         if self.external_reconfig:
             # prevent the reconfig flag from being written out
